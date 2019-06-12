@@ -44,7 +44,7 @@
       </li>
 
       <li>
-            <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการเครื่องประดับเว็บไซต์</span></a>
+            <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการเครื่องประดับเว็บไซต2222์</span></a>
       </li>
       <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการปฏิทินกิจกรรม</span></a>
