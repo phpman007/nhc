@@ -90,7 +90,7 @@ class CreateMemberDetailsTable extends Migration
 
             // information part 7 for ngo group
             $table->string('ngoName', 150)->comment("ชื่อองค์กร");
-            $table->string('ngoStatus')->comment("สถานะภาพ");
+            $table->string('ngoStatus')->comment("สถานะ");
             $table->text('ngoNo', 10)->comment("เลขที่");
             $table->text('ngoMoo', 2)->comment("หมู่ที่");
             $table->text('ngoSoi', 50)->comment("ซอย");
@@ -117,14 +117,14 @@ class CreateMemberDetailsTable extends Migration
             $table->string('memberImg', 255)->comment("รูปหน้าตรง");
             $table->string('sorChor1', 255)->comment("เอกสารสช.1");
 
-            $table->string('ngoDoc', 255)->comment("สำเนาเอกสารรับรองความเป็นนิติบุคคล");
-            $table->string('ngoObject', 255)->comment("สำเนาวัตถุประสงค์ในการก่อตั้ง");
-            $table->string('ngoBasis', 255)->comment("สำเนากิจกรรม");
-            $table->string('ngoProject', 255)->comment("คำสั่งแต่งตั้ง");
+            $table->string('ngoConfirmDoc', 255)->comment("สำเนาเอกสารรับรองความเป็นนิติบุคคล");
+            $table->string('ngoObjectiveDoc', 255)->comment("สำเนาวัตถุประสงค์ในการก่อตั้ง");
+            $table->string('ngoActivityDoc', 255)->comment("สำเนากิจกรรม");
+            $table->string('ngoOrderDoc', 255)->comment("คำสั่งแต่งตั้ง");
             $table->string('ngoPresidentIdCard', 255)->comment("บัตรประชาชนของประธานองค์กร");
-            $table->string('ngoReport', 255)->comment("สำเนาเอกสารลงลายมือชื่อ");
+            $table->string('ngoSignatureDoc', 255)->comment("สำเนาเอกสารลงลายมือชื่อ");
 
-            $table->string('ngoApprove', 255)->comment("หนังสือรับรององค์กร");
+            $table->string('ngoApproveDoc', 255)->comment("หนังสือรับรององค์กร");
 
             $table->string('zipFile', 255)->comment("ไฟล์บีบอัด");
 
