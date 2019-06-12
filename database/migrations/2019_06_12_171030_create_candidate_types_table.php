@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrganizationGroupsTable extends Migration
+class CreateCandidateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateOrganizationGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('organization_groups', function (Blueprint $table) {
+        Schema::create('candidate_types', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('groupName', 255)->comment("ชื่อกลุ่ม");
+            $table->string('candidateType', 50)->comment("ประเภทของสมาชิกแบบสมัครเพื่อลงคะแนนอย่างเดียวหรือแบบลงเลือกตั้งด้วย");
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateOrganizationGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organization_groups');
+        Schema::dropIfExists('candidate_types');
     }
 }

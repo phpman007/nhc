@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('tel', 10);
-            $table->string('position');
-            $table->string('permission');
+            $table->string('position')->comment("ตำแหน่ง");
+            $table->string('permission')->comment("สิทธิ์");
             $table->rememberToken();
             $table->timestamps();
         });
