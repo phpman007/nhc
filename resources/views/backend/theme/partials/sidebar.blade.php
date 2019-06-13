@@ -33,6 +33,14 @@
                               <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
                         </ul>
                   </li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐานผู้รับสิทธิลงคะแนน</span></a></li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐาน</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                          <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
+                          <li><a href="#">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                          <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
+                    </ul>
+                  </li>
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                               <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
@@ -40,6 +48,35 @@
                               <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
                         </ul>
                   </li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
+            </ul>
+            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ลงคะแนน</span> <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับรองผลการลงคะแนน</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                              <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="#">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                              <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
+                        </ul>
+                  </li>
+            </ul>
+            <ul class="nav nav-second-level collapse">
+                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">แสดงผลการลงคะแนนแบบ Real Time</span> <span class="fa arrow"></span></a>
+                          <ul class="nav nav-third-level">
+                                <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
+                                <li><a href="#">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
+                          </ul>
+                    </li>
+            </ul>
+            <ul class="nav nav-second-level collapse">
+                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จับฉลากหากรรมการสุขภาพแห่งชาติ</span> <span class="fa arrow"></span></a>
+                          <ul class="nav nav-third-level">
+                                <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
+                                <li><a href="#">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
+                          </ul>
+                    </li>
             </ul>
       </li>
 
