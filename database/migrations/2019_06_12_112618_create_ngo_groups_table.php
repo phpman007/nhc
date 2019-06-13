@@ -15,7 +15,7 @@ class CreateNgoGroupsTable extends Migration
     {
         Schema::create('ngo_groups', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('groupName', 255);
+            $table->string('groupName', 255)->comment("ชื่อกลุ่ม");
             $table->timestamps();
         });
     }
