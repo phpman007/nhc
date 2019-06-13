@@ -21,16 +21,29 @@
       </li>
 
       <li>
-            <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
       </li>
       <li>
-            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการเนื้อหาข้อมูล</span> <span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับสมัคร</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
-                  <li><a href="index.html">จัดการเนื้อหาข้อมูล</a></li>
-                  <li><a href="dashboard_2.html">จัดการหมวดหมู่</a></li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตั้งวันการลงทะเบียน</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                              <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="#">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                              <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
+                        </ul>
+                  </li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                              <li><a href="#">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="#">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                              <li><a href="#">ผู้แทนองค์กรภาคเอกชน</a></li>
+                        </ul>
+                  </li>
             </ul>
       </li>
-      <li>
+
+      {{-- <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการข้อมูลคลังภาพ</span></a>
       </li>
 
@@ -61,7 +74,7 @@
       </li>
       <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">สถิติการเข้าชมเว็บไซต์</span></a>
-      </li>
+      </li> --}}
 
 
 </ul>
