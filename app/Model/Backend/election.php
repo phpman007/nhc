@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Model\Backend;
 
 use Illuminate\Database\Eloquent\Model;
 
 class election extends Model
 {
-    //
+    protected $table='elections';
 }

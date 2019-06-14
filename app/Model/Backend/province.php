@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Model\Backend;
 
 use Illuminate\Database\Eloquent\Model;
 
-class status extends Model
+class province extends Model
 {
-    protected $table='statuses';
+    protected $table='provinces';
 
     public function memberDetails()
     {

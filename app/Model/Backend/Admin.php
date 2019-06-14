@@ -19,7 +19,7 @@ class Admin extends Authenticatable
        * @var array
        */
       protected $fillable = [
-          'name', 'email', 'password',
+          'username', 'email', 'password', 'tel', 'position', 'permission',
       ];
 
       /**
@@ -39,4 +39,9 @@ class Admin extends Authenticatable
       protected $casts = [
           'email_verified_at' => 'datetime',
       ];
+
+      public function memberDetails()
+        {
+        return $this->belongsTo('App\Model\Backend\memberDetail');
+        }
 }
