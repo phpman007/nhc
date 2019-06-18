@@ -15,8 +15,8 @@ class CreateCandidateTypesTable extends Migration
     {
         Schema::create('candidate_types', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('candidateType', 50)->comment("ประเภทของสมาชิกแบบสมัครเพื่อลงคะแนนอย่างเดียวหรือแบบลงเลือกตั้งด้วย");
-            $table->timestamps();
+            $table->string('candidateType', 50)->comment("ประเภทของสมาชิกแบบสมัครเพื่อลงคะแนนอย่างเดียวหรือแบบลงเลือกตั้งด้วย")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

@@ -15,8 +15,8 @@ class CreateGendersTable extends Migration
     {
         Schema::create('genders', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('gender', 30)->comment("เพศ");
-            $table->timestamps();
+            $table->string('gender', 30)->comment("เพศ")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

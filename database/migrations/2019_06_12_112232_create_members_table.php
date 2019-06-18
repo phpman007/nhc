@@ -15,22 +15,22 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username');
-            $table->string('email')->unique();
+            $table->string('username')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('nameTitle', 100)->comment("คำนำหน้าชื่อ");
-            $table->string('firstname', 100);
-            $table->string('lastname', 100);
-            // $table->string('fullname', 255)->comment("ชื่อเต็ม");
-            $table->string('personalId', 13)->comment("เลขที่บัตรประชาชน");
-            $table->integer('groupId')->comment("รหัสกลุ่ม");
-            $table->integer('seniorGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มผู้ทรงคุณวุฒิ");
-            $table->integer('organizationGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มองค์กรส่วนท้องถิ่น");
-            $table->integer('ngoGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มองค์กรอิสระ");
-            $table->integer('candidateStatus')->comment("สถานะสมาชิกว่าเป็นผู้สมัครรับเลือกหรือผู้ลงคะแนนเพียงอย่างเดียว");
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('password')->nullable();
+            $table->string('nameTitle', 100)->comment("คำนำหน้าชื่อ")->nullable();
+            $table->string('firstname', 100)->nullable();
+            $table->string('lastname', 100)->nullable();
+            $table->string('fullname', 255)->comment("ชื่อเต็ม")->nullable();
+            $table->string('personalId', 13)->comment("เลขที่บัตรประชาชน")->nullable();
+            $table->integer('groupId')->comment("รหัสกลุ่ม")->nullable();
+            $table->integer('seniorGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มผู้ทรงคุณวุฒิ")->nullable();
+            $table->integer('organizationGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มองค์กรส่วนท้องถิ่น")->nullable();
+            $table->integer('ngoGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มองค์กรอิสระ")->nullable();
+            $table->integer('candidateStatus')->comment("สถานะสมาชิกว่าเป็นผู้สมัครรับเลือกหรือผู้ลงคะแนนเพียงอย่างเดียว")->nullable();
+            $table->rememberToken()->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

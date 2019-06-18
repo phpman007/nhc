@@ -15,14 +15,14 @@ class CreateAttachFilesTable extends Migration
     {
         Schema::create('attach_files', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('fileName', 255)->comment("ชื่อไฟล์");
-            $table->string('path', 255)->comment("ที่อยู่ของไฟล์");
-            $table->string('newName', 255)->comment("ชื่อใหม่");
-            $table->integer('status')->comment("สถานะ");
-            $table->integer('size')->comment("ขนาด");
-            $table->string('type', 20)->comment("ชนิดของไฟล์");
-            $table->timestamps();
-            $table->softDeletes();
+            $table->string('fileName', 255)->comment("ชื่อไฟล์")->nullable();
+            $table->string('path', 255)->comment("ที่อยู่ของไฟล์")->nullable();
+            $table->string('newName', 255)->comment("ชื่อใหม่")->nullable();
+            $table->integer('status')->comment("สถานะ")->nullable();
+            $table->integer('size')->comment("ขนาด")->nullable();
+            $table->string('type', 20)->comment("ชนิดของไฟล์")->nullable();
+            $table->timestamps()->nullable();
+            $table->softDeletes()->nullable();
         });
     }
 

@@ -15,11 +15,11 @@ class CreateElectionVotesTable extends Migration
     {
         Schema::create('election_votes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('memberId')->comment("รหัสสมาชิก");
-            $table->string('electionId')->comment("รหัสการเลือกตั้ง");
-            $table->string('voteTo')->comment("โหวตให้กับรหัสสมาชิก");
-            $table->integer('point')->comment("คะแนน");
-            $table->timestamps();
+            $table->string('memberId')->comment("รหัสสมาชิก")->nullable();
+            $table->string('electionId')->comment("รหัสการเลือกตั้ง")->nullable();
+            $table->string('voteTo')->comment("โหวตให้กับรหัสสมาชิก")->nullable();
+            $table->integer('point')->comment("คะแนน")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

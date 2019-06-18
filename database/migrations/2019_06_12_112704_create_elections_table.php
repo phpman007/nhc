@@ -15,17 +15,14 @@ class CreateElectionsTable extends Migration
     {
         Schema::create('elections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('groupId')->comment("รหัสกลุ่ม");
-            $table->integer('seniorGroupId')->comment("รหัสกลุ่มผู้ทรงคุณวุฒิ");
-            $table->integer('organizationgroupId')->comment("รหัสกลุ่มองค์กรบริหารส่วนท้องถิ่น");
-            $table->integer('ngogroupId')->comment("รหัสกลุ่มองค์กรภาคเอกชน");
-            $table->string('province')->comment("จังหวัด");
-            $table->string('section')->comment("เขต");
-            $table->date('openDate')->comment("วันที่เปิดรับสมัคร");
-            $table->date('endDate')->comment("วันที่สิ้นสุดการรับสมัคร");
-            $table->date('confirmDate')->comment("วันที่ยืนยันการรับสมัคร");
-            $table->date('electionDate')->comment("วันลงคะแนนเสียงเลือกตั้ง");
-            $table->timestamps();
+            $table->string('groupId')->comment("รหัสกลุ่ม")->nullable();
+            $table->string('province')->comment("จังหวัด")->nullable();
+            $table->string('section')->comment("เขต")->nullable();
+            $table->date('openDate')->comment("วันที่เปิดรับสมัคร")->nullable();
+            $table->date('endDate')->comment("วันที่สิ้นสุดการรับสมัคร")->nullable();
+            $table->date('confirmDate')->comment("วันที่ยืนยันการรับสมัคร")->nullable();
+            $table->date('electionDate')->comment("วันลงคะแนนเสียงเลือกตั้ง")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 
