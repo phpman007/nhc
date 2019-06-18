@@ -1,152 +1,149 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
-{{-- @section('loginname','สวัสดี A') --}}
+@section('loginname','สวัสดี A')
+
+ <script>
+
+    // function editstatus(id){
+        //var a = document.getElementsByName('txtstatuschange[]')[id].value;
+        //var b = document.getElementsByName('Hid[]')[id].value;
+        // var a = document.getElementsByName('frmstatuschange[]')[id].submit();
+      // alert(id+" idstatus="+a+" id="+b);
+    // }
+
+    /*function NewWindow(mypage,myname,w,h,scroll){
+        var win = null;
+        LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+        TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+        settings =
+        'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+        win = window.open(mypage,myname,settings)
+    }*/
+
+</script>
+
 @section('content')
+{{--  [ <a href="function_query_repor_print.php" onClick="NewWindow(this.href,'name','400','400','yes');return false">คลิก</a> ]  --}}
+
 <div class="card border-info mb-3">
+
     <div class="card-header">
         <strong>ตรวจสอบหลักฐานผู้รับสิทธิ์ลงคะแนน ผู้แทนองค์กรส่วนท้องถิ่น</strong>
     </div>
     <div class="card-body">
-
-        {{-- <form method="GET"> --}}
-            {{-- <div class="uk-grid data-uk-grid-margin">
-                <div class="uk-width-medium-1-5">
-                        <div class="uk-form-row">
-                            <label>เลขที่แจ้ง: </label>
-                            <input type="text" name="no" class="md-input label-fixed" value="{{request()->input('no')}}">
-                        </div>
-                </div>
-            <div class="uk-width-medium-1-5">
-                <div class="uk-form-row">
-                    <label>เรื่องที่แจ้ง: </label>
-                    <input type="text" name="title" class="md-input label-fixed" value="{{request()->input('title')}}">
-            </div></div></div> --}}
-
-            {{-- <div class="row">
-                <div class="form-group"><label class="form-check-label">ค้นหาจาก : </label><input type="text" name="txtsearch" class="md-input label-fixed" value="" placeholder="กรุณากรอกชื่อ-สกุล หรือรหัสเอกสาร"></div>
-                <div class="form-group">
-                    <label class="form-check-label">กลุ่มย่อย : </label>
-                        <select>
-                            <option value="กลุ่มย่อย 1">กลุ่มย่อย 1</option>
-                            <option value="กลุ่มย่อย 2">กลุ่มย่อย 2</option>
-                            <option value="กลุ่มย่อย 3">กลุ่มย่อย 3</option>
-                            <option value="กลุ่มย่อย 4">กลุ่มย่อย 4</option>
-                        </select>
-                </div>
+        @if(session('flash_message')=="ok")
+            {{-- <div class="alert alert-success alert-dismissible fade show"><span class="glyphicon glyphicon-ok"></span><em> {!! session('flash_message') !!}</em></div> --}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะเรียบร้อยแล้ว</i>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             </div>
-            <div class="row">
-                <div class="form-group"><label class="form-check-label">จังหวัด : </label>
-                    <select>
-                            <option value="จังหวัด 1">จังหวัด 1</option>
-                    </select>
-                </div>
-                <div class="form-group"><label class="form-check-label">สถานะ : </label>
-                    <select>
-                        <option value="สถานะ 1">สถานะ 1</option>
-                    </select>
-                </div>
+        @elseif(session('flash_message')=="not")
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะไม่ได้!!!</i>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             </div>
-            <button type="submit" class="btn btn-primary">ค้นหา</button> <button type="reset" class="btn btn-primary">ล้างข้อมูล</button>
-        </form>
-        <div>
-            <table class="table table-striped table-bordered">
-                <tr align="middle">
-                    <th>ลำดับ</th>
-                    <th>รหัสเอกสาร</th>
-                    <th>ชื่อ - สกุล</th>
-                    <th>กลุ่มย่อย</th>
-                    <th>จังหวัด</th>
-                    <th>ดาวน์โหลด</th>
-                    <th>สถานะ</th>
-                    <th>ผู้ที่ตรวจสอบ</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td align="middle"><button type="submit">ดาวน์โหลด</button></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-    </div> --}}
+        @endif
 
-    <form>
+        <form id="frmsearchmemcheck" method="post" action="{{url('backend/check/memCheck')}}">
+        {{ csrf_field() }}
             <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">ค้นหาจาก : </label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="กรุณากรอกชื่อ-สกุล หรือรหัสเอกสาร">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="inputPassword4">กลุ่มย่อย : </label>
-                <select id="inputState" class="form-control">
-                        <option selected>กรุณาเลือก ...</option>
-                        <option>...</option>
+                <div class="form-group col-md-6">
+                <label for="txtname">ค้นหาจาก : </label>
+                <input class="form-control" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
+                name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
+                </div>
+                <div class="form-group col-md-6">
+                <label for="txtgroup">กลุ่มย่อย : </label>
+                <select id="txtgroup" name="txtgroup" class="form-control">
+                        <option value="" selected>กรุณาเลือก ...</option>
+                        @foreach ($listgroupor as $valgroup)
+                        <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
+                        value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
+                        @endforeach
                 </select>
-              </div>
+                </div>
             </div>
             <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="inputEmail4">จังหวัด : </label>
-                      <select id="inputState" class="form-control">
-                            <option selected>จังหวัด ...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="inputPassword4">สถานะ : </label>
-                      <select id="inputState" class="form-control">
-                              <option selected>สถานะ ...</option>
-                              <option>...</option>
-                      </select>
-
-                      {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                            <option selected>สถานะ ...</option>
-                            <option>...</option>
-                      </select> --}}
-
-                    </div>
-                  </div>
-                <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn btn-primary btn-lg">ค้นหา</button>&nbsp<button type="reset" class="btn btn-primary btn-lg">ล้างข้อมูล</button>
+                <div class="form-group col-md-6">
+                    <label for="txtprovince">จังหวัด : </label>
+                    <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
+                        @foreach ($listprovince as $valprovince)
+                        <option
+                            @for($i=0;$i<$countprovince;$i++)
+                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->province)
+                                selected
+                                @endif
+                            @endfor
+                        value={{$valprovince->province}}>{{$valprovince->province}}</option>
+                        @endforeach
+                    </select>
                 </div>
-          </form>
+                <div class="form-group col-md-6">
+                    <label for="txtstatus">สถานะ : </label>
+                    <select id="txtstatus" name="txtstatus" class="form-control">
+                        <option value="" selected>สถานะ ...</option>
+                        @foreach ($liststatus as $valstatus)
+                        <option @if(request()->input('txtstatus')!=null && request()->input('ok')=="1" && request()->input('txtstatus') == $valstatus->id) selected @endif
+                        value={{$valstatus->id}}>{{$valstatus->status}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
-          <hr>
+            <div class="d-flex justify-content-center">
+                <button id="ok" name="ok" type="submit" value="1" class="btn btn-info">ค้นหา</button>&nbsp
+                <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
+            </div>
 
-          <div>
+        </form>
+        <hr>
+        <div>
+
+            @if($listmember->isEmpty())
+                <h3 class="d-flex justify-content-center">ไม่มีข้อมูล</h3>
+            @else
                 <table class="table table-striped table-bordered">
                     <tr align="middle">
                         <th>ลำดับ</th>
                         <th>รหัสเอกสาร</th>
-                        <th>ชื่อ - นามสกุล</th>
+                        <th>ชื่อ - สกุล</th>
                         <th>กลุ่มย่อย</th>
                         <th>จังหวัด</th>
                         <th>ดาวน์โหลด</th>
                         <th>สถานะ</th>
                         <th>ผู้ที่ตรวจสอบ</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td align="middle"><button type="submit">ดาวน์โหลด</button></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    @foreach ($listmember as $key=>$valmember)
+                        <tr>
+                        <td align="middle">{{$valmember->id}}</td>
+                        <td align="middle">{{$valmember->docId}}</td>
+                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
+                        <td>{{$valmember->groupName}}</td>
+                        <td align="middle">{{$valmember->province}}</td>
+                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-info">ดาวน์โหลด</button></a></td>
+                        <td align="middle">{{$valmember->status}}</td>
+                        <td align="middle">{{$valmember->username}}</td>
+                        </tr>
+                    @endforeach
                 </table>
-            </div>
+                <div class="d-flex justify-content-center"><h3>{{ $listmember->links() }} </h3></div>
+            @endif
+        </div>
+    </div>
 </div>
 
-{{-- <script>
-    $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-    });
-</script> --}}
+@endsection
 
+@section('js')
+    <script>
+    $(function(){
+        $('.js-example-basic-multiple').select2({
+        maximumSelectionLength: 3
+        });
+    })
+    </script>
 @endsection

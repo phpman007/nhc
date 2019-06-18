@@ -10,32 +10,32 @@ class member extends Model
 
     public function memberDetails()
     {
-        return $this->hasOne('App\Model\Backend\memberDetail');
+        return $this->hasOne(memberDetails::class, 'id', 'memberId');
     }
 
-    public function groups()
-    {
-        return $this->belongsTo('App\Model\Backend\group');
-    }
+    // public function groups()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\group');
+    // }
 
-    public function seniorGroups()
-    {
-        return $this->belongsTo('App\Model\Backend\seniorGroup');
-    }
+    // public function seniorGroups()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\seniorGroup');
+    // }
 
-    public function organizationGroups()
-    {
-        return $this->belongsTo('App\Model\Backend\organizationGroup');
-    }
+    // public function organizationGroups()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\organizationGroup');
+    // }
 
-    public function ngoGroups()
-    {
-        return $this->belongsTo('App\Model\Backend\ngoGroup');
-    }
+    // public function ngoGroups()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\ngoGroup');
+    // }
 
-    public function candidateTypes()
-    {
-        return $this->belongsTo('App\Model\Backend\candidateType');
-    }
+    // public function candidateTypes()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\candidateType');
+    // }
 
 }

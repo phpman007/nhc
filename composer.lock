@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "717f38046bd79edccfc38a672ad582ae",
+    "content-hash": "39b4bf464d02f680f42c7c8b38f2a443",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -586,6 +586,60 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "laracasts/flash",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/flash.git",
+                "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/flash/zipball/10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
+                "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracasts\\Flash\\FlashServiceProvider"
+                    ],
+                    "aliases": {
+                        "Flash": "Laracasts\\Flash\\Flash"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Flash": "src/"
+                },
+                "files": [
+                    "src/Laracasts/Flash/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Easy flash notifications",
+            "time": "2017-06-22T19:01:19+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1262,16 +1316,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.19.1",
+            "version": "2.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "5cf102d1476fdf92f1f991bd1a1a0d93c65755ca"
+                "reference": "adcad3f3af52d0ad4ad7b05f43aa58243b6ca67b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5cf102d1476fdf92f1f991bd1a1a0d93c65755ca",
-                "reference": "5cf102d1476fdf92f1f991bd1a1a0d93c65755ca",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/adcad3f3af52d0ad4ad7b05f43aa58243b6ca67b",
+                "reference": "adcad3f3af52d0ad4ad7b05f43aa58243b6ca67b",
                 "shasum": ""
             },
             "require": {
@@ -1318,7 +1372,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-06-04T20:07:46+00:00"
+            "time": "2019-06-07T09:56:45+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2000,16 +2054,16 @@
         },
         {
             "name": "rap2hpoutre/laravel-log-viewer",
-            "version": "v1.1.1",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
-                "reference": "f6acf9779669568e8afce1182e1a5579d5a0ffe5"
+                "reference": "ba8e645dda959c9cc679f3bbb3f1bd271cc02e56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/f6acf9779669568e8afce1182e1a5579d5a0ffe5",
-                "reference": "f6acf9779669568e8afce1182e1a5579d5a0ffe5",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/ba8e645dda959c9cc679f3bbb3f1bd271cc02e56",
+                "reference": "ba8e645dda959c9cc679f3bbb3f1bd271cc02e56",
                 "shasum": ""
             },
             "require": {
@@ -2055,7 +2109,7 @@
                 "logging",
                 "lumen"
             ],
-            "time": "2019-03-02T15:10:46+00:00"
+            "time": "2019-06-12T15:22:58+00:00"
         },
         {
             "name": "sabberworm/php-css-parser",
@@ -3639,16 +3693,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v9.4.0",
+            "version": "v9.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "fe397a9e3c2164df8eba83352cc51a2ccc380758"
+                "reference": "ac37f93026b6b607d1bb56789d147a4efd8d97d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/fe397a9e3c2164df8eba83352cc51a2ccc380758",
-                "reference": "fe397a9e3c2164df8eba83352cc51a2ccc380758",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/ac37f93026b6b607d1bb56789d147a4efd8d97d9",
+                "reference": "ac37f93026b6b607d1bb56789d147a4efd8d97d9",
                 "shasum": ""
             },
             "require": {
@@ -3706,7 +3760,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2019-06-06T08:12:54+00:00"
+            "time": "2019-06-12T05:06:59+00:00"
         }
     ],
     "packages-dev": [

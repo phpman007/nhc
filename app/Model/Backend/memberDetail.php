@@ -10,36 +10,40 @@ class memberDetail extends Model
 
     public function member()
     {
-        return $this->hasOne('App\Model\Backend\member');
-    }
-
-    public function addressTypes()
-    {
-        return $this->belongsTo('App\Model\Backend\addressType');
-    }
-
-    public function genders()
-    {
-        return $this->belongsTo('App\Model\Backend\gender');
-    }
-
-    public function admin()
-    {
-        return $this->hasMany('App\Model\Backend\Admin');
-    }
-
-    public function reasons()
-    {
-        return $this->hasMany('App\Model\Backend\reason');
+        return $this->hasOne(Member::class, 'id', 'memberId');
     }
 
     public function statuses()
     {
-        return $this->belongsTo('App\Model\Backend\status');
+        return $this->belongsTo(Statuses::class, 'statusId', 'id');
     }
 
-    public function provinces()
-    {
-        return $this->belongsTo('App\Model\Backend\provinces');
-    }
+    // public function province()
+    // {
+    //     return $this->hasOne(Province::class, 'district_code', 'subDistrictId');
+    // }
+
+    // public function addressTypes()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\addressType');
+    // }
+
+    // public function genders()
+    // {
+    //     return $this->belongsTo('App\Model\Backend\gender');
+    // }
+
+    // public function admin()
+    // {
+    //     return $this->hasMany('App\Model\Backend\Admin');
+    // }
+
+    // public function reasons()
+    // {
+    //     return $this->hasMany('App\Model\Backend\reason');
+    // }
+
+
+
+
 }

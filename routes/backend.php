@@ -4,24 +4,19 @@ Route::post('login', 'UserController@postLogin')->name('login.post');
 Route::get('logout', 'UserController@getLogout')->name('logout.get');
 
 Route::get('index', function() {
-      return redirect('backend/theme-build');
+      return redirect('backend/home');
 });
 
-Route::get('theme-build', function() {
+Route::get('home', function() {
       return view('backend.theme.master');
 });
 
-Route::group(['prefix' => 'SN'], function () {
-
-    Route::get('/insSN', function () {return view('backend.SNelectionSet.insSN');});
 
     // Route::get('/insElection', 'ElectionsController@create')->name('insElection');
     // Route::get('/store', 'ElectionsController@store')->name('member.store');
-});
+
 
 Route::group(['prefix' => 'election'], function () {
-
-    // Route::get('/user', 'UserController@index');
 
     Route::get('/snSet', function () {return view('backend.election.snSet');});
     Route::get('/orSet', function () {return view('backend.election.orSet');});
@@ -31,15 +26,21 @@ Route::group(['prefix' => 'election'], function () {
 
 Route::group(['prefix' => 'check'], function () {
 
+    Route::match(['get', 'post'],'/index', 'CheckSNController@index')->name('check.index');
     Route::get('/snCheck', function () {return view('backend.check.snCheck');});
-    Route::get('/orCheck', function () {return view('backend.check.orCheck');});
-    Route::get('/ngoCheck', function () {return view('backend.check.ngoCheck');});
-    Route::get('/memCheck', function () {return view('backend.check.memCheck');});
-
+    // Route::get('/orCheck', function () {return view('backend.check.orCheck');});
+    // Route::get('/ngoCheck', function () {return view('backend.check.ngoCheck');});
+    // Route::get('/memCheck', function () {return view('backend.check.memCheck');});
+    Route::match(['get', 'post'],'/memCheck', 'memberCheckController@index')->name('check.memCheck');
+    Route::match(['get', 'post'],'/ngoCheck', 'ngoCheckController@index')->name('check.ngoCheck');
+    Route::match(['get', 'post'],'/orCheck', 'orCheckController@index')->name('check.orCheck');
 });
 
 Route::group(['prefix' => 'approve'], function () {
+    // Route::match(['get', 'post'],'/search', 'QuestionController@search')->name('questionuser.search');
 
+    Route::match(['get', 'post'],'/index', 'ApproveSNController@index')->name('approve.index');
+    Route::get('/editstatus', 'ApproveSNController@editstatus')->name('approve.status');
     Route::get('/snApprove', function () {return view('backend.Approve.snApprove');});
     Route::get('/orApprove', function () {return view('backend.Approve.orApprove');});
     Route::get('/ngoApprove', function () {return view('backend.Approve.ngoApprove');});

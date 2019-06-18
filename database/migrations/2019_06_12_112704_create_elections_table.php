@@ -15,10 +15,7 @@ class CreateElectionsTable extends Migration
     {
         Schema::create('elections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('groupId')->comment("รหัสกลุ่ม");
-            $table->integer('seniorGroupId')->comment("รหัสกลุ่มผู้ทรงคุณวุฒิ");
-            $table->integer('organizationGroupId')->comment("รหัสกลุ่มผู้แทนองค์กรบริหารส่วนท้องถิ่น");
-            $table->integer('ngoGroupId')->comment("รหัสกลุ่มผู้แทนองค์กรภาคเอกชน");
+            $table->string('groupId')->comment("รหัสกลุ่ม");
             $table->string('province')->comment("จังหวัด");
             $table->string('section')->comment("เขต");
             $table->date('openDate')->comment("วันที่เปิดรับสมัคร");
