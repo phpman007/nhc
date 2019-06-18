@@ -56,15 +56,17 @@ class orCheckController extends Controller
         }else{$countgroup=0;}
 
         if(!empty($input['txtsection'])){
-            $countstatus=count($input['txtsection']);
-            for($i=0;$i<$countstatus;$i++){
-                if($i==0){
-                    $list->where('member_details.section','=',$input['txtsection'][0]);
-                }else{
-                    $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
-                }
-            }
-        }else{$countsection=0;}
+        //     $countstatus=count($input['txtsection']);
+        //     for($i=0;$i<$countstatus;$i++){
+        //         if($i==0){
+        //             $list->where('member_details.section','=',$input['txtsection'][0]);
+        //         }else{
+        //             $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
+        //         }
+        //     }
+        // }else{$countsection=0;
+            $list->where('member_details.section','=',$input['txtsection'][0]);
+        }
 
         if(!empty($input['txtstatus'])){
             $countstatus=count($input['txtstatus']);
