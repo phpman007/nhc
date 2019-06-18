@@ -51,37 +51,50 @@
         <form id="frmsearchorcheck" method="post" action="{{url('backend/check/orCheck')}}">
         {{ csrf_field() }}
             <div class="form-row">
+
                 <div class="form-group col-md-6">
                 <label for="txtname">ค้นหาจาก : </label>
                 <input class="form-control" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
                 name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
                 </div>
+
                 <div class="form-group col-md-6">
-                <label for="txtgroup">กลุ่มย่อย : </label>
-                <select id="txtgroup" name="txtgroup" class="form-control">
-                        <option value="" selected>กรุณาเลือก ...</option>
-                        @foreach ($listgroupor as $valgroup)
-                        <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
-                        value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
-                        @endforeach
-                </select>
+                        <label for="txtgroup">กลุ่มย่อย : </label>
+                        <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
+
+                            @foreach ($listgroupor as $valgroup)
+                            {{--  <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
+                            value={{$valgroup->id}}>{{$valgroup->groupName}}</option>  --}}
+                                <option
+                                    @for($i=0;$i<$countgroup;$i++)
+                                        @if(request()->input('txtgroup')[$i]!=null && request()->input('ok')=="1" && request()->input('txtgroup')[$i] == $valgroup->id)
+                                        selected
+                                        @endif
+                                    @endfor
+                                value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
+                            @endforeach
+                        </select>
                 </div>
+
             </div>
             <div class="form-row">
+
                 <div class="form-group col-md-6">
-                    <label for="txtprovince">จังหวัด : </label>
-                    <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
-                        @foreach ($listprovince as $valprovince)
-                        <option
-                            @for($i=0;$i<$countprovince;$i++)
-                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->province)
-                                selected
-                                @endif
-                            @endfor
-                        value={{$valprovince->province}}>{{$valprovince->province}}</option>
-                        @endforeach
-                    </select>
+                        <label for="txtprovince">จังหวัด : </label>
+                        <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
+                            {{--  <option value="" selected>จังหวัด ...</option>  --}}
+                            @foreach ($listprovince as $valprovince)
+                            <option
+                                @for($i=0;$i<$countprovince;$i++)
+                                    @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->province)
+                                    selected
+                                    @endif
+                                @endfor
+                            value={{$valprovince->province}}>{{$valprovince->province}}</option>
+                            @endforeach
+                        </select>
                 </div>
+
                 <div class="form-group col-md-6">
                     <label for="txtsection">เขต : </label>
                     <select id="txtsection" name="txtsection" class="form-control">
@@ -103,22 +116,31 @@
                         <option value="15">เขต 15</option>
                     </select>
                 </div>
+
             </div>
+
             <div class="form-row">
-                    <div class="form-group col-md-6">
-                            <label for="txtstatus">สถานะ : </label>
-                            <select id="txtstatus" name="txtstatus" class="form-control">
-                                <option value="" selected>สถานะ ...</option>
-                                @foreach ($liststatus as $valstatus)
-                                <option @if(request()->input('txtstatus')!=null && request()->input('ok')=="1" && request()->input('txtstatus') == $valstatus->id) selected @endif
+
+                <div class="form-group col-md-6">
+                    <label for="txtstatus">สถานะ : </label>
+                        <select id="txtstatus" name="txtstatus[]" class="js-example-basic-multiple form-control" multiple="multiple">
+                            @foreach ($liststatus as $valstatus)
+                                <option
+                                    @for($i=0;$i<$countstatus;$i++)
+                                        @if(request()->input('txtstatus')[$i]!=null && request()->input('ok')=="1" && request()->input('txtstatus')[$i] == $valstatus->id)
+                                        selected
+                                        @endif
+                                    @endfor
                                 value={{$valstatus->id}}>{{$valstatus->status}}</option>
-                                @endforeach
-                            </select>
-                    </div>
+                            @endforeach
+                        </select>
+                </div>
+
                 <div class="form-group col-md-6 d-flex justify-content-center">
                     <button id="ok" name="ok" type="submit" value="1" class="btn btn-info">ค้นหา</button>&nbsp
                     <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
                 </div>
+
             </div>
         </form>
         <hr>
@@ -149,7 +171,7 @@
                             @endif
                         </td>
                         <td align="middle">{{$valmember->docId}}</td>
-                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
+                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}} {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td align="middle">{{$valmember->province}}</td>
                         <td align="middle">เขต {{$valmember->section}}</td>

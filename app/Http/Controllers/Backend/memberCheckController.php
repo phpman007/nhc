@@ -35,27 +35,62 @@ class memberCheckController extends Controller
         $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
         $list->join('organization_groups', 'members.organizationGroupId', '=', 'organization_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
+        $list->select('members.id','member_details.docId','member_details.zipFile','member_details.section','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
+        $list->where('members.groupId','=',2);
+        $list->where('members.candidateStatus','=',2);
+
         if(!empty($input['txtname'])){
             $list->where('members.firstname','like',"%".$input['txtname']."%");
             $list->orwhere('members.lastname','like',"%".$input['txtname']."%");
             $list->orwhere('member_details.docId','like',"%".$input['txtname']."%");
         }
+
         if(!empty($input['txtgroup'])){
-            $list->where('members.organizationGroupId','=',$input['txtgroup']);
-        }
+            $countgroup=count($input['txtgroup']);
+            for($i=0;$i<$countgroup;$i++){
+                if($i==0){
+                    $list->where('members.organizationGroupId','=',$input['txtgroup'][0]);
+                }else{
+                    $list->orwhere('members.organizationGroupId','=',$input['txtgroup'][$i]);
+                }
+            }
+        }else{$countgroup=0;}
+
+        if(!empty($input['txtsection'])){
+            $countstatus=count($input['txtsection']);
+            for($i=0;$i<$countstatus;$i++){
+                if($i==0){
+                    $list->where('member_details.section','=',$input['txtsection'][0]);
+                }else{
+                    $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
+                }
+            }
+        }else{$countsection=0;}
+
         if(!empty($input['txtstatus'])){
-            $list->where('member_details.statusId','=',$input['txtstatus']);
-        }
+            $countstatus=count($input['txtstatus']);
+            for($i=0;$i<$countstatus;$i++){
+                if($i==0){
+                    $list->where('member_details.statusId','=',$input['txtstatus'][0]);
+                }else{
+                    $list->orwhere('member_details.statusId','=',$input['txtstatus'][$i]);
+                }
+            }
+        }else{$countstatus=0;}
+
         if(!empty($input['txtprovince'])){
             $countprovince=count($input['txtprovince']);
             for($i=0;$i<$countprovince;$i++){
-                $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
+                if($i==0){
+                    $list->where('provinces.province','=',$input['txtprovince'][0]);
+                }else{
+                    $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
+                }
             }
         }else{$countprovince=0;}
-        $listmember= $list->orderBy('members.id')->paginate(10);
+        $listmember= $list->orderBy('members.id')->paginate(2);
 
-        return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listmember','countprovince'));
+        return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listsection','listmember','countprovince','countstatus','countgroup'));
     }
 
     // public function adminCheck()

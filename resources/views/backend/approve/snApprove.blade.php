@@ -2,12 +2,19 @@
 @section('title','NHC ADMIN')
 @section('loginname','สวัสดี A')
 
- <script>
-
-    function editstatus(id){
-        //var a = document.getElementsByName('txtstatuschange[]')[id].value;
+<script>
+    var select_element;
+    function editstatus(id, element){
+        select_element = element
+        var status = document.getElementsByName('txtstatuschange[]')[id].value;
+        console.log(status)
         //var b = document.getElementsByName('Hid[]')[id].value;
-        var a = document.getElementsByName('frmstatuschange[]')[id].submit();
+        if(status==4){
+            document.getElementById('gotomodal').click();
+        }else{
+            document.getElementsByName('frmstatuschange[]')[id].submit();
+        }
+
       // alert(id+" idstatus="+a+" id="+b);
     }
 
@@ -39,6 +46,8 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
+
+
         @elseif(session('flash_message')=="not")
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะไม่ได้!!!</i>
@@ -56,23 +65,30 @@
                 <input class="form-control" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
                 name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
                 </div>
+
                 <div class="form-group col-md-6">
                 <label for="txtgroup">กลุ่มย่อย : </label>
-                <select id="txtgroup" name="txtgroup" class="form-control">
+                <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
 
-                        <option value="" selected>กรุณาเลือก ...</option>
-                        @foreach ($listgroupsn as $valgroup)
-                        <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
+                    @foreach ($listgroupsn as $valgroup)
+                    {{--  <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
+                    value={{$valgroup->id}}>{{$valgroup->groupName}}</option>  --}}
+                        <option
+                            @for($i=0;$i<$countgroup;$i++)
+                                @if(request()->input('txtgroup')[$i]!=null && request()->input('ok')=="1" && request()->input('txtgroup')[$i] == $valgroup->id)
+                                selected
+                                @endif
+                            @endfor
                         value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
-                        @endforeach
+                    @endforeach
                 </select>
                 </div>
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="txtprovince">จังหวัด : </label>
                     <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
-                    {{--  <select id="txtprovince" name="txtprovince" class="form-control">  --}}
                         {{--  <option value="" selected>จังหวัด ...</option>  --}}
                         @foreach ($listprovince as $valprovince)
                         <option
@@ -87,18 +103,22 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="txtstatus">สถานะ : </label>
-                    <select id="txtstatus" name="txtstatus" class="form-control">
-                        <option value="" selected>สถานะ ...</option>
+                    <select id="txtstatus" name="txtstatus[]" class="js-example-basic-multiple form-control" multiple="multiple">
                         @foreach ($liststatus as $valstatus)
-                        <option @if(request()->input('txtstatus')!=null && request()->input('ok')=="1" && request()->input('txtstatus') == $valstatus->id) selected @endif
-                        value={{$valstatus->id}}>{{$valstatus->status}}</option>
+                            <option
+                                @for($i=0;$i<$countstatus;$i++)
+                                    @if(request()->input('txtstatus')[$i]!=null && request()->input('ok')=="1" && request()->input('txtstatus')[$i] == $valstatus->id)
+                                    selected
+                                    @endif
+                                @endfor
+                            value={{$valstatus->id}}>{{$valstatus->status}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
             <div class="d-flex justify-content-center">
-                <button id="ok" name="ok" type="submit" value="1" class="btn btn-info">ค้นหา</button>&nbsp
+                <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary">ค้นหา</button>&nbsp
                 <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
             </div>
 
@@ -129,11 +149,11 @@
                         <td>{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td>{{$valmember->province}}</td>
-                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-info">ดาวน์โหลด</button></a></td>
+                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
                         {{-- <td>{{$valmember->status}}</td> --}}
                         <td>
                             <form name="frmstatuschange[]" action="{{url('backend/approve/editstatus')}}">
-                                <select name="txtstatuschange[]" class="form-control" onchange="editstatus('{{$key}}');">
+                                <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" onchange="editstatus('{{$key}}', this);">
                                     @foreach ($liststatus as $valstatus)
                                     <option @if($valmember->status!=null && $valmember->statusid == $valstatus->id) selected @endif
                                     value={{$valstatus->id}}>{{$valstatus->status}}</option>
@@ -141,6 +161,49 @@
                                 </select>
                                 <input type="hidden" name="Hid[]" id="Hid" value={{$valmember->id}}>
                             </form>
+
+                            {{--  //modal สถานะไม่ผ่าน  --}}
+                            <div id="m-editstatus" class="modal fade" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                {{--  <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">กำหนดเหตุผลสถานะไม่ผ่าน</h3>  --}}
+                                                <div class="col-sm-12"><h3 class="m-t-none m-b">กำหนดเหตุผลสถานะไม่ผ่าน</h3>
+                                                    {{--  <p>Sign in today for more expirience.</p>  --}}
+
+                                                    <form method="post">
+                                                        <div class="form-group">
+                                                            <label for="recipient-name" class="col-form-label">เหตุผลสถานะไม่ผ่าน :</label>
+                                                            <div class="form-check">
+                                                            @if(!$listreason->isEmpty())
+                                                                @foreach($listreason as $valreason)
+                                                                    <div class="i-checks">
+                                                                    <input type="checkbox" name="chkreason" class="form-check-input" value={{$valreason->id}}>
+                                                                    <label class="form-check-label" for="chkreason">{{$valreason->notPassReason}}</label>
+                                                                    </div><br>
+                                                                @endforeach
+                                                            @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="reset" class="btn btn-secondary">ล้างข้อมูล</button>
+                                                            <button type="submit" class="btn btn-primary">บันทึก</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                {{--  <div class="col-sm-6"><h4>Not a member?</h4>
+                                                    <p>You can create an account:</p>
+                                                    <p class="text-center">
+                                                        <a href=""><i class="fa fa-sign-in big-icon"></i></a>
+                                                    </p>
+                                            </div>  --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--  //end modal  --}}
+
                         </td>
                         <td>{{$valmember->username}}</td>
                         </tr>
@@ -152,14 +215,41 @@
     </div>
 </div>
 
+<a data-toggle="modal" id="gotomodal" href="#m-editstatus"> test </a>
+
+{{--  <div class="text-center">
+    <a data-toggle="modal" class="btn btn-primary" href="#m-editstatus">Form in simple modal box</a>
+</div>  --}}
+
+
+
 @endsection
 
 @section('js')
-    <script>
+
+<script>
     $(function(){
         $('.js-example-basic-multiple').select2({
         maximumSelectionLength: 3
         });
-    })
-    </script>
+
+        $('#m-editstatus').on('hidden.bs.modal', function() {
+            console.log($(select_element).val($(select_element).data('default')))
+        });
+
+    });
+
+    {{--  $(document).ready(function() {
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2000
+        };
+        toastr.success('aaaaaaaaa', 'Welcome to NHC Application Builder');
+    });  --}}
+</script>
+
 @endsection
+
+

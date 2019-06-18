@@ -4,12 +4,12 @@
 
  <script>
 
-    function editstatus(id){
+    //function editstatus(id){
         //var a = document.getElementsByName('txtstatuschange[]')[id].value;
         //var b = document.getElementsByName('Hid[]')[id].value;
-        var a = document.getElementsByName('frmstatuschange[]')[id].submit();
+      //  var a = document.getElementsByName('frmstatuschange[]')[id].submit();
       // alert(id+" idstatus="+a+" id="+b);
-    }
+    //}
 
     /*function NewWindow(mypage,myname,w,h,scroll){
         var win = null;
@@ -56,21 +56,32 @@
                 <input class="form-control" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
                 name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
                 </div>
+
                 <div class="form-group col-md-6">
-                <label for="txtgroup">กลุ่มย่อย : </label>
-                <select id="txtgroup" name="txtgroup" class="form-control">
-                        <option value="" selected>กรุณาเลือก ...</option>
+                    <label for="txtgroup">กลุ่มย่อย : </label>
+                    <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
+
                         @foreach ($listgroupsn as $valgroup)
-                        <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
-                        value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
+                        {{--  <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
+                        value={{$valgroup->id}}>{{$valgroup->groupName}}</option>  --}}
+                            <option
+                                @for($i=0;$i<$countgroup;$i++)
+                                    @if(request()->input('txtgroup')[$i]!=null && request()->input('ok')=="1" && request()->input('txtgroup')[$i] == $valgroup->id)
+                                    selected
+                                    @endif
+                                @endfor
+                            value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
                         @endforeach
-                </select>
-                </div>
+                    </select>
+                    </div>
+
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="txtprovince">จังหวัด : </label>
                     <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
+                        {{--  <option value="" selected>จังหวัด ...</option>  --}}
                         @foreach ($listprovince as $valprovince)
                         <option
                             @for($i=0;$i<$countprovince;$i++)
@@ -84,11 +95,15 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="txtstatus">สถานะ : </label>
-                    <select id="txtstatus" name="txtstatus" class="form-control">
-                        <option value="" selected>สถานะ ...</option>
+                    <select id="txtstatus" name="txtstatus[]" class="js-example-basic-multiple form-control" multiple="multiple">
                         @foreach ($liststatus as $valstatus)
-                        <option @if(request()->input('txtstatus')!=null && request()->input('ok')=="1" && request()->input('txtstatus') == $valstatus->id) selected @endif
-                        value={{$valstatus->id}}>{{$valstatus->status}}</option>
+                            <option
+                                @for($i=0;$i<$countstatus;$i++)
+                                    @if(request()->input('txtstatus')[$i]!=null && request()->input('ok')=="1" && request()->input('txtstatus')[$i] == $valstatus->id)
+                                    selected
+                                    @endif
+                                @endfor
+                            value={{$valstatus->id}}>{{$valstatus->status}}</option>
                         @endforeach
                     </select>
                 </div>

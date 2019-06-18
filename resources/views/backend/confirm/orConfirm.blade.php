@@ -4,7 +4,7 @@
 @section('content')
 <div class="card border-info mb-3">
     <div class="card-header">
-        <strong>ตั้งวันการลงทะเบียน ผู้ทรงคุณวุฒิ</strong>
+        <strong>รับรองผลการลงคะแนน ผู้แทนองค์กรส่วนท้องถิ่น</strong>
     </div>
     <div class="card-body">
 
