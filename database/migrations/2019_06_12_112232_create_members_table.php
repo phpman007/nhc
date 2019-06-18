@@ -20,9 +20,9 @@ class CreateMembersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('nameTitle', 100)->comment("คำนำหน้าชื่อ");
-            // $table->string('firstname', 100);
-            // $table->string('lastname', 100);
-            $table->string('fullname', 255)->comment("ชื่อเต็ม");
+            $table->string('firstname', 100);
+            $table->string('lastname', 100);
+            // $table->string('fullname', 255)->comment("ชื่อเต็ม");
             $table->string('personalId', 13)->comment("เลขที่บัตรประชาชน");
             $table->integer('groupId')->comment("รหัสกลุ่ม");
             $table->integer('seniorGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มผู้ทรงคุณวุฒิ");
