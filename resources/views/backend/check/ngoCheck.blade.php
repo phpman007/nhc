@@ -135,7 +135,13 @@
                     </tr>
                     @foreach ($listmember as $key=>$valmember)
                         <tr>
-                        <td align="middle">{{$valmember->id}}</td>
+                        <td align="middle">
+                            @if (!empty($_GET['page']))
+                                {{ $key + ($_GET['page'] - 1) * $listmember->PerPage() + 1  }}
+                            @else
+                                {{$key + 1}}
+                            @endif
+                        </td>
                         <td align="middle">{{$valmember->docId}}</td>
                         <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>

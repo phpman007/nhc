@@ -165,9 +165,9 @@
                         <tr>
                         <td align="middle">
                             @if(!empty($_GET['page']))
-                            {{ ($key+1) * (int)$_GET['page'] }}
+                                {{ ($key+1) * (int)$_GET['page'] }}
                             @else
-                            {{ $key+1 }}
+                                {{ $key+1 }}
                             @endif
                         </td>
                         <td align="middle">{{$valmember->docId}}</td>

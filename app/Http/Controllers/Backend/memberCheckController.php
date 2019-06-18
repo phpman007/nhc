@@ -88,7 +88,8 @@ class memberCheckController extends Controller
                 }
             }
         }else{$countprovince=0;}
-        $listmember= $list->orderBy('members.id')->paginate(2);
+
+        $listmember= $list->orderBy('members.id')->paginate(10);
 
         return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listsection','listmember','countprovince','countstatus','countgroup'));
     }
