@@ -43,7 +43,7 @@
                   </li>
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
-                              <li><a href="{{ url('backend/approve/index') }}">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
                               <li><a href="{{ url('backend/approve/orApprove') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
                               <li><a href="{{ url('backend/approve/ngoApprove') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
                         </ul>
