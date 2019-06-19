@@ -34,7 +34,7 @@ class orCheckController extends Controller
         $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
         $list->join('organization_groups', 'members.organizationGroupId', '=', 'organization_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','member_details.section','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
+        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
         $list->where('members.groupId','=',2);
         // $list->where('members.candidateStatus','=',1);
 
@@ -60,19 +60,6 @@ class orCheckController extends Controller
             }
         }else{$countgroup=0;}
 
-        if(!empty($input['txtsection'])){
-            $countstatus=count($input['txtsection']);
-            for($i=0;$i<$countstatus;$i++){
-                if($i==0){
-                    $list->where('member_details.section','=',$input['txtsection'][0]);
-                }else{
-                    $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
-                }
-            }
-        }else{$countsection=0;
-            // $list->where('member_details.section','=',$input['txtsection'][0]);
-        }
-
         if(!empty($input['txtstatus'])){
             $countstatus=count($input['txtstatus']);
             for($i=0;$i<$countstatus;$i++){
@@ -96,7 +83,7 @@ class orCheckController extends Controller
         }else{$countprovince=0;}
         $listmember= $list->orderBy('members.id')->paginate(10);
 
-        return view('/backend/check/orCheck',compact('listprovince','listgroupor','liststatus','listsection','listmember','countprovince','countstatus','countgroup','countsection'));
+        return view('/backend/check/orCheck',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup','countsection'));
     }
 
     // public function adminCheck()
