@@ -37,14 +37,21 @@ Route::group(['prefix' => 'check'], function () {
 });
 
 Route::group(['prefix' => 'approve'], function () {
-    // Route::match(['get', 'post'],'/search', 'QuestionController@search')->name('questionuser.search');
+    Route::match(['get', 'post'],'/snApprove', 'ApproveSNController@index')->name('approveSN.index');
+    Route::get('/editstatusSN', 'ApproveSNController@editstatus')->name('approveSN.editstatus');
+    Route::get('/editnotpassSN', 'ApproveSNController@editnotpass')->name('approveSN.editnotpass');
 
-    Route::match(['get', 'post'],'/index', 'ApproveSNController@index')->name('approve.index');
-    Route::get('/editstatus', 'ApproveSNController@editstatus')->name('approve.status');
-    Route::get('/snApprove', function () {return view('backend.Approve.snApprove');});
-    Route::get('/orApprove', function () {return view('backend.Approve.orApprove');});
-    Route::get('/ngoApprove', function () {return view('backend.Approve.ngoApprove');});
-    Route::get('/memApprove', function () {return view('backend.Approve.memApprove');});
+    Route::match(['get', 'post'],'/orApprove', 'ApproveORController@index')->name('approveOR.index');
+    Route::get('/editstatusOR', 'ApproveORController@editstatus')->name('approveOR.editstatus');
+    Route::get('/editnotpassOR', 'ApproveORController@editnotpass')->name('approveOR.editnotpass');
+
+    Route::match(['get', 'post'],'/ngoApprove', 'ApproveNGOController@index')->name('approveNGO.index');
+    Route::get('/editstatusNGO', 'ApproveNGOController@editstatus')->name('approveNGO.editstatus');
+    Route::get('/editnotpassNGO', 'ApproveNGOController@editnotpass')->name('approveNGO.editnotpass');
+
+    Route::match(['get', 'post'],'/memApprove', 'ApproveMemberController@index')->name('approveMEM.index');
+    Route::get('/editstatusMEM', 'ApproveMemberController@editstatus')->name('approveMEM.editstatus');
+    Route::get('/editnotpassMEM', 'ApproveMemberController@editnotpass')->name('approveMEM.editnotpass');
 
 });
 

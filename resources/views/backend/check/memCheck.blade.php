@@ -97,8 +97,7 @@
 
                 <div class="form-group col-md-6">
                     <label for="txtsection">เขต : </label>
-                    <select id="txtsection" name="txtsection" class="form-control">
-                        <option value="" selected>เขต ...</option>
+                    <select id="txtsection" name="txtsection[]" class="js-example-basic-multiple form-control" multiple="multiple">
                         <option value="1">เขต 1</option>
                         <option value="2">เขต 2</option>
                         <option value="3">เขต 3</option>

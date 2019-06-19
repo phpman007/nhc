@@ -76,7 +76,7 @@ class CreateMemberDetailsTable extends Migration
             $table->string('vision')->comment("วิสัยทัศน์")->nullable();
             $table->integer('statusId')->comment("สถานะ 4 แบบ รอการตรวจสอบ,อยู่ระหว่าง,ผ่าน,ไม่ผ่าน")->nullable();
             $table->integer('adminId')->comment("เลขที่แอดมิน")->nullable();
-            $table->integer('reason')->comment("เหตุผลที่ไม่ผ่าน")->nullable();
+            $table->string('reason', 50)->comment("เหตุผลที่ไม่ผ่าน")->nullable();
 
             // information part 6 more information for organization group
             $table->integer('provinceMemberID')->comment("จังหวัดสมาชิก")->nullable();

@@ -15,6 +15,8 @@ class CreateAttachFilesTable extends Migration
     {
         Schema::create('attach_files', function (Blueprint $table) {
             $table->Increments('id');
+            $table->integer('member_id')->comment("รหัสสมาชิก")->nullable();
+            $table->integer('upload_group')->comment("กลุ่มที่อัพโหลด")->nullable();
             $table->string('fileName', 255)->comment("ชื่อไฟล์")->nullable();
             $table->string('path', 255)->comment("ที่อยู่ของไฟล์")->nullable();
             $table->string('newName', 255)->comment("ชื่อใหม่")->nullable();

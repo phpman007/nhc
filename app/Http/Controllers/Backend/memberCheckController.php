@@ -37,12 +37,17 @@ class memberCheckController extends Controller
         $list->join('users', 'member_details.adminId', '=', 'users.id');
         $list->select('members.id','member_details.docId','member_details.zipFile','member_details.section','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
         $list->where('members.groupId','=',2);
-        $list->where('members.candidateStatus','=',2);
+        // $list->where('members.candidateStatus','=',2);
 
         if(!empty($input['txtname'])){
-            $list->where('members.firstname','like',"%".$input['txtname']."%");
-            $list->orwhere('members.lastname','like',"%".$input['txtname']."%");
-            $list->orwhere('member_details.docId','like',"%".$input['txtname']."%");
+            $list->where('members.candidateStatus','=',2)
+            ->where(function ($query) {
+                $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
+                      ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%')
+                      ->orWhere('member_details.docId','like','%'.\Request::get('txtname').'%');
+            });
+        }else{
+            $list->where('members.candidateStatus','=',2);
         }
 
         if(!empty($input['txtgroup'])){
@@ -57,16 +62,16 @@ class memberCheckController extends Controller
         }else{$countgroup=0;}
 
         if(!empty($input['txtsection'])){
-            // $countstatus=count($input['txtsection']);
-        //     for($i=0;$i<$countstatus;$i++){
-        //         if($i==0){
-        //             $list->where('member_details.section','=',$input['txtsection'][0]);
-        //         }else{
-        //             $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
-        //         }
-        //     }
-        // }else{$countsection=0;
-            $list->where('member_details.section','=',$input['txtsection'][0]);
+            $countstatus=count($input['txtsection']);
+            for($i=0;$i<$countstatus;$i++){
+                if($i==0){
+                    $list->where('member_details.section','=',$input['txtsection'][0]);
+                }else{
+                    $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
+                }
+            }
+        }else{$countsection=0;
+            // $list->where('member_details.section','=',$input['txtsection'][0]);
         }
 
         if(!empty($input['txtstatus'])){
@@ -93,7 +98,7 @@ class memberCheckController extends Controller
 
         $listmember= $list->orderBy('members.id')->paginate(10);
 
-        return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listsection','listmember','countprovince','countstatus','countgroup'));
+        return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listsection','listmember','countprovince','countstatus','countgroup','countsection'));
     }
 
     // public function adminCheck()

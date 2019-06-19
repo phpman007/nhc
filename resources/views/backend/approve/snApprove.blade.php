@@ -8,14 +8,16 @@
         select_element = element
         var status = document.getElementsByName('txtstatuschange[]')[id].value;
         console.log(status)
-        //var b = document.getElementsByName('Hid[]')[id].value;
+
         if(status==4){
-            document.getElementById('gotomodal').click();
+            document.getElementsByName('gotomodal[]')[id].click();
         }else{
             document.getElementsByName('frmstatuschange[]')[id].submit();
         }
 
-      // alert(id+" idstatus="+a+" id="+b);
+        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
+            console.log($(select_element).val($(select_element).data('default')))
+        });
     }
 
     /*function NewWindow(mypage,myname,w,h,scroll){
@@ -46,8 +48,6 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-
-
         @elseif(session('flash_message')=="not")
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะไม่ได้!!!</i>
@@ -57,7 +57,7 @@
             </div>
         @endif
 
-        <form id="frmsearchapprove" method="post" action="{{url('backend/approve/index')}}">
+        <form id="frmsearchapprove" method="post" action="{{url('backend/approve/snApprove')}}">
         {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -142,7 +142,13 @@
                     </tr>
                     @foreach ($listmember as $key=>$valmember)
                         <tr>
-                        <td align="middle">{{$valmember->id}}</td>
+                        <td align="middle">
+                            @if (!empty($_GET['page']))
+                                {{ $key + ($_GET['page'] - 1) * $listmember->PerPage() + 1  }}
+                            @else
+                                {{$key + 1}}
+                            @endif
+                        </td>
                         <td align="middle">{{$valmember->docId}}</td>
                         {{--  <td>{{$valmember->member->firstname}}  {{$valmember->member->lastname}}</td>
                         <td>{{$valmember->statuses->status}}</td>--}}
@@ -151,8 +157,13 @@
                         <td>{{$valmember->province}}</td>
                         <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
                         {{-- <td>{{$valmember->status}}</td> --}}
+
+                        {{-- สถานะ  --}}
                         <td>
-                            <form name="frmstatuschange[]" action="{{url('backend/approve/editstatus')}}">
+                            <a data-toggle="modal" name="gotomodal[]" href="#m-editstatus-{{$key}}" style="display: none;"> test {{$key}} </a>
+
+                            <form name="frmstatuschange[]" method="GET" action="{{url('backend/approve/editstatusSN')}}">
+                                {{ csrf_field() }}
                                 <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" onchange="editstatus('{{$key}}', this);">
                                     @foreach ($liststatus as $valstatus)
                                     <option @if($valmember->status!=null && $valmember->statusid == $valstatus->id) selected @endif
@@ -163,49 +174,44 @@
                             </form>
 
                             {{--  //modal สถานะไม่ผ่าน  --}}
-                            <div id="m-editstatus" class="modal fade" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                {{--  <div class="col-sm-6 b-r"><h3 class="m-t-none m-b">กำหนดเหตุผลสถานะไม่ผ่าน</h3>  --}}
-                                                <div class="col-sm-12"><h3 class="m-t-none m-b">กำหนดเหตุผลสถานะไม่ผ่าน</h3>
-                                                    {{--  <p>Sign in today for more expirience.</p>  --}}
+                            <form name"frmnotpass[]" method="GET" action="{{url('backend/approve/editnotpassSN')}}">
+                            {{ csrf_field() }}
+                                <input type="hidden" name="Hidmember[]" value={{$valmember->id}}>
 
-                                                    <form method="post">
-                                                        <div class="form-group">
-                                                            <label for="recipient-name" class="col-form-label">เหตุผลสถานะไม่ผ่าน :</label>
-                                                            <div class="form-check">
-                                                            @if(!$listreason->isEmpty())
-                                                                @foreach($listreason as $valreason)
-                                                                    <div class="i-checks">
-                                                                    <input type="checkbox" name="chkreason" class="form-check-input" value={{$valreason->id}}>
-                                                                    <label class="form-check-label" for="chkreason">{{$valreason->notPassReason}}</label>
-                                                                    </div><br>
-                                                                @endforeach
-                                                            @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="reset" class="btn btn-secondary">ล้างข้อมูล</button>
-                                                            <button type="submit" class="btn btn-primary">บันทึก</button>
-                                                        </div>
-                                                    </form>
+                                <div id="m-editstatus-{{$key}}" class="modal fade" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title">กำหนดเหตุผลสถานะไม่ผ่าน</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="recipient-name" class="col-form-label">เหตุผลสถานะไม่ผ่าน :</label>
+                                                <div class="form-check">
+                                                @if(!$listreason->isEmpty())
+                                                    @foreach($listreason as $valreason)
+                                                        <div class="i-checks">
+                                                        <input type="checkbox" name="chkreason[]" class="form-check-input" value={{$valreason->id}}>
+                                                        <label class="form-check-label" for="chkreason">{{$valreason->notPassReason}}</label>
+                                                        </div><br>
+                                                    @endforeach
+                                                @endif
                                                 </div>
-                                                {{--  <div class="col-sm-6"><h4>Not a member?</h4>
-                                                    <p>You can create an account:</p>
-                                                    <p class="text-center">
-                                                        <a href=""><i class="fa fa-sign-in big-icon"></i></a>
-                                                    </p>
-                                            </div>  --}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">บันทึก</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                             {{--  //end modal  --}}
-
                         </td>
+
                         <td>{{$valmember->username}}</td>
+
                         </tr>
                     @endforeach
                 </table>
@@ -214,14 +220,6 @@
         </div>
     </div>
 </div>
-
-<a data-toggle="modal" id="gotomodal" href="#m-editstatus"> test </a>
-
-{{--  <div class="text-center">
-    <a data-toggle="modal" class="btn btn-primary" href="#m-editstatus">Form in simple modal box</a>
-</div>  --}}
-
-
 
 @endsection
 
@@ -233,13 +231,12 @@
         maximumSelectionLength: 3
         });
 
-        $('#m-editstatus').on('hidden.bs.modal', function() {
-            console.log($(select_element).val($(select_element).data('default')))
-        });
-
+        //$('#m-editstatus-2').on('hidden.bs.modal', function() {
+            //  console.log($(select_element).val($(select_element).data('default')))
+        // });
     });
 
-    {{--  $(document).ready(function() {
+    {{-- $(document).ready(function() {
         toastr.options = {
             closeButton: true,
             progressBar: true,
