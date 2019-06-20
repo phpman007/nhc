@@ -22,9 +22,14 @@ class CreateElectionsTable extends Migration
             $table->string('province')->comment("จังหวัด")->nullable();
             $table->string('section')->comment("เขต")->nullable();
             $table->date('openDate')->comment("วันที่เปิดรับสมัคร")->nullable();
+            // $table->time('openTime')->comment("เวลาเปิดรับสมัคร")->nullable();
             $table->date('endDate')->comment("วันที่สิ้นสุดการรับสมัคร")->nullable();
+            // $table->time('endTime')->comment("เวลาปิดรับสมัคร")->nullable();
             $table->date('confirmDate')->comment("วันที่ยืนยันการรับสมัคร")->nullable();
+            // $table->time('confirmTime')->comment("เวลายืนยันการรับสมัคร")->nullable();
             $table->date('electionDate')->comment("วันลงคะแนนเสียงเลือกตั้ง")->nullable();
+            $table->time('openElectionTime')->comment("เวลาเปิดลงคะแนน")->nullable();
+            $table->time('endElectionTime')->comment("เวลาปิดลงคะแนน")->nullable();
             $table->timestamps()->nullable();
         });
     }
