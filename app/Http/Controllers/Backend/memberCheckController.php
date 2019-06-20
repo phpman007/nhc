@@ -37,7 +37,6 @@ class memberCheckController extends Controller
         $list->join('users', 'member_details.adminId', '=', 'users.id');
         $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
         $list->where('members.groupId','=',2);
-        // $list->where('members.candidateStatus','=',2);
 
         if(!empty($input['txtname'])){
             $list->where('members.candidateStatus','=',2)
@@ -52,36 +51,82 @@ class memberCheckController extends Controller
 
         if(!empty($input['txtgroup'])){
             $countgroup=count($input['txtgroup']);
-            for($i=0;$i<$countgroup;$i++){
-                if($i==0){
-                    $list->where('members.organizationGroupId','=',$input['txtgroup'][0]);
-                }else{
-                    $list->orwhere('members.organizationGroupId','=',$input['txtgroup'][$i]);
-                }
+            if($countgroup==1){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0]);
+                });
+            }elseif($countgroup==2){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0])
+                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[1]);
+                });
+            }elseif($countgroup==3){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0])
+                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[1])
+                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[2]);
+                });
             }
-        }else{$countgroup=0;}
+
+        }else{
+            $countgroup=0;
+            $list->where('members.candidateStatus','=',2);
+        }
 
         if(!empty($input['txtstatus'])){
             $countstatus=count($input['txtstatus']);
-            for($i=0;$i<$countstatus;$i++){
-                if($i==0){
-                    $list->where('member_details.statusId','=',$input['txtstatus'][0]);
-                }else{
-                    $list->orwhere('member_details.statusId','=',$input['txtstatus'][$i]);
-                }
+            if($countstatus==1){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0]);
+                });
+            }elseif($countstatus==2){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1]);
+                });
+            }elseif($countstatus==3){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[2]);
+                });
             }
-        }else{$countstatus=0;}
+        }else{
+            $countstatus=0;
+            $list->where('members.candidateStatus','=',2);
+        }
 
         if(!empty($input['txtprovince'])){
             $countprovince=count($input['txtprovince']);
-            for($i=0;$i<$countprovince;$i++){
-                if($i==0){
-                    $list->where('provinces.province','=',$input['txtprovince'][0]);
-                }else{
-                    $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
-                }
+            if($countprovince==1){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('provinces.province','=',\Request::get('txtprovince')[0]);
+                });
+            }elseif($countprovince==2){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('provinces.province','=',\Request::get('txtprovince')[0])
+                        ->orWhere('provinces.province','=',\Request::get('txtprovince')[1]);
+                });
+            }elseif($countprovince==3){
+                $list->where('members.candidateStatus','=',2)
+                ->where(function ($query) {
+                    $query->where('provinces.province','=',\Request::get('txtprovince')[0])
+                        ->orWhere('provinces.province','=',\Request::get('txtprovince')[1])
+                        ->orWhere('provinces.province','=',\Request::get('txtprovince')[2]);
+                });
             }
-        }else{$countprovince=0;}
+        }else{
+            $countprovince=0;
+            $list->where('members.candidateStatus','=',2);
+        }
 
         $listmember= $list->orderBy('members.id')->paginate(10);
 

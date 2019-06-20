@@ -40,22 +40,13 @@
         <strong>อนุมัติผู้สมัคร ผู้ทรงคุณวุฒิ</strong>
     </div>
     <div class="card-body">
-        @if(session('flash_message')=="ok")
-            {{-- <div class="alert alert-success alert-dismissible fade show"><span class="glyphicon glyphicon-ok"></span><em> {!! session('flash_message') !!}</em></div> --}}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะเรียบร้อยแล้ว</i>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-        @elseif(session('flash_message')=="not")
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะไม่ได้!!!</i>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-        @endif
+        {{-- <div class="alert alert-success alert-dismissible fade show"><span class="glyphicon glyphicon-ok"></span><em> {!! session('flash_message') !!}</em></div> --}}
+        {{-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะเรียบร้อยแล้ว</i>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div> --}}
 
         <form id="frmsearchapprove" method="post" action="{{url('backend/approve/snApprove')}}">
         {{ csrf_field() }}
@@ -188,17 +179,10 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <label for="recipient-name" class="col-form-label">เหตุผลสถานะไม่ผ่าน :</label>
-                                                <div class="form-check">
-                                                @if(!$listreason->isEmpty())
-                                                    @foreach($listreason as $valreason)
-                                                        <div class="i-checks">
-                                                        <input type="checkbox" name="chkreason[]" class="form-check-input" value={{$valreason->id}}>
-                                                        <label class="form-check-label" for="chkreason">{{$valreason->notPassReason}}</label>
-                                                        </div><br>
-                                                    @endforeach
-                                                @endif
-                                                </div>
+                                                <label for="txtreason[]">เหตุผลสถานะไม่ผ่าน :</label>
+                                                <textarea name="txtreason[]" rows="10" class="form-control" required></textarea>
+                                                {{-- @if($valmember->reason!=""){{$valmember->reason}} @endif --}}
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">บันทึก</button>
@@ -236,15 +220,25 @@
         // });
     });
 
-    {{-- $(document).ready(function() {
+    @if (Session::has('success'))
         toastr.options = {
             closeButton: true,
             progressBar: true,
             showMethod: 'slideDown',
             timeOut: 2000
         };
-        toastr.success('aaaaaaaaa', 'Welcome to NHC Application Builder');
-    });  --}}
+        toastr.success('แก้ไขสถานะเรียบร้อยแล้ว', '');
+    @endif
+    @if (Session::has( 'error' ))
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2000
+        };
+        toastr.error('แก้ไขสถานะไม่ได้!!!', '');
+    @endif
+
 </script>
 
 @endsection

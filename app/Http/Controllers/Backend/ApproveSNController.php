@@ -33,14 +33,14 @@ class ApproveSNController extends Controller
         $listprovince=Province::select('province_code','province')->groupBy('province_code','province')->orderBy('province')->get();
         $listgroupsn=GroupSN::get();
         $liststatus=Statuses::get();
-        $listreason=reason::get();
+        // $listreason=reason::get();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
         $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
         $list->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','senior_groups.groupName','users.username');
+        $list->select('member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','senior_groups.groupName','users.username');
         $list->where('members.groupId','=',1);
 
         if(!empty($input['txtname'])){
@@ -85,7 +85,7 @@ class ApproveSNController extends Controller
 
         //$listmember=MemberDetail::all();
 
-        return view('/backend/approve/snApprove',compact('listprovince','listgroupsn','liststatus','listmember','countprovince','listreason','countstatus','countgroup'));
+        return view('/backend/approve/snApprove',compact('listprovince','listgroupsn','liststatus','listmember','countprovince','countstatus','countgroup'));
     }
 
     public function editstatus()
@@ -99,9 +99,9 @@ class ApproveSNController extends Controller
         // flash('บันทึกเรียบร้อย')->success();
 
         if($list->update()){
-            \Session::flash('flash_message','ok');
+            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
         }else{
-            \Session::flash('flash_message','not');
+            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
         return redirect('/backend/approve/snApprove');
     }
@@ -110,26 +110,18 @@ class ApproveSNController extends Controller
     {
         $input = \Request::all();
         //dd($input);
-        if(!empty($input['chkreason'])){
-            $countstatus=count($input['chkreason']);
-            if($countstatus>0){
-                $txtstatus=implode(",", $input['chkreason']);
 
-                $list = MemberDetail::find($input['Hidmember'][0]);
-                $list->reason = $txtstatus;
-                $list->statusId = 4;
+        $list = MemberDetail::find($input['Hidmember'][0]);
+        $list->reason = $input['txtreason'][0];
+        $list->statusId = 4;
 
-                if($list->update()){
-                    \Session::flash('flash_message','ok');
-                }else{
-                    \Session::flash('flash_message','not');
-                }
-            }
+        if($list->update()){
+            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
         }else{
-            \Session::flash('flash_message','not2');
+            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
-        return redirect('/backend/approve/snApprove');
 
+        return redirect('/backend/approve/snApprove');
     }
 
     /**

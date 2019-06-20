@@ -33,16 +33,15 @@ class ApproveORController extends Controller
         $listprovince=Province::select('province_code','province')->groupBy('province_code','province')->orderBy('province')->get();
         $listgroupor=GroupOR::get();
         $liststatus=Statuses::get();
-        $listreason=reason::get();
+        // $listreason=reason::get();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
         $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
         $list->join('organization_groups', 'members.organizationGroupId', '=', 'organization_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
+        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','organization_groups.groupName','users.username');
         $list->where('members.groupId','=',2);
-
 
         if(!empty($input['txtname'])){
             $list->where('members.candidateStatus','=',1)
@@ -57,53 +56,85 @@ class ApproveORController extends Controller
 
         if(!empty($input['txtgroup'])){
             $countgroup=count($input['txtgroup']);
-            for($i=0;$i<$countgroup;$i++){
-                if($i==0){
-                    $list->where('members.organizationGroupId','=',$input['txtgroup'][0]);
-                }else{
-                    $list->orwhere('members.organizationGroupId','=',$input['txtgroup'][$i]);
-                }
+            if($countgroup==1){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0]);
+                });
+            }elseif($countgroup==2){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0])
+                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[1]);
+                });
+            }elseif($countgroup==3){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0])
+                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[1])
+                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[2]);
+                });
             }
-        }else{$countgroup=0;}
+        }else{
+            $list->where('members.candidateStatus','=',1);
+            $countgroup=0;
+        }
 
         if(!empty($input['txtstatus'])){
             $countstatus=count($input['txtstatus']);
-            for($i=0;$i<$countstatus;$i++){
-                if($i==0){
-                    $list->where('member_details.statusId','=',$input['txtstatus'][0]);
-                }else{
-                    $list->orwhere('member_details.statusId','=',$input['txtstatus'][$i]);
-                }
+            if($countstatus==1){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0]);
+                });
+            }elseif($countstatus==2){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1]);
+                });
+            }elseif($countstatus==3){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[2]);
+                });
             }
-        }else{$countstatus=0;}
+        }else{
+            $countstatus=0;
+            $list->where('members.candidateStatus','=',1);
+        }
 
         if(!empty($input['txtprovince'])){
             $countprovince=count($input['txtprovince']);
-            for($i=0;$i<$countprovince;$i++){
-                if($i==0){
-                    $list->where('provinces.province','=',$input['txtprovince'][0]);
-                }else{
-                    $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
-                }
+            if($countprovince==1){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('provinces.province','=',\Request::get('txtprovince')[0]);
+                });
+            }elseif($countprovince==2){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('provinces.province','=',\Request::get('txtprovince')[0])
+                        ->orWhere('provinces.province','=',\Request::get('txtprovince')[1]);
+                });
+            }elseif($countprovince==3){
+                $list->where('members.candidateStatus','=',1)
+                ->where(function ($query) {
+                    $query->where('provinces.province','=',\Request::get('txtprovince')[0])
+                        ->orWhere('provinces.province','=',\Request::get('txtprovince')[1])
+                        ->orWhere('provinces.province','=',\Request::get('txtprovince')[2]);
+                });
             }
-        }else{$countprovince=0;}
+        }else{
+            $countprovince=0;
+            $list->where('members.candidateStatus','=',1);
+        }
 
-        if(!empty($input['txtsection'])){
-            $countsection=count($input['txtsection']);
-            for($i=0;$i<$countsection;$i++){
-                if($i==0){
-                    $list->where('member_details.section','=',$input['txtsection'][0]);
-                }else{
-                    $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
-                }
-            }
-
-        }else{$countsection=0;}
         $listmember= $list->orderBy('members.id')->paginate(10);
 
-        //$listmember=MemberDetail::all();
-
-        return view('/backend/approve/orApprove',compact('listprovince','listgroupor','liststatus','listmember','countprovince','listreason','countstatus','countgroup','countsection'));
+        return view('/backend/approve/orApprove',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup'));
     }
 
     public function editstatus()
@@ -116,9 +147,9 @@ class ApproveORController extends Controller
 
 
         if($list->update()){
-            \Session::flash('flash_message','ok');
+            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
         }else{
-            \Session::flash('flash_message','not');
+            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
         return redirect('/backend/approve/orApprove');
     }
@@ -126,24 +157,15 @@ class ApproveORController extends Controller
     public function editnotpass()
     {
         $input = \Request::all();
-        //dd($input);
-        if(!empty($input['chkreason'])){
-            $countstatus=count($input['chkreason']);
-            if($countstatus>0){
-                $txtstatus=implode(",", $input['chkreason']);
 
-                $list = MemberDetail::find($input['Hidmember'][0]);
-                $list->reason = $txtstatus;
-                $list->statusId = 4;
+        $list = MemberDetail::find($input['Hidmember'][0]);
+        $list->reason = $input['txtreason'][0];
+        $list->statusId = 4;
 
-                if($list->update()){
-                    \Session::flash('flash_message','ok');
-                }else{
-                    \Session::flash('flash_message','not');
-                }
-            }
+        if($list->update()){
+            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
         }else{
-            \Session::flash('flash_message','not2');
+            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
         return redirect('/backend/approve/orApprove');
 

@@ -19,20 +19,9 @@
             console.log($(select_element).val($(select_element).data('default')))
         });
     }
-
-    /*function NewWindow(mypage,myname,w,h,scroll){
-        var win = null;
-        LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
-        TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
-        settings =
-        'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
-        win = window.open(mypage,myname,settings)
-    }*/
-
 </script>
 
 @section('content')
-{{--  [ <a href="function_query_repor_print.php" onClick="NewWindow(this.href,'name','400','400','yes');return false">คลิก</a> ]  --}}
 
 <div class="card border-info mb-3">
 
@@ -71,8 +60,6 @@
                 <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
 
                     @foreach ($listgroupor as $valgroup)
-                    {{--  <option @if(request()->input('txtgroup')!=null && request()->input('ok')=="1" && request()->input('txtgroup') == $valgroup->id) selected @endif
-                    value={{$valgroup->id}}>{{$valgroup->groupName}}</option>  --}}
                         <option
                             @for($i=0;$i<$countgroup;$i++)
                                 @if(request()->input('txtgroup')[$i]!=null && request()->input('ok')=="1" && request()->input('txtgroup')[$i] == $valgroup->id)
@@ -89,7 +76,6 @@
                 <div class="form-group col-md-6">
                     <label for="txtprovince">จังหวัด : </label>
                     <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
-                        {{--  <option value="" selected>จังหวัด ...</option>  --}}
                         @foreach ($listprovince as $valprovince)
                         <option
                             @for($i=0;$i<$countprovince;$i++)
@@ -102,6 +88,29 @@
                     </select>
                 </div>
 
+                <div class="form-group col-md-6">
+                    <label for="txtsection">เขต : </label>
+                    <select id="txtsection" name="txtsection[]" class="js-example-basic-multiple form-control" multiple="multiple">
+                        <option value="1">เขต 1</option>
+                        <option value="2">เขต 2</option>
+                        <option value="3">เขต 3</option>
+                        <option value="4">เขต 4</option>
+                        <option value="5">เขต 5</option>
+                        <option value="6">เขต 6</option>
+                        <option value="7">เขต 7</option>
+                        <option value="8">เขต 8</option>
+                        <option value="9">เขต 9</option>
+                        <option value="10">เขต 10</option>
+                        <option value="11">เขต 11</option>
+                        <option value="12">เขต 12</option>
+                        <option value="13">เขต 13</option>
+                        <option value="14">เขต 14</option>
+                        <option value="15">เขต 15</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="txtstatus">สถานะ : </label>
                     <select id="txtstatus" name="txtstatus[]" class="js-example-basic-multiple form-control" multiple="multiple">
@@ -132,14 +141,15 @@
             @else
                 <table class="table table-striped table-bordered">
                     <tr align="middle">
-                        <th>ลำดับ</th>
-                        <th>รหัสเอกสาร</th>
-                        <th>ชื่อ - สกุล</th>
-                        <th width="30%">กลุ่มย่อย</th>
-                        <th>จังหวัด</th>
-                        <th>ดาวน์โหลด</th>
-                        <th>สถานะ</th>
-                        <th>ผู้ที่ตรวจสอบ</th>
+                        <th width="5%">ลำดับ</th>
+                        <th width="10%">รหัสเอกสาร</th>
+                        <th width="20%">ชื่อ - สกุล</th>
+                        <th width="15%">กลุ่มย่อย</th>
+                        <th width="10%">จังหวัด</th>
+                        <th width="5%">เขต</th>
+                        <th width="5%">ดาวน์โหลด</th>
+                        <th width="15%">สถานะ</th>
+                        <th width="15%">ผู้ที่ตรวจสอบ</th>
                     </tr>
                     @foreach ($listmember as $key=>$valmember)
                         <tr>
@@ -154,6 +164,7 @@
                         <td>{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td>{{$valmember->province}}</td>
+                        <td>{{$valmember->section}}</td>
                         <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
 
                         {{-- สถานะ  --}}
@@ -173,39 +184,32 @@
 
                             {{--  //modal สถานะไม่ผ่าน  --}}
                             <form name"frmnotpass[]" method="GET" action="{{url('backend/approve/editnotpassNGO')}}">
-                            {{ csrf_field() }}
-                                <input type="hidden" name="Hidmember[]" value={{$valmember->id}}>
+                                {{ csrf_field() }}
+                                    <input type="hidden" name="Hidmember[]" value={{$valmember->id}}>
 
-                                <div id="m-editstatus-{{$key}}" class="modal fade" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title">กำหนดเหตุผลสถานะไม่ผ่าน</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="recipient-name" class="col-form-label">เหตุผลสถานะไม่ผ่าน :</label>
-                                                <div class="form-check">
-                                                @if(!$listreason->isEmpty())
-                                                    @foreach($listreason as $valreason)
-                                                        <div class="i-checks">
-                                                        <input type="checkbox" name="chkreason[]" class="form-check-input" value={{$valreason->id}}>
-                                                        <label class="form-check-label" for="chkreason">{{$valreason->notPassReason}}</label>
-                                                        </div><br>
-                                                    @endforeach
-                                                @endif
+                                    <div id="m-editstatus-{{$key}}" class="modal fade" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title">กำหนดเหตุผลสถานะไม่ผ่าน</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">บันทึก</button>
+                                                <div class="modal-body">
+                                                    <label for="txtreason[]">เหตุผลสถานะไม่ผ่าน :</label>
+                                                    <textarea name="txtreason[]" rows="10" class="form-control" required></textarea>
+                                                    {{-- @if($valmember->reason!=""){{$valmember->reason}} @endif --}}
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
-                            {{--  //end modal  --}}
+                                </form>
+                                {{--  //end modal  --}}
                         </td>
 
                         <td>{{$valmember->username}}</td>
@@ -228,12 +232,26 @@
         $('.js-example-basic-multiple').select2({
         maximumSelectionLength: 3
         });
-
-        //$('#m-editstatus-2').on('hidden.bs.modal', function() {
-            //  console.log($(select_element).val($(select_element).data('default')))
-        // });
     });
 
+    @if (Session::has('success'))
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2000
+        };
+        toastr.success('แก้ไขสถานะเรียบร้อยแล้ว', '');
+    @endif
+    @if (Session::has( 'error' ))
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+            timeOut: 2000
+        };
+        toastr.error('แก้ไขสถานะไม่ได้!!!', '');
+    @endif
 </script>
 
 @endsection
