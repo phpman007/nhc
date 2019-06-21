@@ -26,16 +26,16 @@ class CheckSNController extends Controller
     {
         $input = \Request::all();
 
-        $listprovince=Province::select('province_code','province')->groupBy('province_code','province')->orderBy('province')->get();
+        $listprovince=Province::orderBy('province')->get();
         $listgroupsn=GroupSN::get();
         $liststatus=Statuses::get();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
-        $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
+        $list->join('province','member_details.provinceId','=','province.provinceId');
         $list->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','senior_groups.groupName','users.username');
+        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','senior_groups.groupName','users.username');
         $list->where('members.groupId','=',1);
 
         if(!empty($input['txtname'])){
@@ -70,9 +70,9 @@ class CheckSNController extends Controller
             $countprovince=count($input['txtprovince']);
             for($i=0;$i<$countprovince;$i++){
                 if($i==0){
-                    $list->where('provinces.province','=',$input['txtprovince'][0]);
+                    $list->where('province.province','=',$input['txtprovince'][0]);
                 }else{
-                    $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
+                    $list->orwhere('province.province','=',$input['txtprovince'][$i]);
                 }
             }
         }else{$countprovince=0;}

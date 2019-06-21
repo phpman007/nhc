@@ -104,8 +104,6 @@
                         <option value="11">เขต 11</option>
                         <option value="12">เขต 12</option>
                         <option value="13">เขต 13</option>
-                        <option value="14">เขต 14</option>
-                        <option value="15">เขต 15</option>
                     </select>
                 </div>
             </div>
@@ -141,15 +139,15 @@
             @else
                 <table class="table table-striped table-bordered">
                     <tr align="middle">
-                        <th width="5%">ลำดับ</th>
-                        <th width="10%">รหัสเอกสาร</th>
-                        <th width="20%">ชื่อ - สกุล</th>
-                        <th width="15%">กลุ่มย่อย</th>
-                        <th width="10%">จังหวัด</th>
-                        <th width="5%">เขต</th>
-                        <th width="5%">ดาวน์โหลด</th>
-                        <th width="15%">สถานะ</th>
-                        <th width="15%">ผู้ที่ตรวจสอบ</th>
+                        <th>ลำดับ</th>
+                        <th>รหัสเอกสาร</th>
+                        <th>ชื่อ - สกุล</th>
+                        <th width="30%">กลุ่มย่อย</th>
+                        <th>จังหวัด</th>
+                        <th></th>เขต</th>
+                        <th>ดาวน์โหลด</th>
+                        <th>สถานะ</th>
+                        <th>ผู้ที่ตรวจสอบ</th>
                     </tr>
                     @foreach ($listmember as $key=>$valmember)
                         <tr>

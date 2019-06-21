@@ -25,16 +25,25 @@ class ngoCheckController extends Controller
     {
         $input = \Request::all();
 
-        $listprovince=Province::select('province_code','province')->groupBy('province_code','province')->orderBy('province')->get();
+        $listprovince=Province::orderBy('province')->get();
         $listgroupngo=ngoGroup::get();
         $liststatus=Statuses::get();
 
+        // $list=MemberDetail::join('members','members.id','=','member_details.memberId');
+        // $list->join('statuses','member_details.statusId','=','statuses.id');
+        // $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
+        // $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
+        // $list->join('users', 'member_details.adminId', '=', 'users.id');
+        // $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','ngo_groups.groupName','users.username');
+        // $list->where('members.groupId','=',3);
+
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
-        $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
-        $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','ngo_groups.groupName','users.username');
+        $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
+        $list->join('ngo_sections','member_details.section','=','ngo_sections.id');
+        $list->join('province','ngo_sections.provinceId','=','province.provinceId');
+        $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','ngo_groups.groupName','users.username');
         $list->where('members.groupId','=',3);
 
         if(!empty($input['txtname'])){
@@ -82,9 +91,9 @@ class ngoCheckController extends Controller
             $countprovince=count($input['txtprovince']);
             for($i=0;$i<$countprovince;$i++){
                 if($i==0){
-                    $list->where('provinces.province','=',$input['txtprovince'][0]);
+                    $list->where('province.province','=',$input['txtprovince'][0]);
                 }else{
-                    $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
+                    $list->orwhere('province.province','=',$input['txtprovince'][$i]);
                 }
             }
         }else{$countprovince=0;}

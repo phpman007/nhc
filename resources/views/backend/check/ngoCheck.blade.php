@@ -110,6 +110,7 @@
                     <option value="10">เขต 10</option>
                     <option value="11">เขต 11</option>
                     <option value="12">เขต 12</option>
+                    <option value="13">เขต 13</option>
                 </select>
             </div>
 
