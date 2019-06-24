@@ -130,7 +130,7 @@ class memberCheckController extends Controller
 
         $listmember= $list->orderBy('members.id')->paginate(10);
 
-        return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup','countsection'));
+        return view('/backend/check/memCheck',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup'));
     }
 
     // public function adminCheck()

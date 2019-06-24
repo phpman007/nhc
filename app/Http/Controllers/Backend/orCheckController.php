@@ -129,7 +129,7 @@ class orCheckController extends Controller
 
         $listmember= $list->orderBy('members.id')->paginate(10);
 
-        return view('/backend/check/orCheck',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup','countsection'));
+        return view('/backend/check/orCheck',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup'));
     }
 
     // public function adminCheck()
