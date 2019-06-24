@@ -1,3 +1,4 @@
+{{-- {{ dd(session()->get('users.permission')) }} --}}
 
 <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
@@ -41,6 +42,12 @@
                           <li><a href="{{ url('backend/check/ngoCheck') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
                     </ul>
                   </li>
+                  {{-- @if (Session::has('id') && Session::get('users.permission') == 'super admin') { --}}
+                  {{-- @if (Session::has('permission')) {
+                    {{Session::get('permission')}};
+                  }@endif --}}
+                  {{-- @if ( {{session('users.permission')}} = 'super admin' ) { --}}
+                  {{-- @if (Session::has('permission' == 'super admin')){ --}}
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                               <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
@@ -49,6 +56,7 @@
                         </ul>
                   </li>
                   <li><a href="{{ url('backend/approve/memApprove') }}"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
+                  {{-- }@endif --}}
             </ul>
             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ลงคะแนน</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">

@@ -1,0 +1,84 @@
+@charset "utf-8";
+/*
+ CSS Create by 2fellows
+*/
+@media (max-width: 1300px){
+
+}
+@media (max-width: 1200px){
+  .insitepage2f .container{ width: 100%;}
+}
+@media (max-width: 1024px){
+  .control-insitepage2f{ padding-bottom: 60px;}
+  .input2f.width65per{ width: 55%;}
+}
+@media (max-width: 991px){
+ .navbar-header { float: none; }
+ .navbar-toggle {display: block;}
+ .navbar-collapse {border-top: 1px solid transparent;  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);}
+ .navbar-collapse.collapse {display: none!important;  }
+ .navbar-nav {  float: none!important;  margin:0;}
+ .navbar-nav>li {  float: none;  }
+ .navbar-nav>li>a {  padding-top: 10px;padding-bottom: 10px;}
+ .navbar-collapse.collapse.in {  /* NEW */  display: block!important;}
+ /* css insitepage */
+ .control-insitepage2f{ padding-bottom: 50px;}
+ .content-form2f h4{font-size: 30px;  line-height: 30px;}
+ .content-form2f {  padding: 50px 30px;}
+ .text-input2f.title-sm, .text-titlenumber,.set-form2f .text-input2f{padding-left: 0;}
+ .set-form2f .text-input2f > span{ left: 0;position: relative; top: 0; margin-right: 3px;}
+ .set-form2f .text-input2f{ display: block; height: auto;width: 100%; margin-bottom: 5px;}
+ .text-major{ text-align: right;}
+ .text-major .text-input2f{  display: none;}
+ .text-titlenumber{ margin-bottom: 15px;}
+ .insite-banner2f{ height: 250px;}
+ .shape-banner {height: 80px;}
+ .control-bannertext2f{ top: 90px;}
+ .headline2f h1{    font-size: 40px;  line-height: 40px;}
+ .btn-center2f.t-left2f{ text-align: center;}
+ .set-form2f + .btn-center2f{ margin-top: 15px;}
+ .btn-2button .btn{ min-width: 100px; margin-right: 5px;}
+  .input2f.width200{ width: 80px;}
+  .set-form2f .headlineform2f h5, .set-form2f .headlineform2f .text-unit, .headlineform2f .input2f.width200{ margin-right: 10px;}
+}
+@media (max-width: 767px){
+  .bg-banner img{ width: auto;object-fit:scale-down;;}
+  .navication2f .breadcrumb{     margin: 10px 0; margin: 10px 0;}
+  .navication2f .breadcrumb>li+li:before{padding: 0 2px;}
+  .control-bannertext2f{ top:70px;}
+  .box-step2f span{ font-size: 19px;}
+  .box-step2f strong{ font-size: 35px; line-height: 24px;}
+  .box-step2f{ border-width: 6px; width: 80px; height: 80px;    font-family: 'DBHeaventv3_2';}
+  .bg-progress2f{ top:32px; height: 20px;}
+  .line-progress2f{ top:37px;}
+  .line-progress2f ul li span{ height: 10px;}
+  .control-progress2f{ margin-bottom: 20px;}
+  .btn-center2f .btn{ min-width: 120px;}
+  .btn.btn-border, .btn.btn-green{ font-size: 23px;}
+  .btn-center2f .btn{ margin: 3px;}
+  .set-form2f,.headform2f{ margin-bottom: 15px;}
+  .headform2f{ font-size: 28px;    padding: 5px 15px;}
+  .box-input2f > .row > .nopaddingright{ padding-right: 15px;}
+
+
+}
+@media (max-width: 600px){
+  .box-step2f span{ display: none;}
+  .box-step2f{border-width: 5px;  width: 60px; height: 60px; }
+  .box-step2f strong {font-size: 40px;line-height: 40px;}
+  .bg-progress2f {top: 24px;  height: 16px;}
+  .line-progress2f {  top: 27px;}
+}
+@media (max-width: 480px){
+  .insite-banner2f{ height: 200px;}
+  .shape-banner {  height: 50px;}
+  .shape-banner {  height: 50px;}
+  .content-form2f {  padding: 30px 30px;}
+  .inline-check > div{ display: block; margin-right: 0; }
+  .inline-check .box-radio2f{margin-bottom: 10px;}
+  .input2f.width65per{ width: 100%;}
+  .btn-center2f .btn img{ display: none;}
+  .btn.btn-border, .btn.btn-green{ font-size: 23px; padding: 5px; }
+  .btn-center2f .btn{ min-width: 85px;}
+
+}
