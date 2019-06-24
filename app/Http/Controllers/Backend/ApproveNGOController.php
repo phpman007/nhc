@@ -30,17 +30,18 @@ class ApproveNGOController extends Controller
         $input = \Request::all();
        //dd($input['txtgroup']);
 
-        $listprovince=Province::select('province_code','province')->groupBy('province_code','province')->orderBy('province')->get();
+        $listprovince=Province::orderBy('province')->get();
         $listgroupor=GroupNGO::get();
         $liststatus=Statuses::get();
         // $listreason=reason::get();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
-        $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
-        $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','ngo_groups.groupName','users.username');
+        $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
+        $list->join('ngo_sections','member_details.section','=','ngo_sections.id');
+        $list->join('province','ngo_sections.provinceId','=','province.provinceId');
+        $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','ngo_groups.groupName','users.username');
         $list->where('members.groupId','=',3);
 
         if(!empty($input['txtname'])){
@@ -75,9 +76,9 @@ class ApproveNGOController extends Controller
             $countprovince=count($input['txtprovince']);
             for($i=0;$i<$countprovince;$i++){
                 if($i==0){
-                    $list->where('provinces.province','=',$input['txtprovince'][0]);
+                    $list->where('province.province','=',$input['txtprovince'][0]);
                 }else{
-                    $list->orwhere('provinces.province','=',$input['txtprovince'][$i]);
+                    $list->orwhere('province.province','=',$input['txtprovince'][$i]);
                 }
             }
         }else{$countprovince=0;}
@@ -94,7 +95,7 @@ class ApproveNGOController extends Controller
 
         }else{$countsection=0;}
 
-        $listmember= $list->orderBy('members.id')->paginate(10);
+        $listmember= $list->orderBy('members.id')->paginate(10)->appends($input);
 
         return view('/backend/approve/ngoApprove',compact('listprovince','listgroupor','liststatus','listmember','countprovince','countstatus','countgroup','countsection'));
     }
@@ -113,7 +114,8 @@ class ApproveNGOController extends Controller
         }else{
             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
-        return redirect('/backend/approve/ngoApprove');
+        return back();
+        // return redirect('/backend/approve/ngoApprove');
     }
 
     public function editnotpass()
@@ -129,7 +131,8 @@ class ApproveNGOController extends Controller
         }else{
             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
-        return redirect('/backend/approve/ngoApprove');
+        return back();
+        // return redirect('/backend/approve/ngoApprove');
 
     }
 

@@ -15,12 +15,21 @@ Route::get('home', function() {
     // Route::get('/insElection', 'ElectionsController@create')->name('insElection');
     // Route::get('/store', 'ElectionsController@store')->name('member.store');
 
-
 Route::group(['prefix' => 'election'], function () {
+    Route::match(['get', 'post'],'/snElection', 'ElectionSNController@index')->name('electionSN.index');
+    Route::get('/changedate', 'ElectionSNController@edit')->name('electionSN.changedate');
+    Route::get('/changedate2', 'ElectionSNController@edit2')->name('electionSN.changedate2');
+    Route::get('/changedate3', 'ElectionSNController@edit3')->name('electionSN.changedate3');
 
-    Route::get('/snSet', function () {return view('backend.election.snSet');});
-    Route::get('/orSet', function () {return view('backend.election.orSet');});
-    Route::get('/ngoSet', function () {return view('backend.election.ngoSet');});
+    Route::match(['get', 'post'],'/orElection', 'ElectionORController@index')->name('electionOR.index');
+    Route::get('/ORchangedate', 'ElectionORController@edit')->name('electionOR.changedate');
+    Route::get('/ORchangedate2', 'ElectionORController@edit2')->name('electionOR.changedate2');
+    Route::get('/ORchangedate3', 'ElectionORController@edit3')->name('electionOR.changedate3');
+
+    Route::get('/ngoElection', 'ElectionNGOController@index')->name('electionNGO.index');
+    Route::get('/NGOchangedate', 'ElectionNGOController@edit')->name('electionNGO.changedate');
+    Route::get('/NGOchangedate2', 'ElectionNGOController@edit2')->name('electionNGO.changedate2');
+    Route::get('/NGOchangedate3', 'ElectionNGOController@edit3')->name('electionNGO.changedate3');
 
 });
 

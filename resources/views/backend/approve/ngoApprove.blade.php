@@ -91,19 +91,97 @@
                 <div class="form-group col-md-6">
                     <label for="txtsection">เขต : </label>
                     <select id="txtsection" name="txtsection[]" class="js-example-basic-multiple form-control" multiple="multiple">
-                        <option value="1">เขต 1</option>
-                        <option value="2">เขต 2</option>
-                        <option value="3">เขต 3</option>
-                        <option value="4">เขต 4</option>
-                        <option value="5">เขต 5</option>
-                        <option value="6">เขต 6</option>
-                        <option value="7">เขต 7</option>
-                        <option value="8">เขต 8</option>
-                        <option value="9">เขต 9</option>
-                        <option value="10">เขต 10</option>
-                        <option value="11">เขต 11</option>
-                        <option value="12">เขต 12</option>
-                        <option value="13">เขต 13</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 1)
+                                selected
+                                @endif
+                            @endfor
+                        value="1">เขต 1</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 2)
+                                selected
+                                @endif
+                            @endfor
+                        value="2">เขต 2</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 3)
+                                selected
+                                @endif
+                            @endfor
+                        value="3">เขต 3</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 4)
+                                selected
+                                @endif
+                            @endfor
+                        value="4">เขต 4</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 5)
+                                selected
+                                @endif
+                            @endfor
+                        value="5">เขต 5</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 6)
+                                selected
+                                @endif
+                            @endfor
+                        value="6">เขต 6</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 7)
+                                selected
+                                @endif
+                            @endfor
+                        value="7">เขต 7</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 8)
+                                selected
+                                @endif
+                            @endfor
+                        value="8">เขต 8</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 9)
+                                selected
+                                @endif
+                            @endfor
+                        value="9">เขต 9</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 10)
+                                selected
+                                @endif
+                            @endfor
+                        value="10">เขต 10</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 11)
+                                selected
+                                @endif
+                            @endfor
+                        value="11">เขต 11</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 12)
+                                selected
+                                @endif
+                            @endfor
+                        value="12">เขต 12</option>
+                        <option
+                            @for($i=0;$i<$countsection;$i++)
+                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 13)
+                                selected
+                                @endif
+                            @endfor
+                        value="13">เขต 13</option>
                     </select>
                 </div>
             </div>
@@ -139,15 +217,15 @@
             @else
                 <table class="table table-striped table-bordered">
                     <tr align="middle">
-                        <th>ลำดับ</th>
-                        <th>รหัสเอกสาร</th>
-                        <th>ชื่อ - สกุล</th>
-                        <th width="30%">กลุ่มย่อย</th>
-                        <th>จังหวัด</th>
-                        <th></th>เขต</th>
-                        <th>ดาวน์โหลด</th>
-                        <th>สถานะ</th>
-                        <th>ผู้ที่ตรวจสอบ</th>
+                        <th width="5%">ลำดับ</th>
+                        <th width="10%">รหัสเอกสาร</th>
+                        <th width="20%">ชื่อ - สกุล</th>
+                        <th width="15%">กลุ่มย่อย</th>
+                        <th width="10%">จังหวัด</th>
+                        <th width="5%">เขต</th>
+                        <th width="5%">ดาวน์โหลด</th>
+                        <th width="15%">สถานะ</th>
+                        <th width="15%">ผู้ที่ตรวจสอบ</th>
                     </tr>
                     @foreach ($listmember as $key=>$valmember)
                         <tr>
@@ -162,7 +240,7 @@
                         <td>{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td>{{$valmember->province}}</td>
-                        <td>{{$valmember->section}}</td>
+                        <td align="middle">{{$valmember->section}}</td>
                         <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
 
                         {{-- สถานะ  --}}
