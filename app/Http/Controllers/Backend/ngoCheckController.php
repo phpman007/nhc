@@ -64,8 +64,8 @@ class ngoCheckController extends Controller
         }else{$countgroup=0;}
 
         if(!empty($input['txtsection'])){
-            $countstatus=count($input['txtsection']);
-            for($i=0;$i<$countstatus;$i++){
+            $countsection=count($input['txtsection']);
+            for($i=0;$i<$countsection;$i++){
                 if($i==0){
                     $list->where('member_details.section','=',$input['txtsection'][0]);
                 }else{
@@ -99,7 +99,7 @@ class ngoCheckController extends Controller
         }else{$countprovince=0;}
         $listmember= $list->orderBy('members.id')->paginate(10);
 
-        return view('/backend/check/ngoCheck',compact('listprovince','listgroupngo','liststatus','listsection','listmember','countprovince','countstatus','countgroup'));
+        return view('/backend/check/ngoCheck',compact('listprovince','listgroupngo','liststatus','listmember','countprovince','countstatus','countgroup'));
     }
 
     // public function adminCheck()
