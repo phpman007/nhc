@@ -15,8 +15,8 @@ class CreateSeniorGroupsTable extends Migration
     {
         Schema::create('senior_groups', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('groupName', 150);
-            $table->timestamps();
+            $table->string('groupName', 150)->comment("ชื่อกลุ่ม")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

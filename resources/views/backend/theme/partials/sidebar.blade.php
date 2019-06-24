@@ -2,35 +2,85 @@
 <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
             <div class="dropdown profile-element">
-                  <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold">David Williams</span>
-                        <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
-                  </a>
-                  <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                  {{--  <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>  --}}
+                  {{--  <a data-toggle="dropdown" class="dropdown-toggle" href="#">  --}}
+                        <span class="block m-t-xs font-bold"><font color="white">@yield('loginname')</font></span>
+                        {{--  <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>  --}}
+                  {{--  </a>  --}}
+                  {{--<ul class="dropdown-menu animated fadeInRight m-t-xs">
+                          <li><a class="dropdown-item" href="profile.html">Profile</a></li>
                         <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
                         <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('backend.logout.get') }}">Logout</a></li>
-                  </ul>
+                  </ul>--}}
             </div>
             <div class="logo-element">
-                  IN+
+                  NHC
             </div>
       </li>
 
       <li>
-            <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+            <a href="/backend/theme-build"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
       </li>
       <li>
-            <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการเนื้อหาข้อมูล</span> <span class="fa arrow"></span></a>
+            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับสมัคร</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
-                  <li><a href="index.html">จัดการเนื้อหาข้อมูล</a></li>
-                  <li><a href="dashboard_2.html">จัดการหมวดหมู่</a></li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตั้งวันการลงทะเบียน</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                              <li><a href="{{ url('backend/election/snSet') }}">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="{{ url('backend/election/orSet') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                              <li><a href="{{ url('backend/election/ngoSet') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                        </ul>
+                  </li>
+                  <li><a href="{{ url('backend/check/memCheck') }}"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐานผู้รับสิทธิลงคะแนน</span></a></li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐาน</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                          <li><a href="{{ url('backend/check/index') }}">ผู้ทรงคุณวุฒิ</a></li>
+                          <li><a href="{{ url('backend/check/orCheck') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                          <li><a href="{{ url('backend/check/ngoCheck') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                              <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="{{ url('backend/approve/orApprove') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                              <li><a href="{{ url('backend/approve/ngoApprove') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                        </ul>
+                  </li>
+                  <li><a href="{{ url('backend/approve/memApprove') }}"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
+            </ul>
+            <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ลงคะแนน</span> <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับรองผลการลงคะแนน</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                              <li><a href="{{ url('backend/confirm/snConfirm') }}">ผู้ทรงคุณวุฒิ</a></li>
+                              <li><a href="{{ url('backend/confirm/orConfirm') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                              <li><a href="{{ url('backend/confirm/ngoConfirm') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                        </ul>
+                  </li>
+            </ul>
+            <ul class="nav nav-second-level collapse">
+                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">แสดงผลการลงคะแนนแบบ Real Time</span> <span class="fa arrow"></span></a>
+                          <ul class="nav nav-third-level">
+                                <li><a href="{{ url('backend/RT/snRT') }}">ผู้ทรงคุณวุฒิ</a></li>
+                                <li><a href="{{ url('backend/RT/orRT') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                <li><a href="{{ url('backend/RT/ngoRT') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                          </ul>
+                    </li>
+            </ul>
+            <ul class="nav nav-second-level collapse">
+                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จับฉลากหากรรมการสุขภาพแห่งชาติ</span> <span class="fa arrow"></span></a>
+                          <ul class="nav nav-third-level">
+                                <li><a href="{{ url('backend/draw/snDraw') }}">ผู้ทรงคุณวุฒิ</a></li>
+                                <li><a href="{{ url('backend/draw/orDraw') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                <li><a href="{{ url('backend/draw/ngoDraw') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                          </ul>
+                    </li>
             </ul>
       </li>
-      <li>
+
+      {{-- <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการข้อมูลคลังภาพ</span></a>
       </li>
 
@@ -61,7 +111,7 @@
       </li>
       <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">สถิติการเข้าชมเว็บไซต์</span></a>
-      </li>
+      </li> --}}
 
 
 </ul>

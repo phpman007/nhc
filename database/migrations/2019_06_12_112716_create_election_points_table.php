@@ -15,10 +15,10 @@ class CreateElectionPointsTable extends Migration
     {
         Schema::create('election_points', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('electionId');
-            $table->string('memberId');
-            $table->integer('memberPoint');
-            $table->timestamps();
+            $table->string('electionId')->comment("รหัสการเลือกตั้ง")->nullable();
+            $table->string('memberId')->comment("รหัสสมาชิก")->nullable();
+            $table->integer('memberPoint')->comment("คะแนน")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 
