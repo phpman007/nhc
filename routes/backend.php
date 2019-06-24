@@ -43,6 +43,7 @@ Route::group(['prefix' => 'check'], function () {
     Route::match(['get', 'post'],'/memCheck', 'memberCheckController@index')->name('check.memCheck');
     Route::match(['get', 'post'],'/ngoCheck', 'ngoCheckController@index')->name('check.ngoCheck');
     Route::match(['get', 'post'],'/orCheck', 'orCheckController@index')->name('check.orCheck');
+
 });
 
 Route::group(['prefix' => 'approve'], function () {

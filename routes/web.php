@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-      \Mail::to('hawkandeagle5@gmail.com')->send(new App\Mail\TestSending());
+    //   \Mail::to('hawkandeagle5@gmail.com')->send(new App\Mail\TestSending());
     return view('frontend.homepage.index');
 });
 
