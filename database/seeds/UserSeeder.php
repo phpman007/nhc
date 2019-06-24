@@ -11,14 +11,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User;
-        $user->username = '2fellows';
-        $user->email = 'admin@2fellows.com';
-        $user->email_verified_at = \Carbon\Carbon::now();
-        $user->password = \Hash::make('root');
-        $user->tel = '00000000';
-        $user->position = 'dev';
-        $user->permission = 'admin';
-        $user->save();
+          $user = new User;
+         $user->username = '2fellows';
+         $user->email = 'admin@2fellows.com';
+         $user->email_verified_at = \Carbon\Carbon::now();
+         $user->password = \Hash::make('root');
+         $user->tel = '00000000';
+         $user->position = 'dev';
+         $user->permission = 'admin';
+         $user->save();
     }
 }

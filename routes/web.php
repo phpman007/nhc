@@ -12,5 +12,47 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+      \Mail::to('hawkandeagle5@gmail.com')->send(new App\Mail\TestSending());
+    return view('frontend.homepage.index');
+});
+
+
+Route::group([
+	'prefix' => 'form-professional',
+	'as' =>'form-professional.',
+	'namespace' =>'Frontend'], function() {
+
+	Route::get('{step}', 'FormProfessorController@formView');
+
+	Route::post('{step}', 'FormProfessorController@formPost');
+});
+
+Route::group([
+	'prefix' => 'form-organization',
+	'as' =>'form-organization.',
+	'namespace' =>'Frontend'], function() {
+
+	Route::get('{step}', 'FormOrganizationController@formView');
+
+	Route::post('{step}', 'FormOrganizationController@formPost');
+});
+Route::group([
+	'prefix' => 'form-ngo-register',
+	'as' =>'form-ngo-register.',
+	'namespace' =>'Frontend'], function() {
+
+	Route::get('{step}', 'FormNgoRegisterController@formView');
+
+	Route::post('{step}', 'FormNgoRegisterController@formPost');
+});
+
+
+Route::group([
+	'prefix' => 'form-ngo',
+	'as' =>'form-ngo.',
+	'namespace' =>'Frontend'], function() {
+
+	Route::get('{step}', 'FormNgoController@formView');
+
+	Route::post('{step}', 'FormNgoController@formPost');
 });
