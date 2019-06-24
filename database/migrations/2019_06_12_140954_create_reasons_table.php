@@ -15,8 +15,8 @@ class CreateReasonsTable extends Migration
     {
         Schema::create('reasons', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('notPassReason', 200)->comment("เหตุผลที่ไม่ผ่าน");
-            $table->timestamps();
+            $table->string('notPassReason', 200)->comment("เหตุผลที่ไม่ผ่าน")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

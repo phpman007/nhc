@@ -15,3 +15,5 @@
 
 <link href="{{ asset("backend/css/animate.css") }}" rel="stylesheet">
 <link href="{{ asset("backend/css/style.css") }}" rel="stylesheet">
+
+<link href="{{ asset("css/select2.min.css") }}" rel="stylesheet" />

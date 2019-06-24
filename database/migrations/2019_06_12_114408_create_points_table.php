@@ -15,8 +15,8 @@ class CreatePointsTable extends Migration
     {
         Schema::create('points', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('point')->comment("คะแนน");
-            $table->timestamps();
+            $table->integer('point')->comment("คะแนน")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

@@ -15,8 +15,8 @@ class CreateAddressTypesTable extends Migration
     {
         Schema::create('address_types', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('addressType', 20)->comment("ประเภทของที่อยู่");
-            $table->timestamps();
+            $table->string('addressType', 20)->comment("ประเภทของที่อยู่")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 

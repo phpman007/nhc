@@ -15,8 +15,8 @@ class CreateOrganizationGroupsTable extends Migration
     {
         Schema::create('organization_groups', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('groupName', 255)->comment("ชื่อกลุ่ม");
-            $table->timestamps();
+            $table->string('groupName', 255)->comment("ชื่อกลุ่ม")->nullable();
+            $table->timestamps()->nullable();
         });
     }
 
