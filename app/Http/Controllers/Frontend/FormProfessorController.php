@@ -23,6 +23,7 @@ class FormProfessorController extends Controller
 
     	switch ($step) {
     		case 1:
+                  Auth::logout();
     			return $this->stepOne($request);
     			break;
     		case 2:
@@ -36,6 +37,9 @@ class FormProfessorController extends Controller
     			break;
             case 5:
     			return $this->stepFive($request);
+    			break;
+            case 6:
+    			return $this->stepSix($request);
     			break;
     		default:
     			// code...
@@ -66,6 +70,19 @@ class FormProfessorController extends Controller
     	$dataSet['updated_at'] = now();
 
     	$dataSet['groupId'] = 1;
+
+      $hasMember = Member::where('personalId', $dataSet['personalId'])->first();
+      if($hasMember) {
+            if(Hash::check($request->password, $hasMember->password)) :
+                  Auth::login($hasMember, true);
+            else:
+                  return back()->withInput()->withErrors(['personalId'=>'มีข้อมูลอยู่ในระบบแล้ว รหัสผ่านไม่ถูกต้อง']);
+            endif;
+
+            if(Auth::check()) {
+                  return Redirect::to('form-professional/2');
+            }
+      }
 
     	try {
     		if(Member::insert($dataSet)) {
@@ -154,6 +171,7 @@ class FormProfessorController extends Controller
 			'street' 		   => 'required|max:101',
 			'subDistrictId'      => 'required',
 			'districtId'         => 'required',
+                  'dateOfBirth'        => 'required',
 			'provinceId'         => 'required',
 			'zipCode' 		   => 'required',
 			'tel'                => 'required|min:7|max:11',
@@ -181,10 +199,7 @@ class FormProfessorController extends Controller
     public function stepFive(Request $request) {
 
           $request->validate([
-                'vision'      =>'required',
-                'uploadBtn01' =>'required|max:1024',
-                'uploadBtn02' =>'required|max:1024',
-                'uploadBtn03' =>'required|max:1024',
+                'vision'      =>'required'
           ]);
 
           $dataSet = $request->only(['vision']);
@@ -193,35 +208,81 @@ class FormProfessorController extends Controller
 
           $mmember->update($dataSet);
 
-          $attach = $request->only(['uploadBtn01' ,'uploadBtn02', 'uploadBtn03']);
+          $attachFile = $request->only(['uploadBtn01' ,'uploadBtn02', 'uploadBtn03']);
 
-
+          $memberId = Auth::user()->id;
+          $uploadGroup = 1;
           if($request->hasFile('uploadBtn01')) {
-                if($attach['uploadBtn01']->isValid()) {
-                     $type                = $attach['uploadBtn01']->getClientOriginalExtension();
-                     $oldNameUpload01     = $attach['uploadBtn01']->getClientOriginalName();
-                     $newNameUpload01     = 'personal_card_'.date('YmdHis').".". $type;
-                     $size                = $attach['uploadBtn01']->getSize();
-                     $path                = 'uploads/professional/';
-                     $uploadGroup         = '1';
-                     $memberId            = Auth::user()->id;
+                if($attachFile['uploadBtn01']->isValid()) {
 
-                     // Upload File
-                     $attach['uploadBtn01']->move($path, $newNameUpload01);
-                     Attachment::where('upload_group', $uploadGroup)->where('member_id', $memberId)->update(['status' => 0]);
+                     $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn01'], 'proffessional');
+                     Attachment::where('upload_group', $uploadGroup)->where('use_is', 'copy_personal_card')->where('member_id', $memberId)->update(['status' => 0]);
                      $attach = new Attachment();
-                     $attach->path        = $path.$newNameUpload01;
-                     $attach->fileName    = $oldNameUpload01;
-                     $attach->newName     = $newNameUpload01;
+                     $attach->path        = $fileUpload1['path'];
+                     $attach->fileName    = $fileUpload1['oldName'];
+                     $attach->newName     = $fileUpload1['filename'];
                      $attach->status      = 1;
-                     $attach->size        = $size;
-                     $attach->type        = $type;
+                     $attach->size        = $fileUpload1['size'];
+                     $attach->type        = $fileUpload1['type'];
                      $attach->member_id   = $memberId;
                      $attach->upload_group = $uploadGroup;
+                     $attach->use_is      = 'copy_personal_card';
+
+                     // dd($attach);
                      $attach->save();
 
-                     dump("Has upload", $oldNameUpload01, $attach);
                }
           }
+          if($request->hasFile('uploadBtn02')) {
+                if($attachFile['uploadBtn02']->isValid()) {
+
+                     $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn02'], 'proffessional');
+                     Attachment::where('upload_group', $uploadGroup)->where('use_is', 'personal_photo')->where('member_id', $memberId)->update(['status' => 0]);
+                     $attach = new Attachment();
+                     $attach->path        = $fileUpload1['path'];
+                     $attach->fileName    = $fileUpload1['oldName'];
+                     $attach->newName     = $fileUpload1['filename'];
+                     $attach->status      = 1;
+                     $attach->size        = $fileUpload1['size'];
+                     $attach->type        = $fileUpload1['type'];
+                     $attach->member_id   = $memberId;
+                     $attach->upload_group = $uploadGroup;
+                     $attach->use_is      = 'personal_photo';
+
+                     // dd($attach);
+                     $attach->save();
+
+               }
+          }
+
+          if($request->hasFile('uploadBtn03')) {
+                if($attachFile['uploadBtn03']->isValid()) {
+
+                     $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn03'], 'proffessional');
+                     Attachment::where('upload_group', $uploadGroup)->where('use_is', 'document1')->where('member_id', $memberId)->update(['status' => 0]);
+                     $attach = new Attachment();
+                     $attach->path        = $fileUpload1['path'];
+                     $attach->fileName    = $fileUpload1['oldName'];
+                     $attach->newName     = $fileUpload1['filename'];
+                     $attach->status      = 1;
+                     $attach->size        = $fileUpload1['size'];
+                     $attach->type        = $fileUpload1['type'];
+                     $attach->member_id   = $memberId;
+                     $attach->upload_group = $uploadGroup;
+                     $attach->use_is      = 'document1';
+
+                     // dd($attach);
+                     $attach->save();
+
+               }
+          }
+         return Redirect::to('form-professional/6');
+   }
+
+   public function stepSix(Request $request)
+   {
+         $request->validate(['g-recaptcha-response' => 'recaptcha']);
+
+         return back()->with('success', true);
    }
 }

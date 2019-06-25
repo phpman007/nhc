@@ -593,8 +593,17 @@ $(document).ready(function() {
       });
       @if(!empty(Auth::user()->detail->dateOfBirth))
 		setTimeout(function () {
-			$('[name="dateOfBirth"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}')
+			$('[name="dateOfBirth"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
+
+                  $('[name="startDate"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->startDate)->format('d/m/Y') }}');
+                  $('[name="endDate"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->endDate)->format('d/m/Y') }}');
+
+                  $.get('{{ url('api/checkYear') }}?date=' + $('[name="dateOfBirth"]').val() , function(data) {
+                    console.log(data);
+                    $('#yearOld').val(data.old)
+                  });
 		}, 500);
+
 		// $('#date-birdth').datepicker('update', '{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
 	@endif
 });
