@@ -71,7 +71,7 @@ class FormProfessorController extends Controller
 
     	$dataSet['groupId'] = 1;
 
-      $hasMember = Member::where('personalId', $dataSet['personalId'])->first();
+      $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 1)->first();
       if($hasMember) {
             if(Hash::check($request->password, $hasMember->password)) :
                   Auth::login($hasMember, true);

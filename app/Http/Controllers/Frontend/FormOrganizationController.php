@@ -73,10 +73,10 @@ class FormOrganizationController extends Controller
 
             $dataSet['groupId'] = 2;
 
-            $hasMember = Member::where('personalId', $dataSet['personalId'])->first();
+            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 2)->first();
             if($hasMember) {
-                  if(Hash::check($hasMember->password, $dataSet['password'])) :
-                        Auth::login($member, true);
+                  if(Hash::check($request->password, $hasMember->password)) :
+                        Auth::login($hasMember, true);
                   else:
                         return back()->withErrors(['personalId'=>'มีข้อมูลอยู่ในระบบแล้ว รหัสผ่านไม่ถูกต้อง']);
                   endif;
