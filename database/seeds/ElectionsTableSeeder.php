@@ -919,24 +919,6 @@ class ElectionsTableSeeder extends Seeder
             ),
             50 => 
             array (
-                'id' => 51,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 30,
-                'section' => '7',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            51 => 
-            array (
                 'id' => 52,
                 'groupId' => '3',
                 'seniorGroupId' => 0,
@@ -953,7 +935,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            52 => 
+            51 => 
             array (
                 'id' => 53,
                 'groupId' => '3',
@@ -971,7 +953,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            53 => 
+            52 => 
             array (
                 'id' => 54,
                 'groupId' => '3',
@@ -989,7 +971,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 55,
                 'groupId' => '3',
@@ -1007,7 +989,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 56,
                 'groupId' => '3',
@@ -1025,25 +1007,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            56 => 
-            array (
-                'id' => 57,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 27,
-                'section' => '8',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            57 => 
+            55 => 
             array (
                 'id' => 58,
                 'groupId' => '3',
@@ -1061,7 +1025,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            58 => 
+            56 => 
             array (
                 'id' => 59,
                 'groupId' => '3',
@@ -1079,7 +1043,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            59 => 
+            57 => 
             array (
                 'id' => 60,
                 'groupId' => '3',
@@ -1097,25 +1061,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            60 => 
-            array (
-                'id' => 61,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 27,
-                'section' => '9',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            61 => 
+            58 => 
             array (
                 'id' => 62,
                 'groupId' => '3',
@@ -1133,43 +1079,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            62 => 
-            array (
-                'id' => 63,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 21,
-                'section' => '9',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            63 => 
-            array (
-                'id' => 64,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 23,
-                'section' => '9',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            64 => 
+            59 => 
             array (
                 'id' => 65,
                 'groupId' => '3',
@@ -1187,79 +1097,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            65 => 
-            array (
-                'id' => 66,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 26,
-                'section' => '10',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            66 => 
-            array (
-                'id' => 67,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 24,
-                'section' => '10',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            67 => 
-            array (
-                'id' => 68,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 25,
-                'section' => '10',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            68 => 
-            array (
-                'id' => 69,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 1,
-                'province_id' => 30,
-                'section' => '10',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            69 => 
+            60 => 
             array (
                 'id' => 70,
                 'groupId' => '3',
@@ -1277,7 +1115,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            70 => 
+            61 => 
             array (
                 'id' => 71,
                 'groupId' => '3',
@@ -1295,7 +1133,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            71 => 
+            62 => 
             array (
                 'id' => 72,
                 'groupId' => '3',
@@ -1313,7 +1151,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            72 => 
+            63 => 
             array (
                 'id' => 73,
                 'groupId' => '3',
@@ -1331,7 +1169,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            73 => 
+            64 => 
             array (
                 'id' => 74,
                 'groupId' => '3',
@@ -1349,7 +1187,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            74 => 
+            65 => 
             array (
                 'id' => 75,
                 'groupId' => '3',
@@ -1367,7 +1205,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            75 => 
+            66 => 
             array (
                 'id' => 76,
                 'groupId' => '3',
@@ -1385,7 +1223,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            76 => 
+            67 => 
             array (
                 'id' => 77,
                 'groupId' => '3',
@@ -1403,7 +1241,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            77 => 
+            68 => 
             array (
                 'id' => 78,
                 'groupId' => '3',
@@ -1421,7 +1259,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            78 => 
+            69 => 
             array (
                 'id' => 79,
                 'groupId' => '3',
@@ -1439,7 +1277,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            79 => 
+            70 => 
             array (
                 'id' => 80,
                 'groupId' => '3',
@@ -1457,7 +1295,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            80 => 
+            71 => 
             array (
                 'id' => 81,
                 'groupId' => '3',
@@ -1475,7 +1313,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            81 => 
+            72 => 
             array (
                 'id' => 82,
                 'groupId' => '3',
@@ -1493,7 +1331,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            82 => 
+            73 => 
             array (
                 'id' => 83,
                 'groupId' => '3',
@@ -1511,7 +1349,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            83 => 
+            74 => 
             array (
                 'id' => 84,
                 'groupId' => '3',
@@ -1529,7 +1367,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            84 => 
+            75 => 
             array (
                 'id' => 85,
                 'groupId' => '3',
@@ -1547,7 +1385,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            85 => 
+            76 => 
             array (
                 'id' => 86,
                 'groupId' => '3',
@@ -1565,7 +1403,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            86 => 
+            77 => 
             array (
                 'id' => 87,
                 'groupId' => '3',
@@ -1583,7 +1421,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            87 => 
+            78 => 
             array (
                 'id' => 88,
                 'groupId' => '3',
@@ -1601,7 +1439,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            88 => 
+            79 => 
             array (
                 'id' => 89,
                 'groupId' => '3',
@@ -1619,7 +1457,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            89 => 
+            80 => 
             array (
                 'id' => 90,
                 'groupId' => '3',
@@ -1637,7 +1475,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            90 => 
+            81 => 
             array (
                 'id' => 91,
                 'groupId' => '3',
@@ -1655,7 +1493,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            91 => 
+            82 => 
             array (
                 'id' => 92,
                 'groupId' => '3',
@@ -1673,7 +1511,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            92 => 
+            83 => 
             array (
                 'id' => 93,
                 'groupId' => '3',
@@ -1691,7 +1529,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            93 => 
+            84 => 
             array (
                 'id' => 94,
                 'groupId' => '3',
@@ -1709,7 +1547,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            94 => 
+            85 => 
             array (
                 'id' => 95,
                 'groupId' => '3',
@@ -1727,7 +1565,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            95 => 
+            86 => 
             array (
                 'id' => 96,
                 'groupId' => '3',
@@ -1745,7 +1583,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            96 => 
+            87 => 
             array (
                 'id' => 97,
                 'groupId' => '3',
@@ -1763,7 +1601,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            97 => 
+            88 => 
             array (
                 'id' => 98,
                 'groupId' => '3',
@@ -1781,7 +1619,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            98 => 
+            89 => 
             array (
                 'id' => 99,
                 'groupId' => '3',
@@ -1799,7 +1637,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            99 => 
+            90 => 
             array (
                 'id' => 100,
                 'groupId' => '3',
@@ -1817,7 +1655,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            100 => 
+            91 => 
             array (
                 'id' => 101,
                 'groupId' => '3',
@@ -1835,7 +1673,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            101 => 
+            92 => 
             array (
                 'id' => 102,
                 'groupId' => '3',
@@ -1853,7 +1691,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            102 => 
+            93 => 
             array (
                 'id' => 103,
                 'groupId' => '3',
@@ -1871,7 +1709,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            103 => 
+            94 => 
             array (
                 'id' => 104,
                 'groupId' => '3',
@@ -1889,7 +1727,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            104 => 
+            95 => 
             array (
                 'id' => 105,
                 'groupId' => '3',
@@ -1907,7 +1745,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            105 => 
+            96 => 
             array (
                 'id' => 106,
                 'groupId' => '3',
@@ -1925,7 +1763,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            106 => 
+            97 => 
             array (
                 'id' => 107,
                 'groupId' => '3',
@@ -1943,7 +1781,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            107 => 
+            98 => 
             array (
                 'id' => 108,
                 'groupId' => '3',
@@ -1961,7 +1799,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            108 => 
+            99 => 
             array (
                 'id' => 109,
                 'groupId' => '3',
@@ -1979,7 +1817,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            109 => 
+            100 => 
             array (
                 'id' => 110,
                 'groupId' => '3',
@@ -1997,7 +1835,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            110 => 
+            101 => 
             array (
                 'id' => 111,
                 'groupId' => '3',
@@ -2015,7 +1853,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            111 => 
+            102 => 
             array (
                 'id' => 112,
                 'groupId' => '3',
@@ -2033,7 +1871,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            112 => 
+            103 => 
             array (
                 'id' => 113,
                 'groupId' => '3',
@@ -2051,7 +1889,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            113 => 
+            104 => 
             array (
                 'id' => 114,
                 'groupId' => '3',
@@ -2069,7 +1907,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            114 => 
+            105 => 
             array (
                 'id' => 115,
                 'groupId' => '3',
@@ -2087,7 +1925,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            115 => 
+            106 => 
             array (
                 'id' => 116,
                 'groupId' => '3',
@@ -2105,7 +1943,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            116 => 
+            107 => 
             array (
                 'id' => 117,
                 'groupId' => '3',
@@ -2123,7 +1961,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            117 => 
+            108 => 
             array (
                 'id' => 118,
                 'groupId' => '3',
@@ -2141,7 +1979,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            118 => 
+            109 => 
             array (
                 'id' => 119,
                 'groupId' => '3',
@@ -2159,7 +1997,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            119 => 
+            110 => 
             array (
                 'id' => 120,
                 'groupId' => '3',
@@ -2177,7 +2015,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            120 => 
+            111 => 
             array (
                 'id' => 121,
                 'groupId' => '3',
@@ -2195,7 +2033,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            121 => 
+            112 => 
             array (
                 'id' => 122,
                 'groupId' => '3',
@@ -2213,7 +2051,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            122 => 
+            113 => 
             array (
                 'id' => 123,
                 'groupId' => '3',
@@ -2231,7 +2069,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            123 => 
+            114 => 
             array (
                 'id' => 124,
                 'groupId' => '3',
@@ -2249,7 +2087,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            124 => 
+            115 => 
             array (
                 'id' => 125,
                 'groupId' => '3',
@@ -2267,7 +2105,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            125 => 
+            116 => 
             array (
                 'id' => 126,
                 'groupId' => '3',
@@ -2285,7 +2123,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            126 => 
+            117 => 
             array (
                 'id' => 127,
                 'groupId' => '3',
@@ -2303,25 +2141,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            127 => 
-            array (
-                'id' => 128,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 30,
-                'section' => '7',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            128 => 
+            118 => 
             array (
                 'id' => 129,
                 'groupId' => '3',
@@ -2339,7 +2159,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            129 => 
+            119 => 
             array (
                 'id' => 130,
                 'groupId' => '3',
@@ -2357,7 +2177,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            130 => 
+            120 => 
             array (
                 'id' => 131,
                 'groupId' => '3',
@@ -2375,7 +2195,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            131 => 
+            121 => 
             array (
                 'id' => 132,
                 'groupId' => '3',
@@ -2393,7 +2213,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            132 => 
+            122 => 
             array (
                 'id' => 133,
                 'groupId' => '3',
@@ -2411,25 +2231,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            133 => 
-            array (
-                'id' => 134,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 27,
-                'section' => '8',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            134 => 
+            123 => 
             array (
                 'id' => 135,
                 'groupId' => '3',
@@ -2447,7 +2249,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            135 => 
+            124 => 
             array (
                 'id' => 136,
                 'groupId' => '3',
@@ -2465,7 +2267,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            136 => 
+            125 => 
             array (
                 'id' => 137,
                 'groupId' => '3',
@@ -2483,25 +2285,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            137 => 
-            array (
-                'id' => 138,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 27,
-                'section' => '9',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            138 => 
+            126 => 
             array (
                 'id' => 139,
                 'groupId' => '3',
@@ -2519,43 +2303,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            139 => 
-            array (
-                'id' => 140,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 21,
-                'section' => '9',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            140 => 
-            array (
-                'id' => 141,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 23,
-                'section' => '9',
-                'openDate' => '2019-06-20',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '2019-06-20',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            141 => 
+            127 => 
             array (
                 'id' => 142,
                 'groupId' => '3',
@@ -2573,79 +2321,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            142 => 
-            array (
-                'id' => 143,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 26,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '2019-06-20',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            143 => 
-            array (
-                'id' => 144,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 24,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            144 => 
-            array (
-                'id' => 145,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 25,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            145 => 
-            array (
-                'id' => 146,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 2,
-                'province_id' => 30,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '2019-06-20',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            146 => 
+            128 => 
             array (
                 'id' => 147,
                 'groupId' => '3',
@@ -2663,7 +2339,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            147 => 
+            129 => 
             array (
                 'id' => 148,
                 'groupId' => '3',
@@ -2681,7 +2357,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            148 => 
+            130 => 
             array (
                 'id' => 149,
                 'groupId' => '3',
@@ -2699,7 +2375,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            149 => 
+            131 => 
             array (
                 'id' => 150,
                 'groupId' => '3',
@@ -2717,7 +2393,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            150 => 
+            132 => 
             array (
                 'id' => 151,
                 'groupId' => '3',
@@ -2735,7 +2411,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            151 => 
+            133 => 
             array (
                 'id' => 152,
                 'groupId' => '3',
@@ -2753,7 +2429,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            152 => 
+            134 => 
             array (
                 'id' => 153,
                 'groupId' => '3',
@@ -2771,7 +2447,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            153 => 
+            135 => 
             array (
                 'id' => 154,
                 'groupId' => '3',
@@ -2789,7 +2465,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            154 => 
+            136 => 
             array (
                 'id' => 155,
                 'groupId' => '3',
@@ -2807,7 +2483,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            155 => 
+            137 => 
             array (
                 'id' => 156,
                 'groupId' => '3',
@@ -2825,7 +2501,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            156 => 
+            138 => 
             array (
                 'id' => 157,
                 'groupId' => '3',
@@ -2843,7 +2519,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            157 => 
+            139 => 
             array (
                 'id' => 158,
                 'groupId' => '3',
@@ -2861,7 +2537,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            158 => 
+            140 => 
             array (
                 'id' => 159,
                 'groupId' => '3',
@@ -2879,7 +2555,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            159 => 
+            141 => 
             array (
                 'id' => 160,
                 'groupId' => '3',
@@ -2897,7 +2573,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            160 => 
+            142 => 
             array (
                 'id' => 161,
                 'groupId' => '3',
@@ -2915,7 +2591,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            161 => 
+            143 => 
             array (
                 'id' => 162,
                 'groupId' => '3',
@@ -2933,7 +2609,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            162 => 
+            144 => 
             array (
                 'id' => 163,
                 'groupId' => '3',
@@ -2951,7 +2627,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            163 => 
+            145 => 
             array (
                 'id' => 164,
                 'groupId' => '3',
@@ -2969,7 +2645,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            164 => 
+            146 => 
             array (
                 'id' => 165,
                 'groupId' => '3',
@@ -2987,7 +2663,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            165 => 
+            147 => 
             array (
                 'id' => 166,
                 'groupId' => '3',
@@ -3005,7 +2681,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            166 => 
+            148 => 
             array (
                 'id' => 167,
                 'groupId' => '3',
@@ -3023,7 +2699,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            167 => 
+            149 => 
             array (
                 'id' => 169,
                 'groupId' => '3',
@@ -3041,7 +2717,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            168 => 
+            150 => 
             array (
                 'id' => 170,
                 'groupId' => '3',
@@ -3059,7 +2735,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            169 => 
+            151 => 
             array (
                 'id' => 171,
                 'groupId' => '3',
@@ -3077,7 +2753,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            170 => 
+            152 => 
             array (
                 'id' => 172,
                 'groupId' => '3',
@@ -3095,7 +2771,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            171 => 
+            153 => 
             array (
                 'id' => 173,
                 'groupId' => '3',
@@ -3113,7 +2789,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            172 => 
+            154 => 
             array (
                 'id' => 174,
                 'groupId' => '3',
@@ -3131,7 +2807,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            173 => 
+            155 => 
             array (
                 'id' => 175,
                 'groupId' => '3',
@@ -3149,7 +2825,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            174 => 
+            156 => 
             array (
                 'id' => 176,
                 'groupId' => '3',
@@ -3167,7 +2843,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            175 => 
+            157 => 
             array (
                 'id' => 177,
                 'groupId' => '3',
@@ -3185,7 +2861,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            176 => 
+            158 => 
             array (
                 'id' => 178,
                 'groupId' => '3',
@@ -3203,7 +2879,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            177 => 
+            159 => 
             array (
                 'id' => 179,
                 'groupId' => '3',
@@ -3221,7 +2897,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            178 => 
+            160 => 
             array (
                 'id' => 180,
                 'groupId' => '3',
@@ -3239,7 +2915,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            179 => 
+            161 => 
             array (
                 'id' => 181,
                 'groupId' => '3',
@@ -3257,7 +2933,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            180 => 
+            162 => 
             array (
                 'id' => 182,
                 'groupId' => '3',
@@ -3275,7 +2951,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            181 => 
+            163 => 
             array (
                 'id' => 183,
                 'groupId' => '3',
@@ -3293,7 +2969,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            182 => 
+            164 => 
             array (
                 'id' => 184,
                 'groupId' => '3',
@@ -3311,25 +2987,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            183 => 
-            array (
-                'id' => 185,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 21,
-                'section' => '6',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            184 => 
+            165 => 
             array (
                 'id' => 186,
                 'groupId' => '3',
@@ -3347,7 +3005,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            185 => 
+            166 => 
             array (
                 'id' => 187,
                 'groupId' => '3',
@@ -3365,7 +3023,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            186 => 
+            167 => 
             array (
                 'id' => 188,
                 'groupId' => '3',
@@ -3383,7 +3041,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            187 => 
+            168 => 
             array (
                 'id' => 189,
                 'groupId' => '3',
@@ -3401,7 +3059,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            188 => 
+            169 => 
             array (
                 'id' => 190,
                 'groupId' => '3',
@@ -3419,7 +3077,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            189 => 
+            170 => 
             array (
                 'id' => 191,
                 'groupId' => '3',
@@ -3437,7 +3095,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            190 => 
+            171 => 
             array (
                 'id' => 192,
                 'groupId' => '3',
@@ -3455,7 +3113,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            191 => 
+            172 => 
             array (
                 'id' => 193,
                 'groupId' => '3',
@@ -3473,7 +3131,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            192 => 
+            173 => 
             array (
                 'id' => 194,
                 'groupId' => '3',
@@ -3491,7 +3149,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            193 => 
+            174 => 
             array (
                 'id' => 195,
                 'groupId' => '3',
@@ -3509,7 +3167,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            194 => 
+            175 => 
             array (
                 'id' => 196,
                 'groupId' => '3',
@@ -3527,7 +3185,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            195 => 
+            176 => 
             array (
                 'id' => 197,
                 'groupId' => '3',
@@ -3545,7 +3203,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            196 => 
+            177 => 
             array (
                 'id' => 198,
                 'groupId' => '3',
@@ -3563,7 +3221,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            197 => 
+            178 => 
             array (
                 'id' => 199,
                 'groupId' => '3',
@@ -3581,7 +3239,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            198 => 
+            179 => 
             array (
                 'id' => 200,
                 'groupId' => '3',
@@ -3599,7 +3257,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            199 => 
+            180 => 
             array (
                 'id' => 201,
                 'groupId' => '3',
@@ -3617,7 +3275,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            200 => 
+            181 => 
             array (
                 'id' => 202,
                 'groupId' => '3',
@@ -3635,7 +3293,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            201 => 
+            182 => 
             array (
                 'id' => 203,
                 'groupId' => '3',
@@ -3653,7 +3311,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            202 => 
+            183 => 
             array (
                 'id' => 204,
                 'groupId' => '3',
@@ -3671,25 +3329,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            203 => 
-            array (
-                'id' => 205,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 30,
-                'section' => '7',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            204 => 
+            184 => 
             array (
                 'id' => 206,
                 'groupId' => '3',
@@ -3707,7 +3347,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            205 => 
+            185 => 
             array (
                 'id' => 207,
                 'groupId' => '3',
@@ -3725,7 +3365,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            206 => 
+            186 => 
             array (
                 'id' => 208,
                 'groupId' => '3',
@@ -3743,7 +3383,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            207 => 
+            187 => 
             array (
                 'id' => 209,
                 'groupId' => '3',
@@ -3761,7 +3401,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            208 => 
+            188 => 
             array (
                 'id' => 210,
                 'groupId' => '3',
@@ -3779,25 +3419,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            209 => 
-            array (
-                'id' => 211,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 27,
-                'section' => '8',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            210 => 
+            189 => 
             array (
                 'id' => 212,
                 'groupId' => '3',
@@ -3815,7 +3437,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            211 => 
+            190 => 
             array (
                 'id' => 213,
                 'groupId' => '3',
@@ -3833,7 +3455,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            212 => 
+            191 => 
             array (
                 'id' => 214,
                 'groupId' => '3',
@@ -3851,25 +3473,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            213 => 
-            array (
-                'id' => 215,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 27,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            214 => 
+            192 => 
             array (
                 'id' => 216,
                 'groupId' => '3',
@@ -3887,7 +3491,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            215 => 
+            193 => 
             array (
                 'id' => 217,
                 'groupId' => '3',
@@ -3905,25 +3509,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            216 => 
-            array (
-                'id' => 218,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 23,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            217 => 
+            194 => 
             array (
                 'id' => 219,
                 'groupId' => '3',
@@ -3941,79 +3527,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            218 => 
-            array (
-                'id' => 220,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 26,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            219 => 
-            array (
-                'id' => 221,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 24,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            220 => 
-            array (
-                'id' => 222,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 25,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            221 => 
-            array (
-                'id' => 223,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 3,
-                'province_id' => 30,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            222 => 
+            195 => 
             array (
                 'id' => 224,
                 'groupId' => '3',
@@ -4031,7 +3545,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            223 => 
+            196 => 
             array (
                 'id' => 225,
                 'groupId' => '3',
@@ -4049,7 +3563,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            224 => 
+            197 => 
             array (
                 'id' => 226,
                 'groupId' => '3',
@@ -4067,7 +3581,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            225 => 
+            198 => 
             array (
                 'id' => 227,
                 'groupId' => '3',
@@ -4085,7 +3599,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            226 => 
+            199 => 
             array (
                 'id' => 228,
                 'groupId' => '3',
@@ -4103,7 +3617,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            227 => 
+            200 => 
             array (
                 'id' => 229,
                 'groupId' => '3',
@@ -4121,7 +3635,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            228 => 
+            201 => 
             array (
                 'id' => 230,
                 'groupId' => '3',
@@ -4139,7 +3653,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            229 => 
+            202 => 
             array (
                 'id' => 231,
                 'groupId' => '3',
@@ -4157,7 +3671,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            230 => 
+            203 => 
             array (
                 'id' => 232,
                 'groupId' => '3',
@@ -4175,7 +3689,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            231 => 
+            204 => 
             array (
                 'id' => 233,
                 'groupId' => '3',
@@ -4193,7 +3707,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            232 => 
+            205 => 
             array (
                 'id' => 234,
                 'groupId' => '3',
@@ -4211,7 +3725,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            233 => 
+            206 => 
             array (
                 'id' => 235,
                 'groupId' => '3',
@@ -4229,7 +3743,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            234 => 
+            207 => 
             array (
                 'id' => 236,
                 'groupId' => '3',
@@ -4247,7 +3761,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            235 => 
+            208 => 
             array (
                 'id' => 237,
                 'groupId' => '3',
@@ -4265,7 +3779,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            236 => 
+            209 => 
             array (
                 'id' => 238,
                 'groupId' => '3',
@@ -4283,7 +3797,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            237 => 
+            210 => 
             array (
                 'id' => 239,
                 'groupId' => '3',
@@ -4301,7 +3815,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            238 => 
+            211 => 
             array (
                 'id' => 240,
                 'groupId' => '3',
@@ -4319,7 +3833,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            239 => 
+            212 => 
             array (
                 'id' => 241,
                 'groupId' => '3',
@@ -4337,7 +3851,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            240 => 
+            213 => 
             array (
                 'id' => 242,
                 'groupId' => '3',
@@ -4355,7 +3869,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            241 => 
+            214 => 
             array (
                 'id' => 243,
                 'groupId' => '3',
@@ -4373,7 +3887,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            242 => 
+            215 => 
             array (
                 'id' => 244,
                 'groupId' => '3',
@@ -4391,7 +3905,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            243 => 
+            216 => 
             array (
                 'id' => 245,
                 'groupId' => '3',
@@ -4409,7 +3923,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            244 => 
+            217 => 
             array (
                 'id' => 246,
                 'groupId' => '3',
@@ -4427,7 +3941,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            245 => 
+            218 => 
             array (
                 'id' => 247,
                 'groupId' => '3',
@@ -4445,7 +3959,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            246 => 
+            219 => 
             array (
                 'id' => 248,
                 'groupId' => '3',
@@ -4463,7 +3977,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            247 => 
+            220 => 
             array (
                 'id' => 249,
                 'groupId' => '3',
@@ -4481,7 +3995,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            248 => 
+            221 => 
             array (
                 'id' => 250,
                 'groupId' => '3',
@@ -4499,7 +4013,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            249 => 
+            222 => 
             array (
                 'id' => 251,
                 'groupId' => '3',
@@ -4517,7 +4031,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            250 => 
+            223 => 
             array (
                 'id' => 252,
                 'groupId' => '3',
@@ -4535,7 +4049,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            251 => 
+            224 => 
             array (
                 'id' => 253,
                 'groupId' => '3',
@@ -4553,7 +4067,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            252 => 
+            225 => 
             array (
                 'id' => 254,
                 'groupId' => '3',
@@ -4571,7 +4085,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            253 => 
+            226 => 
             array (
                 'id' => 255,
                 'groupId' => '3',
@@ -4589,7 +4103,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            254 => 
+            227 => 
             array (
                 'id' => 256,
                 'groupId' => '3',
@@ -4607,7 +4121,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            255 => 
+            228 => 
             array (
                 'id' => 257,
                 'groupId' => '3',
@@ -4625,7 +4139,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            256 => 
+            229 => 
             array (
                 'id' => 258,
                 'groupId' => '3',
@@ -4643,7 +4157,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            257 => 
+            230 => 
             array (
                 'id' => 259,
                 'groupId' => '3',
@@ -4661,7 +4175,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            258 => 
+            231 => 
             array (
                 'id' => 260,
                 'groupId' => '3',
@@ -4679,7 +4193,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            259 => 
+            232 => 
             array (
                 'id' => 261,
                 'groupId' => '3',
@@ -4697,7 +4211,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            260 => 
+            233 => 
             array (
                 'id' => 262,
                 'groupId' => '3',
@@ -4715,7 +4229,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            261 => 
+            234 => 
             array (
                 'id' => 263,
                 'groupId' => '3',
@@ -4733,7 +4247,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            262 => 
+            235 => 
             array (
                 'id' => 264,
                 'groupId' => '3',
@@ -4751,7 +4265,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            263 => 
+            236 => 
             array (
                 'id' => 265,
                 'groupId' => '3',
@@ -4769,7 +4283,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            264 => 
+            237 => 
             array (
                 'id' => 266,
                 'groupId' => '3',
@@ -4787,7 +4301,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            265 => 
+            238 => 
             array (
                 'id' => 267,
                 'groupId' => '3',
@@ -4805,7 +4319,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            266 => 
+            239 => 
             array (
                 'id' => 268,
                 'groupId' => '3',
@@ -4823,7 +4337,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            267 => 
+            240 => 
             array (
                 'id' => 269,
                 'groupId' => '3',
@@ -4841,7 +4355,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            268 => 
+            241 => 
             array (
                 'id' => 270,
                 'groupId' => '3',
@@ -4859,7 +4373,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            269 => 
+            242 => 
             array (
                 'id' => 271,
                 'groupId' => '3',
@@ -4877,7 +4391,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            270 => 
+            243 => 
             array (
                 'id' => 272,
                 'groupId' => '3',
@@ -4895,7 +4409,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            271 => 
+            244 => 
             array (
                 'id' => 273,
                 'groupId' => '3',
@@ -4913,7 +4427,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            272 => 
+            245 => 
             array (
                 'id' => 274,
                 'groupId' => '3',
@@ -4931,7 +4445,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            273 => 
+            246 => 
             array (
                 'id' => 275,
                 'groupId' => '3',
@@ -4949,7 +4463,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            274 => 
+            247 => 
             array (
                 'id' => 276,
                 'groupId' => '3',
@@ -4967,7 +4481,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            275 => 
+            248 => 
             array (
                 'id' => 277,
                 'groupId' => '3',
@@ -4985,7 +4499,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            276 => 
+            249 => 
             array (
                 'id' => 278,
                 'groupId' => '3',
@@ -5003,7 +4517,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            277 => 
+            250 => 
             array (
                 'id' => 279,
                 'groupId' => '3',
@@ -5021,7 +4535,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            278 => 
+            251 => 
             array (
                 'id' => 280,
                 'groupId' => '3',
@@ -5039,7 +4553,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            279 => 
+            252 => 
             array (
                 'id' => 281,
                 'groupId' => '3',
@@ -5057,25 +4571,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            280 => 
-            array (
-                'id' => 282,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 30,
-                'section' => '7',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            281 => 
+            253 => 
             array (
                 'id' => 283,
                 'groupId' => '3',
@@ -5093,7 +4589,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            282 => 
+            254 => 
             array (
                 'id' => 284,
                 'groupId' => '3',
@@ -5111,7 +4607,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            283 => 
+            255 => 
             array (
                 'id' => 285,
                 'groupId' => '3',
@@ -5129,7 +4625,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            284 => 
+            256 => 
             array (
                 'id' => 286,
                 'groupId' => '3',
@@ -5147,7 +4643,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            285 => 
+            257 => 
             array (
                 'id' => 287,
                 'groupId' => '3',
@@ -5165,25 +4661,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            286 => 
-            array (
-                'id' => 288,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 27,
-                'section' => '8',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            287 => 
+            258 => 
             array (
                 'id' => 289,
                 'groupId' => '3',
@@ -5201,7 +4679,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            288 => 
+            259 => 
             array (
                 'id' => 290,
                 'groupId' => '3',
@@ -5219,7 +4697,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            289 => 
+            260 => 
             array (
                 'id' => 291,
                 'groupId' => '3',
@@ -5237,25 +4715,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            290 => 
-            array (
-                'id' => 292,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 27,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            291 => 
+            261 => 
             array (
                 'id' => 293,
                 'groupId' => '3',
@@ -5273,43 +4733,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            292 => 
-            array (
-                'id' => 294,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 21,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            293 => 
-            array (
-                'id' => 295,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 23,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            294 => 
+            262 => 
             array (
                 'id' => 296,
                 'groupId' => '3',
@@ -5327,79 +4751,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            295 => 
-            array (
-                'id' => 297,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 26,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            296 => 
-            array (
-                'id' => 298,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 24,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            297 => 
-            array (
-                'id' => 299,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 25,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            298 => 
-            array (
-                'id' => 300,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 4,
-                'province_id' => 30,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            299 => 
+            263 => 
             array (
                 'id' => 301,
                 'groupId' => '3',
@@ -5417,7 +4769,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            300 => 
+            264 => 
             array (
                 'id' => 302,
                 'groupId' => '3',
@@ -5435,7 +4787,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            301 => 
+            265 => 
             array (
                 'id' => 303,
                 'groupId' => '3',
@@ -5453,7 +4805,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            302 => 
+            266 => 
             array (
                 'id' => 304,
                 'groupId' => '3',
@@ -5471,7 +4823,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            303 => 
+            267 => 
             array (
                 'id' => 305,
                 'groupId' => '3',
@@ -5489,7 +4841,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            304 => 
+            268 => 
             array (
                 'id' => 306,
                 'groupId' => '3',
@@ -5507,7 +4859,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            305 => 
+            269 => 
             array (
                 'id' => 307,
                 'groupId' => '3',
@@ -5525,7 +4877,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            306 => 
+            270 => 
             array (
                 'id' => 308,
                 'groupId' => '3',
@@ -5543,7 +4895,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            307 => 
+            271 => 
             array (
                 'id' => 309,
                 'groupId' => '3',
@@ -5561,7 +4913,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            308 => 
+            272 => 
             array (
                 'id' => 310,
                 'groupId' => '3',
@@ -5579,7 +4931,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            309 => 
+            273 => 
             array (
                 'id' => 311,
                 'groupId' => '3',
@@ -5597,7 +4949,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            310 => 
+            274 => 
             array (
                 'id' => 312,
                 'groupId' => '3',
@@ -5615,7 +4967,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            311 => 
+            275 => 
             array (
                 'id' => 313,
                 'groupId' => '3',
@@ -5633,7 +4985,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            312 => 
+            276 => 
             array (
                 'id' => 314,
                 'groupId' => '3',
@@ -5651,7 +5003,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            313 => 
+            277 => 
             array (
                 'id' => 315,
                 'groupId' => '3',
@@ -5669,7 +5021,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            314 => 
+            278 => 
             array (
                 'id' => 316,
                 'groupId' => '3',
@@ -5687,7 +5039,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            315 => 
+            279 => 
             array (
                 'id' => 317,
                 'groupId' => '3',
@@ -5705,7 +5057,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            316 => 
+            280 => 
             array (
                 'id' => 318,
                 'groupId' => '3',
@@ -5723,7 +5075,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            317 => 
+            281 => 
             array (
                 'id' => 319,
                 'groupId' => '3',
@@ -5741,7 +5093,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            318 => 
+            282 => 
             array (
                 'id' => 320,
                 'groupId' => '3',
@@ -5759,7 +5111,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            319 => 
+            283 => 
             array (
                 'id' => 321,
                 'groupId' => '3',
@@ -5777,7 +5129,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            320 => 
+            284 => 
             array (
                 'id' => 322,
                 'groupId' => '3',
@@ -5795,7 +5147,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            321 => 
+            285 => 
             array (
                 'id' => 323,
                 'groupId' => '3',
@@ -5813,7 +5165,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            322 => 
+            286 => 
             array (
                 'id' => 324,
                 'groupId' => '3',
@@ -5831,7 +5183,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            323 => 
+            287 => 
             array (
                 'id' => 325,
                 'groupId' => '3',
@@ -5849,7 +5201,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            324 => 
+            288 => 
             array (
                 'id' => 326,
                 'groupId' => '3',
@@ -5867,7 +5219,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            325 => 
+            289 => 
             array (
                 'id' => 327,
                 'groupId' => '3',
@@ -5885,7 +5237,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            326 => 
+            290 => 
             array (
                 'id' => 328,
                 'groupId' => '3',
@@ -5903,7 +5255,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            327 => 
+            291 => 
             array (
                 'id' => 329,
                 'groupId' => '3',
@@ -5921,7 +5273,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            328 => 
+            292 => 
             array (
                 'id' => 330,
                 'groupId' => '3',
@@ -5939,7 +5291,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            329 => 
+            293 => 
             array (
                 'id' => 331,
                 'groupId' => '3',
@@ -5957,7 +5309,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            330 => 
+            294 => 
             array (
                 'id' => 332,
                 'groupId' => '3',
@@ -5975,7 +5327,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            331 => 
+            295 => 
             array (
                 'id' => 333,
                 'groupId' => '3',
@@ -5993,7 +5345,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            332 => 
+            296 => 
             array (
                 'id' => 334,
                 'groupId' => '3',
@@ -6011,7 +5363,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            333 => 
+            297 => 
             array (
                 'id' => 335,
                 'groupId' => '3',
@@ -6029,7 +5381,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            334 => 
+            298 => 
             array (
                 'id' => 336,
                 'groupId' => '3',
@@ -6047,7 +5399,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            335 => 
+            299 => 
             array (
                 'id' => 337,
                 'groupId' => '3',
@@ -6065,7 +5417,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            336 => 
+            300 => 
             array (
                 'id' => 338,
                 'groupId' => '3',
@@ -6083,7 +5435,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            337 => 
+            301 => 
             array (
                 'id' => 339,
                 'groupId' => '3',
@@ -6101,7 +5453,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            338 => 
+            302 => 
             array (
                 'id' => 340,
                 'groupId' => '3',
@@ -6119,7 +5471,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            339 => 
+            303 => 
             array (
                 'id' => 341,
                 'groupId' => '3',
@@ -6137,7 +5489,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            340 => 
+            304 => 
             array (
                 'id' => 342,
                 'groupId' => '3',
@@ -6155,7 +5507,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            341 => 
+            305 => 
             array (
                 'id' => 343,
                 'groupId' => '3',
@@ -6173,7 +5525,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            342 => 
+            306 => 
             array (
                 'id' => 344,
                 'groupId' => '3',
@@ -6191,7 +5543,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            343 => 
+            307 => 
             array (
                 'id' => 345,
                 'groupId' => '3',
@@ -6209,7 +5561,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            344 => 
+            308 => 
             array (
                 'id' => 346,
                 'groupId' => '3',
@@ -6227,7 +5579,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            345 => 
+            309 => 
             array (
                 'id' => 347,
                 'groupId' => '3',
@@ -6245,7 +5597,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            346 => 
+            310 => 
             array (
                 'id' => 348,
                 'groupId' => '3',
@@ -6263,7 +5615,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            347 => 
+            311 => 
             array (
                 'id' => 349,
                 'groupId' => '3',
@@ -6281,7 +5633,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            348 => 
+            312 => 
             array (
                 'id' => 350,
                 'groupId' => '3',
@@ -6299,7 +5651,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            349 => 
+            313 => 
             array (
                 'id' => 351,
                 'groupId' => '3',
@@ -6317,7 +5669,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            350 => 
+            314 => 
             array (
                 'id' => 352,
                 'groupId' => '3',
@@ -6335,7 +5687,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            351 => 
+            315 => 
             array (
                 'id' => 353,
                 'groupId' => '3',
@@ -6353,7 +5705,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            352 => 
+            316 => 
             array (
                 'id' => 354,
                 'groupId' => '3',
@@ -6371,7 +5723,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            353 => 
+            317 => 
             array (
                 'id' => 355,
                 'groupId' => '3',
@@ -6389,7 +5741,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            354 => 
+            318 => 
             array (
                 'id' => 356,
                 'groupId' => '3',
@@ -6407,7 +5759,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            355 => 
+            319 => 
             array (
                 'id' => 357,
                 'groupId' => '3',
@@ -6425,7 +5777,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            356 => 
+            320 => 
             array (
                 'id' => 358,
                 'groupId' => '3',
@@ -6443,25 +5795,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            357 => 
-            array (
-                'id' => 359,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 30,
-                'section' => '7',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            358 => 
+            321 => 
             array (
                 'id' => 360,
                 'groupId' => '3',
@@ -6479,7 +5813,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            359 => 
+            322 => 
             array (
                 'id' => 361,
                 'groupId' => '3',
@@ -6497,7 +5831,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            360 => 
+            323 => 
             array (
                 'id' => 362,
                 'groupId' => '3',
@@ -6515,7 +5849,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            361 => 
+            324 => 
             array (
                 'id' => 363,
                 'groupId' => '3',
@@ -6533,7 +5867,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            362 => 
+            325 => 
             array (
                 'id' => 364,
                 'groupId' => '3',
@@ -6551,25 +5885,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            363 => 
-            array (
-                'id' => 365,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 27,
-                'section' => '8',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            364 => 
+            326 => 
             array (
                 'id' => 366,
                 'groupId' => '3',
@@ -6587,7 +5903,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            365 => 
+            327 => 
             array (
                 'id' => 367,
                 'groupId' => '3',
@@ -6605,7 +5921,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            366 => 
+            328 => 
             array (
                 'id' => 368,
                 'groupId' => '3',
@@ -6623,25 +5939,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            367 => 
-            array (
-                'id' => 369,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 27,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            368 => 
+            329 => 
             array (
                 'id' => 370,
                 'groupId' => '3',
@@ -6659,43 +5957,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            369 => 
-            array (
-                'id' => 371,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 21,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            370 => 
-            array (
-                'id' => 372,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 23,
-                'section' => '9',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            371 => 
+            330 => 
             array (
                 'id' => 373,
                 'groupId' => '3',
@@ -6713,79 +5975,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            372 => 
-            array (
-                'id' => 374,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 26,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            373 => 
-            array (
-                'id' => 375,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 24,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            374 => 
-            array (
-                'id' => 376,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 25,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            375 => 
-            array (
-                'id' => 377,
-                'groupId' => '3',
-                'seniorGroupId' => 0,
-                'organizationGroupId' => 0,
-                'ngoGroupId' => 5,
-                'province_id' => 30,
-                'section' => '10',
-                'openDate' => '0000-00-00',
-                'endDate' => '0000-00-00',
-                'confirmDate' => '0000-00-00',
-                'electionDate' => '0000-00-00',
-                'openElectionTime' => '00:00:00',
-                'endElectionTime' => '00:00:00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            376 => 
+            331 => 
             array (
                 'id' => 378,
                 'groupId' => '3',
@@ -6803,7 +5993,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            377 => 
+            332 => 
             array (
                 'id' => 379,
                 'groupId' => '3',
@@ -6821,7 +6011,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            378 => 
+            333 => 
             array (
                 'id' => 380,
                 'groupId' => '3',
@@ -6839,7 +6029,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            379 => 
+            334 => 
             array (
                 'id' => 381,
                 'groupId' => '3',
@@ -6857,7 +6047,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            380 => 
+            335 => 
             array (
                 'id' => 382,
                 'groupId' => '3',
@@ -6875,7 +6065,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            381 => 
+            336 => 
             array (
                 'id' => 383,
                 'groupId' => '3',
@@ -6893,7 +6083,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            382 => 
+            337 => 
             array (
                 'id' => 384,
                 'groupId' => '3',
@@ -6911,7 +6101,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            383 => 
+            338 => 
             array (
                 'id' => 385,
                 'groupId' => '3',
@@ -6929,7 +6119,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            384 => 
+            339 => 
             array (
                 'id' => 386,
                 'groupId' => '3',
@@ -6947,7 +6137,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            385 => 
+            340 => 
             array (
                 'id' => 387,
                 'groupId' => '3',
@@ -6965,7 +6155,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            386 => 
+            341 => 
             array (
                 'id' => 388,
                 'groupId' => '3',
@@ -6983,7 +6173,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            387 => 
+            342 => 
             array (
                 'id' => 389,
                 'groupId' => '3',
@@ -7001,7 +6191,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            388 => 
+            343 => 
             array (
                 'id' => 390,
                 'groupId' => '3',
@@ -7019,7 +6209,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            389 => 
+            344 => 
             array (
                 'id' => 391,
                 'groupId' => '3',
@@ -7037,7 +6227,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            390 => 
+            345 => 
             array (
                 'id' => 392,
                 'groupId' => '3',
@@ -7055,7 +6245,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            391 => 
+            346 => 
             array (
                 'id' => 393,
                 'groupId' => '3',
@@ -7073,7 +6263,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            392 => 
+            347 => 
             array (
                 'id' => 394,
                 'groupId' => '3',
@@ -7091,7 +6281,7 @@ class ElectionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            393 => 
+            348 => 
             array (
                 'id' => 395,
                 'groupId' => '3',
@@ -7102,6 +6292,96 @@ class ElectionsTableSeeder extends Seeder
                 'section' => '4',
                 'openDate' => '0000-00-00',
                 'endDate' => '2019-06-20',
+                'confirmDate' => '0000-00-00',
+                'electionDate' => '0000-00-00',
+                'openElectionTime' => '00:00:00',
+                'endElectionTime' => '00:00:00',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            349 => 
+            array (
+                'id' => 396,
+                'groupId' => '3',
+                'seniorGroupId' => 0,
+                'organizationGroupId' => 0,
+                'ngoGroupId' => 1,
+                'province_id' => 40,
+                'section' => '7',
+                'openDate' => '0000-00-00',
+                'endDate' => '0000-00-00',
+                'confirmDate' => '0000-00-00',
+                'electionDate' => '0000-00-00',
+                'openElectionTime' => '00:00:00',
+                'endElectionTime' => '00:00:00',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            350 => 
+            array (
+                'id' => 397,
+                'groupId' => '3',
+                'seniorGroupId' => 0,
+                'organizationGroupId' => 0,
+                'ngoGroupId' => 2,
+                'province_id' => 40,
+                'section' => '7',
+                'openDate' => '0000-00-00',
+                'endDate' => '0000-00-00',
+                'confirmDate' => '0000-00-00',
+                'electionDate' => '0000-00-00',
+                'openElectionTime' => '00:00:00',
+                'endElectionTime' => '00:00:00',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            351 => 
+            array (
+                'id' => 398,
+                'groupId' => '3',
+                'seniorGroupId' => 0,
+                'organizationGroupId' => 0,
+                'ngoGroupId' => 3,
+                'province_id' => 40,
+                'section' => '7',
+                'openDate' => '0000-00-00',
+                'endDate' => '0000-00-00',
+                'confirmDate' => '0000-00-00',
+                'electionDate' => '0000-00-00',
+                'openElectionTime' => '00:00:00',
+                'endElectionTime' => '00:00:00',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            352 => 
+            array (
+                'id' => 399,
+                'groupId' => '3',
+                'seniorGroupId' => 0,
+                'organizationGroupId' => 0,
+                'ngoGroupId' => 4,
+                'province_id' => 40,
+                'section' => '7',
+                'openDate' => '0000-00-00',
+                'endDate' => '0000-00-00',
+                'confirmDate' => '0000-00-00',
+                'electionDate' => '0000-00-00',
+                'openElectionTime' => '00:00:00',
+                'endElectionTime' => '00:00:00',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            353 => 
+            array (
+                'id' => 400,
+                'groupId' => '3',
+                'seniorGroupId' => 0,
+                'organizationGroupId' => 0,
+                'ngoGroupId' => 5,
+                'province_id' => 40,
+                'section' => '7',
+                'openDate' => '0000-00-00',
+                'endDate' => '0000-00-00',
                 'confirmDate' => '0000-00-00',
                 'electionDate' => '0000-00-00',
                 'openElectionTime' => '00:00:00',
