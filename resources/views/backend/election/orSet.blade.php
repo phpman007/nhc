@@ -20,7 +20,7 @@
         <strong>ตั้งวันการลงทะเบียน ผู้แทนองค์กรส่วนท้องถิ่น</strong>
     </div>
     <div class="card-body">
-        <form id="frmsearchset" method="post" action="{{url('backend/election/orElection')}}">
+        <form id="frmsearchset" method="get" action="{{url('backend/election/orElection')}}">
         {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -39,16 +39,16 @@
                 </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                {{-- <div class="form-group col-md-6">
                     <label for="txtprovince">จังหวัด : </label>
                     <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
                         @foreach ($listprovince as $valprovince)
-                        <option value={{$valprovince->province}}>{{$valprovince->province}}</option>
+                        <option value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center  col-md-6">
                 <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary">ค้นหา</button>&nbsp
                 <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
             </div>

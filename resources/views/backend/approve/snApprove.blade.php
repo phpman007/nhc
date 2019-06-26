@@ -48,7 +48,7 @@
                 </button>
                 </div> --}}
 
-        <form id="frmsearchapprove" method="post" action="{{url('backend/approve/snApprove')}}">
+        <form id="frmsearchapprove" method="get" action="{{url('backend/approve/snApprove')}}">
         {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -84,11 +84,11 @@
                         @foreach ($listprovince as $valprovince)
                         <option
                             @for($i=0;$i<$countprovince;$i++)
-                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->province)
+                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->provinceId)
                                 selected
                                 @endif
                             @endfor
-                        value={{$valprovince->province}}>{{$valprovince->province}}</option>
+                        value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
                         @endforeach
                     </select>
                 </div>

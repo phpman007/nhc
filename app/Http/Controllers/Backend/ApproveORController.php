@@ -39,8 +39,8 @@ class ApproveORController extends Controller
         $list->join('statuses','member_details.statusId','=','statuses.id');
         $list->join('province','member_details.provinceId','=','province.provinceId');
         $list->join('organization_groups', 'members.organizationGroupId', '=', 'organization_groups.id');
-        $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','organization_groups.groupName','users.username');
+        $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','organization_groups.groupName','users.username');
         $list->where('members.groupId','=',2);
 
         if(!empty($input['txtname'])){
@@ -111,20 +111,20 @@ class ApproveORController extends Controller
             if($countprovince==1){
                 $list->where('members.candidateStatus','=',1)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0]);
                 });
             }elseif($countprovince==2){
                 $list->where('members.candidateStatus','=',1)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1]);
                 });
             }elseif($countprovince==3){
                 $list->where('members.candidateStatus','=',1)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[2]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[2]);
                 });
             }
         }else{

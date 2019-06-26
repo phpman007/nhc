@@ -29,8 +29,8 @@ class ElectionNGOController extends Controller
         $listgroup=GroupNGO::get();
 
         $list=election::join('ngo_groups', 'elections.ngoGroupId', '=', 'ngo_groups.id');
-        $list->join('province', 'elections.province_id', '=', 'province.provinceId');
-        $list->select('province.province','elections.id','ngo_groups.groupName','elections.openDate','elections.endDate','elections.confirmDate','elections.electionDate','elections.openElectionTime','elections.endElectionTime');
+        $list->join('province', 'elections.provinceId', '=', 'province.provinceId');
+        $list->select('province.province','province.provinceId','elections.id','ngo_groups.groupName','elections.openDate','elections.endDate','elections.confirmDate','elections.electionDate','elections.openElectionTime','elections.endElectionTime');
 
         if(!empty($input['txtgroup'])){
             $countgroup=count($input['txtgroup']);
@@ -63,20 +63,20 @@ class ElectionNGOController extends Controller
             if($countprovince==1){
                 $list->where('elections.groupId','=',3)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0]);
                 });
             }elseif($countprovince==2){
                 $list->where('elections.groupId','=',3)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1]);
                 });
             }elseif($countprovince==3){
                 $list->where('elections.groupId','=',3)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[2]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[2]);
                 });
             }
         }else{

@@ -22,7 +22,7 @@
       </li>
 
       <li>
-            <a href="/backend/theme-build"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+            <a href="/backend/home"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
       </li>
       <li>
             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับสมัคร</span> <span class="fa arrow"></span></a>
