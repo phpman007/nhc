@@ -593,10 +593,49 @@ $(document).ready(function() {
       });
       @if(!empty(Auth::user()->detail->dateOfBirth))
 		setTimeout(function () {
-			$('[name="dateOfBirth"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}')
+			$('[name="dateOfBirth"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
+
+                  $('[name="startDate"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->startDate)->format('d/m/Y') }}');
+                  $('[name="endDate"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->endDate)->format('d/m/Y') }}');
+
+                  $.get('{{ url('api/checkYear') }}?date=' + $('[name="dateOfBirth"]').val() , function(data) {
+                    console.log(data);
+                    $('#yearOld').val(data.old)
+                  });
 		}, 500);
+
 		// $('#date-birdth').datepicker('update', '{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
 	@endif
+      $("[name='zipCode']").on('keyup', function(event) {
+		var _zipcode = $(this).val();
+
+		$.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
+				console.log(json)
+				address = json
+				if(address[0] != null) {
+					// จังหวัด
+					address = address[0];
+					$("#provinceName").val(address.province);
+					$("#provinceId").val(address.province_code);
+					// อำเภอ
+					$("#districtName").val(address.amphoe);
+					$("#districtId").val(address.amphoe_code);
+					// ตำบล
+					$("#subDistrictName").val(address.district);
+					$("#subDistrictId").val(address.district_code);
+				} else {
+					// จังหวัด
+					$("#provinceName").val("");
+					$("#provinceId").val("");
+					// อำเภอ
+					$("#districtName").val("");
+					$("#districtId").val("");
+					// ตำบล
+					$("#subDistrictName").val("");
+					$("#subDistrictId").val("");
+				}
+		});
+	});
 });
 
 </script>

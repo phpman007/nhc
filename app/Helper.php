@@ -1,9 +1,14 @@
 <?php
 namespace App;
 use DB;
+use Carbon\Carbon;
 
 class Helper
 {
+      public static function dateToThai($date)
+      {
+            return Carbon::parse($date)->addYears(543)->format("d/m/Y");
+      }
       public static function getProvices()
       {
             $provinces = DB::table('provinces')
@@ -27,6 +32,8 @@ class Helper
             }
             return false;
       }
+
+
 }
 
 

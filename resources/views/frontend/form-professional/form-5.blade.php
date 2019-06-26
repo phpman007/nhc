@@ -67,6 +67,12 @@
                                   <div class="col-md-6 col-sm-8 nopaddingright">
                                       <div class="input2f">
 							   <input type="text" name="uploadFile01" id="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวประชาชน" readonly>
+                                             <?php
+                                             $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
+                                              ?>
+                                              @if($file1)
+                                              <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a></small>
+                                              @endif
                                       </div><!--end input2f-->
                                   </div>
                                   <div class="col-md-6 col-sm-4">
@@ -74,6 +80,7 @@
                                           <div class="fileUpload btn btn-blue">
                                                <span>Upload</span>
 							     {!! Form::file('uploadBtn01', ['id' => 'uploadBtn01', 'class'=>'upload']) !!}
+
                                            </div>
                                       </div><!--end btn-2button-->
                                   </div>
@@ -89,6 +96,12 @@
                                       <div class="input2f">
 
 							  <input type="text" name="uploadFile02" id="uploadFile02" class="form-control" placeholder="รูปถ่าย" readonly>
+                                            <?php
+                                           $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
+                                            ?>
+                                            @if($file2)
+                                            <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a></small>
+                                            @endif
                                       </div><!--end input2f-->
                                   </div>
                                   <div class="col-md-6 col-sm-4">
@@ -96,6 +109,7 @@
                                           <div class="fileUpload btn btn-blue">
                                                <span>Upload</span>
 							     {!! Form::file('uploadBtn02', ['id' => 'uploadBtn02', 'class'=>'upload']) !!}
+
                                            </div>
                                            <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                       </div><!--end btn-2button-->
@@ -112,6 +126,12 @@
                                   <div class="col-md-6 col-sm-8 nopaddingright">
                                       <div class="input2f">
 							  <input type="text" name="uploadFile03" id="uploadFile03" class="form-control" placeholder="เอกสารสรุปผลงานอันเป็นที่ประจักษ์" readonly>
+                                            <?php
+                                          $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
+                                           ?>
+                                           @if($file3)
+                                           <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a></small>
+                                           @endif
                                       </div><!--end input2f-->
                                   </div>
                                   <div class="col-md-6 col-sm-4">
@@ -119,6 +139,7 @@
                                           <div class="fileUpload btn btn-blue">
                                                <span>Upload</span>
 							     {!! Form::file('uploadBtn03', ['id' => 'uploadBtn03', 'class'=>'upload']) !!}
+
                                            </div>
                                            <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                       </div><!--end btn-2button-->

@@ -21,6 +21,7 @@ class MemberDetail extends Model
 		'enoughExperience',
 		'enoughProfile',
 		'dateOfBirth',
+		'workPlaceName',
 		'genderId',
 		'addressType',
 		'no',
@@ -100,4 +101,14 @@ class MemberDetail extends Model
 		'ngoApproveDoc',
 		'zipFile',
 	];
+
+	public function subdistrict() {
+		return $this->belongsTo(Province::class, 'subDistrictId', 'district_code');
+	}
+	public function district() {
+		return $this->belongsTo(Province::class, 'districtId', 'amphoe_code');
+	}
+	public function province() {
+		return $this->belongsTo(Province::class, 'provinceId', 'province_code');
+	}
 }

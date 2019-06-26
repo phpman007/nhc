@@ -13,8 +13,9 @@ class FormOrganizationController extends Controller
       protected $view = 'form-organize';
 
       public function formView($step) {
-            if($step > 1 && !Auth::check()) {
-                  return Redirect::to('form-organization/1');
+            if($step > 2 ) {
+                  if(!Auth::check())
+                        return Redirect::to('form-organization/2');
             }
 
             return view('frontend.'. $this->view .'.form-'.$step, ['active' => $step]);
@@ -38,6 +39,9 @@ class FormOrganizationController extends Controller
                   case 6:
                   return $this->stepFive($request);
                   break;
+                  case 7:
+                  return $this->stepSix($request);
+                  break;
                   default:
                   // code...
                   break;
@@ -48,6 +52,8 @@ class FormOrganizationController extends Controller
 
 
       public function stepOne(Request $request) {
+
+
             $request->validate([
                   'personalId' 				=> 'required|min:12|max:13',
                   'email' 					=> 'required|email',
@@ -67,8 +73,20 @@ class FormOrganizationController extends Controller
 
             $dataSet['groupId'] = 2;
 
-            try {
+            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 2)->first();
+            if($hasMember) {
+                  if(Hash::check($request->password, $hasMember->password)) :
+                        Auth::login($hasMember, true);
+                  else:
+                        return back()->withErrors(['personalId'=>'มีข้อมูลอยู่ในระบบแล้ว รหัสผ่านไม่ถูกต้อง']);
+                  endif;
 
+                  if(Auth::check()) {
+                        return Redirect::to('form-organization/3');
+                  }
+            }
+
+            try {
                   if(Member::insert($dataSet)) {
 
                         $member = Member::where('personalId', $dataSet['personalId'])->first();
@@ -121,13 +139,12 @@ class FormOrganizationController extends Controller
                   }
             endforeach;
 
-
             unset($dataSet['date_create']);
             try {
                   if(!empty($member->detail)) {
                         $member->detail->update($dataSet);
                   } else {
-                        $member->detail()->firstOrCreate($dataSet);
+                        $member->detail()->create($dataSet);
                   }
                   return Redirect::to('form-organization/4');
 
@@ -208,5 +225,10 @@ class FormOrganizationController extends Controller
             $mmember->update($dataSet);
 
             return Redirect::to('form-organization/7');
+      }
+      public function stepSix(Request $request) {
+            $request->validate(['g-recaptcha-response' => 'recaptcha']);
+
+            return back()->with('success', true);
       }
 }
