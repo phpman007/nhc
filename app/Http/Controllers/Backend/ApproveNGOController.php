@@ -16,6 +16,9 @@ use App\Model\Backend\reason;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\approveMail;
+
 class ApproveNGOController extends Controller
 {
     /**
@@ -173,7 +176,7 @@ class ApproveNGOController extends Controller
 
 
         if($list->update()){
-            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+            $this->mail($input['Hid'][0],3);
         }else{
             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
@@ -190,12 +193,33 @@ class ApproveNGOController extends Controller
         $list->statusId = 4;
 
         if($list->update()){
-            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+            $this->mail($input['Hidmember'][0],4);
         }else{
             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
         return back();
         // return redirect('/backend/approve/ngoApprove');
+
+    }
+
+    public function mail($id,$status)
+    {   
+        $list=MemberDetail::join('members','members.id','=','member_details.memberId')
+        ->join('statuses','member_details.statusId','=','statuses.id')
+        ->join('province','member_details.provinceId','=','province.provinceId')
+        ->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id')
+        ->leftJoin('users', 'member_details.adminId', '=', 'users.id')
+        ->select('members.email','member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username')
+        ->where('member_details.id','=',$id)
+        ->first();
+        $group="ผู้แทนองค์กรภาคเอกชน";
+
+        if($list1->email!=""){
+            // Mail::to('julaluckw@gmail.com')->send(new approveMail($group,$list));
+            \Session::flash('sendemail','แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว'); 
+        }else{
+            \Session::flash('error','แก้ไขสถานะแล้ว แต่ส่งอีเมล์แจ้งไม่ได้!!!'); 
+        }                 
 
     }
 

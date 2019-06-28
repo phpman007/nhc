@@ -238,6 +238,15 @@
         };
         toastr.error('แก้ไขสถานะไม่ได้!!!', '');
     @endif
+    @if (Session::has( 'sendemail' ))
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'slideDown',
+        timeOut: 3000
+    };
+    toastr.success('แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว', '');
+    @endif
 
 </script>
 

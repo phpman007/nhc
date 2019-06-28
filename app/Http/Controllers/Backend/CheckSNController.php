@@ -24,6 +24,10 @@ class CheckSNController extends Controller
      */
     public function index()
     {
+        // if (Session::get('users') == NULL) {
+        //     return back();
+        // }
+
         $input = \Request::all();
 
         $listprovince=Province::orderBy('province')->get();

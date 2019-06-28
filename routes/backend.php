@@ -66,6 +66,8 @@ Route::group(['prefix' => 'approve'], function () {
     Route::get('/editstatusMEM', 'ApproveMemberController@editstatus')->name('approveMEM.editstatus');
     Route::get('/editnotpassMEM', 'ApproveMemberController@editnotpass')->name('approveMEM.editnotpass');
 
+    Route::get('/aa', function () {return view('mail.test');});
+
 });
 
 Route::group(['prefix' => 'confirm'], function () {
@@ -79,9 +81,8 @@ Route::group(['prefix' => 'confirm'], function () {
 Route::group(['prefix' => 'RT'], function () {
     Route::match(['get', 'post'],'/snRT', 'RealtimeSNController@index')->name('realtimeSN.index');
     // Route::get('/snRT', function () {return view('backend.RT.snRT');});
-    // Route::get('/orRT', function () {return view('backend.RT.orRT');});
-    // Route::get('/ngoRT', function () {return view('backend.RT.ngoRT');});
-
+    Route::get('/orRT', function () {return view('backend.RT.orRT');});
+    Route::get('/ngoRT', function () {return view('backend.RT.ngoRT');});
 });
 
 Route::group(['prefix' => 'draw'], function () {

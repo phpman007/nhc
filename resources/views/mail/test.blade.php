@@ -5,6 +5,8 @@
             <title></title>
       </head>
       <body>
+      <img src="{{asset('img/logo.png')}}">
             Test sendmail
+
       </body>
 </html>

@@ -15,7 +15,8 @@ class CreateNgoGroupsTable extends Migration
     {
         Schema::create('ngo_groups', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('groupName', 255)->comment("ชื่อกลุ่ม")->nullable();
+            $table->string('groupName', 255)->comment("ชื่อกลุ่มขึ้นต้นด้วยกลุ่ม")->nullable();
+            $table->string('groupName1', 255)->comment("ชื่อกลุ่มขึ้นต้นด้วยผู้แทน")->nullable();
             $table->timestamps()->nullable();
         });
     }

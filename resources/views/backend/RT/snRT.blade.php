@@ -1,10 +1,12 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
 
+@section('loginname','สวัสดี A')
 @section('content')
+
 <div class="card border-info mb-3">
     <div class="card-header">
-        <strong>แสดงผลการลงคะแนนแบบ Real Time ผู้ทรงคุณวุฒิ</strong>
+        <strong>ผลการลงคะแนนแบบ Real Time ผู้ทรงคุณวุฒิ</strong>
     </div>
     <div class="card-body">
         <form id="frmsearchapprove" method="post" action="{{url('backend/RT/snRT')}}">
