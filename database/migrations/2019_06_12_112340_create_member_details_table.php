@@ -107,6 +107,7 @@ class CreateMemberDetailsTable extends Migration
             $table->text('detail1')->comment("รายละเอียด1")->nullable();
             $table->string('activity2', 255)->comment("กิจกรรมที่เกี่ยวข้อง2")->nullable();
             $table->text('detail2')->comment("รายละเอียด2")->nullable();
+            $table->string('byNgo')->comment("ด้วยองค์กร...")->nullable();
             $table->string('suggestNameTitle', 150)->comment("คำนำหน้าชื่อ")->nullable();
             $table->string('suggestFirstname', 50)->nullable();
             $table->string('suggestLastname', 50)->nullable();
