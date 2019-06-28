@@ -90,7 +90,8 @@ class CreateMemberDetailsTable extends Migration
 
             // information part 7 for ngo group
             $table->string('ngoName', 150)->comment("ชื่อองค์กร")->nullable();
-            $table->string('ngoStatus')->comment("สถานะ")->nullable();
+            $table->integer('legalStatus', 150)->comment("สถานะความเป็นนิติบุคคล")->nullable();
+            $table->string('ngoStatus')->comment("รายละเอียดสถานะ")->nullable();
             $table->text('ngoNo', 10)->comment("เลขที่")->nullable();
             $table->text('ngoMoo', 2)->comment("หมู่ที่")->nullable();
             $table->text('ngoSoi', 50)->comment("ซอย")->nullable();
