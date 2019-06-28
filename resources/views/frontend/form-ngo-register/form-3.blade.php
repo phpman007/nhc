@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -41,31 +41,8 @@
                 </div><!--end box-line-progress2f-->
                 <div class="box-step-progress2f">
                     <ul class="list-inline">
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>1</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>2</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>3</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>4</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                    </ul>
+                        @include('frontend.form-professional.step-nav')
+                  </ul>
                 </div><!--end box-step-progress2f-->
                 <div class="clear2f"></div>
               </div><!--end control-progress2f-->
@@ -75,27 +52,13 @@
                   <div class="set-form2f">
                     <h5>๑. องค์กรฯ ประสงค์ขอขึ้นทะเบียนในกลุ่ม (เลือกได้เพียงหนึ่งกลุ่มเท่านั้น)</h5>
                     <div class="input-radio2f">
+                          @foreach(DB::table('ngo_groups')->get() as $key => $item)
                         <div class="box-radio2f">
-                          <input type="radio" id="group1" name="radio-group" checked>
-                          <label for="group1">๑) กลุ่มขององค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพของตนเองและสมาชิก</label>
+                          {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key]) !!}
+                          <label for="group{{$key}}">{{$key+1}}) {{$item->groupName}}</label>
                         </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group2" name="radio-group">
-                          <label for="group2">๒) กลุ่มขององค์กรที่ดำเนินงานด้านอาสาสมัคร งานจิตอาสา หรือการรณรงค์เผยแพร่</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group3" name="radio-group">
-                          <label for="group3">๓) กลุ่มขององค์กรที่ดำเนินงานด้านการแพทย์และสาธารณสุข</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group4" name="radio-group">
-                          <label for="group4">๔) กลุ่มขององค์กรชุมชนที่ดำเนินงานด้านการพัฒนาในพื้นที่ชุมชน</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group5" name="radio-group">
-                          <label for="group5">๕) กลุ่มขององค์กรที่ดำเนินงานด้านการพัฒนาชุมชน สังคม นโยบายสาธารณะ การพิทักษ์สิทธิมนุษยชน การศึกษา ศาสนา  ทรัพยากรธรรมชาติ
-                          และสิ่งแวดล้อม หรืออื่นๆ ในเชิงประเด็น</label>
-                        </div>
+                        @endforeach
+
                     </div><!--end input-radio2f-->
                     <div class="box-input2f boxremark">
                         <div class="text-input2f nopadding">
@@ -113,7 +76,10 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <input type="text" name="" value="" class="form-control" placeholder="ชื่อกิจกรรม">
+                                        {!! Form::text('activity1', Auth::user()->detail->activity1, ["class"=>"form-control", "placeholder"=>"ชื่อกิจกรรม"]) !!}
+                                        @if($errors->has("activity1"))
+                                        <small>{{ $errors->first('activity1') }}</small>
+                                        @endif
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -125,7 +91,11 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="สรุปผลงานที่สำคัญ"></textarea>
+                                    {!! Form::textarea('detail1', @Auth::user()->detail->detail1, ["rows"=>"4", "cols"=>"40", "class"=>"form-,control"
+                                   "placeholder"=>"สรุปผลงานที่สำคัญ"]) !!}
+                                   @if($errors->has('detail1'))
+                                   <small>{{ $errors->first('detail1') }}</small>
+                                   @endif
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -138,7 +108,10 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <input type="text" name="" value="" class="form-control" placeholder="ชื่อกิจกรรม">
+                                        {!! Form::text('activity2', Auth::user()->detail->activity2, ["class"=>"form-control", "placeholder"=>"ชื่อกิจกรรม"]) !!}
+                                        @if($errors->has("activity2"))
+                                        <small>{{ $errors->first('activity2') }}</small>
+                                        @endif
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -150,7 +123,11 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="สรุปผลงานที่สำคัญ"></textarea>
+                                        {!! Form::textarea('detail2', @Auth::user()->detail->detail2, ["rows"=>"4", "cols"=>"40", "class"=>"form-,control"
+                                       "placeholder"=>"สรุปผลงานที่สำคัญ"]) !!}
+                                       @if($errors->has('detail2'))
+                                       <small>{{ $errors->first('detail2') }}</small>
+                                       @endif
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -158,7 +135,7 @@
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
-                      <button type="button" name="button" class="btn btn-green">บันทึก</button>
+                      <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -166,7 +143,7 @@
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

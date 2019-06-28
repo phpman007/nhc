@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open(['files' => true]) !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -41,30 +41,7 @@
                 </div><!--end box-line-progress2f-->
                 <div class="box-step-progress2f">
                     <ul class="list-inline">
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>1</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>2</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>3</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>4</strong>
-                          </div><!--end box-step2f-->
-                      </li>
+                             @include('frontend.form-professional.step-nav')
                     </ul>
                 </div><!--end box-step-progress2f-->
                 <div class="clear2f"></div>
@@ -80,6 +57,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
+                                      {!! Form::text('suggestNameTitle', Auth::user()->detail->suggestNameTitle, ["class"=>"form-control", "placeholder"=>"ด้วยองค์กร"]) !!}
+                                      @if($errors->has("suggestNameTitle"))
+                                      <small>{{ $errors->first('suggestNameTitle') }}</small>
+                                      @endif
                                   <input type="text" name="" value="" class="form-control" placeholder="ด้วยองค์กร">
                                 </div>
                                 <div class="text-underline">ได้เสนอ</div>
@@ -93,12 +74,18 @@
                             </div>
                             <div class="col-md-2 col-sm-3 nopaddingright">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="คำนำหน้า">
+                                      {!! Form::text('suggestNameTitle', Auth::user()->detail->suggestNameTitle, ["class"=>"form-control", "placeholder"=>"คำนำหน้า"]) !!}
+                                      @if($errors->has("suggestNameTitle"))
+                                      <small>{{ $errors->first('suggestNameTitle') }}</small>
+                                      @endif
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-5">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ชื่อ - นามสกุล">
+                                  {!! Form::text('suggestFullname', Auth::user()->detail->suggestFullname, ["class"=>"form-control", "placeholder"=>"ชื่อ - นามสกุล"]) !!}
+                                  @if($errors->has("suggestFullname"))
+                                  <small>{{ $errors->first('suggestFullname') }}</small>
+                                  @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -110,7 +97,11 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ตำแหน่งสมาชิกในองค์กร">
+                                      {!! Form::text('suggestPosition', Auth::user()->detail->suggestPosition, ["class"=>"form-control", "placeholder"=>"ตำแหน่งสมาชิกในองค์กร"]) !!}
+                                     @if($errors->has("suggestPosition"))
+                                     <small>{{ $errors->first('suggestPosition') }}</small>
+                                     @endif
+                                 
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -229,14 +220,14 @@
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
-                      <button type="button" name="button" class="btn btn-green">ตรวจทานเอกสาร</button>
+                      <button type="submit" name="button" class="btn btn-green">ตรวจทานเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

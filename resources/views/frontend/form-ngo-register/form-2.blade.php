@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -41,31 +41,8 @@
                 </div><!--end box-line-progress2f-->
                 <div class="box-step-progress2f">
                     <ul class="list-inline">
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>1</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>2</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>3</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>4</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                    </ul>
+                        @include('frontend.form-professional.step-nav')
+                  </ul>
                 </div><!--end box-step-progress2f-->
                 <div class="clear2f"></div>
               </div><!--end control-progress2f-->
@@ -79,7 +56,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                  <input type="text" class="form-control" name="" value="" placeholder="วัน/เดือน/พ.ศ.">
+                                      {!! Form::text('date_create', now()->addYears(543)->format("d/m/Y"), [ "class"=>"form-control" , "placeholder"=>"วัน/เดือน/พ.ศ.", 'readonly'=>'']) !!}
                                   <span class="input-group-addon"><img src="images/icon-calendar-gray.svg" alt="" data-pin-nopin="true"></span>
                                 </div><!--end input_form-->
                             </div>
@@ -92,7 +69,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="นาย/นาง/นางสาว">
+                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                      @if($errors->has("nameTitle"))
+                                      <small>{{ $errors->first('nameTitle') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -100,11 +80,29 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">ชื่อ-นามสกุล</div>
+                                <div class="text-input2f nopadding">ชื่อ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ชื่อ-นามสกุล">
+                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                      @if($errors->has("firstname"))
+                                      <small>{{ $errors->first('firstname') }}</small>
+                                      @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f nopadding">นามสกุล</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                      @if($errors->has("lastname"))
+                                      <small>{{ $errors->first('lastname') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -116,7 +114,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="จังหวัด">
+                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -137,7 +135,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ชื่อองค์กร">
+                                     {!! Form::text('ngoName', @Auth::user()->detail->ngoName, ["class"=>"form-control", "placeholder"=>"ชื่อองค์กร"]) !!}
+                                     @if($errors->has('ngoName'))
+                                     <small>{{ $errors->first('ngoName') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -159,7 +160,7 @@
                                     </div>
                                 </div><!--end input-radio2f-->
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="สถานภาพขององค์กร">
+                                      {!! Form::text('ngoStatus', @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"สถานภาพขององค์กร"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -167,11 +168,115 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">๓.ที่ตั้งองค์กร</div>
+                                <div class="text-input2f">เลขที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <textarea name="name" rows="4" cols="40" class="form-control" placeholder="ที่ตั้งองค์กร"></textarea>
+                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
+                                     @if($errors->has('no'))
+                                     <small>{{ $errors->first('no') }}</small>
+                                     @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">หมู่ที่</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('moo', @Auth::user()->detail->moo, ["class"=>"form-control" ,"placeholder"=>"หมู่ที่"]) !!}
+                                     @if($errors->has('moo'))
+                                     <small>{{ $errors->first('moo') }}</small>
+                                     @endif
+                                </div>
+                           </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ตรอก/ซอย</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('soi', @Auth::user()->detail->soi, ["class"=>"form-control" ,"placeholder"=>"ซอย"]) !!}
+                                    @if($errors->has('soi'))
+                                    <small>{{ $errors->first('soi') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ถนน</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('street', @Auth::user()->detail->street, ["class"=>"form-control" ,"placeholder"=>"ถนน"]) !!}
+                                     @if($errors->has('street'))
+                                     <small>{{ $errors->first('street') }}</small>
+                                     @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">รหัสไปรษณีย์</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('zipCode',  @Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                 @if($errors->has('zipCode'))
+                                 <small>{{ $errors->first('zipCode') }}</small>
+                                 @endif
+                                </div>
+                           </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">จังหวัด</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',@Auth::user()->detail->provinceId)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
+                                      {!! Form::hidden('provinceId', @Auth::user()->detail->provinceId, ['id'=>'provinceId']) !!}
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">อำเภอ/เขต</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',@Auth::user()->detail->districtId)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
+                                        {!! Form::hidden('districtId', @Auth::user()->detail->districtId, ['id'=>'districtId']) !!}
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ตำบล/แขวง</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+
+                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',@Auth::user()->detail->subDistrictId)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
+
+                                      {!! Form::hidden('subDistrictId', @Auth::user()->detail->subDistrictId, ['id'=>'subDistrictId']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -183,7 +288,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                  <input type="text" class="form-control" name="" value="" placeholder="ก่อตั้งองค์กรวันที่">
+                                      {!! Form::text('ngoStartDate', ,@Auth::user()->detail->ngoStartDate, ['class'=>'form-control', 'placeholder' => 'ก่อตั้งองค์กรวันที่']) !!}
+                                      @if($errors->has('ngoStartDate'))
+                                      <small>{{ $errors->first('ngoStartDate') }}</small>
+                                      @endif
                                   <span class="input-group-addon"><img src="images/icon-calendar-gray.svg" alt="" data-pin-nopin="true"></span>
                                 </div><!--end input_form-->
                             </div>
@@ -197,7 +305,10 @@
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-9">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="จำนวนสมาชิก">
+                                  {!! Form::text('ngoQtyMember', ,@Auth::user()->detail->ngoQtyMember, ['class'=>'form-control', 'placeholder' => 'จำนวนสมาชิก']) !!}
+                                  @if($errors->has('ngoQtyMember'))
+                                  <small>{{ $errors->first('ngoQtyMember') }}</small>
+                                  @endif
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-2 col-xs-3 nopaddingleft">
@@ -214,8 +325,11 @@
                             <div class="col-md-2 col-sm-4 nopaddingright"></div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control"
-                                    placeholder="วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน"></textarea>
+                                      {!! Form::textarea('ngoObjective', @Auth::user()->detail->ngoObjective, ["rows"=>"4", "cols"=>"40", "class"=>"form-,control"
+                                     "placeholder"=>"วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน"]) !!}
+                                     @if($errors->has('ngoObjective'))
+                                     <small>{{ $errors->first('ngoObjective') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -223,7 +337,7 @@
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
-                      <button type="button" name="button" class="btn btn-green">บันทึก</button>
+                      <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -231,7 +345,7 @@
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

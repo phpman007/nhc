@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -41,31 +41,8 @@
                 </div><!--end box-line-progress2f-->
                 <div class="box-step-progress2f">
                     <ul class="list-inline">
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>1</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>2</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>3</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>4</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                    </ul>
+                        @include('frontend.form-professional.step-nav')
+                  </ul>
                 </div><!--end box-step-progress2f-->
                 <div class="clear2f"></div>
               </div><!--end control-progress2f-->
@@ -79,7 +56,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="1234567890123" class="form-control" placeholder="เลขบัตรประชาชน">
+                                    <input type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="เลขบัตรประชาชน">
+                                    @if($errors->has('personalId'))
+                                    <small>{{ $errors->first('personalId') }}</small>
+                                    @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -91,7 +71,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="จังหวัด">
+                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -103,7 +83,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="อีเมล์">
+                                    <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="อีเมล์">
+                                    @if($errors->has('email'))
+                                    <small>{{ $errors->first('email') }}</small>
+                                    @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -115,10 +98,13 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="password" name="" value="" class="form-control" placeholder="รหัสผ่าน">
+                                      {!! Form::password('password', ["class"=>"form-control", "placeholder"=>""]) !!}
+                                      @if($errors->has('password'))
+                                     <small>{{ $errors->first('password') }}</small>
+                                     @endif
                                   <span class="icon-viewpass notview">
-                                    <img src="images/visibility-on.svg" class="pass-view" alt="">
-                                    <img src="images/visibility-off.svg" class="pass-none" alt="">
+                                    <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
+                                    <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
                                 </div>
                             </div>
@@ -131,10 +117,13 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="password" name="" value="" class="form-control" placeholder="รหัสผ่าน">
+                                    {!! Form::password('password_confirmation', ["class"=>"form-control", "placeholder"=>""]) !!}
+                                    @if($errors->has('password_confirmation'))
+                                   <small>{{ $errors->first('password_confirmation') }}</small>
+                                   @endif
                                   <span class="icon-viewpass notview">
-                                    <img src="images/visibility-on.svg" class="pass-view" alt="">
-                                    <img src="images/visibility-off.svg" class="pass-none" alt="">
+                                        <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
+                                        <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
                                 </div>
                             </div>
@@ -147,7 +136,7 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
                           <button type="button" name="button" class="btn btn-border">ยกเลิก</button>
-                          <button type="button" name="button" class="btn btn-green">บันทึก</button>
+                          <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                         </div>
                       </div>
 
@@ -157,7 +146,7 @@
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

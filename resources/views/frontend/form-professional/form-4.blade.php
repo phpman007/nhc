@@ -104,7 +104,7 @@
                                       <div class="box-date input-group date">
                                         {{ Form::text('dateOfBirth', null, ['class'=> 'form-control date-picker', 'id' => 'date-birdth', 'readonly'=>'', 'placeholder'=>'วัน/เดือน/พ.ศ.']) }}
 
-                                        <span class="input-group-addon"><img src="images/icon-calendar-gray.svg" alt="" data-pin-nopin="true"></span>
+                                        <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
                                         @if($errors->has('dateOfBirth'))
                                         <small>{{ $errors->first('dateOfBirth') }}</small>
                                         @endif

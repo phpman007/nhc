@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" class="form-control" name="" value="10/มกราคม/2548" placeholder="วัน/เดือน/พ.ศ." readonly>
+                                   {!! Form::text('date_create', now()->addYears(543)->format("d/m/Y"), [ "class"=>"form-control" , "placeholder"=>"วัน/เดือน/พ.ศ.", 'readonly'=>'']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -53,7 +53,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="นาย" class="form-control" placeholder="นาย/นาง/นางสาว" readonly>
+                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                     @if($errors->has("nameTitle"))
+                                     <small>{{ $errors->first('nameTitle') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -61,11 +64,29 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">ชื่อ-นามสกุล</div>
+                                <div class="text-input2f nopadding">ชื่อ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="สำราญโรจน์ สุทัศน์ชูโต๊ะ" class="form-control" placeholder="ชื่อ-นามสกุล" readonly>
+                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                     @if($errors->has("firstname"))
+                                     <small>{{ $errors->first('firstname') }}</small>
+                                     @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f nopadding">นามสกุล</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                      @if($errors->has("lastname"))
+                                      <small>{{ $errors->first('lastname') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -77,7 +98,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="กรุงเทพมหานคร" class="form-control" placeholder="จังหวัด" readonly>
+                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -98,7 +119,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริษัท ทริส คอร์ปอเรชั่น จำกัด" class="form-control" placeholder="ชื่อองค์กร" readonly>
+                                      {!! Form::text('ngoName', @Auth::user()->detail->ngoName, ["class"=>"form-control", "placeholder"=>"ชื่อองค์กร"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -120,7 +141,7 @@
                                     </div>
                                 </div><!--end input-radio2f-->
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริษัทจดทะเบียน" class="form-control" placeholder="สถานภาพขององค์กร" readonly>
+                                  {!! Form::text('ngoStatus', @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"สถานภาพขององค์กร"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -574,14 +595,14 @@
                 </div>
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border">ปิด</button>
-                      <button type="button" name="button" class="btn btn-green">ตรวจทานเอกสาร</button>
+                      <button type="submit" name="button" class="btn btn-green">ตรวจทานเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
+use App\Model\Frontend\Member;
+use App\Model\Frontend\Attachment;
+use Auth, Hash, Redirect;
 class FormNgoRegisterController extends Controller
 {
       protected $view = 'form-ngo-register';
@@ -22,6 +24,8 @@ class FormNgoRegisterController extends Controller
 
             switch ($step) {
                   case 1:
+                        Auth::logout();
+
                         return $this->stepOne($request);
                         break;
                   case 2:
@@ -64,7 +68,20 @@ class FormNgoRegisterController extends Controller
 
             $dataSet['updated_at'] = now();
 
-            $dataSet['groupId'] = 1;
+            $dataSet['groupId'] = 3;
+
+            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
+            if($hasMember) {
+                  if(Hash::check($request->password, $hasMember->password)) :
+                        Auth::login($hasMember, true);
+                  else:
+                        return back()->withErrors(['personalId'=>'มีข้อมูลอยู่ในระบบแล้ว รหัสผ่านไม่ถูกต้อง']);
+                  endif;
+
+                  if(Auth::check()) {
+                        return Redirect::to('form-ngo-register/2');
+                  }
+            }
 
             try {
                   if(Member::insert($dataSet)) {
@@ -86,7 +103,7 @@ class FormNgoRegisterController extends Controller
                   endif;
 
                   if(Auth::check()) {
-                        return Redirect::to('form-professional/2');
+                        return Redirect::to('form-ngo-register/2');
                   }
             return Redirect::back();
             }
@@ -127,7 +144,7 @@ class FormNgoRegisterController extends Controller
                   } else {
                         $member->detail()->firstOrCreate($dataSet);
                   }
-                  return Redirect::to('form-professional/3');
+                  return Redirect::to('form-ngo-register/3');
 
             } catch (Exception $e) {
 
@@ -138,7 +155,6 @@ class FormNgoRegisterController extends Controller
       public function stepThree(Request $request) {
 
             Auth::user()->seniorGroupId = $request->seniorGroupId;
-
             Auth::user()->save();
 
             return Redirect::to('form-professional/4');
@@ -174,7 +190,7 @@ class FormNgoRegisterController extends Controller
        $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
        $mmember->update($dataSet);
 
-       return Redirect::to('form-professional/5');
+       return Redirect::to('form-ngo-register/5');
       }
 
       public function stepFive(Request $request) {

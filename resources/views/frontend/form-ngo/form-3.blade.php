@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -41,30 +41,7 @@
                 </div><!--end box-line-progress2f-->
                 <div class="box-step-progress2f">
                     <ul class="list-inline">
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>1</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>2</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>3</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>4</strong>
-                          </div><!--end box-step2f-->
-                      </li>
+                             @include('frontend.form-professional.step-nav')
                     </ul>
                 </div><!--end box-step-progress2f-->
                 <div class="clear2f"></div>
@@ -84,7 +61,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="นาย/นาง/นางสาว">
+                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                     @if($errors->has("nameTitle"))
+                                     <small>{{ $errors->first('nameTitle') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -96,7 +76,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ชื่อ">
+                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                     @if($errors->has("firstname"))
+                                     <small>{{ $errors->first('firstname') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -108,7 +91,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="นามสกุล">
+                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                     @if($errors->has("lastname"))
+                                     <small>{{ $errors->first('lastname') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -122,8 +108,12 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                  <input type="text" class="form-control" name="" value="" placeholder="วัน/เดือน/พ.ศ.">
-                                  <span class="input-group-addon"><img src="images/icon-calendar-gray.svg" alt="" data-pin-nopin="true"></span>
+                                      {{ Form::text('dateOfBirth', null, ['class'=> 'form-control date-picker', 'id' => 'date-birdth', 'readonly'=>'', 'placeholder'=>'วัน/เดือน/พ.ศ.']) }}
+
+                                      <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
+                                      @if($errors->has('dateOfBirth'))
+                                      <small>{{ $errors->first('dateOfBirth') }}</small>
+                                      @endif
                                 </div><!--end input_form-->
                             </div>
                         </div><!--end row-->
@@ -135,7 +125,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="อายุ">
+                                  <input readonly="" type="text" id="yearOld" name="yearOld" value="{{ !empty(@Auth::user()->detail->yearOld) ? @Auth::user()->detail->yearOld : old('yearOld') }}" class="form-control" placeholder="อายุ">
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -152,15 +142,15 @@
                             <div class="col-md-6 col-sm-8">
                                   <div class="input-radio2f inline-check">
                                       <div class="box-radio2f">
-                                        <input type="radio" id="home" name="radio-group" checked>
+                                        {{ Form::radio('addressType', 1, @Auth::user()->detail->addressType == 1 ? "checked" :'checked', ['id'=>'home']) }}
                                         <label for="home">บ้าน</label>
                                       </div>
                                       <div class="box-radio2f">
-                                        <input type="radio" id="office" name="radio-group">
+                                       {{ Form::radio('addressType', 2, @Auth::user()->detail->addressType == 1 ? "checked" :'', ['id'=>'office']) }}
                                         <label for="office">ที่ทำงาน</label>
                                       </div>
                                       <div class="input2f width65per">
-                                        <input type="text" name="" value="" class="form-control" placeholder="สถานที่ทำงาน">
+                                         {!! Form::text('workPlaceName', @Auth::user()->detail->workPlaceName, ["class"=>"form-control" ,"placeholder"=>"สถานที่ทำงาน"]) !!}
                                       </div>
                                   </div><!--end input-radio2f-->
                               </div>
@@ -173,7 +163,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="เลขที่">
+                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
+                                     @if($errors->has('no'))
+                                     <small>{{ $errors->first('no') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -185,7 +178,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="หมู่ที่">
+                                      {!! Form::text('moo', @Auth::user()->detail->moo, ["class"=>"form-control" ,"placeholder"=>"หมู่ที่"]) !!}
+                                      @if($errors->has('moo'))
+                                      <small>{{ $errors->first('moo') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -197,7 +193,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ตรอก/ซอย">
+                                      {!! Form::text('soi', @Auth::user()->detail->soi, ["class"=>"form-control" ,"placeholder"=>"ซอย"]) !!}
+                                   @if($errors->has('soi'))
+                                   <small>{{ $errors->first('soi') }}</small>
+                                   @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -209,43 +208,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ถนน">
-                                </div>
-                            </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">ตำบล/แขวง</div>
-                            </div>
-                            <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ตำบล/แขวง">
-                                </div>
-                            </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">อำเภอ/เขต</div>
-                            </div>
-                            <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="อำเภอ/เขต">
-                                </div>
-                            </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">จังหวัด</div>
-                            </div>
-                            <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="จังหวัด">
+                                      {!! Form::text('street', @Auth::user()->detail->street, ["class"=>"form-control" ,"placeholder"=>"ถนน"]) !!}
+                                     @if($errors->has('street'))
+                                     <small>{{ $errors->first('street') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -257,7 +223,51 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="รหัสไปรษณีย์">
+                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                  @if($errors->has('zipCode'))
+                                  <small>{{ $errors->first('zipCode') }}</small>
+                                  @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">จังหวัด</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',Auth::user()->detail->provinceId)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
+                                      {!! Form::hidden('provinceId', Auth::user()->detail->provinceId, ['id'=>'provinceId']) !!}
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">อำเภอ/เขต</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',Auth::user()->detail->districtId)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
+                                        {!! Form::hidden('districtId', Auth::user()->detail->districtId, ['id'=>'districtId']) !!}
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ตำบล/แขวง</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+
+                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',Auth::user()->detail->subDistrictId)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
+
+                                      {!! Form::hidden('subDistrictId', Auth::user()->detail->subDistrictId, ['id'=>'subDistrictId']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -269,7 +279,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="โทรศัพท์">
+                                      {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์']) !!}
+                                     @if($errors->has('tel'))
+                                 <small>{{ $errors->first('tel') }}</small>
+                                 @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -281,7 +294,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="โทรศัพท์เคลื่อนที่(มือถือ)">
+                                      {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์เคลื่อนที่(มือถือ)"]) !!}
+                                     @if($errors->has('mobile'))
+                                 <small>{{ $errors->first('mobile') }}</small>
+                                 @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -294,7 +310,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8 col-xs-11">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="วุฒิการศึกษา">
+                                      {!! Form::text('graduated1', Auth::user()->detail->graduated1, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
+                                     @if($errors->has('graduated1'))
+                                 <small>{{ $errors->first('graduated1') }}</small>
+                                 @endif
                                 </div>
                             </div>
                             <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -302,7 +321,10 @@
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-11">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="สาขา">
+                                      {!! Form::text('faculty1', Auth::user()->detail->faculty1, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
+                                     @if($errors->has('faculty1'))
+                                 <small>{{ $errors->first('faculty1') }}</small>
+                                 @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -314,7 +336,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="วุฒิการศึกษา">
+                                {!! Form::text('graduated2', Auth::user()->detail->graduated2, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -322,7 +344,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="สาขา">
+                                {!! Form::text('faculty2', Auth::user()->detail->faculty2, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
                           </div>
                       </div><!--end row-->
@@ -334,7 +356,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="วุฒิการศึกษา">
+                                {!! Form::text('graduated3', Auth::user()->detail->graduated3, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -342,7 +364,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="สาขา">
+                                {!! Form::text('faculty3', Auth::user()->detail->faculty3, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
                           </div>
                       </div><!--end row-->
@@ -354,7 +376,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="วุฒิการศึกษา">
+                                {!! Form::text('graduated4', Auth::user()->detail->graduated4, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -362,7 +384,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="สาขา">
+                                {!! Form::text('faculty4', Auth::user()->detail->faculty4, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
                           </div>
                       </div><!--end row-->
@@ -374,7 +396,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="วุฒิการศึกษา">
+                                {!! Form::text('graduated5', Auth::user()->detail->graduated5, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -382,7 +404,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="" class="form-control" placeholder="สาขา">
+                                {!! Form::text('faculty5', Auth::user()->detail->faculty5, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
                           </div>
                       </div><!--end row-->
@@ -398,7 +420,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="ปัจจุบันปฏิบัติหน้าที่"></textarea>
+                                      {!! Form::textarea('nowWork',  Auth::user()->detail->nowWork, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"ปัจจุบันปฏิบัติหน้าที่"]) !!}
+                                     @if($errors->has('nowWork'))
+                               <small>{{ $errors->first('nowWork') }}</small>
+                               @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -410,7 +435,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="สถานที่ปฏิบัติงาน"></textarea>
+                                      {!! Form::textarea('nowWorkPlace',  Auth::user()->detail->nowWorkPlace, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"สถานที่ปฏิบัติงาน"]) !!}
+                                     @if($errors->has('nowWorkPlace'))
+                              <small>{{ $errors->first('nowWorkPlace') }}</small>
+                              @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -422,7 +450,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="งานในความรับผิดชอบ"></textarea>
+                                      {!! Form::textarea('nowRole',  Auth::user()->detail->nowRole, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"งานในความรับผิดชอบ"]) !!}
+                                     @if($errors->has('nowRole'))
+                             <small>{{ $errors->first('nowRole') }}</small>
+                             @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -438,7 +469,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ปฏิบัติหน้าที่">
+                                      {!! Form::text('pastWork1', Auth::user()->detail->pastWork1, [ 'class'=>"form-control", 'placeholder'=>"ปฏิบัติหน้าที่"]) !!}
+                                     @if($errors->has('pastWork1'))
+                                   <small>{{ $errors->first('pastWork1') }}</small>
+                                   @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -450,7 +484,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="องค์กร">
+                                      {!! Form::text('pastOrganization1', Auth::user()->detail->pastOrganization1, [ 'class'=>"form-control", 'placeholder'=>"องค์กร"]) !!}
+                                     @if($errors->has('องค์กร'))
+                                   <small>{{ $errors->first('องค์กร') }}</small>
+                                   @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -462,7 +499,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ระยะเวลาการปฏิบัติหน้าที่">
+                                      {!! Form::text('time1', Auth::user()->detail->time1, [ 'class'=>"form-control", 'placeholder'=>"ระยะเวลาการปฏิบัติหน้าที่"]) !!}
+                                     @if($errors->has('time1'))
+                                   <small>{{ $errors->first('time1') }}</small>
+                                   @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -475,7 +515,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ปฏิบัติหน้าที่">
+                                      {!! Form::text('pastWork2', Auth::user()->detail->pastWork2, [ 'class'=>"form-control", 'placeholder'=>"ปฏิบัติหน้าที่"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -487,7 +527,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="องค์กร">
+                                  {!! Form::text('pastOrganization2', Auth::user()->detail->pastOrganization2, [ 'class'=>"form-control", 'placeholder'=>"องค์กร"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -499,7 +539,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ระยะเวลาการปฏิบัติหน้าที่">
+                                  {!! Form::text('time2', Auth::user()->detail->time2, [ 'class'=>"form-control", 'placeholder'=>"ระยะเวลาการปฏิบัติหน้าที่"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -512,7 +552,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ปฏิบัติหน้าที่">
+                                  {!! Form::text('pastWork3', Auth::user()->detail->pastWork3, [ 'class'=>"form-control", 'placeholder'=>"ปฏิบัติหน้าที่"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -524,7 +564,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="องค์กร">
+                                  {!! Form::text('pastOrganization3', Auth::user()->detail->pastOrganization3, [ 'class'=>"form-control", 'placeholder'=>"องค์กร"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -536,7 +576,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="" class="form-control" placeholder="ระยะเวลาการปฏิบัติหน้าที่">
+                                  {!! Form::text('time3', Auth::user()->detail->time3, [ 'class'=>"form-control", 'placeholder'=>"ระยะเวลาการปฏิบัติหน้าที่"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -549,8 +589,10 @@
                             <div class="col-md-2 col-sm-4 nopaddingright"></div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control"
-                                    placeholder="ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร"></textarea>
+                                      {!! Form::textarea('importantMemo',  Auth::user()->detail->importantMemo, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร"]) !!}
+                                     @if($errors->has('importantMemo'))
+                                   <small>{{ $errors->first('importantMemo') }}</small>
+                                   @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -558,7 +600,7 @@
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
-                      <button type="button" name="button" class="btn btn-green">บันทึก</button>
+                      <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -566,7 +608,7 @@
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

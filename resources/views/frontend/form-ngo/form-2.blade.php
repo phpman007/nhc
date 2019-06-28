@@ -1,5 +1,5 @@
 @extends('frontend.theme.master')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -39,30 +39,7 @@
                 </div><!--end box-line-progress2f-->
                 <div class="box-step-progress2f">
                     <ul class="list-inline">
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>1</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li class="active">
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>2</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>3</strong>
-                          </div><!--end box-step2f-->
-                      </li>
-                      <li>
-                          <div class="box-step2f">
-                              <span>ขั้นตอนที่</span>
-                              <strong>4</strong>
-                          </div><!--end box-step2f-->
-                      </li>
+                             @include('frontend.form-professional.step-nav')
                     </ul>
                 </div><!--end box-step-progress2f-->
                 <div class="clear2f"></div>
@@ -111,7 +88,7 @@
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
-                      <button type="button" name="button" class="btn btn-green">บันทึก</button>
+                      <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -119,7 +96,7 @@
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @section('content')
 
 @endsection

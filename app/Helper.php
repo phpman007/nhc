@@ -5,10 +5,15 @@ use Carbon\Carbon;
 
 class Helper
 {
+      // แปลงวันที่จาก Database เป็น ไทย
+      // return date format thai
       public static function dateToThai($date)
       {
             return Carbon::parse($date)->addYears(543)->format("d/m/Y");
       }
+
+      // ดึงข้อมูลจังหวัดส่งค่าเป็น Array
+      // Return array
       public static function getProvices()
       {
             $provinces = DB::table('provinces')
@@ -18,6 +23,9 @@ class Helper
             return $provinces->pluck('province', 'province_code')->toArray();
       }
 
+
+      // อัพโหลดไฟล์
+      // return array file upload
       public static function uploadFile($file, $destination = "other") {
 
             if($file->isValid()) {

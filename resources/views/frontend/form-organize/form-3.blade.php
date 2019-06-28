@@ -71,6 +71,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                      @if($errors->has("nameTitle"))
+                                      <small>{{ $errors->first('nameTitle') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -83,6 +86,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                      @if($errors->has("firstname"))
+                                      <small>{{ $errors->first('firstname') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -95,6 +101,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                      @if($errors->has("lastname"))
+                                      <small>{{ $errors->first('lastname') }}</small>
+                                      @endif
                                 </div>
                             </div>
                         </div><!--end row-->
