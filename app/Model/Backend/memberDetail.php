@@ -4,7 +4,7 @@ namespace App\Model\Backend;
 
 use Illuminate\Database\Eloquent\Model;
 
-class memberDetail extends Model
+class MemberDetail extends Model
 {
     protected $table='member_details';
 
