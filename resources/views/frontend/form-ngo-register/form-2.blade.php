@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     {!! Form::select('provinceMemberID', Helper::getProvices(), @Auth::user()->detail->provinceMemberID, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -151,11 +151,11 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input-radio2f inline-check">
                                     <div class="box-radio2f">
-                                      <input type="radio" id="test1" name="test" checked>
+                                          {!! Form::radio('legalStastus', 0, @Auth::user()->detail->legalStastus == 0 ? 'checked' : '', ['id'=>'test1']) !!}
                                       <label for="test1">ไม่เป็นนิติบุคคล</label>
                                     </div>
                                     <div class="box-radio2f">
-                                      <input type="radio" id="test2" name="test">
+                                          {!! Form::radio('legalStastus', 1, @Auth::user()->detail->legalStastus == 1 ? 'checked' : '', ['id'=>'test2']) !!}
                                       <label for="test2">เป็นนิติบุคคล</label>
                                     </div>
                                 </div><!--end input-radio2f-->
@@ -172,9 +172,9 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
-                                     @if($errors->has('no'))
-                                     <small>{{ $errors->first('no') }}</small>
+                                      {!! Form::text('ngoNo', @Auth::user()->detail->ngoNo, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
+                                     @if($errors->has('ngoNo'))
+                                     <small>{{ $errors->first('ngoNo') }}</small>
                                      @endif
                                 </div>
                             </div>
@@ -187,9 +187,9 @@
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('moo', @Auth::user()->detail->moo, ["class"=>"form-control" ,"placeholder"=>"หมู่ที่"]) !!}
-                                     @if($errors->has('moo'))
-                                     <small>{{ $errors->first('moo') }}</small>
+                                      {!! Form::text('ngoMoo', @Auth::user()->detail->ngoMoo, ["class"=>"form-control" ,"placeholder"=>"หมู่ที่"]) !!}
+                                     @if($errors->has('ngoMoo'))
+                                     <small>{{ $errors->first('ngoMoo') }}</small>
                                      @endif
                                 </div>
                            </div>
@@ -202,9 +202,9 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('soi', @Auth::user()->detail->soi, ["class"=>"form-control" ,"placeholder"=>"ซอย"]) !!}
-                                    @if($errors->has('soi'))
-                                    <small>{{ $errors->first('soi') }}</small>
+                                      {!! Form::text('ngoSoi', @Auth::user()->detail->ngoSoi, ["class"=>"form-control" ,"placeholder"=>"ซอย"]) !!}
+                                    @if($errors->has('ngoSoi'))
+                                    <small>{{ $errors->first('ngoSoi') }}</small>
                                     @endif
                                 </div>
                             </div>
@@ -217,9 +217,9 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('street', @Auth::user()->detail->street, ["class"=>"form-control" ,"placeholder"=>"ถนน"]) !!}
-                                     @if($errors->has('street'))
-                                     <small>{{ $errors->first('street') }}</small>
+                                      {!! Form::text('ngoStreet', @Auth::user()->detail->ngoStreet, ["class"=>"form-control" ,"placeholder"=>"ถนน"]) !!}
+                                     @if($errors->has('ngoStreet'))
+                                     <small>{{ $errors->first('ngoStreet') }}</small>
                                      @endif
                                 </div>
                             </div>
@@ -232,9 +232,9 @@
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('zipCode',  @Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
-                                 @if($errors->has('zipCode'))
-                                 <small>{{ $errors->first('zipCode') }}</small>
+                                      {!! Form::text('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                 @if($errors->has('ngoZipCode'))
+                                 <small>{{ $errors->first('ngoZipCode') }}</small>
                                  @endif
                                 </div>
                            </div>
@@ -247,8 +247,8 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',@Auth::user()->detail->provinceId)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
-                                      {!! Form::hidden('provinceId', @Auth::user()->detail->provinceId, ['id'=>'provinceId']) !!}
+                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',@Auth::user()->detail->ngoProvincetID)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
+                                      {!! Form::hidden('ngoProvincetID', @Auth::user()->detail->ngoProvincetID, ['id'=>'ngoProvincetID']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -260,8 +260,8 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',@Auth::user()->detail->districtId)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
-                                        {!! Form::hidden('districtId', @Auth::user()->detail->districtId, ['id'=>'districtId']) !!}
+                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',@Auth::user()->detail->ngoDistrictID)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
+                                        {!! Form::hidden('ngoDistrictID', @Auth::user()->detail->ngoDistrictID, ['id'=>'ngoDistrictID']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -274,9 +274,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
 
-                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',@Auth::user()->detail->subDistrictId)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
+                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',@Auth::user()->detail->ngoSubDistrictID)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
 
-                                      {!! Form::hidden('subDistrictId', @Auth::user()->detail->subDistrictId, ['id'=>'subDistrictId']) !!}
+                                      {!! Form::hidden('ngoSubDistrictID', @Auth::user()->detail->ngoSubDistrictID, ['id'=>'ngoSubDistrictID']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -288,7 +288,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                      {!! Form::text('ngoStartDate', ,@Auth::user()->detail->ngoStartDate, ['class'=>'form-control', 'placeholder' => 'ก่อตั้งองค์กรวันที่']) !!}
+                                      {!! Form::text('ngoStartDate',@Auth::user()->detail->ngoStartDate, ['class'=>'form-control date-picker', 'placeholder' => 'ก่อตั้งองค์กรวันที่']) !!}
                                       @if($errors->has('ngoStartDate'))
                                       <small>{{ $errors->first('ngoStartDate') }}</small>
                                       @endif
@@ -305,7 +305,7 @@
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-9">
                                 <div class="input2f">
-                                  {!! Form::text('ngoQtyMember', ,@Auth::user()->detail->ngoQtyMember, ['class'=>'form-control', 'placeholder' => 'จำนวนสมาชิก']) !!}
+                                  {!! Form::text('ngoQtyMember',@Auth::user()->detail->ngoQtyMember, ['class'=>'form-control', 'placeholder' => 'จำนวนสมาชิก']) !!}
                                   @if($errors->has('ngoQtyMember'))
                                   <small>{{ $errors->first('ngoQtyMember') }}</small>
                                   @endif
@@ -325,7 +325,7 @@
                             <div class="col-md-2 col-sm-4 nopaddingright"></div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::textarea('ngoObjective', @Auth::user()->detail->ngoObjective, ["rows"=>"4", "cols"=>"40", "class"=>"form-,control"
+                                      {!! Form::textarea('ngoObjective', @Auth::user()->detail->ngoObjective, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
                                      "placeholder"=>"วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน"]) !!}
                                      @if($errors->has('ngoObjective'))
                                      <small>{{ $errors->first('ngoObjective') }}</small>
@@ -357,6 +357,46 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
+$(document).ready(function() {
+      @if(!empty(Auth::user()->detail->ngoStartDate))
+		setTimeout(function () {
+                  $('[name="ngoStartDate"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->ngoStartDate)->format('d/m/Y') }}');
+		}, 500);
+
+	@endif
+
+
+      $("[name='ngoZipCode']").on('keyup', function(event) {
+		var _zipcode = $(this).val();
+
+		$.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
+				console.log(json)
+				address = json
+				if(address[0] != null) {
+					// จังหวัด
+					address = address[0];
+					$("#provinceName").val(address.province);
+					$("#ngoProvincetID").val(address.province_code);
+					// อำเภอ
+					$("#districtName").val(address.amphoe);
+					$("#ngoDistrictID").val(address.amphoe_code);
+					// ตำบล
+					$("#subDistrictName").val(address.district);
+					$("#subDistrictId").val(address.district_code);
+				} else {
+					// จังหวัด
+					$("#provinceName").val("");
+					$("#provinceId").val("");
+					// อำเภอ
+					$("#districtName").val("");
+					$("#districtId").val("");
+					// ตำบล
+					$("#subDistrictName").val("");
+					$("#subDistrictId").val("");
+				}
+		});
+	});
+});
 
 </script>
 @endsection

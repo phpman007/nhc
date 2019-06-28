@@ -627,7 +627,7 @@
                     <div class="box-confirm2f">
                       <div class="box-checkbox2f">
                         <label class="checkbox2f">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ  หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
-                          <input type="checkbox" checked="checked">
+                          <input type="checkbox">
                           <span class="checkmark"></span>
                         </label>
                       </div>

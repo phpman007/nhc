@@ -52,7 +52,7 @@
                   <div class="set-form2f">
                     <h5>๑. องค์กรฯ ประสงค์ขอขึ้นทะเบียนในกลุ่ม (เลือกได้เพียงหนึ่งกลุ่มเท่านั้น)</h5>
                     <div class="input-radio2f">
-                          @foreach(DB::table('ngo_groups')->get() as $key => $item)
+                        @foreach(DB::table('ngo_groups')->get() as $key => $item)
                         <div class="box-radio2f">
                           {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key]) !!}
                           <label for="group{{$key}}">{{$key+1}}) {{$item->groupName}}</label>
@@ -91,7 +91,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    {!! Form::textarea('detail1', @Auth::user()->detail->detail1, ["rows"=>"4", "cols"=>"40", "class"=>"form-,control"
+                                    {!! Form::textarea('detail1', @Auth::user()->detail->detail1, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
                                    "placeholder"=>"สรุปผลงานที่สำคัญ"]) !!}
                                    @if($errors->has('detail1'))
                                    <small>{{ $errors->first('detail1') }}</small>
@@ -123,7 +123,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                        {!! Form::textarea('detail2', @Auth::user()->detail->detail2, ["rows"=>"4", "cols"=>"40", "class"=>"form-,control"
+                                        {!! Form::textarea('detail2', @Auth::user()->detail->detail2, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
                                        "placeholder"=>"สรุปผลงานที่สำคัญ"]) !!}
                                        @if($errors->has('detail2'))
                                        <small>{{ $errors->first('detail2') }}</small>

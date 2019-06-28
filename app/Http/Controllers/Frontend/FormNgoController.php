@@ -10,9 +10,12 @@ class FormNgoController extends Controller
       protected $view = 'form-ngo';
 
       public function formView($step) {
+            if($step == 1) {
+                  Auth::logout();
+            }
 
             if($step != 1 && !Auth::check()) {
-                  return Redirect::to('form-professional/1');
+                  // return Redirect::to('form-ngo/1');
             }
 
           return view('frontend.'. $this->view .'.form-'.$step, ['active' => $step]);
@@ -48,48 +51,47 @@ class FormNgoController extends Controller
       public function stepOne(Request $request) {
 
             $request->validate([
-                  'personalId' 				=> 'required|min:12|max:13',
-                  'email' 					=> 'required|email',
-                  'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		=> 'required|min:6|max:20'
-            ]);
+                    // 'personalId' 				=> 'required|min:12|max:13',
+                    // 'email' 					=> 'required|email',
+                    'password'					=> 'required|min:6|max:20|confirmed',
+                    'password_confirmation'		=> 'required|min:6|max:20'
+              ]);
 
-            $dataSet =  $request->only(['personalId', 'email', 'password']);
+              $dataSet =  $request->only(['personalId', 'email', 'password']);
 
-            $dataSet['password'] = Hash::make($dataSet['password']);
+              $dataSet['password'] = Hash::make($dataSet['password']);
 
-            $dataSet['username'] = $dataSet['email'];
+              $dataSet['username'] = $dataSet['email'];
 
-            $dataSet['created_at'] = now();
+              $dataSet['created_at'] = now();
 
-            $dataSet['updated_at'] = now();
+              $dataSet['updated_at'] = now();
 
-            $dataSet['groupId'] = 1;
+              $dataSet['groupId'] = 4;
+              dd($dataSet);
 
-            try {
-                  if(Member::insert($dataSet)) {
+              $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 1)->first();
+              if($hasMember) {
+                    if(Hash::check($request->password, $hasMember->password)) :
+                          Auth::login($hasMember, true);
+                    else:
+                          return back()->withInput()->withErrors(['personalId'=>'มีข้อมูลอยู่ในระบบแล้ว รหัสผ่านไม่ถูกต้อง']);
+                    endif;
 
-                  $member = Member::where('personalId', $dataSet['personalId'])->first();
+                    if(Auth::check()) {
+                          return Redirect::to('form-professional/2');
+                    }
+              }
 
-                  Auth::login($member, true);
 
-                  return Redirect::to('form-professional/2');
-            } else {
-                  return Redirect::back();
-            }
+            $dataSet = $request->all();
+            dd($request->all());
 
-            } catch (Exception $e) {
-                  $member = Member::where('personalId', $dataSet['personalId'])->first();
+            Auth::user()->update($request->all());
 
-                  if(Hash::check($member->password, $dataSet['password'])) :
-                        Auth::login($member, true);
-                  endif;
+            Auth::user()->detail->update($dataSet);
 
-                  if(Auth::check()) {
-                        return Redirect::to('form-professional/2');
-                  }
-            return Redirect::back();
-            }
+            return redirect();
       }
 
       public function stepTwo(Request $request) {
@@ -127,7 +129,7 @@ class FormNgoController extends Controller
                   } else {
                         $member->detail()->firstOrCreate($dataSet);
                   }
-                  return Redirect::to('form-professional/3');
+                  return Redirect::to('form-ngo/3');
 
             } catch (Exception $e) {
 
@@ -141,7 +143,7 @@ class FormNgoController extends Controller
 
             Auth::user()->save();
 
-            return Redirect::to('form-professional/4');
+            return Redirect::to('form-ngo/4');
       }
 
       public function stepFour(Request $request) {
@@ -174,7 +176,7 @@ class FormNgoController extends Controller
        $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
        $mmember->update($dataSet);
 
-       return Redirect::to('form-professional/5');
+       return Redirect::to('form-ngo/5');
       }
 
       public function stepFive(Request $request) {
@@ -201,7 +203,7 @@ class FormNgoController extends Controller
                        $oldNameUpload01     = $attach['uploadBtn01']->getClientOriginalName();
                        $newNameUpload01     = 'personal_card_'.date('YmdHis').".". $type;
                        $size                = $attach['uploadBtn01']->getSize();
-                       $path                = 'uploads/professional/';
+                       $path                = 'uploads/ngo/';
                        $uploadGroup         = '1';
                        $memberId            = Auth::user()->id;
 

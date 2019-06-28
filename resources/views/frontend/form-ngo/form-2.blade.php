@@ -54,31 +54,12 @@
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
                     <div class="input-radio2f">
-                        <div class="box-radio2f">
-                          <input type="radio" id="group1" name="radio-group" checked>
-                          <label for="group1">ผู้แทนองค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพตนเองและสมาชิก</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group2" name="radio-group">
-                          <label for="group2">ผู้แทนองค์กรที่ดำเนินงานด้านอาสาสมัคร จิตอาสา หรือรณรงค์เผยแพร่</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group3" name="radio-group">
-                          <label for="group3">ผู้แทนองค์กรที่ดำเนินงานด้านการแพทย์และสาธารณสุข</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group4" name="radio-group">
-                          <label for="group4">ผู้แทนองค์กรชุมชนที่ดำเนินงานด้านการพัฒนาในพื้นที่ชุมชน</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group5" name="radio-group">
-                          <label for="group5">กลุ่มพัฒนาประชาชนกลุ่มเป้าหมายเฉพาะ</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group6" name="radio-group">
-                          <label for="group6">ผู้แทนองค์กรที่ดำเนินงานด้านพัฒนาชุมชน สังคม นโยบายสาธารณะ พิทักษ์สิทธิมนุษยชน
-                            การศึกษา ศาสนา ทรัพยากรธรรมชาติและสิ่งแวดล้อม หรืออื่นๆ ในเชิงประเด็น</label>
-                        </div>
+                          @foreach(DB::table('ngo_groups')->get() as $key => $item)
+                          <div class="box-radio2f">
+                            {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key]) !!}
+                            <label for="group{{$key}}">{{$key+1}}) {{$item->groupName}}</label>
+                          </div>
+                          @endforeach
                     </div><!--end input-radio2f-->
                     <div class="box-input2f boxremark">
                         <div class="text-input2f nopadding">

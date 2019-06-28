@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                      {!! Form::text('nameTitle', @Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
                                       @if($errors->has("nameTitle"))
                                       <small>{{ $errors->first('nameTitle') }}</small>
                                       @endif
@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                      {!! Form::text('firstname', @Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
                                       @if($errors->has("firstname"))
                                       <small>{{ $errors->first('firstname') }}</small>
                                       @endif
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                      {!! Form::text('lastname', @Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
                                       @if($errors->has("lastname"))
                                       <small>{{ $errors->first('lastname') }}</small>
                                       @endif
@@ -122,38 +122,38 @@
                     <div class="input-checkbox2f">
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๑) มีสัญชาติไทย
-                            {!! Form::checkbox('thaiStatus', 1, Auth::user()->detail->thaiStatus, []) !!}
+                            {!! Form::checkbox('thaiStatus', 1, @Auth::user()->detail->thaiStatus, []) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์
-                            {!! Form::checkbox('ageQualify', 1, Auth::user()->detail->ageQualify, []) !!}
+                            {!! Form::checkbox('ageQualify', 1, @Auth::user()->detail->ageQualify, []) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
-                            {!! Form::checkbox('enoughAbility', 1, Auth::user()->detail->enoughAbility, []) !!}
+                            {!! Form::checkbox('enoughAbility', 1, @Auth::user()->detail->enoughAbility, []) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
-                            {!! Form::checkbox('noDrug', 1, Auth::user()->detail->noDrug, []) !!}
+                            {!! Form::checkbox('noDrug', 1, @Auth::user()->detail->noDrug, []) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๕) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
-                            {!! Form::checkbox('noCriminal', 1, Auth::user()->detail->noCriminal, []) !!}
+                            {!! Form::checkbox('noCriminal', 1, @Auth::user()->detail->noCriminal, []) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
                             เว้นแต่เป็นโทษสำหรับความผิดที่ได้กระทำโดยประมาทหรือ ความผิดลหุโทษ
-                              {!! Form::checkbox('noJail', 1, Auth::user()->detail->noJail, []) !!}
+                              {!! Form::checkbox('noJail', 1, @Auth::user()->detail->noJail, []) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->

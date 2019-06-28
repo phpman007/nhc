@@ -57,11 +57,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('suggestNameTitle', Auth::user()->detail->suggestNameTitle, ["class"=>"form-control", "placeholder"=>"ด้วยองค์กร"]) !!}
-                                      @if($errors->has("suggestNameTitle"))
-                                      <small>{{ $errors->first('suggestNameTitle') }}</small>
+                                      {!! Form::text('byNgo', Auth::user()->detail->byNgo, ["class"=>"form-control", "placeholder"=>"ด้วยองค์กร"]) !!}
+                                      @if($errors->has("byNgo"))
+                                      <small>{{ $errors->first('byNgo') }}</small>
                                       @endif
-                                  <input type="text" name="" value="" class="form-control" placeholder="ด้วยองค์กร">
                                 </div>
                                 <div class="text-underline">ได้เสนอ</div>
                             </div>
@@ -101,7 +100,7 @@
                                      @if($errors->has("suggestPosition"))
                                      <small>{{ $errors->first('suggestPosition') }}</small>
                                      @endif
-                                 
+
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -127,13 +126,19 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile01" class="form-control" placeholder="">
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn01" type="file" class="upload">
+                                         <input id="file1" name="file1" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -147,13 +152,20 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile02" class="form-control" placeholder="">
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
+
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn02" type="file" class="upload">
+                                         <input id="file2" name="file2" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -166,13 +178,19 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile03" class="form-control" placeholder="">
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn03" type="file" class="upload">
+                                         <input id="uploadBtn03" name="file3" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -185,13 +203,19 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile04" class="form-control" placeholder="">
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn04" type="file" class="upload">
+                                         <input id="uploadBtn04" name="file4" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -204,13 +228,19 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile05" class="form-control" placeholder="">
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn05" type="file" class="upload">
+                                         <input id="uploadBtn05" name="file5" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->

@@ -25,6 +25,8 @@ class MemberDetail extends Model
 		'genderId',
 		'addressType',
 		'no',
+		'legalStastus',
+		'byNgo',
 		'moo',
 		'soi',
 		'street',

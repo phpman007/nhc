@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                   {!! Form::text('date_create', now()->addYears(543)->format("d/m/Y"), [ "class"=>"form-control" , "placeholder"=>"วัน/เดือน/พ.ศ.", 'readonly'=>'']) !!}
+                                  <div class="text-input2f nopadding"> {{ Auth::user()->created_at->addYears('543')->format('d/m/Y') }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -53,10 +53,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
-                                     @if($errors->has("nameTitle"))
-                                     <small>{{ $errors->first('nameTitle') }}</small>
-                                     @endif
+                                      <div class="text-input2f nopadding"> {{ Auth::user()->nameTitle }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -68,10 +65,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
-                                     @if($errors->has("firstname"))
-                                     <small>{{ $errors->first('firstname') }}</small>
-                                     @endif
+                                       <div class="text-input2f nopadding">{{ Auth::user()->firstname }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -83,10 +77,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
-                                      @if($errors->has("lastname"))
-                                      <small>{{ $errors->first('lastname') }}</small>
-                                      @endif
+                                      <div class="text-input2f nopadding">{{ Auth::user()->lastname }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -98,7 +89,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     <div class="text-input2f nopadding">{{ @DB::table('provinces')->where('province_code',@Auth::user()->detail->provinceId)->first()->province }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -119,7 +110,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('ngoName', @Auth::user()->detail->ngoName, ["class"=>"form-control", "placeholder"=>"ชื่อองค์กร"]) !!}
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoName }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -132,16 +123,16 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input-radio2f inline-check">
                                     <div class="box-radio2f">
-                                      <input type="radio" id="test1" name="test" >
+                                     {!! Form::radio('legalStastus', 0, @Auth::user()->detail->legalStastus == 0 ? 'checked' : '', ['id'=>'test1']) !!}
                                       <label for="test1">ไม่เป็นนิติบุคคล</label>
                                     </div>
                                     <div class="box-radio2f">
-                                      <input type="radio" id="test2" name="test" checked>
+                                      {!! Form::radio('legalStastus', 1, @Auth::user()->detail->legalStastus == 1 ? 'checked' : '', ['id'=>'test1']) !!}
                                       <label for="test2">เป็นนิติบุคคล</label>
                                     </div>
                                 </div><!--end input-radio2f-->
                                 <div class="input2f">
-                                  {!! Form::text('ngoStatus', @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"สถานภาพขององค์กร"]) !!}
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoStatus }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -149,15 +140,98 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">๓.ที่ตั้งองค์กร</div>
+                                <div class="text-input2f">เลขที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <textarea name="name" rows="4" cols="40" class="form-control" placeholder="ที่ตั้งองค์กร" readonly>
-                                    เลขที่ 191 อาคารสีลมคอมเพล็กซ์ ชั้น 18 ห้อง 1-4, 4A
-                                    ถนนสีลม แขวงสีลม เขตบางรัก
-                                    กรุงเทพฯ 10500
-                                  </textarea>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoNo }}</div>
+
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">หมู่ที่</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoMoo }}</div>
+                                </div>
+                           </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ตรอก/ซอย</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoSoi }}</div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ถนน</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoStreet }}</div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">รหัสไปรษณีย์</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoZipCode }}</div>
+                                </div>
+                           </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">จังหวัด</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                    <div class="text-input2f nopadding">{{ @DB::table('provinces')->where('province_code',@Auth::user()->detail->ngoProvincetID)->first()->province }}</div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">อำเภอ/เขต</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      <div class="text-input2f nopadding">{{ @DB::table('provinces')->where('amphoe_code',@Auth::user()->detail->ngoDistrictID)->first()->amphoe }}</div>
+
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">ตำบล/แขวง</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                    <div class="text-input2f nopadding">{{ @DB::table('provinces')->where('district_code',@Auth::user()->detail->ngoSubDistrictID)->first()->district }}</div>
+
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -169,7 +243,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" class="form-control" name="" value="27/กรกฎาคม/2536" placeholder="ก่อตั้งองค์กรวันที่" readonly>
+                                      <div class="text-input2f nopadding">{{ Helper::dateToThai(Auth::user()->detail->ngoStartDate) }}</div>
                                 </div><!--end input2f-->
                             </div>
                         </div><!--end row-->
@@ -182,7 +256,8 @@
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-9">
                                 <div class="input2f">
-                                  <input type="text" name="" value="300" class="form-control" placeholder="จำนวนสมาชิก" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoQtyMember }}</div>
+
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-2 col-xs-3 nopaddingleft">
@@ -199,12 +274,7 @@
                             <div class="col-md-2 col-sm-4 nopaddingright"></div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="5" cols="40" class="form-control"
-                                    placeholder="วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน" readonly>
-                                      บริการให้คำปรึกษาแนะนำแนวทางในการออกแบบระบบการประเมินผลความสำเร็จในการดำเนินงานตามแผนยุทธศาสตร์ตั้งแต่ระดับองค์กร
-                                      ระดับหน่วยงาน ระดับบุคคลหรือในระดับโครงการรวมทั้งการประเมินผลความสำเร็จตามภารกิจในการจัดตั้งองค์การของหน่วยงานภาครัฐ
-                                       เพื่อให้การถ่ายทอดวิสัยทัศน์และยุทธศาสตร์ลงไปสู่การปฏิบัติได้จริง
-                                    </textarea>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->ngoObjective }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -214,27 +284,12 @@
                   <div class="set-form2f">
                     <h5>๑. องค์กรฯ ประสงค์ขอขึ้นทะเบียนในกลุ่ม (เลือกได้เพียงหนึ่งกลุ่มเท่านั้น)</h5>
                     <div class="input-radio2f">
-                        <div class="box-radio2f">
-                          <input type="radio" id="group1" name="radio-group" checked>
-                          <label for="group1">๑) กลุ่มขององค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพของตนเองและสมาชิก</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group2" name="radio-group">
-                          <label for="group2">๒) กลุ่มขององค์กรที่ดำเนินงานด้านอาสาสมัคร งานจิตอาสา หรือการรณรงค์เผยแพร่</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group3" name="radio-group">
-                          <label for="group3">๓) กลุ่มขององค์กรที่ดำเนินงานด้านการแพทย์และสาธารณสุข</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group4" name="radio-group">
-                          <label for="group4">๔) กลุ่มขององค์กรชุมชนที่ดำเนินงานด้านการพัฒนาในพื้นที่ชุมชน</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group5" name="radio-group">
-                          <label for="group5">๕) กลุ่มขององค์กรที่ดำเนินงานด้านการพัฒนาชุมชน สังคม นโยบายสาธารณะ การพิทักษ์สิทธิมนุษยชน การศึกษา ศาสนา  ทรัพยากรธรรมชาติ
-                          และสิ่งแวดล้อม หรืออื่นๆ ในเชิงประเด็น</label>
-                        </div>
+                          @foreach(DB::table('ngo_groups')->get() as $key => $item)
+                          <div class="box-radio2f">
+                            {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key]) !!}
+                            <label for="group{{$key}}">{{$key+1}}) {{$item->groupName}}</label>
+                          </div>
+                          @endforeach
                     </div><!--end input-radio2f-->
                     <div class="box-input2f boxremark">
                         <div class="text-input2f nopadding">
@@ -252,7 +307,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <input type="text" name="" value="โครงการทำนาข้าวปลอดสารพิษตามหลักปรัชญาเศรษฐกิจพอเพียง" class="form-control" placeholder="ชื่อกิจกรรม" readonly>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->activity1 }}</div>
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -264,13 +319,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <textarea name="name" rows="5" cols="40" class="form-control" placeholder="สรุปผลงานที่สำคัญ" readonly>
-                                      - ห้องคอมพิวเตอร์เพื่อการเรียนรู้
-                                      - เงินสนับสนุน โครงการเกษตรอินทรีย์
-                                      - เงินสนับสนุน โครงการโรงเพาะเห็ด
-                                      - เงินสนับสนุนทุนการศึกษานักเรียน
-                                      - เงินสนับสนุนทุนพัฒนาครู
-                                    </textarea>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->detail1 }}</div>
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -283,7 +332,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <input type="text" name="" value=" โครงการส่งเสริมพัฒนาปรับปรุงห้องสมุดให้มีชีวิต" class="form-control" placeholder="ชื่อกิจกรรม" readonly>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->activity2 }}</div>
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -295,11 +344,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="สรุปผลงานที่สำคัญ">
-                                      - ห้องคอมพิวเตอร์เพื่อการเรียนรู้
-                                      - เงินสนับสนุนทุนการศึกษานักเรียน
-                                      - เงินสนับสนุนทุนพัฒนาครู
-                                    </textarea>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->detail2 }}</div>
                                   </div>
                               </div>
                           </div><!--end row-->
@@ -314,7 +359,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริษัท ทริส คอร์ปอเรชั่น จำกัด" class="form-control" placeholder="ด้วยองค์กร" readonly>
+                                   <div class="text-input2f nopadding">{{ Auth::user()->detail->byNgo }}</div>
                                 </div>
                                 <div class="text-underline">ได้เสนอ</div>
                             </div>
@@ -327,12 +372,12 @@
                             </div>
                             <div class="col-md-2 col-sm-3 nopaddingright">
                                 <div class="input2f">
-                                  <input type="text" name="" value="นาย" class="form-control" placeholder="คำนำหน้า" readonly>
+                                 <div class="text-input2f nopadding">{{ Auth::user()->detail->suggestNameTitle }}</div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-5">
                                 <div class="input2f">
-                                  <input type="text" name="" value="สำราญโรจน์ สุทัศน์ชูโต๊ะ" class="form-control" placeholder="ชื่อ - นามสกุล" readonly>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->suggestFullname }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -344,7 +389,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="ผู้บริหาร" class="form-control" placeholder="ตำแหน่งสมาชิกในองค์กร" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->suggestPosition }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -363,13 +408,23 @@
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <h5>ทั้งนี้ ข้าพเจ้าได้ยื่นแบบขอขึ้นทะเบียนองค์กรและยืนยันการส่งผู้แทนองค์กรภาคเอกชน พร้อมเอกสารหลักฐานประกอบการขอขึ้นทะเบียน มาพร้อมนี้</h5>
+                    @if(Auth::user()->detail->legalStastus == 1)
                     <p class="green2f"><span class="underline2f">สำหรับองค์กรภาคเอกชนที่เป็นนิติบุคคล</span> ประกอบด้วย</p>
+                    @else
+                    <p class="green2f"><span class="underline2f">สำหรับกรณีที่องค์กรภาคเอกชนไม่เป็นนิติบุคคล</span> ประกอบด้วย</p>
+                    @endif
                     <div class="box-input2f">
                         <div class="text-input2f nopadding">สำเนาหลักฐานที่แสดงความเป็นนิติบุคคล</div>
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงความเป็นนิติบุคคล.pdf" readonly>
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -389,6 +444,12 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร.pdf">
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -409,6 +470,12 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานซึ่งแสดงถึงการดำเนินกิจกรรมในกลุ่มองค์กร.pdf" readonly>
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -428,6 +495,12 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile03" class="form-control" placeholder="" value="สำเนาคำสั่งแต่งตั้งประธานองค์กรหรือรายงานการประชุม.pdf" readonly>
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -447,6 +520,12 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="" class="form-control" placeholder="" value="สำเนาบัตรประจำตัวประชาชนของประธานองค์กร.jpg" readonly>
+                                  <?php
+                                  $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
+                                   ?>
+                                   @if($file)
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -462,27 +541,10 @@
                     </div><!--end box-input2f-->
 
                   </div><!--end set-form2f-->
-                  <div class="set-form2f">
+                  <div class="set-form2f" style="display:none">
+
                     <p class="green2f"><span class="underline2f">สำหรับกรณีที่องค์กรภาคเอกชนไม่เป็นนิติบุคคล</span> ประกอบด้วย</p>
-                    <div class="box-input2f">
-                        <div class="text-input2f nopadding">สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร</div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-8 nopaddingright">
-                                <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงความเป็นนิติบุคคล.pdf" readonly>
-                                </div><!--end input2f-->
-                            </div>
-                            <div class="col-md-6 col-sm-4">
-                                <div class="btn-2button">
-                                    <div class="fileUpload btn btn-blue">
-                                         <span>Upload</span>
-                                         <input id="" type="file" class="upload">
-                                     </div>
-                                     <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
-                                </div><!--end btn-2button-->
-                            </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+
                     <div class="box-input2f">
                         <div class="text-input2f nopadding">สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร</div>
                         <div class="row">
@@ -584,14 +646,18 @@
                     <div class="box-checkbox2f">
                       <label class="checkbox2f">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ
                         หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  <br>ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
-                        <input type="checkbox" checked="checked">
+                        <input type="checkbox">
                         <span class="checkmark"></span>
                       </label>
                     </div>
                   </div><!--end box-confirm2f-->
 
                 <div class="box-captcha2f">
-                    <img src="images/img-captcha.png" alt="">
+                      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                     {!! htmlFormSnippet() !!}
+                     @if($errors->has('g-recaptcha-response'))
+                     กรุณากดยืนยันตัวก่อนยื่นเอกสาร
+                     @endif
                 </div>
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border">ปิด</button>
