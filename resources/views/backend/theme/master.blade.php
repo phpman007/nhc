@@ -646,5 +646,14 @@
 <script src="{{asset('plugins/bootstrap-datepicker-custom/dist/js/bootstrap-datepicker-custom.js')}}"></script>
 <script src="{{asset('plugins/bootstrap-datepicker-custom/dist/locales/bootstrap-datepicker.th.min.js')}}" charset="UTF-8"></script>
 
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+
 </body>
 </html>

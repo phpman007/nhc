@@ -16,6 +16,9 @@ use App\Model\Backend\reason;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\approveMail;
+
 class ApproveORController extends Controller
 {
     /**
@@ -39,8 +42,8 @@ class ApproveORController extends Controller
         $list->join('statuses','member_details.statusId','=','statuses.id');
         $list->join('province','member_details.provinceId','=','province.provinceId');
         $list->join('organization_groups', 'members.organizationGroupId', '=', 'organization_groups.id');
-        $list->join('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','organization_groups.groupName','users.username');
+        $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','organization_groups.groupName','users.username');
         $list->where('members.groupId','=',2);
 
         if(!empty($input['txtname'])){
@@ -111,20 +114,20 @@ class ApproveORController extends Controller
             if($countprovince==1){
                 $list->where('members.candidateStatus','=',1)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0]);
                 });
             }elseif($countprovince==2){
                 $list->where('members.candidateStatus','=',1)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1]);
                 });
             }elseif($countprovince==3){
                 $list->where('members.candidateStatus','=',1)
                 ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[2]);
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[2]);
                 });
             }
         }else{
@@ -140,14 +143,12 @@ class ApproveORController extends Controller
     public function editstatus()
     {
         $input = \Request::all();
-        // dd($input);
 
         $list = MemberDetail::find($input['Hid'][0]);
         $list->statusId = $input['txtstatuschange'][0];
 
-
         if($list->update()){
-            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+            $this->mail($input['Hid'][0],3);
         }else{
             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
@@ -164,12 +165,32 @@ class ApproveORController extends Controller
         $list->statusId = 4;
 
         if($list->update()){
-            \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+            $this->mail($input['Hidmember'][0],4);
         }else{
             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
         }
         return back();
         // return redirect('/backend/approve/orApprove');
+    }
+
+    public function mail($id,$status)
+    {   
+        $list=MemberDetail::join('members','members.id','=','member_details.memberId')
+        ->join('statuses','member_details.statusId','=','statuses.id')
+        ->join('province','member_details.provinceId','=','province.provinceId')
+        ->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id')
+        ->leftJoin('users', 'member_details.adminId', '=', 'users.id')
+        ->select('members.email','member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username')
+        ->where('member_details.id','=',$id)
+        ->first();
+        $group="ผู้แทนองค์กรส่วนท้องถิ่น";
+
+        if($list1->email!=""){
+            // Mail::to('julaluckw@gmail.com')->send(new approveMail($group,$list));
+            \Session::flash('sendemail','แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว'); 
+        }else{
+            \Session::flash('error','แก้ไขสถานะแล้ว แต่ส่งอีเมล์แจ้งไม่ได้!!!'); 
+        }                 
 
     }
 

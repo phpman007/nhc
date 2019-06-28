@@ -29,94 +29,266 @@ class ngoCheckController extends Controller
         $listgroupngo=ngoGroup::get();
         $liststatus=Statuses::get();
 
-        // $list=MemberDetail::join('members','members.id','=','member_details.memberId');
-        // $list->join('statuses','member_details.statusId','=','statuses.id');
-        // $list->join('provinces','member_details.subDistrictId','=','provinces.district_code');
-        // $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
-        // $list->join('users', 'member_details.adminId', '=', 'users.id');
-        // $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','provinces.province','ngo_groups.groupName','users.username');
-        // $list->where('members.groupId','=',3);
+        $list=MemberDetail::join('members','members.id','=','member_details.memberId');
+        $list->join('statuses','member_details.statusId','=','statuses.id');
+        $list->join('users', 'member_details.adminId', '=', 'users.id');
+        $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
+        $list->join('ngo_sections','member_details.section','=','ngo_sections.id');
+        $list->leftJoin('province','ngo_sections.provinceId','=','province.provinceId');
+        $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','ngo_groups.groupName','users.username');
+        $list->where('members.groupId','=',3);
+
+        if(!empty($input['txtname'])){
+            $list->where('members.groupId','=',3)
+            ->where(function ($query) {
+                $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
+                      ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%')
+                      ->orWhere('member_details.docId','like','%'.\Request::get('txtname').'%');
+            });
+        }else{
+            $list->where('members.groupId','=',3);
+        }
+
+        if(!empty($input['txtgroup'])){
+            $countgroup=count($input['txtgroup']);
+            if($countgroup==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('members.ngoGroupId','=',\Request::get('txtgroup')[0]);
+                });
+            }elseif($countgroup==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('members.ngoGroupId','=',\Request::get('txtgroup')[0])
+                        ->orWhere('members.ngoGroupId','=',\Request::get('txtgroup')[1]);
+                });
+            }elseif($countgroup==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('members.ngoGroupId','=',\Request::get('txtgroup')[0])
+                        ->orWhere('members.ngoGroupId','=',\Request::get('txtgroup')[1])
+                        ->orWhere('members.ngoGroupId','=',\Request::get('txtgroup')[2]);
+                });
+            }
+        }else{
+            $list->where('members.groupId','=',3);
+            $countgroup=0;
+        }
+
+        if(!empty($input['txtstatus'])){
+            $countstatus=count($input['txtstatus']);
+            if($countstatus==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0]);
+                });
+            }elseif($countstatus==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1]);
+                });
+            }elseif($countstatus==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1])
+                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[2]);
+                });
+            }
+        }else{
+            $countstatus=0;
+            $list->where('members.groupId','=',3);
+        }
+
+        if(!empty($input['txtprovince'])){
+            $countprovince=count($input['txtprovince']);
+            if($countprovince==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0]);
+                });
+            }elseif($countprovince==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1]);
+                });
+            }elseif($countprovince==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1])
+                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[2]);
+                });
+            }
+        }else{
+            $countprovince=0;
+            $list->where('members.groupId','=',3);
+        }
+
+        if(!empty($input['txtsection'])){
+            $countsection=count($input['txtsection']);
+            if($countsection==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.section','=',\Request::get('txtsection')[0]);
+                });
+            }elseif($countsection==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.section','=',\Request::get('txtsection')[0])
+                        ->orWhere('member_details.section','=',\Request::get('txtsection')[1]);
+                });
+            }elseif($countsection==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.section','=',\Request::get('txtsection')[0])
+                        ->orWhere('member_details.section','=',\Request::get('txtsection')[1])
+                        ->orWhere('member_details.section','=',\Request::get('txtsection')[2]);
+                });
+            }
+        }else{
+            $countsection=0;
+            $list->where('members.groupId','=',3);
+        }
+
+        $listmember= $list->orderBy('members.id')->paginate(10);
+
+        return view('/backend/check/ngoCheck',compact('listprovince','listgroupngo','liststatus','listmember','countprovince','countstatus','countgroup','countsection'));
+    }
+
+    public function exportExcel(){
+        $input = \Request::all();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
         $list->join('users', 'member_details.adminId', '=', 'users.id');
         $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
         $list->join('ngo_sections','member_details.section','=','ngo_sections.id');
-        $list->join('province','ngo_sections.provinceId','=','province.provinceId');
+        $list->leftJoin('province','ngo_sections.provinceId','=','province.provinceId');
         $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','ngo_groups.groupName','users.username');
         $list->where('members.groupId','=',3);
 
-        if(!empty($input['txtname'])){
-            $list->where('members.firstname','like',"%".$input['txtname']."%");
-            $list->orwhere('members.lastname','like',"%".$input['txtname']."%");
-            $list->orwhere('member_details.docId','like',"%".$input['txtname']."%");
+        if(!empty($input['Hname'])){
+            $list->where('members.groupId','=',3)
+            ->where(function ($query) {
+                $query->where('members.firstname','like','%'.\Request::get('Hname').'%')
+                      ->orWhere('members.lastname','like','%'.\Request::get('Hname').'%')
+                      ->orWhere('member_details.docId','like','%'.\Request::get('Hname').'%');
+            });
+        }else{
+            $list->where('members.groupId','=',3);
         }
 
-        if(!empty($input['txtgroup'])){
-            $countgroup=count($input['txtgroup']);
-            for($i=0;$i<$countgroup;$i++){
-                if($i==0){
-                    $list->where('members.ngoGroupId','=',$input['txtgroup'][0]);
-                }else{
-                    $list->orwhere('members.ngoGroupId','=',$input['txtgroup'][$i]);
-                }
+        if(!empty($input['Hgroup'])){
+            $countgroup=count($input['Hgroup']);
+            if($countgroup==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('members.ngoGroupId','=',\Request::get('Hgroup')[0]);
+                });
+            }elseif($countgroup==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('members.ngoGroupId','=',\Request::get('Hgroup')[0])
+                        ->orWhere('members.ngoGroupId','=',\Request::get('Hgroup')[1]);
+                });
+            }elseif($countgroup==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('members.ngoGroupId','=',\Request::get('Hgroup')[0])
+                        ->orWhere('members.ngoGroupId','=',\Request::get('Hgroup')[1])
+                        ->orWhere('members.ngoGroupId','=',\Request::get('Hgroup')[2]);
+                });
             }
-        }else{$countgroup=0;}
-
-        if(!empty($input['txtsection'])){
-            $countsection=count($input['txtsection']);
-            for($i=0;$i<$countsection;$i++){
-                if($i==0){
-                    $list->where('member_details.section','=',$input['txtsection'][0]);
-                }else{
-                    $list->orwhere('member_details.section','=',$input['txtsection'][$i]);
-                }
-            }
-        }else{$countsection=0;
-            // $list->where('member_details.section','=',$input['txtsection'][0]);
+        }else{
+            $list->where('members.groupId','=',3);
+            $countgroup=0;
         }
 
-        if(!empty($input['txtstatus'])){
-            $countstatus=count($input['txtstatus']);
-            for($i=0;$i<$countstatus;$i++){
-                if($i==0){
-                    $list->where('member_details.statusId','=',$input['txtstatus'][0]);
-                }else{
-                    $list->orwhere('member_details.statusId','=',$input['txtstatus'][$i]);
-                }
+        if(!empty($input['Hstatus'])){
+            $countstatus=count($input['Hstatus']);
+            if($countstatus==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('Hstatus')[0]);
+                });
+            }elseif($countstatus==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('Hstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('Hstatus')[1]);
+                });
+            }elseif($countstatus==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.statusId','=',\Request::get('Hstatus')[0])
+                        ->orWhere('member_details.statusId','=',\Request::get('Hstatus')[1])
+                        ->orWhere('member_details.statusId','=',\Request::get('Hstatus')[2]);
+                });
             }
-        }else{$countstatus=0;}
+        }else{
+            $countstatus=0;
+            $list->where('members.groupId','=',3);
+        }
 
-        if(!empty($input['txtprovince'])){
-            $countprovince=count($input['txtprovince']);
-            for($i=0;$i<$countprovince;$i++){
-                if($i==0){
-                    $list->where('province.province','=',$input['txtprovince'][0]);
-                }else{
-                    $list->orwhere('province.province','=',$input['txtprovince'][$i]);
-                }
+        if(!empty($input['Hprovince'])){
+            $countprovince=count($input['Hprovince']);
+            if($countprovince==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('province.provinceId','=',\Request::get('Hprovince')[0]);
+                });
+            }elseif($countprovince==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('province.provinceId','=',\Request::get('Hprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('Hprovince')[1]);
+                });
+            }elseif($countprovince==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('province.provinceId','=',\Request::get('Hprovince')[0])
+                        ->orWhere('province.provinceId','=',\Request::get('Hprovince')[1])
+                        ->orWhere('province.provinceId','=',\Request::get('Hprovince')[2]);
+                });
             }
-        }else{$countprovince=0;}
-        $listmember= $list->orderBy('members.id')->paginate(10);
+        }else{
+            $countprovince=0;
+            $list->where('members.groupId','=',3);
+        }
 
-        return view('/backend/check/ngoCheck',compact('listprovince','listgroupngo','liststatus','listmember','countprovince','countstatus','countgroup'));
+        if(!empty($input['Hsection'])){
+            $countsection=count($input['Hsection']);
+            if($countsection==1){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.section','=',\Request::get('Hsection')[0]);
+                });
+            }elseif($countsection==2){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.section','=',\Request::get('Hsection')[0])
+                        ->orWhere('member_details.section','=',\Request::get('Hsection')[1]);
+                });
+            }elseif($countsection==3){
+                $list->where('members.groupId','=',3)
+                ->where(function ($query) {
+                    $query->where('member_details.section','=',\Request::get('Hsection')[0])
+                        ->orWhere('member_details.section','=',\Request::get('Hsection')[1])
+                        ->orWhere('member_details.section','=',\Request::get('Hsection')[2]);
+                });
+            }
+        }else{
+            $countsection=0;
+            $list->where('members.groupId','=',3);
+        }
+
+        $listmember= $list->orderBy('members.id')->get();
+        return view('/backend/check/ngoCheckExcel',compact('listmember'));
+
     }
-
-    // public function adminCheck()
-    // {
-    //     $input = \Request::all();
-
-    //     $list = MemberDetail::find($input['Hid'][0]);
-    //     $list->statusId = $input['txtstatuschange'][0];
-
-    //     if($list->update()){
-    //         \Session::flash('flash_message','ok');
-    //     }else{
-    //         \Session::flash('flash_message','not');
-    //     }
-    //     return redirect('/backend/check/index');
-    // }
-
     /**
      * Show the form for creating a new resource.
      *

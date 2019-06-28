@@ -20,7 +20,7 @@
         <strong>ตั้งวันการลงทะเบียน ผู้แทนองค์กรภาคเอกชน</strong>
     </div>
     <div class="card-body">
-        <form id="frmsearchset" name="frmsearchset" method="GET" action="{{url('backend/election/ngoElection')}}">
+        <form id="frmsearchset" name="frmsearchset" method="get" action="{{url('backend/election/ngoElection')}}">
         {{ csrf_field() }}
 
             <div class="form-row">
@@ -46,11 +46,11 @@
                         @foreach ($listprovince as $valprovince)
                         <option
                             @for($i=0;$i<$countprovince;$i++)
-                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->province)
+                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->provinceId)
                                 selected
                                 @endif
                             @endfor
-                        value={{$valprovince->province}}>{{$valprovince->province}}</option>
+                        value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
                         @endforeach
                     </select>
                 </div>

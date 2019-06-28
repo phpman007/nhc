@@ -9,6 +9,8 @@
 
 <!-- Toastr style -->
 <link href="{{ asset("backend/css/plugins/toastr/toastr.min.css") }}" rel="stylesheet">
+<link href="{{ asset("backend/css/animate.css") }}" rel="stylesheet">
+<link href="{{ asset("backend/css/style.css") }}" rel="stylesheet">
 
 <!-- Gritter -->
 <link href="{{ asset("backend/js/plugins/gritter/jquery.gritter.css") }}" rel="stylesheet">
@@ -17,3 +19,9 @@
 <link href="{{ asset("backend/css/style.css") }}" rel="stylesheet">
 
 <link href="{{ asset("css/select2.min.css") }}" rel="stylesheet" />
+
+<!-- iCheck -->
+<link href="{{ asset("backend/css/plugins/iCheck/custom.css") }}" rel="stylesheet">
+
+<link href="{{ asset("backend/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css") }}" rel="stylesheet">
+

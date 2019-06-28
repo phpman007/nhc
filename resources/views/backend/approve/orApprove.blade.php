@@ -28,7 +28,7 @@
         <strong>อนุมัติผู้สมัคร ผู้แทนองค์กรส่วนท้องถิ่น</strong>
     </div>
     <div class="card-body">
-        <form id="frmsearchapprove" method="post" action="{{url('backend/approve/orApprove')}}">
+        <form id="frmsearchapprove" method="get" action="{{url('backend/approve/orApprove')}}">
         {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -62,11 +62,11 @@
                         @foreach ($listprovince as $valprovince)
                         <option
                             @for($i=0;$i<$countprovince;$i++)
-                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->province)
+                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->provinceId)
                                 selected
                                 @endif
                             @endfor
-                        value={{$valprovince->province}}>{{$valprovince->province}}</option>
+                        value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -208,6 +208,15 @@
             timeOut: 2000
         };
         toastr.error('แก้ไขสถานะไม่ได้!!!', '');
+    @endif
+    @if (Session::has( 'sendemail' ))
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'slideDown',
+        timeOut: 3000
+    };
+    toastr.success('แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว', '');
     @endif
 </script>
 
