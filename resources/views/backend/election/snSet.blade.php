@@ -63,7 +63,6 @@
                     <tr align="middle">
                         <th width="5%">ลำดับ</th>
                         <th>กลุ่มย่อย</th>
-                        <th>จังหวัด</th>
                         <th width="12%">วันที่เปิดรับสมัคร</th>
                         <th width="12%">วันที่ปิดรับสมัคร</th>
                         <th width="12%">ยืนยันใช้สิทธิ์</th>
@@ -82,7 +81,6 @@
                             @endif
                         </td>
                         <td>{{$valmember->groupName}}</td>
-                        <td>{{$valmember->province}}</td>
 
                         <form name="frmchangedate[]" method="GET" action="{{url('backend/election/changedate')}}">
                             {{ csrf_field() }}
@@ -119,10 +117,10 @@
                                     </div>
                                 </div>
                             </td>
-                        </form>
-                        <form name="frmchangedate2[]" method="GET" action="{{url('backend/election/changedate2')}}">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="Hid2[]" id="Hid2" value={{$valmember->id}}>
+                        {{--  </form>
+                        <form name="frmchangedate2[]" method="GET" action="{{url('backend/election/changedate2')}}">  --}}
+                            {{--{{ csrf_field() }}
+                              <input type="hidden" name="Hid2[]" id="Hid2" value={{$valmember->id}}>  --}}
                             <td>
                                 @php
                                 if($valmember->confirmDate!="0000-00-00"){
@@ -133,7 +131,7 @@
                                 }else{ $dateTH3="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH3 }}" onchange="changedate2('{{$key}}');" name="txtdateconfirm[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH3 }}" onchange="changedate('{{$key}}');" name="txtdateconfirm[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -149,7 +147,7 @@
                                 }else{ $dateTH4="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH4 }}" onchange="changedate2('{{$key}}');" name="txtdateelection[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH4 }}" onchange="changedate('{{$key}}');" name="txtdateelection[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -179,7 +177,7 @@
                             </td>
                             <td>
                                 <select name="txttimeend[]"  onchange="changedate3('{{$key}}');" class="form-control">
-                                        <option value="00:00:00">เลือก</option>
+                                    <option value="00:00:00">เลือก</option>
                                     <option value="06:00:00" @if($valmember->endElectionTime=="06:00:00") selected @endif>06.00 น.</option>
                                     <option value="07:00:00" @if($valmember->endElectionTime=="07:00:00") selected @endif>07.00 น.</option>
                                     <option value="08:00:00" @if($valmember->endElectionTime=="08:00:00") selected @endif>08.00 น.</option>
@@ -245,6 +243,7 @@
     };
     toastr.error('แก้ไขไม่ได้!!!', '');
     @endif
+
     @if (Session::has( 'warning1' ))
     toastr.options = {
         closeButton: true,
@@ -252,8 +251,9 @@
         showMethod: 'slideDown',
         timeOut: 3000
     };
-    toastr.warning('กำหนด วันที่เปิดสม้คร-ปิดสมัคร ให้ถูกต้อง!!!', '');
+    toastr.warning('กำหนดวันที่ให้ถูกต้อง!!!', '');
     @endif
+
     @if (Session::has( 'warning2' ))
     toastr.options = {
         closeButton: true,
@@ -261,8 +261,9 @@
         showMethod: 'slideDown',
         timeOut: 3000
     };
-    toastr.warning('กำหนด วันที่ยืนยันใช้สิทธิ์-วันที่ลงคะแนน ให้ถูกต้อง!!!', '');
+    toastr.warning('วันที่ไม่ควรมีค่าว่าง!!!', '');
     @endif
+
     @if (Session::has( 'warning3' ))
     toastr.options = {
         closeButton: true,

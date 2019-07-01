@@ -129,10 +129,10 @@
                                     </div>
                                 </div>
                             </td>
-                        </form>
+                        {{--  </form>
                         <form name="frmchangedate2[]" method="GET" action="{{url('backend/election/NGOchangedate2')}}">
                             {{ csrf_field() }}
-                            <input type="hidden" name="Hid2[]" id="Hid2" value={{$valmember->id}}>
+                            <input type="hidden" name="Hid2[]" id="Hid2" value={{$valmember->id}}>  --}}
                             <td>
                                 @php
                                 if($valmember->confirmDate!="0000-00-00"){
@@ -143,7 +143,7 @@
                                 }else{ $dateTH3="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH3 }}" onchange="changedate2('{{$key}}');" name="txtdateconfirm[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH3 }}" onchange="changedate('{{$key}}');" name="txtdateconfirm[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -159,7 +159,7 @@
                                 }else{ $dateTH4="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH4 }}" onchange="changedate2('{{$key}}');" name="txtdateelection[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH4 }}" onchange="changedate('{{$key}}');" name="txtdateelection[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -262,7 +262,7 @@
         showMethod: 'slideDown',
         timeOut: 3000
     };
-    toastr.warning('กำหนด วันที่เปิดสม้คร-ปิดสมัคร ให้ถูกต้อง!!!', '');
+    toastr.warning('กำหนดวันที่ ให้ถูกต้อง!!!', '');
     @endif
     @if (Session::has( 'warning2' ))
     toastr.options = {
@@ -271,7 +271,7 @@
         showMethod: 'slideDown',
         timeOut: 3000
     };
-    toastr.warning('กำหนด วันที่ยืนยันใช้สิทธิ์-วันที่ลงคะแนน ให้ถูกต้อง!!!', '');
+    toastr.warning('วันที่ไม่ควรมีค่าว่าง!!!', '');
     @endif
     @if (Session::has( 'warning3' ))
     toastr.options = {
