@@ -178,23 +178,23 @@ class ApproveMemberController extends Controller
     }
 
     public function mail($id,$status)
-    {   
+    {
         $list=MemberDetail::join('members','members.id','=','member_details.memberId')
         ->join('statuses','member_details.statusId','=','statuses.id')
         ->join('province','member_details.provinceId','=','province.provinceId')
-        ->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id')
+        ->join('organization_groups', 'members.organizationGroupId', '=', 'organization_groups.id')
         ->leftJoin('users', 'member_details.adminId', '=', 'users.id')
-        ->select('members.email','member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username')
+        ->select('members.email','member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','organization_groups.groupName','users.username')
         ->where('member_details.id','=',$id)
         ->first();
         $group="รับสิทธิ์ลงคะแนน ผู้แทนองค์กรส่วนท้องถิ่น";
 
-        if($list1->email!=""){
+        if($list->email!=""){
             // Mail::to('julaluckw@gmail.com')->send(new approveMail($group,$list));
-            \Session::flash('sendemail','แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว'); 
+            \Session::flash('sendemail','แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว');
         }else{
-            \Session::flash('error','แก้ไขสถานะแล้ว แต่ส่งอีเมล์แจ้งไม่ได้!!!'); 
-        }                 
+            \Session::flash('error','แก้ไขสถานะแล้ว แต่ส่งอีเมล์แจ้งไม่ได้!!!');
+        }
     }
 
     /**
