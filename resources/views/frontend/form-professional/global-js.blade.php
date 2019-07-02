@@ -25,8 +25,8 @@
    jQuery(document).ready(function($) {
      $('.active .box-step2f').on('click', function(event) {
        event.preventDefault();
-       console.log(this);
-       location.href = $(this).data('url')
+       if (typeof($(this).data('url')) != "undefined")
+          location.href = $(this).data('url')
      });
    });
   </script>

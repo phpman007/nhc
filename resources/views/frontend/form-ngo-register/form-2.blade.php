@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceMemberID', Helper::getProvices(), @Auth::user()->detail->provinceMemberID, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     {!! Form::select('provinceId', Helper::getProvices(), @Auth::user()->provinceId, ["class"=>"form-control" ,"placeholder"=>"จังหวัด",'readonly' => '']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -288,7 +288,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                      {!! Form::text('ngoStartDate',@Auth::user()->detail->ngoStartDate, ['class'=>'form-control date-picker', 'placeholder' => 'ก่อตั้งองค์กรวันที่']) !!}
+                                      {!! Form::text('ngoStartDate',@Auth::user()->detail->ngoStartDate, ['class'=>'form-control date-picker', 'placeholder' => 'ก่อตั้งองค์กรวันที่','readonly' => '']) !!}
                                       @if($errors->has('ngoStartDate'))
                                       <small>{{ $errors->first('ngoStartDate') }}</small>
                                       @endif
@@ -382,17 +382,18 @@ $(document).ready(function() {
 					$("#ngoDistrictID").val(address.amphoe_code);
 					// ตำบล
 					$("#subDistrictName").val(address.district);
-					$("#subDistrictId").val(address.district_code);
+                              console.log(address)
+					$("#ngoSubDistrictID").val(address.district_code);
 				} else {
 					// จังหวัด
 					$("#provinceName").val("");
-					$("#provinceId").val("");
+					$("#ngoProvincetID").val("");
 					// อำเภอ
 					$("#districtName").val("");
-					$("#districtId").val("");
+					$("#ngoDistrictID").val("");
 					// ตำบล
 					$("#subDistrictName").val("");
-					$("#subDistrictId").val("");
+					$("#ngoSubDistrictID").val("");
 				}
 		});
 	});

@@ -24,6 +24,9 @@ class FormOrganizationController extends Controller
       public function formPost($step, Request $request) {
 
             switch ($step) {
+                  case 1:
+                  return $this->stepOther($request);
+                  break;
                   case 2:
                   return $this->stepOne($request);
                   break;
@@ -50,18 +53,80 @@ class FormOrganizationController extends Controller
 
       }
 
+      public function stepOther(Request $request) {
+            $request->validate([
+                  'personalId' 				=> 'required|min:12',
+                  'provinceId'                        => 'required',
+                  'email' 					=> 'required|email|unique:members',
+                  'password'					=> 'required|min:6|max:20|confirmed',
+                  'password_confirmation'		      => 'required|min:6|max:20',
+                  'uploadBtn01'                       => 'required',
+                  'g-recaptcha-response'              => 'recaptcha'
+            ]);
+
+            $dataSet =  $request->only(['personalId', 'email', 'password', 'provinceId']);
+
+            $dataSet['personalId'] = str_replace('-', '', $dataSet['personalId']);
+
+            $dataSet['password'] = Hash::make($dataSet['password']);
+
+            $dataSet['username'] = $dataSet['email'];
+
+            $dataSet['created_at'] = now();
+
+            $dataSet['updated_at'] = now();
+
+            $dataSet['groupId'] = 3;
+
+
+            try {
+                  if(Member::insert($dataSet)) {
+                        $member = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
+
+                        if($request->hasFile('uploadBtn01')) {
+                              if($fileUpload = \Helper::uploadFile($request->uploadBtn01, 'personal_card')) {
+                                    Attachment::where('member_id', Auth::user()->id)->where('use_is', 'personal_card')->update(['status' => 0]);
+
+                                    $attach = new Attachment;
+                                    $attach->fileName       = $fileUpload['oldName'];
+                                    $attach->path           = $fileUpload['path'];
+                                    $attach->newName        = $fileUpload['filename'];
+                                    $attach->status         = 1;
+                                    $attach->size           = $fileUpload['size'];
+                                    $attach->type           = $fileUpload['type'];
+                                    $attach->member_id      = $member->id;
+                                    $attach->upload_group   = 2;
+                                    $attach->use_is         = 'personal_card';
+                                    $attach->save();
+
+                              }
+                        }
+
+                  } else {
+                        return Redirect::back();
+                  }
+
+            } catch (\Exception $e) {
+
+                  return back()->errors(['error'=> $e->getMessage()]);
+            }
+            return back()->with('success' ,'ลงทะเบียนเรียบร้อยแล้ว');
+      }
 
       public function stepOne(Request $request) {
 
 
             $request->validate([
-                  'personalId' 				=> 'required|min:12|max:13',
+                  'personalId' 				=> 'required|min:12',
+                  'provinceId'                        => 'required',
                   'email' 					=> 'required|email',
                   'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		=> 'required|min:6|max:20'
+                  'password_confirmation'		     => 'required|min:6|max:20'
             ]);
 
-            $dataSet =  $request->only(['personalId', 'email', 'password']);
+            $dataSet =  $request->only(['personalId', 'email', 'password', 'provinceId']);
+
+            $dataSet['personalId'] = str_replace('-', '', $dataSet['personalId']);
 
             $dataSet['password'] = Hash::make($dataSet['password']);
 
@@ -73,7 +138,7 @@ class FormOrganizationController extends Controller
 
             $dataSet['groupId'] = 2;
 
-            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 2)->first();
+            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
             if($hasMember) {
                   if(Hash::check($request->password, $hasMember->password)) :
                         Auth::login($hasMember, true);
@@ -99,16 +164,8 @@ class FormOrganizationController extends Controller
                   }
 
             } catch (\Exception $e) {
-                  $member = Member::where('personalId', $dataSet['personalId'])->where('groupId', 2)->first();
 
-                  if(Hash::check($member->password, $dataSet['password'])) :
-                        Auth::login($member, true);
-                  endif;
-
-                  if(Auth::check()) {
-                        return Redirect::to('form-organization/3');
-                  }
-                  return Redirect::back();
+                  return Redirect::back()->withInput();
             }
       }
 
@@ -117,6 +174,12 @@ class FormOrganizationController extends Controller
                   'nameTitle'		=> 'required|max:100',
                   'firstname'		=> 'required|max:50',
                   'lastname'		=> 'required|max:50',
+                  'thaiStatus'      => 'required',
+                  'ageQualify'      => 'required',
+                  'enoughAbility'   => 'required',
+                  'noDrug'          => 'required',
+                  'noCriminal'      => 'required',
+                  'noJail'          => 'required'
             ]);
 
             $member = Auth::user();
@@ -155,6 +218,13 @@ class FormOrganizationController extends Controller
       }
 
       public function stepThree(Request $request) {
+            if(!Auth::user()->attach()->where('status', 1)->where('use_is', 'government_official_card')->first()) {
+                  $request->validate([
+                        'file_ref'          => 'required'
+                  ]);
+            }
+
+
             Auth::user()->organizationGroupId = $request->organizationGroupId;
 
             if($request->hasFile('file_ref')) {
@@ -190,24 +260,37 @@ class FormOrganizationController extends Controller
                   'districtId'         => 'required',
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
-                  'tel'                => 'required|min:7|max:11',
-                  'mobile' 		   => 'required|min:9|max:11',
+                  'tel'                => 'required|min:7',
+                  'mobile' 		   => 'required|min:9',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'pastWork1'          => 'required',
                   'pastOrganization1'  => 'required',
                   'time1' 		   =>'required',
+                  'dateOfBirth'           => 'required',
+                  'portfolio'             => 'required',
+                  'pastWork1'             => 'required',
+                  'pastOrganization1'     => 'required',
+                  'time1'                 => 'required',
+                  'roleTimeLeft'          => 'required',
+                  'startDate'             => 'required',
+                  'endDate'               => 'required'
                   // 'importantMemo'      =>'required'
             ]);
 
-            $mmember = Auth::user()->detail;
-            $dataSet = $request->except(['_token']);
-
+            $mmember          = Auth::user()->detail;
+            $dataSet          = $request->except(['_token']);
+            $dataSet['tel']   = str_replace('-', '', $dataSet['tel']);
+            $dataSet['mobile']   = str_replace('-', '', $dataSet['mobile']);
             $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
             $dataSet['startDate'] = $this->dateThaiToDefault($dataSet['startDate']);
             $dataSet['endDate'] = $this->dateThaiToDefault($dataSet['endDate']);
 
-            $mmember->update($dataSet);
+            try {
+                  $mmember->update($dataSet);
+            } catch (\Exception $e) {
+                  return back()->withErrors(['error', $e->getMessage()])->withInput();
+            }
 
             return Redirect::to('form-organization/6');
       }

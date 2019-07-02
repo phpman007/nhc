@@ -130,6 +130,9 @@
                                     <input name="thaiStatus" type="checkbox" {{ @Auth::user()->detail->thaiStatus == 1 ? 'checked="checked"' : !empty(old('thaiStatus')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('thaiStatus'))
+                                    {{ $errors->first('thaiStatus') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                             <div class="box-checkbox2f">
                                 <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์ ณ วันที่สมัคร
@@ -137,12 +140,18 @@
 
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('ageQualify'))
+                                    {{ $errors->first('ageQualify') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                             <div class="box-checkbox2f">
                                 <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
                                     <input name="enoughAbility" type="checkbox" {{ @Auth::user()->detail->enoughAbility == 1 ? 'checked="checked"' : !empty(old('enoughAbility')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('enoughAbility'))
+                                    {{ $errors->first('enoughAbility') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                             <div class="box-checkbox2f">
                                 <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
@@ -155,6 +164,9 @@
                                     <input name="noCriminal" type="checkbox" {{ @Auth::user()->detail->noCriminal == 1 ? 'checked="checked"' : !empty(old('noCriminal')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('noCriminal'))
+                                    {{ $errors->first('noCriminal') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                             <div class="box-checkbox2f">
                                 <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
@@ -162,6 +174,9 @@
                                     <input name="noJail" type="checkbox" {{ @Auth::user()->detail->noJail == 1 ? 'checked="checked"' : !empty(old('noJail')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('noJail'))
+                                    {{ $errors->first('noJail') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                         </div><!--end input-checkbox2f-->
                         <h5>๒.  คุณสมบัติเฉพาะ</h5>
@@ -171,22 +186,32 @@
                                     <input name="noNHCworking" type="checkbox" {{ @Auth::user()->detail->noNHCworking == 1 ? 'checked="checked"' : !empty(old('noNHCworking')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('noNHCworking'))
+                                    {{ $errors->first('noNHCworking') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                             <div class="box-checkbox2f">
                                 <label class="checkbox2f">๒) มีประสบการณ์การทำงานไม่น้อยกว่า ๑๐ ปี
                                     <input name="enoughExperience" type="checkbox" {{ @Auth::user()->detail->enoughExperience == 1 ? 'checked="checked"' : !empty(old('enoughExperience')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('enoughExperience'))
+                                    {{ $errors->first('enoughExperience') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
                             <div class="box-checkbox2f">
                                 <label class="checkbox2f">๓) มีผลงานเป็นที่ประจักษ์ที่สอดคล้องกับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร
                                     <input name="enoughProfile" type="checkbox" {{ @Auth::user()->detail->enoughProfile == 1 ? 'checked="checked"' : !empty(old('enoughProfile')) ? 'checked="checked"' : '' }}>
                                     <span class="checkmark"></span>
                                 </label>
+                                @if($errors->has('enoughProfile'))
+                                    {{ $errors->first('enoughProfile') }}
+                                @endif
                             </div><!--end box-checkbox2f-->
 
                         </div><!--end input-checkbox2f-->
                     </div><!--end set-form2f-->
+
                     <div class="btn-center2f">
                         <button type="button" name="button" class="btn btn-border">ยกเลิก</button>
                         <button type="submit" name="button" class="btn btn-green">บันทึก</button>

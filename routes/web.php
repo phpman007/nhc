@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('frontend.homepage.index');
 });
 
+Route::get('/login', 'Frontend\AuthController@getLogin');
+Route::post('/login', 'Frontend\AuthController@postLogin');
 
 Route::group([
 	'prefix' => 'form-professional',

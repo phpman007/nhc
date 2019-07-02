@@ -54,7 +54,11 @@
                       <div class="input-radio2f">
                            @foreach(DB::table('organization_groups')->get() as $key => $organize)
                           <div class="box-radio2f">
-                            {!! Form::radio('organizationGroupId', $organize->id, Auth::user()->organizationGroupId == $organize->id, ['id' => 'group'.$key]) !!}
+                            @if($key == 0 )
+                            {!! Form::radio('organizationGroupId', $organize->id, Auth::user()->organizationGroupId == $organize->id, ['id' => 'group'.$key, 'checked' =>'' ]) !!}
+                            @else
+                            {!! Form::radio('organizationGroupId', $organize->id, Auth::user()->organizationGroupId == $organize->id, ['id' => 'group'.$key ]) !!}
+                            @endif
                             <label for="group{{$key}}">{{ $organize->groupName  }}</label>
                           </div>
                           @endforeach
@@ -75,6 +79,9 @@
                                    <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
                                    @endif
                                 </div><!--end input2f-->
+                                @if($errors->has('file_ref'))
+                                  {{ $errors->first('file_ref') }}
+                                @endif
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
@@ -109,6 +116,10 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
-
+var filename;
+document.getElementById('uploadBtn01').onchange = function () {
+  filename = this.value.split(String.fromCharCode(92));
+  document.getElementById("uploadFile01").value = filename[filename.length-1];
+};
 </script>
 @endsection

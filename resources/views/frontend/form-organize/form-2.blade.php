@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::text('personalId', null, ["class"=>"form-control", "placeholder"=>"เลขบัตรประชาชน"]) !!}
+                                     {!! Form::text('personalId', null, ["id"=>"personalId","class"=>"form-control", "placeholder"=>"เลขบัตรประชาชน"]) !!}
                                      @if($errors->has('personalId'))
                                      <small>{{ $errors->first('personalId') }}</small>
                                      @endif
@@ -73,6 +73,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                      {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                       @if($errors->has('provinceId'))
+                                     <small>{{ $errors->first('provinceId') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -153,6 +156,28 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
+ jQuery(document).ready(function($) {
+      $("#personalId").mask('0-0000-00000-00-0');
+  });
+$(document).ready(function() {
+  $(".icon-viewpass img").on('click', function(event) {
+        event.preventDefault();
+        var input = $(this).parents('.input2f').find('input');
 
+        // input marker
+
+        $(this).parents('.icon-viewpass').find('img').each(function(k, v) {
+            if($(v).hasClass('pass-view')) {
+                $(v).removeClass('pass-view')
+                $(v).addClass('pass-none');
+                input.attr('type', 'password')
+            } else {
+                $(v).addClass('pass-view')
+                $(v).removeClass('pass-none');
+                input.attr('type', 'text')
+            }
+        })
+    });
+});
 </script>
 @endsection

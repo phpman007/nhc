@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
+use Auth,Redirect;
 class FormNgoController extends Controller
 {
       protected $view = 'form-ngo';
 
       public function formView($step) {
             if($step == 1) {
-                  Auth::logout();
+                  // Auth::logout();
             }
 
             if($step != 1 && !Auth::check()) {
@@ -53,95 +53,48 @@ class FormNgoController extends Controller
             $request->validate([
                     // 'personalId' 				=> 'required|min:12|max:13',
                     // 'email' 					=> 'required|email',
-                    'password'					=> 'required|min:6|max:20|confirmed',
-                    'password_confirmation'		=> 'required|min:6|max:20'
+                    // 'password'					=> 'required|min:6|max:20|confirmed',
+                    // 'password_confirmation'		=> 'required|min:6|max:20',
+                    'thaiStatus'          => 'required',
+                    'ageQualify'          => 'required',
+                    'enoughAbility'       => 'required',
+                    'noDrug'              => 'required',
+                    'noCriminal'          => 'required',
+                    'noJail'              => 'required',
               ]);
 
-              $dataSet =  $request->only(['personalId', 'email', 'password']);
 
-              $dataSet['password'] = Hash::make($dataSet['password']);
-
-              $dataSet['username'] = $dataSet['email'];
-
-              $dataSet['created_at'] = now();
-
-              $dataSet['updated_at'] = now();
-
-              $dataSet['groupId'] = 4;
-              dd($dataSet);
-
-              $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 1)->first();
-              if($hasMember) {
-                    if(Hash::check($request->password, $hasMember->password)) :
-                          Auth::login($hasMember, true);
-                    else:
-                          return back()->withInput()->withErrors(['personalId'=>'มีข้อมูลอยู่ในระบบแล้ว รหัสผ่านไม่ถูกต้อง']);
-                    endif;
-
-                    if(Auth::check()) {
-                          return Redirect::to('form-professional/2');
-                    }
-              }
 
 
             $dataSet = $request->all();
-            dd($request->all());
 
-            Auth::user()->update($request->all());
+            // Auth::user()->update($request->all());
 
             Auth::user()->detail->update($dataSet);
 
-            return redirect();
+            return redirect('form-ngo/2');
       }
 
       public function stepTwo(Request $request) {
 
-            $request->validate([
-                  'nameTitle'		=> 'required|max:100',
-                  'firstname'		=> 'required|max:50',
-                  'lastname'		=> 'required|max:50',
-            ]);
+                        $dataSet = $request->all();
 
-            $member = Auth::user();
+                        // Auth::user()->update($request->all());
+                        // dd($dataSet);
+                        Auth::user()->update($dataSet);
 
-            $dataSet = $request->only(['nameTitle', 'firstname', 'lastname']);
+                        return redirect('form-ngo/3');
 
-            $dataSet['created_at'] = now();
-
-            $dataSet['updated_at'] = now();
-
-            $member->update($dataSet);
-
-            $dataSet = array('thaiStatus' => 0, 'ageQualify' => 0, 'enoughAbility' => 0, 'noDrug' => 0, 'noCriminal' => 0, 'noJail' => 0, 'noNHCworking' => 0, 'enoughExperience' => 0, 'enoughProfile' => 0);
-
-            $dataSet = array_merge($dataSet, $request->except(['_token', 'nameTitle', 'firstname', 'lastname', 'button', 'date']));
-
-            foreach ($dataSet as $key => $value) :
-                  if($value == true) {
-                              $dataSet[$key] = 1;
-                  }
-            endforeach;
-
-
-            try {
-                  if(!empty($member->detail)) {
-                        $member->detail->update($dataSet);
-                  } else {
-                        $member->detail()->firstOrCreate($dataSet);
-                  }
-                  return Redirect::to('form-ngo/3');
-
-            } catch (Exception $e) {
-
-            }
-            return Redirect::back();
       }
 
       public function stepThree(Request $request) {
 
-            Auth::user()->seniorGroupId = $request->seniorGroupId;
+            $dataSet = $request->all();
 
-            Auth::user()->save();
+            $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
+            Auth::user()->update($dataSet);
+
+            Auth::user()->detail->update($dataSet);
 
             return Redirect::to('form-ngo/4');
       }
@@ -149,37 +102,91 @@ class FormNgoController extends Controller
       public function stepFour(Request $request) {
 
             $request->validate([
-                        'no' 			   => 'required|max:11',
-                  'moo' 		   => 'required|max:151',
-                  'soi' 		   => 'required|max:101',
-                  'street' 		   => 'required|max:101',
-                  'subDistrictId'      => 'required',
-                  'districtId'         => 'required',
-                  'provinceId'         => 'required',
-                  'zipCode' 		   => 'required',
-                  'tel'                => 'required|min:7|max:11',
-                  'mobile' 		   => 'required|min:9|max:11',
-                  'graduated1' 	   => 'required',
-                  'faculty1' 		   => 'required',
-                  'nowWork' 		   => 'required',
-                  'nowWorkPlace' 	   => 'required',
-                  'nowRole' 		   => 'required',
-                  'pastWork1'          => 'required',
-                  'pastOrganization1'  => 'required',
-                  'time1' 		   =>'required',
-                  'importantMemo'      =>'required'
+                'vision'        =>'required',
+                'uploadBtn01'   => 'required',
+                'uploadBtn02'   => 'required',
+                'uploadBtn03'   => 'required'
             ]);
 
-       $mmember = Auth::user()->detail;
-       $dataSet = $request->except(['_token']);
+            $dataSet = $request->only(['vision']);
 
-       $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
-       $mmember->update($dataSet);
+            $mmember = Auth::user()->detail;
 
-       return Redirect::to('form-ngo/5');
+            $mmember->update($dataSet);
+
+            $attachFile = $request->only(['uploadBtn01' ,'uploadBtn02', 'uploadBtn03']);
+
+            $memberId = Auth::user()->id;
+            $uploadGroup = 4;
+            if($request->hasFile('uploadBtn01')) {
+                if($attachFile['uploadBtn01']->isValid()) {
+
+                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn01'], 'proffessional');
+                    Attachment::where('upload_group', $uploadGroup)->where('use_is', 'copy_personal_card')->where('member_id', $memberId)->update(['status' => 0]);
+                    $attach = new Attachment();
+                    $attach->path        = $fileUpload1['path'];
+                    $attach->fileName    = $fileUpload1['oldName'];
+                    $attach->newName     = $fileUpload1['filename'];
+                    $attach->status      = 1;
+                    $attach->size        = $fileUpload1['size'];
+                    $attach->type        = $fileUpload1['type'];
+                    $attach->member_id   = $memberId;
+                    $attach->upload_group = $uploadGroup;
+                    $attach->use_is      = 'copy_personal_card';
+
+                    $attach->save();
+
+                }
+            }
+            if($request->hasFile('uploadBtn02')) {
+                if($attachFile['uploadBtn02']->isValid()) {
+
+                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn02'], 'proffessional');
+                    Attachment::where('upload_group', $uploadGroup)->where('use_is', 'personal_photo')->where('member_id', $memberId)->update(['status' => 0]);
+                    $attach = new Attachment();
+                    $attach->path        = $fileUpload1['path'];
+                    $attach->fileName    = $fileUpload1['oldName'];
+                    $attach->newName     = $fileUpload1['filename'];
+                    $attach->status      = 1;
+                    $attach->size        = $fileUpload1['size'];
+                    $attach->type        = $fileUpload1['type'];
+                    $attach->member_id   = $memberId;
+                    $attach->upload_group = $uploadGroup;
+                    $attach->use_is      = 'personal_photo';
+
+                    $attach->save();
+
+                }
+            }
+
+            if($request->hasFile('uploadBtn03')) {
+                if($attachFile['uploadBtn03']->isValid()) {
+
+                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn03'], 'proffessional');
+                    Attachment::where('upload_group', $uploadGroup)->where('use_is', 'document1')->where('member_id', $memberId)->update(['status' => 0]);
+                    $attach = new Attachment();
+                    $attach->path        = $fileUpload1['path'];
+                    $attach->fileName    = $fileUpload1['oldName'];
+                    $attach->newName     = $fileUpload1['filename'];
+                    $attach->status      = 1;
+                    $attach->size        = $fileUpload1['size'];
+                    $attach->type        = $fileUpload1['type'];
+                    $attach->member_id   = $memberId;
+                    $attach->upload_group = $uploadGroup;
+                    $attach->use_is      = 'document1';
+
+                    $attach->save();
+
+                }
+            }
+            return Redirect::to('form-ngo/5');
       }
 
       public function stepFive(Request $request) {
+
+            $request->validate(['g-recaptcha-response' => 'recaptcha']);
+
+            return back()->with('success', true);
 
             $request->validate([
                   'vision'      =>'required',

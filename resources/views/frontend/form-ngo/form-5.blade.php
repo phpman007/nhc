@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-
+{!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -39,8 +39,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" class="form-control" name="" value="14/มิถุนายน/2514"
-                                   placeholder="วัน/เดือน/พ.ศ." readonly>
+                                  <div class="text-input2f nopadding">{{ now()->addYears('543')->format('d/m/Y') }}</div>
                                 </div><!--end input2f-->
                             </div>
                         </div><!--end row-->
@@ -52,7 +51,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="นาย" class="form-control" placeholder="นาย/นาง/นางสาว"  readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->nameTitle  }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -60,12 +59,23 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">ชื่อ-นามสกุล</div>
+                                <div class="text-input2f nopadding">ชื่อ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="สุรชาติ พิพัทธกุล" class="form-control"
-                                  placeholder="ชื่อ-นามสกุล" readonly>
+                                   <div class="text-input2f nopadding">{{ Auth::user()->firstname  }}</div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f nopadding">นามสกุล</div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                   <div class="text-input2f nopadding">{{ Auth::user()->lastname  }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -87,38 +97,38 @@
                     <div class="input-checkbox2f">
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๑) มีสัญชาติไทย
-                            <input type="checkbox" checked="checked">
+                            <input name="thaiStatus" type="checkbox" {{ @Auth::user()->detail->thaiStatus == 1 ? 'checked="checked"' : !empty(old('thaiStatus')) ? 'checked="checked"' : '' }}>
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์
-                            <input type="checkbox" checked="checked">
+                          <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์ ณ วันที่สมัคร
+                            <input name="ageQualify" type="checkbox" {{ @Auth::user()->detail->ageQualify ==1 ? 'checked="checked"' : !empty(old('ageQualify')) ? 'checked="checked"' : '' }}>
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
-                            <input type="checkbox" checked="checked">
+                            <input name="enoughAbility" type="checkbox" {{ @Auth::user()->detail->enoughAbility == 1 ? 'checked="checked"' : !empty(old('enoughAbility')) ? 'checked="checked"' : '' }}>
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
-                            <input type="checkbox">
+                            <input name="noDrug" type="checkbox" {{ @Auth::user()->detail->noDrug == 1 ? 'checked="checked"' : !empty(old('noDrug')) ? 'checked="checked"' : '' }}>
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๕) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
-                            <input type="checkbox">
+                            <input name="noCriminal" type="checkbox" {{ @Auth::user()->detail->noCriminal == 1 ? 'checked="checked"' : !empty(old('noCriminal')) ? 'checked="checked"' : '' }}>
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
                             เว้นแต่เป็นโทษสำหรับความผิดที่ได้กระทำโดยประมาทหรือ ความผิดลหุโทษ
-                            <input type="checkbox">
+                            <input name="noJail" type="checkbox" {{ @Auth::user()->detail->noJail == 1 ? 'checked="checked"' : !empty(old('noJail')) ? 'checked="checked"' : '' }}>
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
@@ -133,31 +143,12 @@
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
                     <div class="input-radio2f">
-                        <div class="box-radio2f">
-                          <input type="radio" id="group1" name="radio-1" checked>
-                          <label for="group1">ผู้แทนองค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพตนเองและสมาชิก</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group2" name="radio-1">
-                          <label for="group2">ผู้แทนองค์กรที่ดำเนินงานด้านอาสาสมัคร จิตอาสา หรือรณรงค์เผยแพร่</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group3" name="radio-1">
-                          <label for="group3">ผู้แทนองค์กรที่ดำเนินงานด้านการแพทย์และสาธารณสุข</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group4" name="radio-1">
-                          <label for="group4">ผู้แทนองค์กรชุมชนที่ดำเนินงานด้านการพัฒนาในพื้นที่ชุมชน</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group5" name="radio-1">
-                          <label for="group5">กลุ่มพัฒนาประชาชนกลุ่มเป้าหมายเฉพาะ</label>
-                        </div>
-                        <div class="box-radio2f">
-                          <input type="radio" id="group6" name="radio-1">
-                          <label for="group6">ผู้แทนองค์กรที่ดำเนินงานด้านพัฒนาชุมชน สังคม นโยบายสาธารณะ พิทักษ์สิทธิมนุษยชน
-                            การศึกษา ศาสนา ทรัพยากรธรรมชาติและสิ่งแวดล้อม หรืออื่นๆ ในเชิงประเด็น</label>
-                        </div>
+                          @foreach(DB::table('ngo_groups')->get() as $key => $item)
+                         <div class="box-radio2f">
+                            {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key]) !!}
+                            <label for="group{{$key}}">{{$key+1}}) {{$item->groupName}}</label>
+                         </div>
+                         @endforeach
                     </div><!--end input-radio2f-->
                     <div class="box-input2f boxremark">
                         <div class="text-input2f nopadding">
@@ -177,7 +168,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="นาย" class="form-control" placeholder="นาย/นาง/นางสาว" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->nameTitle  }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -189,7 +180,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="สุรชาติ" class="form-control" placeholder="ชื่อ" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->firstname  }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -201,7 +192,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="พิพัทธกุล" class="form-control" placeholder="นามสกุล" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->lastname  }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -215,7 +206,8 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" class="form-control" name="" value="14/มิถุนายน/2514" placeholder="วัน/เดือน/พ.ศ." readonly>
+                                      <div class="text-input2f nopadding">{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->addYears('543')->format('d/m/Y') }}
+                                     </div>
                                 </div><!--end input2f-->
                             </div>
                         </div><!--end row-->
@@ -227,7 +219,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="48" class="form-control" placeholder="อายุ" readonly>
+                                  <div class="text-input2f nopadding">{{ now()->format('Y') - Carbon\Carbon::createFromFormat('Y-m-d', Auth::user()->detail->dateOfBirth)->format('Y') }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -243,17 +235,17 @@
                             <div class="col-md-2 col-sm-4 nopaddingright"></div>
                             <div class="col-md-6 col-sm-8">
                                   <div class="input-radio2f inline-check">
-                                      <div class="box-radio2f">
-                                        <input type="radio" id="home" name="radio-group" checked>
-                                        <label for="home">บ้าน</label>
-                                      </div>
-                                      <div class="box-radio2f">
-                                        <input type="radio" id="office" name="radio-group">
-                                        <label for="office">ที่ทำงาน</label>
-                                      </div>
-                                      <div class="input2f width65per">
-                                        <input type="text" name="" value="" class="form-control" placeholder="สถานที่ทำงาน">
-                                      </div>
+                                        <div class="box-radio2f">
+                                           {{ Form::radio('addressType', 1, @Auth::user()->detail->addressType == 1 ? "checked" :'checked', ['id'=>'home']) }}
+                                           <label for="home">บ้าน</label>
+                                        </div>
+                                        <div class="box-radio2f">
+                                           {{ Form::radio('addressType', 2, @Auth::user()->detail->addressType == 1 ? "checked" :'', ['id'=>'office']) }}
+                                           <label for="office">ที่ทำงาน</label>
+                                        </div>
+                                        <div class="input2f width65per">
+                                             <div class="text-input2f nopadding">{{ @Auth::user()->detail->workPlaceName }}</div>
+                                        </div>
                                   </div><!--end input-radio2f-->
                               </div>
                         </div><!--end row-->
@@ -265,7 +257,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="999/99" class="form-control" placeholder="เลขที่" readonly>
+                                  <div class="text-input2f nopadding">{{ @Auth::user()->detail->no }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -277,7 +269,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="9" class="form-control" placeholder="หมู่ที่" readonly>
+                                  <div class="text-input2f nopadding">{{ @Auth::user()->detail->moo }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -289,7 +281,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="นารีเจริญทรัพย์" class="form-control" placeholder="ตรอก/ซอย" readonly>
+                                  <div class="text-input2f nopadding">{{ @Auth::user()->detail->soi }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -301,7 +293,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="กาญจนาภิเษก" class="form-control" placeholder="ถนน" readonly>
+                                  <div class="text-input2f nopadding">{{ @Auth::user()->detail->street }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -313,7 +305,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บางแค" class="form-control" placeholder="ตำบล/แขวง" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->subDistrictId }} : {{ Auth::user()->detail->subdistrict->district }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -325,7 +317,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บางแค" class="form-control" placeholder="อำเภอ/เขต" readonly>
+                                 <div class="text-input2f nopadding">{{ Auth::user()->detail->districtId }} : {{ Auth::user()->detail->district->amphoe }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -337,7 +329,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="กรุงเทพมหานคร" class="form-control" placeholder="จังหวัด" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->provinceId }} : {{ Auth::user()->detail->province->province }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -349,7 +341,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="10160" class="form-control" placeholder="รหัสไปรษณีย์" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->zipCode }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -361,7 +353,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="02 999 8888" class="form-control" placeholder="โทรศัพท์" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->tel }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -373,7 +365,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="089 999 9999" class="form-control" placeholder="โทรศัพท์เคลื่อนที่(มือถือ)" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->mobile }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -386,7 +378,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8 col-xs-11">
                                 <div class="input2f">
-                                  <input type="text" name="" value="ปริญญาเอก" class="form-control" placeholder="วุฒิการศึกษา" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated1 }}</div>
                                 </div>
                             </div>
                             <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -394,7 +386,7 @@
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-11">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริหารธุรกิจ" class="form-control" placeholder="สาขา"  readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty1 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -406,7 +398,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="ปริญญาโท" class="form-control" placeholder="วุฒิการศึกษา" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated2 }}</div>
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -414,7 +406,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="จิตวิทยา" class="form-control" placeholder="สาขา" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty2 }}</div>
                               </div>
                           </div>
                       </div><!--end row-->
@@ -426,7 +418,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="ปริญญาตรี" class="form-control" placeholder="วุฒิการศึกษา" readonly>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated3 }}</div>
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -434,7 +426,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="การจัดการ" class="form-control" placeholder="สาขา" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty3 }}</div>
                               </div>
                           </div>
                       </div><!--end row-->
@@ -446,7 +438,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="มัธยมศึกษา" class="form-control" placeholder="วุฒิการศึกษา" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated4 }}</div>
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -454,7 +446,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="วิชาการศึกษาวิทยาศาสตร์" class="form-control" placeholder="สาขา" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty4 }}</div>
                               </div>
                           </div>
                       </div><!--end row-->
@@ -466,7 +458,7 @@
                           </div>
                           <div class="col-md-6 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="ประถมศึกษา" class="form-control" placeholder="วุฒิการศึกษา" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated5 }}</div>
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
@@ -474,7 +466,7 @@
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
-                                <input type="text" name="" value="วิทยาศาสตร์" class="form-control" placeholder="สาขา" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty5 }}</div>
                               </div>
                           </div>
                       </div><!--end row-->
@@ -490,9 +482,8 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="ปัจจุบันปฏิบัติหน้าที่" readonly>
-                                      ผู้ช่วยเลขานุการบริษัท
-                                    </textarea>
+
+                                       <div class="text-input2f nopadding">{{ Auth::user()->detail->nowWork }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -504,10 +495,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="สถานที่ปฏิบัติงาน" readonly>
-                                      บริษัทโพสต์ พับลิชชิง จำกัด (มหาชน)
-                                      136 อาคารบางกอกโพสต์ ถนนสุนทรโกษา แขวงคลองเตย เขตคลองเตย กรุงเทพมหานคร 10110
-                                    </textarea>
+                                 <div class="text-input2f nopadding">{{ Auth::user()->detail->nowWorkPlace }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -519,9 +507,8 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control" placeholder="งานในความรับผิดชอบ" readonly>
-                                กำหนดนโยบายและวางแผนด้านบัญชีและการเงิน รวมทั้งกำหนดระบบบัญชีและการเงิน ให้สอกคล้องกับแนวทางการดำเนินงานของบริษัท
-                                    </textarea>
+
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->nowRole }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -537,7 +524,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="ผู้ช่วยเลขานุการบริษัท" class="form-control" placeholder="ปฏิบัติหน้าที่" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->pastWork1 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -549,7 +536,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริษัทโพสต์ พับลิชชิง จำกัด (มหาชน)" class="form-control" placeholder="องค์กร" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->pastOrganization1 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -561,7 +548,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="พ.ศ. 2552 - พ.ศ. 2562" class="form-control" placeholder="ระยะเวลาการปฏิบัติหน้าที่" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->time1 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -574,8 +561,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="เลขานุการ ประธานเจ้าหน้าที่ฝ่ายการเงิน และเลขานุการบริษัท"
-                                   class="form-control" placeholder="ปฏิบัติหน้าที่" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->pastWork2 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -587,7 +573,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริษัทโพสต์ พับลิชชิง จำกัด (มหาชน)" class="form-control" placeholder="องค์กร" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->pastOrganization2 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -599,7 +585,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="พ.ศ. 2549 - พ.ศ. 2552" class="form-control" placeholder="ระยะเวลาการปฏิบัติหน้าที่" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->time2 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -612,7 +598,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="เลขานุการกรรมการผู้จัดการ" class="form-control" placeholder="ปฏิบัติหน้าที่" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->pastWork3 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -624,7 +610,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="บริษัทหลักทรัพย์จัดการกองทุน ฟินันซ่า จำกัด" class="form-control" placeholder="องค์กร" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->pastOrganization2 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -636,8 +622,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <input type="text" name="" value="พ.ศ. 2547 - พ.ศ. 2548" class="form-control"
-                                   placeholder="ระยะเวลาการปฏิบัติหน้าที่" readonly>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->time2 }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -650,12 +635,7 @@
                             <div class="col-md-2 col-sm-4 nopaddingright"></div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <textarea name="name" rows="4" cols="40" class="form-control"
-                                    placeholder="ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร" readonly>
-                                    ผู้ตรวจสอบบัญชีต้องรับมอบหมายงานจาก Manager ทำความเข้าใจ
-ธูรกิจของลูกค้า วางแผนการตรวจงาน ดูขั้นตอนการทำงานของลูกค้าว่ามีปัญหาและแก้ไขอย่างไร นำข้อมูลที่ได้มาประกอบกับการทำงาน เพื่อ
-Set ค่า pmte คือค่ามูลค่าความผิดผลาดที่ยอมรับ ผู้ตรวจสอบบัญชีหรือ C.P.A ตรวจความถูกต้องของงานก่อนที่จะเซ็นท์รับรองการผ่านการประเมินอย่างที่บอกว่าการตรวจสอบบัญชีอาจไม่ต้องถูกต้อง 100%
-                                    </textarea>
+                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->importantMemo }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -664,11 +644,7 @@ Set ค่า pmte คือค่ามูลค่าความผิดผ�
                   <div class="headform2f">วิสัยทัศน์ของข้าพเจ้าต่อการพัฒนาระบบสุขภาพแห่งชาติ</div>
                   <div class="set-form2f">
                     <div class="box-input2f">
-                        <textarea name="name" rows="5" cols="50" class="form-control" readonly>
-                          ๑) เพื่อสร้างความเข้มแข็งของ บุคคล ชุมชน ประชาชน องค์กร ปกครองส่วนท้องถิ่น ภาคีเครือข่าย ภาคประชาชนและภาคประชา สังคมด้านสุขภาพ ให้มีศักยภาพ มี ความรู้และทัศนคติที่ถูกต้องด้าน พฤติกรรมสุขภาพ มีการเรียนรู้ มี พฤติกรรมเสี่ยงทางสุขภาพลดลง สามารถช่วยเหลือ ดูแลตนเองและ ชุมชน ตลอดจนมีส่วนร่วมในการ สร้างและจัดการระบบสุขภาพ
-๒) เพื่อสร้างระบบสุขภาพเชิงรุก ที่ มุ่งสร้างเสริมให้คนไทยทุกช่วงวัยมี สุขภาพดี มีระบบการปูองกัน ควบคุมโรคและปัจจัยเสี่ยงด้าน สุขภาพ มีการคุ้มครองผู้บริโภค ด้านสุขภาพที่ดี มีสภาพแวดล้อมที่ เอื้อต่อการมีสุขภาพดี
-3) เพื่อพัฒนาระบบการดูแล ผู้สูงอายุระยะยาวที่เกิดจากความ ร่วมมือของครอบครัว ชุมชน
-                        </textarea>
+                        <div class="text-input2f nopadding">{{ Auth::user()->detail->vision }}</div>
                     </div><!--end box-input2f-->
                     <h5>ทั้งนี้  ข้าพเจ้าได้แนบสำเนาเอกสารหรือหลักฐานที่แนบมาพร้อมใบสมัคร</h5>
                     <div class="box-input2f">
@@ -676,17 +652,15 @@ Set ค่า pmte คือค่ามูลค่าความผิดผ�
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" value="สำเนาบัตรประจำตัวประชาชน.jpg" placeholder="สำเนาบัตรประจำตัวประชาชน" readonly />
+                                      <?php
+                                    $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
+                                     ?>
+                                     @if($file1)
+                                     <a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a>
+                                     @endif
                                 </div><!--end input2f-->
                             </div>
-                            <div class="col-md-6 col-sm-4">
-                                <div class="btn-2button">
-                                    <div class="fileUpload btn btn-blue">
-                                         <span>Upload</span>
-                                         <input id="" type="file" class="upload" />
-                                     </div>
-                                </div><!--end btn-2button-->
-                            </div>
+                            <div class="col-md-6 col-sm-4"></div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
@@ -694,18 +668,15 @@ Set ค่า pmte คือค่ามูลค่าความผิดผ�
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" value="รูปถ่าย.jpg" class="form-control" placeholder="รูปถ่าย" readonly  />
+                                      <?php
+                                   $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
+                                    ?>
+                                    @if($file2)
+                                    <a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a>
+                                    @endif
                                 </div><!--end input2f-->
                             </div>
-                            <div class="col-md-6 col-sm-4">
-                                <div class="btn-2button">
-                                    <div class="fileUpload btn btn-blue">
-                                         <span>Upload</span>
-                                         <input id="" type="file" class="upload" />
-                                     </div>
-                                     <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
-                                </div><!--end btn-2button-->
-                            </div>
+                            <div class="col-md-6 col-sm-4"></div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
@@ -713,17 +684,15 @@ Set ค่า pmte คือค่ามูลค่าความผิดผ�
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" value="แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชน.pdf" class="form-control" placeholder="แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชน" readonly  />
+                                      <?php
+                                  $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
+                                   ?>
+                                   @if($file3)
+                                   <a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a>
+                                   @endif
                                 </div><!--end input2f-->
                             </div>
-                            <div class="col-md-6 col-sm-4">
-                                <div class="btn-2button">
-                                    <div class="fileUpload btn btn-blue">
-                                         <span>Upload</span>
-                                         <input id="" type="file" class="upload" />
-                                     </div>
-                                </div><!--end btn-2button-->
-                            </div>
+                            <div class="col-md-6 col-sm-4"></div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
 
@@ -737,18 +706,22 @@ Set ค่า pmte คือค่ามูลค่าความผิดผ�
                     </div>
                   </div><!--end box-confirm2f-->
                 <div class="box-captcha2f">
-                    <img src="images/img-captcha.png" alt="">
+                      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                     {!! htmlFormSnippet() !!}
+                     @if($errors->has('g-recaptcha-response'))
+                     กรุณากดยืนยันตัวก่อนยื่นเอกสาร
+                     @endif
                 </div>
                   <div class="btn-center2f">
                       <button type="button" name="button" class="btn btn-border">ปิด</button>
-                      <button type="button" name="button" class="btn btn-green">ตรวจสอบเอกสาร</button>
+                      <button type="submit" name="button" class="btn btn-green">ตรวจสอบเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
         </div><!--end control-insitepage2f-->
 
     </div><!--end insitepage2f-->
-
+{!! Form::close() !!}
 @endsection
 
 @section('css')

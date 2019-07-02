@@ -27,6 +27,7 @@ class Member extends Authenticatable
 		'organizationGroupId',
 		'ngoGroupId',
 		'candidateStatus',
+		'provinceId',
 	];
 
 	public function attach() {

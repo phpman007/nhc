@@ -53,6 +53,9 @@
                   <div class="set-form2f">
                     <div class="box-input2f">
                           {!! Form::textarea('vision', Auth::user()->detail->vision, [ "rows"=>"5", "cols"=>"50", "class"=>"form-control", "placeholder"=>"วิสัยทัศน์ของข้าพเจ้าต่อการพัฒนาระบบสุขภาพแห่งชาติ"]) !!}
+                          @if($errors->has('vision'))
+                          {{ $errors->first('vision') }}
+                          @endif
                     </div><!--end box-input2f-->
 
                     <div class="box-confirm2f">

@@ -270,7 +270,7 @@
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์']) !!}
+                                      {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์', 'id'=>'tel']) !!}
                                       @if($errors->has('tel'))
                                   <small>{{ $errors->first('tel') }}</small>
                                   @endif
@@ -285,7 +285,7 @@
                            </div>
                            <div class="col-md-6 col-sm-8">
                               <div class="input2f">
-                                     {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์เคลื่อนที่(มือถือ)"]) !!}
+                                     {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์เคลื่อนที่(มือถือ)", 'id' =>'mobile']) !!}
                                      @if($errors->has('mobile'))
                                  <small>{{ $errors->first('mobile') }}</small>
                                  @endif
@@ -404,6 +404,9 @@
                     <div class="box-input2f">
                       <div class="input2f">
                            {!! Form::textarea('portfolio', Auth::user()->detail->portfolio, ["rows"=>"5", "cols"=>"50", "class"=>"form-control", "placeholder"=>"ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ"]) !!}
+                            @if($errors->has('portfolio'))
+                                  <small>{{ $errors->first('portfolio') }}</small>
+                                  @endif
                       </div>
                     </div><!--end box-input2f-->
                     <h5>๔. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
@@ -417,6 +420,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::text('pastWork1',  Auth::user()->detail->pastWork1, ["class"=>"form-control", "placeholder"=>"ตำแหน่ง"]) !!}
+                                      @if($errors->has('pastWork1'))
+                                  <small>{{ $errors->first('pastWork1') }}</small>
+                                  @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -429,6 +435,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::text('pastOrganization1',  Auth::user()->detail->pastOrganization1, ["class"=>"form-control", "placeholder"=>"หน่วยงาน"]) !!}
+                                      @if($errors->has('pastOrganization1'))
+                                  <small>{{ $errors->first('pastOrganization1') }}</small>
+                                  @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -441,6 +450,9 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                        {!! Form::text('time1',  Auth::user()->detail->time1, ["class"=>"form-control", "placeholder"=>"ระยะเวลาการปฏิบัติหน้าที่"]) !!}
+                                       @if($errors->has('time1'))
+                                  <small>{{ $errors->first('time1') }}</small>
+                                  @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -524,6 +536,9 @@
                       <div class="input2f width200 input-center">
 
                                  {!! Form::text('roleTimeLeft',  Auth::user()->detail->roleTimeLeft, ["class"=>"form-control", "placeholder"=>"ปี"]) !!}
+                                 @if($errors->has('roleTimeLeft'))
+                                  <small>{{ $errors->first('roleTimeLeft') }}</small>
+                                  @endif
                       </div>
                       <div class="text-unit">ปี</div>
                     </div>
@@ -538,6 +553,9 @@
                                 <div class="box-date input-group date">
                                     {!! Form::text('startDate',  null, ["class"=>"form-control date-picker", "placeholder"=>"วัน/เดือน/พ.ศ.", "readonly" =>""]) !!}
                                   <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
+                                  @if($errors->has('startDate'))
+                                  <small>{{ $errors->first('startDate') }}</small>
+                                  @endif
                                 </div><!--end input_form-->
                             </div>
                         </div><!--end row-->
@@ -553,6 +571,9 @@
                                 <div class="box-date input-group date">
                                       {!! Form::text('endDate',  null, ["class"=>"form-control date-picker", "placeholder"=>"วัน/เดือน/พ.ศ.", "readonly" =>""]) !!}
                                   <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
+                                  @if($errors->has('endDate'))
+                                  <small>{{ $errors->first('endDate') }}</small>
+                                  @endif
                                 </div><!--end input_form-->
                             </div>
                         </div><!--end row-->
@@ -584,6 +605,13 @@
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
 $(document).ready(function() {
+
+        $("#tel").mask('0-0-000-0000')
+        $("#mobile").mask('00-0000-0000');
+
+
+     
+
       $("#date-birdth").on('change', function(event) {
         event.preventDefault();
         $.get('{{ url('api/checkYear') }}?date=' + $(this).val() , function(data) {

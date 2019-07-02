@@ -1,4 +1,6 @@
 @extends('frontend.theme.master')
+
+@section('content')
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -171,7 +173,6 @@
 
     </div><!--end insitepage2f-->
 {!! Form::close() !!}
-@section('content')
 
 @endsection
 

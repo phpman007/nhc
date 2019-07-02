@@ -29,6 +29,14 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{asset("frontend/js/bootstrap.min.js")}}"></script>
     @yield('css')
+    <style media="screen">
+          .swal2-popup{
+                font-size: 2rem !important;
+          }
+          .swal2-styled.swal2-confirm {
+                background-color: #51AAAA !important;
+          }
+    </style>
   </head>
   <body data-plyr="{{ asset('frontend/source_vdo_plyr/dist/demo.svg') }}">
     <a href="#" class="cd-top cd-is-visible cd-fade-out">
@@ -66,15 +74,19 @@
   <!-- source slick -->
   <link rel="stylesheet" href="{{asset("frontend/source_slickslide/slick.css")}}" media="screen" />
   <script type="text/javascript" src="{{asset("frontend/source_slickslide/slick.js")}}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css" integrity="sha256-JHRpjLIhLC03YGajXw6DoTtjpo64HQbY5Zu6+iiwRIc=" crossorigin="anonymous" />
   <!-- source source_bxslider -->
   <link rel="stylesheet" href="{{asset("frontend/source_bxslider/jquery.bxslider.css")}}"/>
   <script type="text/javascript" src="{{asset("frontend/source_bxslider/jquery.bxslider.min.js")}}"></script>
   <!--source play vdo-->
   <script src="{{asset("frontend/source_vdo_plyr/plyr.js")}}"></script>
   <link rel="stylesheet" href="{{asset("frontend/source_vdo_plyr/plyr.css")}}">
-<script type="text/javascript" src="{{ asset('frontend/js/jquery.datetimepicker.js') }}"></script>
-<script type="text/javascript" src="{{ asset('frontend/js/bootstrap-datepicker.th.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('frontend/js/jquery.datetimepicker.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('frontend/js/bootstrap-datepicker.th.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('frontend/js/jquery.mask.min.js') }}"></script>
     <link href="{{ asset("frontend/css/jquery.datetimepicker.css") }}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.js" integrity="sha256-FmcrRIeUicq2hy0eo5tD5h2Iv76IBfc3A51x8r9xeIY=" crossorigin="anonymous"></script>
   @yield('js')
   <script type="text/javascript">
   var date_element;
@@ -89,6 +101,26 @@
  </script>
   <script>
 	 $(document).ready(function(){
+
+     @if($errors->has('error'))
+      Swal.fire({
+        type: 'error',
+        title: 'ลงทะเบียน',
+        text: '{{ $errors->first('error') }}',
+        confirmButtonText: 'ปิด',
+        footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
+      })
+      @endif
+
+      @if(session('success'))
+      Swal.fire({
+         type: 'success',
+         title: 'ลงทะเบียน',
+         text: 'ลงทะเบียนเรียบร้อย',
+         confirmButtonText: 'ปิด',
+         footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
+      })
+      @endif
      $('.bigbanner').slick({
         dots: true
      });

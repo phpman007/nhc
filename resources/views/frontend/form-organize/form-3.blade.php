@@ -129,30 +129,45 @@
                             {!! Form::checkbox('thaiStatus', 1, @Auth::user()->detail->thaiStatus, ["class"=>"checkmark"]) !!}
                             <span class="checkmark"></span>
                           </label>
+                           @if($errors->has("thaiStatus"))
+                            <small>{{ $errors->first('thaiStatus') }}</small>
+                            @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์ ณ วันที่สมัคร
                             {!! Form::checkbox('ageQualify', 1, @Auth::user()->detail->ageQualify, ["class"=>"checkmark"]) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("ageQualify"))
+                            <small>{{ $errors->first('ageQualify') }}</small>
+                            @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
                             {!! Form::checkbox('enoughAbility', 1, @Auth::user()->detail->enoughAbility, ["class"=>"checkmark"]) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("enoughAbility"))
+                            <small>{{ $errors->first('enoughAbility') }}</small>
+                            @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
                             {!! Form::checkbox('noDrug', 1, @Auth::user()->detail->noDrug, ["class"=>"checkmark"]) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("noDrug"))
+                            <small>{{ $errors->first('noDrug') }}</small>
+                            @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๕) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
                             {!! Form::checkbox('noCriminal', 1, @Auth::user()->detail->noCriminal, ["class"=>"checkmark"]) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("noCriminal"))
+                            <small>{{ $errors->first('noCriminal') }}</small>
+                            @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
@@ -160,6 +175,9 @@
                               {!! Form::checkbox('noJail', 1, @Auth::user()->detail->noJail, ["class"=>"checkmark"]) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("noJail"))
+                            <small>{{ $errors->first('noJail') }}</small>
+                            @endif
                         </div><!--end box-checkbox2f-->
                     </div><!--end input-checkbox2f-->
 

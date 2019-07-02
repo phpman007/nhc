@@ -71,7 +71,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceMemberID', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     @if($errors->has('provinceId'))
+                                     <small>{{ $errors->first('provinceId') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->

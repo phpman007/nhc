@@ -657,7 +657,6 @@
 @section('css')
 
 <link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.css" integrity="sha256-JHRpjLIhLC03YGajXw6DoTtjpo64HQbY5Zu6+iiwRIc=" crossorigin="anonymous" />
 <style media="screen">
       .swal2-popup{
             font-size: 2rem;
@@ -668,7 +667,6 @@
 @section('js')
 
 @include('frontend.form-professional.global-js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.js" integrity="sha256-FmcrRIeUicq2hy0eo5tD5h2Iv76IBfc3A51x8r9xeIY=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function() {
       @if(Session::get('success'))

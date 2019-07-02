@@ -14,7 +14,7 @@ class FormNgoRegisterController extends Controller
       public function formView($step) {
 
             if($step != 1 && !Auth::check()) {
-                  // return Redirect::to('form-professional/1');
+                  // return Redirect::to('form-ngo-register/1');
             }
 
             return view('frontend.'. $this->view .'.form-'.$step, ['active' => $step]);
@@ -53,12 +53,13 @@ class FormNgoRegisterController extends Controller
 
             $request->validate([
                   'personalId' 				=> 'required|min:12|max:13',
-                  'email' 					=> 'required|email',
+                  'email' 					=> 'required|email|unique:members',
                   'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		=> 'required|min:6|max:20'
+                  'password_confirmation'		=> 'required|min:6|max:20',
+                  'provinceId'                  => 'required'
             ]);
 
-            $dataSet =  $request->only(['personalId', 'email', 'password']);
+            $dataSet =  $request->only(['personalId', 'email', 'password', 'provinceId']);
 
             $dataSet['password'] = Hash::make($dataSet['password']);
 
@@ -68,7 +69,7 @@ class FormNgoRegisterController extends Controller
 
             $dataSet['updated_at'] = now();
 
-            $dataSet['groupId'] = 3;
+            $dataSet['groupId'] = 4;
 
             $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
             if($hasMember) {
@@ -90,7 +91,7 @@ class FormNgoRegisterController extends Controller
 
                         Auth::login($member, true);
 
-                        return Redirect::to('form-professional/2');
+                        return Redirect::to('form-ngo-register/2');
                   } else {
                         return Redirect::back();
                   }
@@ -114,8 +115,17 @@ class FormNgoRegisterController extends Controller
                   'nameTitle'		=> 'required|max:100',
                   'firstname'		=> 'required|max:50',
                   'lastname'		=> 'required|max:50',
-            ]);
+                  'ngoName'         => 'required',
+                  'ngoNo'           => 'required',
+                  'ngoMoo'           => 'required',
+                  'ngoSoi'           => 'required',
+                  'ngoStreet'        => 'required',
+                  'ngoZipCode'       => 'required',
+                  'ngoStartDate'     => 'required',
+                  'ngoQtyMember'     => 'required',
+                  'ngoObjective'     => 'required',
 
+            ]);
             $member = Auth::user();
 
             Auth::user()->update($request->all());
@@ -266,48 +276,9 @@ class FormNgoRegisterController extends Controller
 
       public function stepFive(Request $request) {
 
-            $request->validate([
-                  'vision'      =>'required',
-                  'uploadBtn01' =>'required|max:1024',
-                  'uploadBtn02' =>'required|max:1024',
-                  'uploadBtn03' =>'required|max:1024',
-            ]);
+            $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
-            $dataSet = $request->only(['vision']);
+            return back()->with('success', true);
 
-            $mmember = Auth::user()->detail;
-
-            $mmember->update($dataSet);
-
-            $attach = $request->only(['uploadBtn01' ,'uploadBtn02', 'uploadBtn03']);
-
-
-            if($request->hasFile('uploadBtn01')) {
-                  if($attach['uploadBtn01']->isValid()) {
-                        $type                = $attach['uploadBtn01']->getClientOriginalExtension();
-                        $oldNameUpload01     = $attach['uploadBtn01']->getClientOriginalName();
-                        $newNameUpload01     = 'personal_card_'.date('YmdHis').".". $type;
-                        $size                = $attach['uploadBtn01']->getSize();
-                        $path                = 'uploads/professional/';
-                        $uploadGroup         = '1';
-                        $memberId            = Auth::user()->id;
-
-                        // Upload File
-                        $attach['uploadBtn01']->move($path, $newNameUpload01);
-                        Attachment::where('upload_group', $uploadGroup)->where('member_id', $memberId)->update(['status' => 0]);
-                        $attach = new Attachment();
-                        $attach->path        = $path.$newNameUpload01;
-                        $attach->fileName    = $oldNameUpload01;
-                        $attach->newName     = $newNameUpload01;
-                        $attach->status      = 1;
-                        $attach->size        = $size;
-                        $attach->type        = $type;
-                        $attach->member_id   = $memberId;
-                        $attach->upload_group = $uploadGroup;
-                        $attach->save();
-
-                        dump("Has upload", $oldNameUpload01, $attach);
-                  }
-            }
       }
 }

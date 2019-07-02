@@ -12,7 +12,11 @@ if(Request::segment(1) == "form-ngo-register" || Request::segment(1) == "form-ng
 @for($i = 1 ; $i <= $set; $i++)
 
 <li class="{{ $i <= $active ? 'active' : '' }}">
+	@if($i == 1 || $i == $active)
+	<div class="box-step2f" >
+	@else
 	<div class="box-step2f" data-url="{{ url(Request::segment(1).'/'.( Request::segment(1) == "form-organization" ? $i+1: $i)) }}">
+	@endif
 		<span>ขั้นตอนที่</span>
 		<strong>{{ $i }}</strong>
 	</div><!--end box-step2f-->

@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
-                                        <input type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="เลขบัตรประชาชน">
+                                        <input id="personalId" type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="เลขบัตรประชาชน">
                                         @if($errors->has('personalId'))
                                         <small>{{ $errors->first('personalId') }}</small>
                                         @endif
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
-                                        <input type="password" name="password" value="" class="form-control" placeholder="">
+                                        <input type="password" name="password" value="" class="form-control" placeholder="" autocomplete="false">
                                         <span class="icon-viewpass notview">
                                             <img src="{{ asset("frontend/images/visibility-on.svg") }}" class="pass-view" alt="">
                                             <img src="{{ asset("frontend/images/visibility-off.svg") }}" class="pass-none" alt="">
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
-                                        <input type="password" name="password_confirmation" value="" class="form-control" placeholder="">
+                                        <input type="password" name="password_confirmation" value="" class="form-control" placeholder="" autocomplete="false">
                                         <span class="icon-viewpass notview">
                                             <img src="{{ asset("frontend/images/visibility-on.svg") }}" class="pass-view" alt="">
                                             <img src="{{ asset("frontend/images/visibility-off.svg") }}" class="pass-none" alt="">
@@ -153,6 +153,8 @@
         event.preventDefault();
         var input = $(this).parents('.input2f').find('input');
 
+        // input marker
+
         $(this).parents('.icon-viewpass').find('img').each(function(k, v) {
             if($(v).hasClass('pass-view')) {
                 $(v).removeClass('pass-view')
@@ -164,6 +166,9 @@
                 input.attr('type', 'text')
             }
         })
+    });
+    jQuery(document).ready(function($) {
+        $("#personalId").mask('0-0000-00000-00-0');
     });
 </script>
 @endsection
