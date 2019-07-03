@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
       use Notifiable;
+      use HasRoles;
 
       protected $table = 'users';
+      protected $guard_name = 'admin';
 
       /**
        * The attributes that are mass assignable.

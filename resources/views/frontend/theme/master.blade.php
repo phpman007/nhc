@@ -116,7 +116,16 @@
       Swal.fire({
          type: 'success',
          title: 'ลงทะเบียน',
-         text: 'ลงทะเบียนเรียบร้อย',
+         text: 'ลงทะเบียนเรียบร้อยแล้วระบบจะส่งยืนยันไปทาง Email ภายใน 1 ชม.',
+         confirmButtonText: 'ปิด',
+         footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
+      })
+      @endif
+      @if(session('info'))
+      Swal.fire({
+         type: 'success',
+         title: 'ลงทะเบียน',
+         text: '{{ Session::get('info') }}',
          confirmButtonText: 'ปิด',
          footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
       })

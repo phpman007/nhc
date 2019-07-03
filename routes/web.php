@@ -12,10 +12,8 @@
 */
 
 Route::get('/', function () {
-    //   \Mail::to('hawkandeagle5@gmail.com')->send(new App\Mail\TestSending());
     return view('frontend.homepage.index');
 });
-
 Route::get('/login', 'Frontend\AuthController@getLogin');
 Route::post('/login', 'Frontend\AuthController@postLogin');
 

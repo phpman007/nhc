@@ -124,7 +124,7 @@
                               @if($key == 0 )
                           {!! Form::radio('ngoGroupId', 1, ['id' => 'group-'. ($key+1)]) !!}
                               @else
-                          {!! Form::radio('ngoGroupId', $val->id, $val->id == Auth::user()->ngoGroupId ? 1 : 0, ['id' => 'group-'. ($key+1)]) !!}
+                          {!! Form::radio('ngoGroupId', $val->id, $val->id == @Auth::user()->ngoGroupId ? 1 : 0, ['id' => 'group-'. ($key+1)]) !!}
                           @endif
                           <label for="group-{{ ($key+1) }}">{{ $val->groupName }}</label>
                         </div>

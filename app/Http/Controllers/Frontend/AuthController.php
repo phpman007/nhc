@@ -27,7 +27,7 @@ class AuthController extends Controller
 
          if(Hash::check($request->password, $member->password)) :
                Auth::login($member);
-               return redirect('/')->with('success', 'เข้าสู่ระบบเรียบร้อยแล้ว');
+               return redirect('/')->with('info', 'เข้าสู่ระบบเรียบร้อยแล้ว');
          endif;
    }
 }

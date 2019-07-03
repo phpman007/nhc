@@ -28,8 +28,12 @@
       </li>
 
       <li>
-            <a href="/backend/home"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+            <a href="{{ url('/backend/home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
       </li>
+      <li>
+            <a href="{{ url('/backend/user')}}"><i class="fa fa-th-large"></i> <span class="nav-label">User</span></a>
+      </li>
+
       <li>
             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับสมัคร</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
@@ -57,6 +61,8 @@
                   }@endif --}}
                   {{-- @if ( {{session('users.permission')}} = 'super admin' ) { --}}
                   {{-- @if (Session::has('permission' == 'super admin')){ --}}
+
+                  @if(Auth::guard('admin')->user()->hasRole('super-admin'))
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                               <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
@@ -65,9 +71,13 @@
                         </ul>
                   </li>
                   <li><a href="{{ url('backend/approve/memApprove') }}"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
+                  @endif
                   {{-- }@endif --}}
             </ul>
+
             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ลงคะแนน</span> <span class="fa arrow"></span></a>
+
+            @if(Auth::guard('admin')->user()->hasRole('super-admin'))
             <ul class="nav nav-second-level collapse">
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับรองผลการลงคะแนน</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
@@ -77,6 +87,7 @@
                         </ul>
                   </li>
             </ul>
+            @endif
             <ul class="nav nav-second-level collapse">
                     <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">แสดงผลการลงคะแนนแบบ Real Time</span> <span class="fa arrow"></span></a>
                           <ul class="nav nav-third-level">
@@ -86,6 +97,8 @@
                           </ul>
                     </li>
             </ul>
+
+            @if(Auth::guard('admin')->user()->hasRole('super-admin'))
             <ul class="nav nav-second-level collapse">
                     <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จับฉลากหากรรมการสุขภาพแห่งชาติ</span> <span class="fa arrow"></span></a>
                           <ul class="nav nav-third-level">
@@ -95,6 +108,7 @@
                           </ul>
                     </li>
             </ul>
+            @endif
       </li>
 
       {{-- <li>

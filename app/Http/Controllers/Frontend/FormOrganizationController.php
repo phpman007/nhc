@@ -25,6 +25,7 @@ class FormOrganizationController extends Controller
 
             switch ($step) {
                   case 1:
+                  Auth::logout();
                   return $this->stepOther($request);
                   break;
                   case 2:
@@ -61,7 +62,7 @@ class FormOrganizationController extends Controller
                   'password'					=> 'required|min:6|max:20|confirmed',
                   'password_confirmation'		      => 'required|min:6|max:20',
                   'uploadBtn01'                       => 'required',
-                  'g-recaptcha-response'              => 'recaptcha'
+                  // 'g-recaptcha-response'              => 'recaptcha'
             ]);
 
             $dataSet =  $request->only(['personalId', 'email', 'password', 'provinceId']);

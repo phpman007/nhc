@@ -276,7 +276,7 @@ class FormNgoRegisterController extends Controller
 
       public function stepFive(Request $request) {
 
-            $request->validate(['g-recaptcha-response' => 'recaptcha']);
+            // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
             return back()->with('success', true);
 

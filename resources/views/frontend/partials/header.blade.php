@@ -37,7 +37,7 @@
                   </div><!--end top-manage2f-->
                   <div class="manage-login2f">
                       <div class="control-login2f">
-                          <div class="box-login2f"><a href="">เข้าสู่ระบบ</a></div>
+                          <div class="box-login2f"><a href="{{ url('/login') }}">เข้าสู่ระบบ</a></div>
                           <div class="box-user2f">
                               <div class="img-user2f"><img src="{{asset("frontend/images/icon-user.svg")}}" alt=""></div>
                               <div class="text-username2f">2fellows</div>

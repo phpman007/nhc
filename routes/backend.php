@@ -12,6 +12,13 @@ Route::get('home', function() {
 });
 
 
+Route::get('/user', 'UserController@index');
+Route::get('/user/create', 'UserController@create');
+Route::post('/user/create', 'UserController@store');
+Route::get('/user/update/{id}', 'UserController@update');
+Route::post('/user/update/{id}', 'UserController@edit');
+Route::get('/user/delete/{id}', 'UserController@delete');
+
     // Route::get('/insElection', 'ElectionsController@create')->name('insElection');
     // Route::get('/store', 'ElectionsController@store')->name('member.store');
 
