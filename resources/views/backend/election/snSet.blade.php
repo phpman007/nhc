@@ -1,6 +1,6 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
-@section('loginname','สวัสดี A')
+
 <script>
     function changedate(id){
         document.getElementsByName('frmchangedate[]')[id].submit();

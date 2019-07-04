@@ -1,7 +1,6 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
 
-@section('loginname','สวัสดี A')
 @section('content')
 
 <div class="card border-info mb-3">

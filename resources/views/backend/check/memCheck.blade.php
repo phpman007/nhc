@@ -1,6 +1,5 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
-@section('loginname','สวัสดี A')
 
 @section('content')
 
@@ -157,13 +156,13 @@
                             {{$key + 1}}
                           @endif
                         </td>
-                        <td align="middle">{{$valmember->docId}}</td>
-                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}} {{$valmember->lastname}}</td>
-                        <td>{{$valmember->groupName}}</td>
-                        <td align="middle">{{$valmember->province}}</td>
-                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
-                        <td align="middle">{{$valmember->status}}</td>
-                        <td align="middle">{{$valmember->username}}</td>
+                            <td align="middle">{{$valmember->docId}}</td>
+                            <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}} {{$valmember->lastname}}</td>
+                            <td>{{$valmember->groupName}}</td>
+                            <td align="middle">{{$valmember->province}}</td>
+                            <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
+                            <td align="middle">{{$valmember->status}}</td>
+                            <td align="middle">{{$valmember->username}}</td>
                         </tr>
                     @endforeach
                 </table>

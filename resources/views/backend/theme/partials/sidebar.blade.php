@@ -1,17 +1,15 @@
-{{-- {{ dd(session()->get('users.permission')) }} --}}
-
-{{-- @php
-      use Session;
-@endphp
-
-{{ dd(session()->get('users.permission')) }} --}}
-
 <ul class="nav metismenu" id="side-menu">
       <li class="nav-header">
             <div class="dropdown profile-element">
                   {{--  <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>  --}}
                   {{--  <a data-toggle="dropdown" class="dropdown-toggle" href="#">  --}}
-                        <span class="block m-t-xs font-bold"><font color="white">@yield('loginname')</font></span>
+                    <span class="block m-t-xs font-bold">
+                        <font color="white">
+
+                            สวัสดี {{ (Auth::guard('admin')->user()->username) }}
+
+                        </font>
+                    </span>
                         {{--  <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>  --}}
                   {{--  </a>  --}}
                   {{--<ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -29,9 +27,6 @@
 
       <li>
             <a href="{{ url('/backend/home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
-      </li>
-      <li>
-            <a href="{{ url('/backend/user')}}"><i class="fa fa-th-large"></i> <span class="nav-label">User</span></a>
       </li>
 
       <li>
@@ -55,38 +50,32 @@
                           <li><a href="{{ url('backend/check/ngoCheck') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
                     </ul>
                   </li>
-                  {{-- @if (Session::has('id') && Session::get('users.permission') == 'super admin') { --}}
-                  {{-- @if (Session::has('permission')) {
-                    {{Session::get('permission')}};
-                  }@endif --}}
-                  {{-- @if ( {{session('users.permission')}} = 'super admin' ) { --}}
-                  {{-- @if (Session::has('permission' == 'super admin')){ --}}
 
                   @if(Auth::guard('admin')->user()->hasRole('super-admin'))
-                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                              <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
-                              <li><a href="{{ url('backend/approve/orApprove') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
-                              <li><a href="{{ url('backend/approve/ngoApprove') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
-                        </ul>
-                  </li>
-                  <li><a href="{{ url('backend/approve/memApprove') }}"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
+                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
+                                <li><a href="{{ url('backend/approve/orApprove') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                <li><a href="{{ url('backend/approve/ngoApprove') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                            </ul>
+                    </li>
+                    <li><a href="{{ url('backend/approve/memApprove') }}"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
                   @endif
-                  {{-- }@endif --}}
+
             </ul>
 
             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ลงคะแนน</span> <span class="fa arrow"></span></a>
 
             @if(Auth::guard('admin')->user()->hasRole('super-admin'))
-            <ul class="nav nav-second-level collapse">
-                  <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับรองผลการลงคะแนน</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                              <li><a href="{{ url('backend/confirm/snConfirm') }}">ผู้ทรงคุณวุฒิ</a></li>
-                              <li><a href="{{ url('backend/confirm/orConfirm') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
-                              <li><a href="{{ url('backend/confirm/ngoConfirm') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
-                        </ul>
-                  </li>
-            </ul>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับรองผลการลงคะแนน</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li><a href="{{ url('backend/confirm/snConfirm') }}">ผู้ทรงคุณวุฒิ</a></li>
+                                <li><a href="{{ url('backend/confirm/orConfirm') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                <li><a href="{{ url('backend/confirm/ngoConfirm') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                            </ul>
+                    </li>
+                </ul>
             @endif
             <ul class="nav nav-second-level collapse">
                     <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">แสดงผลการลงคะแนนแบบ Real Time</span> <span class="fa arrow"></span></a>
@@ -99,18 +88,26 @@
             </ul>
 
             @if(Auth::guard('admin')->user()->hasRole('super-admin'))
-            <ul class="nav nav-second-level collapse">
-                    <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จับฉลากหากรรมการสุขภาพแห่งชาติ</span> <span class="fa arrow"></span></a>
-                          <ul class="nav nav-third-level">
-                                <li><a href="{{ url('backend/draw/snDraw') }}">ผู้ทรงคุณวุฒิ</a></li>
-                                <li><a href="{{ url('backend/draw/orDraw') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
-                                <li><a href="{{ url('backend/draw/ngoDraw') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
-                          </ul>
-                    </li>
-            </ul>
+                <ul class="nav nav-second-level collapse">
+                        <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">จับฉลากหากรรมการสุขภาพแห่งชาติ</span> <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                    <li><a href="{{ url('backend/draw/snDraw') }}">ผู้ทรงคุณวุฒิ</a></li>
+                                    <li><a href="{{ url('backend/draw/orDraw') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                                    <li><a href="{{ url('backend/draw/ngoDraw') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
+                            </ul>
+                        </li>
+                </ul>
             @endif
       </li>
 
+      @if(Auth::guard('admin')->user()->hasRole('super-admin'))
+        <li>
+                <a href="{{ url('/backend/user')}}"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการผู้ใช้</span></a>
+        </li>
+      @endif
+        {{-- <li>
+                <a href="{{ url('/backend/userPasswordChange')}}"><i class="fa fa-th-large"></i> <span class="nav-label">เปลี่ยนรหัสผ่าน</span></a>
+        </li> --}}
       {{-- <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการข้อมูลคลังภาพ</span></a>
       </li>

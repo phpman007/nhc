@@ -1,6 +1,5 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
-@section('loginname','สวัสดี A')
 
 <script>
     var select_element;
