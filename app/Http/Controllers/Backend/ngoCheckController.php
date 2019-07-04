@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Model\Backend\Province;
-use App\Model\Backend\ngoGroup;
+use App\Model\Backend\GroupNGO;
 use App\Model\Backend\Statuses;
 use App\Model\Backend\Member;
 use App\Model\Backend\MemberDetail;
@@ -26,17 +26,16 @@ class ngoCheckController extends Controller
         $input = \Request::all();
 
         $listprovince=Province::orderBy('province')->get();
-        $listgroupngo=ngoGroup::get();
+        $listgroupngo=GroupNGO::get();
         $liststatus=Statuses::get();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
         $list->join('statuses','member_details.statusId','=','statuses.id');
-        $list->join('users', 'member_details.adminId', '=', 'users.id');
+        $list->join('province','member_details.provinceId','=','province.provinceId');
         $list->join('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
         $list->join('ngo_sections','member_details.section','=','ngo_sections.id');
-        $list->leftJoin('province','ngo_sections.provinceId','=','province.provinceId');
+        $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
         $list->select('member_details.section','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','ngo_groups.groupName','users.username');
-        $list->where('members.groupId','=',3);
 
         if(!empty($input['txtname'])){
             $list->where('members.groupId','=',3)
