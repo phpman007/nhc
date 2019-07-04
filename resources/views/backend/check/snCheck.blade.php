@@ -145,13 +145,19 @@
                         <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td align="middle">{{$valmember->province}}</td>
-                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
+                        @if($valmember->zipFile==null)
+                            <td></td>
+                        @else
+                            <td align="middle"><button  onclick="window.open('{{ asset('uploads/'.$valmember->zipFile) }}'); location.href='editSN/{{$valmember->id}}';" type="button" class="btn btn-primary">ดาวน์โหลด</button></td>
+                            {{--  <td align="middle"><a onclick="location.href='editSN/{{$valmember->id}}'"  href="{{ asset('uploads/'.$valmember->zipFile) }}"><button onclick="location.href = '{{url('backend/check/edit')}}" type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>  --}}
+                        @endif
                         <td align="middle">{{$valmember->status}}</td>
                         <td align="middle">{{$valmember->username}}</td>
                         </tr>
                     @endforeach
                 </table>
-                <div class="d-flex justify-content-center"><h3>{{ $listmember->links() }} </h3></div>
+                <div class="d-flex justify-content-center" style="font-size: 13px !important;"><b>{{ $listmember->links() }}</b></div>
+
             @endif
         </div>
     </div>
@@ -160,12 +166,24 @@
 @endsection
 
 @section('js')
-    <script>
-    $(function(){
-        $('.js-example-basic-multiple').select2({
-        maximumSelectionLength: 3
-        });
-    })
-    </script>
+<script>
+$(function(){
+    $('.js-example-basic-multiple').select2({
+    maximumSelectionLength: 3
+    });
+})
+
+@if (Session::has('success'))
+toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    showMethod: 'slideDown',
+    timeOut: 2000
+};
+toastr.success('บันทึกผู้แก้ไขเรียบร้อยแล้ว', '');
+@endif
+
+
+</script>
 @endsection
 

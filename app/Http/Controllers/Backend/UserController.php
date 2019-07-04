@@ -57,7 +57,7 @@ class UserController extends Controller
 
       public function index(User $user) {
             return view('backend.user.index',[
-                  'users' => $user->orderBy('updated_at')->paginate()
+                  'users' => $user->orderBy('updated_at')->paginate(10)
             ]);
       }
 
@@ -69,6 +69,7 @@ class UserController extends Controller
       }
 
       public function store(User $user, Request $request){
+
             $user->insert($request->all());
             return back('backend/user')->with('info', 'เพิ่มข้อมูลเรียบร้อยแล้ว');
       }

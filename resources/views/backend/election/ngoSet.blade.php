@@ -1,19 +1,6 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
 
-<script>
-    function changedate(id){
-        document.getElementsByName('frmchangedate[]')[id].submit();
-    }
-
-    function changedate2(id){
-        document.getElementsByName('frmchangedate2[]')[id].submit();
-    }
-
-    function changedate3(id){
-        document.getElementsByName('frmchangedate3[]')[id].submit();
-    }
-</script>
 @section('content')
 <div class="card border-info mb-3">
     <div class="card-header">
@@ -107,7 +94,7 @@
                                 }else{ $dateTH1="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH1 }}" onchange="changedate('{{$key}}');" name="txtdatebegin[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH1 }}" style="font-size: 13px !important;" onchange="changedate('{{$key}}');" name="txtdatebegin[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -123,7 +110,7 @@
                                 }else{ $dateTH2="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH2 }}" onchange="changedate('{{$key}}');" name="txtdateend[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH2 }}" style="font-size: 13px !important;" onchange="changedate('{{$key}}');" name="txtdateend[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -143,7 +130,7 @@
                                 }else{ $dateTH3="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH3 }}" onchange="changedate('{{$key}}');" name="txtdateconfirm[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH3 }}" style="font-size: 13px !important;" onchange="changedate('{{$key}}');" name="txtdateconfirm[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -159,7 +146,7 @@
                                 }else{ $dateTH4="";}
                                 @endphp
                                 <div class="input-group mb-2">
-                                    <input value="{{ $dateTH4 }}" onchange="changedate('{{$key}}');" name="txtdateelection[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
+                                    <input value="{{ $dateTH4 }}" style="font-size: 13px !important;" onchange="changedate('{{$key}}');" name="txtdateelection[]"  class="form-control datepicker" data-date-format="mm/dd/yyyy">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -170,7 +157,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="Hid3[]" id="Hid3" value={{$valmember->id}}>
                             <td>
-                                <select name="txttimebegin[]"  onchange="changedate3('{{$key}}');" class="form-control">
+                                <select name="txttimebegin[]" style="font-size: 13px !important;" onchange="changedate3('{{$key}}');" class="form-control">
                                     <option value="00:00:00">เลือก</option>
                                     <option value="06:00:00" @if($valmember->openElectionTime=="06:00:00") selected @endif>06.00 น.</option>
                                     <option value="07:00:00" @if($valmember->openElectionTime=="07:00:00") selected @endif>07.00 น.</option>
@@ -188,7 +175,7 @@
                                 </select>
                             </td>
                             <td>
-                                <select name="txttimeend[]"  onchange="changedate3('{{$key}}');" class="form-control">
+                                <select name="txttimeend[]" style="font-size: 13px !important;" onchange="changedate3('{{$key}}');" class="form-control">
                                         <option value="00:00:00">เลือก</option>
                                     <option value="06:00:00" @if($valmember->endElectionTime=="06:00:00") selected @endif>06.00 น.</option>
                                     <option value="07:00:00" @if($valmember->endElectionTime=="07:00:00") selected @endif>07.00 น.</option>
@@ -209,7 +196,7 @@
 
                     @endforeach
                 </table>
-                <div class="d-flex justify-content-center"><h3> {{ $listmember->links() }}</h3></div>
+                <div class="d-flex justify-content-center" style="font-size: 13px !important;"><b>{{ $listmember->links() }}</b></div>
             @endif
 
         </div>
@@ -282,6 +269,20 @@
     };
     toastr.warning('กำหนด เวลาเริ่มต้น-สิ้นสุด ให้ถูกต้อง!!!', '');
     @endif
+</script>
+
+<script>
+    function changedate(id){
+        document.getElementsByName('frmchangedate[]')[id].submit();
+    }
+
+    function changedate2(id){
+        document.getElementsByName('frmchangedate2[]')[id].submit();
+    }
+
+    function changedate3(id){
+        document.getElementsByName('frmchangedate3[]')[id].submit();
+    }
 </script>
 
 @endsection

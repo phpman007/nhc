@@ -14,6 +14,7 @@ use App\Model\Backend\Admin;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class CheckSNController extends Controller
 {
@@ -281,7 +282,23 @@ class CheckSNController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list1=MemberDetail::where('id','=',$id)->whereNull('adminId')->first();
+
+        if($list1!=NULL){
+            $adminId=Auth::guard('admin')->user()->id;
+
+            $list2 = MemberDetail::find($id);
+            $list2->adminId = $adminId;
+
+            if($list2->update()){
+                \Session::flash('success');
+            }else{
+                \Session::flash('error');
+            }
+        }else{
+            \Session::flash('error');
+        }
+        return back();
     }
 
     /**

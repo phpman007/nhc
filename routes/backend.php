@@ -8,7 +8,7 @@ Route::get('index', function() {
 });
 
 Route::get('home', function() {
-      return view('backend.theme.master');
+    return view('backend.theme.master');
 });
 
 
@@ -37,21 +37,24 @@ Route::group(['prefix' => 'election'], function () {
     Route::get('/NGOchangedate', 'ElectionNGOController@edit')->name('electionNGO.changedate');
     Route::get('/NGOchangedate2', 'ElectionNGOController@edit2')->name('electionNGO.changedate2');
     Route::get('/NGOchangedate3', 'ElectionNGOController@edit3')->name('electionNGO.changedate3');
-
 });
 
 Route::group(['prefix' => 'check'], function () {
 
     Route::match(['get', 'post'],'/index', 'CheckSNController@index')->name('check.index');
+    Route::get('/editSN/{id}', 'CheckSNController@edit');
     Route::get('/excelSN', 'CheckSNController@exportExcel')->name('check.excelSN');
 
     Route::match(['get', 'post'],'/memCheck', 'memberCheckController@index')->name('check.memCheck');
+    Route::get('/editMEM/{id}', 'memberCheckController@edit');
     Route::get('/excelMEM', 'memberCheckController@exportExcel')->name('check.excelMEM');
 
     Route::match(['get', 'post'],'/ngoCheck', 'ngoCheckController@index')->name('check.ngoCheck');
+    Route::get('/editNGO/{id}', 'ngoCheckController@edit');
     Route::get('/excelNGO', 'ngoCheckController@exportExcel')->name('check.excelNGO');
 
     Route::match(['get', 'post'],'/orCheck', 'orCheckController@index')->name('check.orCheck');
+    Route::get('/editOR/{id}', 'orCheckController@edit');
     Route::get('/excelOR', 'orCheckController@exportExcel')->name('check.excelOR');
 
 });

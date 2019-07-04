@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Model\Backend\Province;
-use App\Model\Backend\GroupNGO;
+use App\Model\Backend\ngoGroup;
 use App\Model\Backend\Statuses;
 use App\Model\Backend\Member;
 use App\Model\Backend\MemberDetail;
@@ -13,6 +13,7 @@ use App\Model\Backend\Admin;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class ngoCheckController extends Controller
 {
@@ -26,7 +27,7 @@ class ngoCheckController extends Controller
         $input = \Request::all();
 
         $listprovince=Province::orderBy('province')->get();
-        $listgroupngo=GroupNGO::get();
+        $listgroupngo=ngoGroup::get();
         $liststatus=Statuses::get();
 
         $list=MemberDetail::join('members','members.id','=','member_details.memberId');
@@ -328,7 +329,23 @@ class ngoCheckController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list1=MemberDetail::where('id','=',$id)->whereNull('adminId')->first();
+
+        if($list1!=NULL){
+            $adminId=Auth::guard('admin')->user()->id;
+
+            $list2 = MemberDetail::find($id);
+            $list2->adminId = $adminId;
+
+            if($list2->update()){
+                \Session::flash('success');
+            }else{
+                \Session::flash('error');
+            }
+        }else{
+            \Session::flash('error');
+        }
+        return back();
     }
 
     /**

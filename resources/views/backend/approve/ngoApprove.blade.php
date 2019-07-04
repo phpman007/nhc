@@ -1,25 +1,6 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
 
-<script>
-    var select_element;
-    function editstatus(id, element){
-        select_element = element
-        var status = document.getElementsByName('txtstatuschange[]')[id].value;
-        console.log(status)
-
-        if(status==4){
-            document.getElementsByName('gotomodal[]')[id].click();
-        }else{
-            document.getElementsByName('frmstatuschange[]')[id].submit();
-        }
-
-        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
-            console.log($(select_element).val($(select_element).data('default')))
-        });
-    }
-</script>
-
 @section('content')
 
 <div class="card border-info mb-3">
@@ -28,29 +9,13 @@
         <strong>อนุมัติผู้สมัคร ผู้แทนองค์กรภาคเอกชน</strong>
     </div>
     <div class="card-body">
-        @if(session('flash_message')=="ok")
-            {{-- <div class="alert alert-success alert-dismissible fade show"><span class="glyphicon glyphicon-ok"></span><em> {!! session('flash_message') !!}</em></div> --}}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะเรียบร้อยแล้ว</i>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-        @elseif(session('flash_message')=="not")
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <span class="glyphicon glyphicon-ok"></span><i>แก้ไขสถานะไม่ได้!!!</i>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-        @endif
 
         <form id="frmsearchapprove" method="get" action="{{url('backend/approve/ngoApprove')}}">
         {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-6">
                 <label for="txtname">ค้นหาจาก : </label>
-                <input class="form-control" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
+                <input class="form-control" style="font-size: 13px !important;" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
                 name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
                 </div>
 
@@ -217,14 +182,14 @@
                 <table class="table table-striped table-bordered">
                     <tr align="middle">
                         <th width="5%">ลำดับ</th>
-                        <th width="10%">รหัสเอกสาร</th>
-                        <th width="20%">ชื่อ - สกุล</th>
-                        <th width="15%">กลุ่มย่อย</th>
+                        <th width="5%">รหัสเอกสาร</th>
+                        <th width="15%">ชื่อ - สกุล</th>
+                        <th width="25%">กลุ่มย่อย</th>
                         <th width="10%">จังหวัด</th>
                         <th width="5%">เขต</th>
                         <th width="5%">ดาวน์โหลด</th>
-                        <th width="15%">สถานะ</th>
-                        <th width="15%">ผู้ที่ตรวจสอบ</th>
+                        <th width="20%">สถานะ</th>
+                        <th width="10%">ผู้ที่ตรวจสอบ</th>
                     </tr>
                     @foreach ($listmember as $key=>$valmember)
                         <tr>
@@ -236,19 +201,22 @@
                             @endif
                         </td>
                         <td align="middle">{{$valmember->docId}}</td>
-                        <td>{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
+                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
-                        <td>{{$valmember->province}}</td>
+                        <td align="middle">{{$valmember->province}}</td>
                         <td align="middle">{{$valmember->section}}</td>
-                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
-
+                        @if($valmember->zipFile==null)
+                            <td></td>
+                        @else
+                            <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
+                        @endif
                         {{-- สถานะ  --}}
-                        <td>
+                        <td align="middle">
                             <a data-toggle="modal" name="gotomodal[]" href="#m-editstatus-{{$key}}" style="display: none;"> test {{$key}} </a>
 
                             <form name="frmstatuschange[]" method="GET" action="{{url('backend/approve/editstatusNGO')}}">
                                 {{ csrf_field() }}
-                                <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" onchange="editstatus('{{$key}}', this);">
+                                <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" style="font-size: 13px !important;" class="form-control" onchange="editstatus('{{$key}}', this);">
                                     @foreach ($liststatus as $valstatus)
                                     <option @if($valmember->status!=null && $valmember->statusid == $valstatus->id) selected @endif
                                     value={{$valstatus->id}}>{{$valstatus->status}}</option>
@@ -287,12 +255,12 @@
                                 {{--  //end modal  --}}
                         </td>
 
-                        <td>{{$valmember->username}}</td>
+                        <td align="middle">{{$valmember->username}}</td>
 
                         </tr>
                     @endforeach
                 </table>
-                <div class="d-flex justify-content-center"><h3>{{ $listmember->links() }} </h3></div>
+                <div class="d-flex justify-content-center" style="font-size: 13px !important;"><b>{{ $listmember->links() }}</b></div>
             @endif
         </div>
     </div>
@@ -336,6 +304,23 @@
     };
     toastr.success('แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว', '');
     @endif
+
+    var select_element;
+    function editstatus(id, element){
+        select_element = element
+        var status = document.getElementsByName('txtstatuschange[]')[id].value;
+        console.log(status)
+
+        if(status==4){
+            document.getElementsByName('gotomodal[]')[id].click();
+        }else{
+            document.getElementsByName('frmstatuschange[]')[id].submit();
+        }
+
+        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
+            console.log($(select_element).val($(select_element).data('default')))
+        });
+    }
 </script>
 
 @endsection

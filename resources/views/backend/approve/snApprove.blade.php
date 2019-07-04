@@ -1,35 +1,6 @@
 @extends('backend.theme.master')
 @section('title','NHC ADMIN')
 
-<script>
-    var select_element;
-    function editstatus(id, element){
-        select_element = element
-        var status = document.getElementsByName('txtstatuschange[]')[id].value;
-        console.log(status)
-
-        if(status==4){
-            document.getElementsByName('gotomodal[]')[id].click();
-        }else{
-            document.getElementsByName('frmstatuschange[]')[id].submit();
-        }
-
-        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
-            console.log($(select_element).val($(select_element).data('default')))
-        });
-    }
-
-    /*function NewWindow(mypage,myname,w,h,scroll){
-        var win = null;
-        LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
-        TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
-        settings =
-        'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
-        win = window.open(mypage,myname,settings)
-    }*/
-
-</script>
-
 @section('content')
 {{--  [ <a href="function_query_repor_print.php" onClick="NewWindow(this.href,'name','400','400','yes');return false">คลิก</a> ]  --}}
 
@@ -52,7 +23,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                 <label for="txtname">ค้นหาจาก : </label>
-                <input class="form-control" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
+                <input class="form-control" style="font-size: 13px !important;" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
                 name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
                 </div>
 
@@ -142,19 +113,23 @@
                         <td align="middle">{{$valmember->docId}}</td>
                         {{--  <td>{{$valmember->member->firstname}}  {{$valmember->member->lastname}}</td>
                         <td>{{$valmember->statuses->status}}</td>--}}
-                        <td>{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
+                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
-                        <td>{{$valmember->province}}</td>
-                        <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
+                        <td align="middle">{{$valmember->province}}</td>
+                        @if($valmember->zipFile==null)
+                            <td></td>
+                        @else
+                            <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
+                        @endif
                         {{-- <td>{{$valmember->status}}</td> --}}
 
                         {{-- สถานะ  --}}
-                        <td>
+                        <td align="middle">
                             <a data-toggle="modal" name="gotomodal[]" href="#m-editstatus-{{$key}}" style="display: none;"> test {{$key}} </a>
 
                             <form name="frmstatuschange[]" method="GET" action="{{url('backend/approve/editstatusSN')}}">
                                 {{ csrf_field() }}
-                                <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" onchange="editstatus('{{$key}}', this);">
+                                <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" style="font-size: 13px !important;" onchange="editstatus('{{$key}}', this);">
                                     @foreach ($liststatus as $valstatus)
                                     <option @if($valmember->status!=null && $valmember->statusid == $valstatus->id) selected @endif
                                     value={{$valstatus->id}}>{{$valstatus->status}}</option>
@@ -193,12 +168,12 @@
                             {{--  //end modal  --}}
                         </td>
 
-                        <td>{{$valmember->username}}</td>
+                        <td align="middle">{{$valmember->username}}</td>
 
                         </tr>
                     @endforeach
                 </table>
-                <div class="d-flex justify-content-center"><h3>{{ $listmember->links() }} </h3></div>
+                <div class="d-flex justify-content-center" style="font-size: 13px !important;"><b>{{ $listmember->links() }}</b></div>
             @endif
         </div>
     </div>
@@ -246,6 +221,32 @@
     };
     toastr.success('แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว', '');
     @endif
+
+    var select_element;
+    function editstatus(id, element){
+        select_element = element
+        var status = document.getElementsByName('txtstatuschange[]')[id].value;
+        console.log(status)
+
+        if(status==4){
+            document.getElementsByName('gotomodal[]')[id].click();
+        }else{
+            document.getElementsByName('frmstatuschange[]')[id].submit();
+        }
+
+        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
+            console.log($(select_element).val($(select_element).data('default')))
+        });
+    }
+
+    /*function NewWindow(mypage,myname,w,h,scroll){
+        var win = null;
+        LeftPosition = (screen.width) ? (screen.width-w)/2 : 0;
+        TopPosition = (screen.height) ? (screen.height-h)/2 : 0;
+        settings =
+        'height='+h+',width='+w+',top='+TopPosition+',left='+LeftPosition+',scrollbars='+scroll+',resizable'
+        win = window.open(mypage,myname,settings)
+    }*/
 
 </script>
 
