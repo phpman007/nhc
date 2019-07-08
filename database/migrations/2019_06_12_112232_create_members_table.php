@@ -30,6 +30,8 @@ class CreateMembersTable extends Migration
             $table->integer('ngoGroupId')->comment("รหัสกลุ่มกรณีที่อยู่ในกลุ่มองค์กรอิสระ")->nullable();
             $table->integer('candidateStatus')->comment("สถานะสมาชิกว่าเป็นผู้สมัครรับเลือกหรือผู้ลงคะแนนเพียงอย่างเดียว")->nullable();
             $table->string('candidateNumber')->comment("หมายเลขเลือกตั้ง")->nullable();
+            $table->integer('last_step')->comment("ตอนนี้ทำถึงสเต็ปที่")->nullable();
+            $table->integer('status_accept')->comment("ยื่นเอกสารแล้วหรือไม่")->nullable();
             $table->rememberToken()->nullable();
             $table->timestamps()->nullable();
         });
