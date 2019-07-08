@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\CreateMember;
+use App\Events\FinishRegister;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,8 +24,8 @@ class SendEmailVerificationCreateMember
      * @param  CreateMember  $event
      * @return void
      */
-    public function handle(CreateMember $event)
+    public function handle(FinishRegister $event)
     {
-          
+
     }
 }

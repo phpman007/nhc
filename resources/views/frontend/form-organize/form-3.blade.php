@@ -183,7 +183,7 @@
 
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                    <button type="reset" name="button" class="btn btn-border">ยกเลิก</button>
+                   <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                     <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

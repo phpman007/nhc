@@ -54,7 +54,7 @@
                     <div class="box-input2f">
                           {!! Form::textarea('vision', Auth::user()->detail->vision, [ "rows"=>"5", "cols"=>"50", "class"=>"form-control", "placeholder"=>"วิสัยทัศน์ของข้าพเจ้าต่อการพัฒนาระบบสุขภาพแห่งชาติ"]) !!}
                           @if($errors->has('vision'))
-                          {{ $errors->first('vision') }}
+                          <small>{{ $errors->first('vision') }}</small>
                           @endif
                     </div><!--end box-input2f-->
 
@@ -70,7 +70,7 @@
                   </div><!--end set-form2f-->
 
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" id="submit-btn" name="button" disabled class="btn btn-green">ตรวจสอบเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

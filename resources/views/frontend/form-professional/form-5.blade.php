@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<form class="" method="post" enctype="multipart/form-data">
+<form class="" id="form-step" method="post" enctype="multipart/form-data">
 {{ csrf_field() }}
           <div class="insitepage2f">
               <div class="navication2f">
@@ -71,7 +71,8 @@
                                              $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                               ?>
                                               @if($file1)
-                                              <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a></small>
+                                              <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->newName }}</a></small> |
+                                              <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file1->id) }}">ลบ</a>
                                               @endif
                                       </div><!--end input2f-->
                                   </div>
@@ -79,7 +80,7 @@
                                       <div class="btn-2button">
                                           <div class="fileUpload btn btn-blue">
                                                <span>Upload</span>
-							     {!! Form::file('uploadBtn01', ['id' => 'uploadBtn01', 'class'=>'upload']) !!}
+							     {!! Form::file('uploadBtn01', ['id' => 'uploadBtn01', 'class'=>'upload', 'accept'=>".jpg, .png, .pdf"]) !!}
 
                                            </div>
                                       </div><!--end btn-2button-->
@@ -100,7 +101,7 @@
                                            $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                             ?>
                                             @if($file2)
-                                            <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a></small>
+                                            <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->newName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file2->id) }}">ลบ</a>
                                             @endif
                                       </div><!--end input2f-->
                                   </div>
@@ -108,7 +109,7 @@
                                       <div class="btn-2button">
                                           <div class="fileUpload btn btn-blue">
                                                <span>Upload</span>
-							     {!! Form::file('uploadBtn02', ['id' => 'uploadBtn02', 'class'=>'upload']) !!}
+							     {!! Form::file('uploadBtn02', ['id' => 'uploadBtn02', 'class'=>'upload', 'accept'=>".jpg, .png, .pdf"]) !!}
 
                                            </div>
                                            <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
@@ -130,7 +131,7 @@
                                           $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                            ?>
                                            @if($file3)
-                                           <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a></small>
+                                           <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->newName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file3->id) }}">ลบ</a>
                                            @endif
                                       </div><!--end input2f-->
                                   </div>
@@ -138,7 +139,7 @@
                                       <div class="btn-2button">
                                           <div class="fileUpload btn btn-blue">
                                                <span>Upload</span>
-							     {!! Form::file('uploadBtn03', ['id' => 'uploadBtn03', 'class'=>'upload']) !!}
+							     {!! Form::file('uploadBtn03', ['id' => 'uploadBtn03', 'class'=>'upload', 'accept'=>".jpg, .png, .pdf"]) !!}
 
                                            </div>
                                            <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
@@ -161,7 +162,7 @@
 
                         </div><!--end set-form2f-->
                         <div class="btn-center2f">
-                            <a href="{{ url('form-professional/4') }}" type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</a>
+                             <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                             <button type="submit" id="submit-btn" name="button" class="btn btn-green" disabled>ตรวจทานเอกสาร</button>
                         </div><!--end btn-center2f-->
                     </div><!--end content-form2f-->
@@ -218,5 +219,13 @@ $(function($) {
 		}
 	});
 })
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+      $('#form-step').on('submit', function(event) {
+            event.preventDefault();
+            alertConfirmForm('#form-step', 'กรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิ Step5 สำเร็จแล้ว คุณต้องการกรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิStepต่อไปไหม');
+      })
+});
 </script>
 @endsection

@@ -22,6 +22,14 @@ class EventServiceProvider extends ServiceProvider
              // \App\Listeners\CreatMember::class,
              \App\Listeners\SendEmailVerificationCreateMember::class,
        ],
+       \App\Events\CancelRegisterEvent::class => [
+             \App\Listeners\SendMailCancelRegister::class,
+             \App\Listeners\LogEmail::class,
+      ],
+      \App\Events\FinishRegister::class => [
+                 \App\Listeners\CreatePdfFile::class,
+                 \App\Listeners\SendEmailVerificationCreateMember::class,
+           ],
     ];
 
     /**

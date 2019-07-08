@@ -29,7 +29,7 @@ class Member extends Authenticatable
 		'candidateStatus',
 		'provinceId',
 	];
-
+	
 	public function attach() {
 		return $this->hasMany(Attachment::class, 'member_id');
 	}

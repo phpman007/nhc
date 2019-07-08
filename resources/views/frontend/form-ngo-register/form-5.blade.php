@@ -418,12 +418,11 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงความเป็นนิติบุคคล.pdf" readonly>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a></small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -443,12 +442,11 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร.pdf">
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a></small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -469,12 +467,11 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานซึ่งแสดงถึงการดำเนินกิจกรรมในกลุ่มองค์กร.pdf" readonly>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a></small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -494,12 +491,11 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile03" class="form-control" placeholder="" value="สำเนาคำสั่งแต่งตั้งประธานองค์กรหรือรายงานการประชุม.pdf" readonly>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a></small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -519,12 +515,11 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาบัตรประจำตัวประชาชนของประธานองค์กร.jpg" readonly>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a></small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -550,7 +545,6 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile01" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร.pdf">
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -570,7 +564,6 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานซึ่งแสดงถึงการดำเนินกิจกรรมในกลุ่มองค์กร.pdf">
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -589,7 +582,6 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="" class="form-control" placeholder="" value="สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร.pdf" readonly>
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -646,7 +638,7 @@
                     <div class="box-checkbox2f">
                       <label class="checkbox2f">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ
                         หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  <br>ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
-                        <input type="checkbox">
+                        <input type="checkbox" checked>
                         <span class="checkmark"></span>
                       </label>
                     </div>
@@ -660,7 +652,7 @@
                      @endif
                 </div>
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border">ปิด</button>
+                      <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">ตรวจทานเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-{!! Form::open() !!}
+{!! Form::open(['id'=> 'form-step']) !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <input type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="เลขบัตรประชาชน">
+                                    <input id="personalId" type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="เลขบัตรประชาชน">
                                     @if($errors->has('personalId'))
                                     <small>{{ $errors->first('personalId') }}</small>
                                     @endif
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"select2 form-control" ,"placeholder"=>"จังหวัด"]) !!}
                                      @if($errors->has('provinceId'))
                                      <small>{{ $errors->first('provinceId') }}</small>
                                      @endif
@@ -105,7 +105,7 @@
                                       @if($errors->has('password'))
                                      <small>{{ $errors->first('password') }}</small>
                                      @endif
-                                  <span class="icon-viewpass notview">
+                                  <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                     <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                     <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
@@ -124,7 +124,7 @@
                                     @if($errors->has('password_confirmation'))
                                    <small>{{ $errors->first('password_confirmation') }}</small>
                                    @endif
-                                  <span class="icon-viewpass notview">
+                                  <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                         <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                         <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
@@ -138,7 +138,7 @@
                       <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
-                          <button type="button" name="button" class="btn btn-border">ยกเลิก</button>
+                          <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                           <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                         </div>
                       </div>
@@ -160,6 +160,32 @@
 @section('js')
 
 @include('frontend.form-professional.global-js')
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+      $(".icon-viewpass img").on('click', function(event) {
+          event.preventDefault();
+          var input = $(this).parents('.input2f').find('input');
+
+          // input marker
+
+          $(this).parents('.icon-viewpass').find('img').each(function(k, v) {
+             if($(v).hasClass('pass-view')) {
+                  $(v).removeClass('pass-view')
+                  $(v).addClass('pass-none');
+                  input.attr('type', 'password')
+             } else {
+                  $(v).addClass('pass-view')
+                  $(v).removeClass('pass-none');
+                  input.attr('type', 'text')
+             }
+          })
+      });
+      $('#form-step').on('submit', function(event) {
+            event.preventDefault();
+            alertConfirmForm('#form-step', 'สมัครไอดีสำเร็จแล้ว กรุณาตรวจสอบข้อมูลในอีเมล์ที่สมัครคุณต้องการกรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิตอนนี้เลยไหม');
+      })
+});
+</script>
 <script type="text/javascript">
 
 </script>

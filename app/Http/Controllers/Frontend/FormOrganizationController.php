@@ -29,6 +29,7 @@ class FormOrganizationController extends Controller
                   return $this->stepOther($request);
                   break;
                   case 2:
+                  Auth::logout();
                   return $this->stepOne($request);
                   break;
                   case 3:
@@ -55,13 +56,14 @@ class FormOrganizationController extends Controller
       }
 
       public function stepOther(Request $request) {
+            $request->request->add(['personalId'=> str_replace('-', '', $request->personalId)]);
             $request->validate([
-                  'personalId' 				=> 'required|min:12',
+                  'personalId' 				=> 'required|unique:members|max:14|min:13',
                   'provinceId'                        => 'required',
                   'email' 					=> 'required|email|unique:members',
-                  'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		      => 'required|min:6|max:20',
-                  'uploadBtn01'                       => 'required',
+                  'password'					=> 'required|min:6|max:20|confirmed|regex:/^[A-Za-z0-9]*$/',
+                  'password_confirmation'		      => 'required|min:6|max:20|regex:/^[A-Za-z0-9]*$/',
+                  'uploadBtn01'                       => 'required|mimes:jpeg,pdf',
                   // 'g-recaptcha-response'              => 'recaptcha'
             ]);
 
@@ -78,15 +80,17 @@ class FormOrganizationController extends Controller
             $dataSet['updated_at'] = now();
 
             $dataSet['groupId'] = 3;
+            $dataSet['candidateStatus'] = 2;
 
+            $member = Member::create($dataSet);
 
+            $member->detail()->create(['statusId' => 1, 'provinceMemberID' => $request->provinceId]);
             try {
-                  if(Member::insert($dataSet)) {
-                        $member = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
+
 
                         if($request->hasFile('uploadBtn01')) {
                               if($fileUpload = \Helper::uploadFile($request->uploadBtn01, 'personal_card')) {
-                                    Attachment::where('member_id', Auth::user()->id)->where('use_is', 'personal_card')->update(['status' => 0]);
+                                    Attachment::where('member_id', $member->id)->where('use_is', 'personal_card')->update(['status' => 0]);
 
                                     $attach = new Attachment;
                                     $attach->fileName       = $fileUpload['oldName'];
@@ -103,26 +107,22 @@ class FormOrganizationController extends Controller
                               }
                         }
 
-                  } else {
-                        return Redirect::back();
-                  }
 
             } catch (\Exception $e) {
-
-                  return back()->errors(['error'=> $e->getMessage()]);
+                  return back()->withErrors(['error'=> $e->getMessage()]);
             }
             return back()->with('success' ,'ลงทะเบียนเรียบร้อยแล้ว');
       }
 
       public function stepOne(Request $request) {
 
-
+            $request->request->add(['personalId'=> str_replace('-', '', $request->personalId)]);
             $request->validate([
-                  'personalId' 				=> 'required|min:12',
+                  'personalId' 				=> 'required|min:12|unique:members',
                   'provinceId'                        => 'required',
-                  'email' 					=> 'required|email',
-                  'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		     => 'required|min:6|max:20'
+                  'email' 					=> 'required|email|unique:members',
+                  'password'					=> 'required|min:6|max:20|confirmed|regex:/^[A-Za-z0-9]*$/',
+                  'password_confirmation'		     => 'required|min:6|max:20|regex:/^[A-Za-z0-9]*$/'
             ]);
 
             $dataSet =  $request->only(['personalId', 'email', 'password', 'provinceId']);
@@ -138,6 +138,13 @@ class FormOrganizationController extends Controller
             $dataSet['updated_at'] = now();
 
             $dataSet['groupId'] = 2;
+            $dataSet['candidateStatus'] = 1;
+
+            $member = Member::create($dataSet);
+            Auth::login($member, true);
+            $member->detail()->create(['statusId' => 1, 'provinceMemberID' => $request->provinceId]);
+
+            return Redirect::to('form-organization/3');
 
             $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
             if($hasMember) {
@@ -221,7 +228,7 @@ class FormOrganizationController extends Controller
       public function stepThree(Request $request) {
             if(!Auth::user()->attach()->where('status', 1)->where('use_is', 'government_official_card')->first()) {
                   $request->validate([
-                        'file_ref'          => 'required'
+                        'file_ref'          => 'required|required|mimes:jpeg,pdf'
                   ]);
             }
 
@@ -253,7 +260,7 @@ class FormOrganizationController extends Controller
 
       public function stepFour(Request $request) {
             $request->validate([
-                  'no' 			   => 'required|max:11',
+                  'no' 			   => 'required|max:7',
                   'moo' 		   => 'required|max:151',
                   'soi' 		   => 'required|max:101',
                   'street' 		   => 'required|max:101',
@@ -311,8 +318,9 @@ class FormOrganizationController extends Controller
             return Redirect::to('form-organization/7');
       }
       public function stepSix(Request $request) {
-            $request->validate(['g-recaptcha-response' => 'recaptcha']);
+            // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
+            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
             return back()->with('success', true);
       }
 }

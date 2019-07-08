@@ -706,7 +706,7 @@
                                      $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                       ?>
                                       @if($file1)
-                                      <a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a>
+                                      <a target="_blank" href="{{asset($file1->path)}}">{{ $file1->newName }}</a>
                                       @endif
                                 </div><!--end input2f-->
                             </div>
@@ -724,7 +724,7 @@
                                     $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                      ?>
                                      @if($file2)
-                                     <a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a>
+                                     <a target="_blank" href="{{asset($file2->path)}}">{{ $file2->newName }}</a>
                                      @endif
                                 </div><!--end input2f-->
                             </div>
@@ -743,7 +743,7 @@
                                    $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                     ?>
                                     @if($file3)
-                                    <a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a>
+                                    <a target="_blank" href="{{asset($file3->path)}}">{{ $file3->newName }}</a>
                                     @endif
                                 </div><!--end box-input2f-->
                             </div>
@@ -770,7 +770,7 @@
                         @endif
                   </div>
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border">ปิด</button>
+                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">ยื่นเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

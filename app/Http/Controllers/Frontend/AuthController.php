@@ -12,6 +12,10 @@ class AuthController extends Controller
     {
           return view('frontend.login');
    }
+   public function logout(){
+         Auth::logout();
+         return redirect('/');
+   }
    public function postLogin(Request $request)
    {
          $request->validate([
@@ -24,10 +28,34 @@ class AuthController extends Controller
          if($member == null) :
                return back()->withErrors(['username' =>'ไม่พบข้อมูลผู้ใช้งาน']);
          endif;
-
          if(Hash::check($request->password, $member->password)) :
                Auth::login($member);
-               return redirect('/')->with('info', 'เข้าสู่ระบบเรียบร้อยแล้ว');
+               switch ($member->groupId) {
+                     case '1':
+                           $redirect = 'form-professional/2';
+                           break;
+                     case '2':
+                           $redirect = 'form-organization/3';
+                           break;
+                     case '3':
+                           $redirect = 'form-ngo-register/2';
+                           break;
+                     case '4':
+                              if(!empty($member->detail->suggestPosition)) {
+                                    $redirect = 'form-ngo/1';
+                              } else {
+                                    $redirect = 'form-ngo-register/2';
+                              }
+
+                           break;
+
+                     default:
+                           $redirect = '/';
+                           break;
+               }
+               return \Redirect::to($redirect)->with('info', 'เข้าสู่ระบบเรียบร้อยแล้ว');
+         else:
+               return back()->withErrors(['username', 'รหัสผ่านไม่ถูกต้อง']);
          endif;
    }
 }

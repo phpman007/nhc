@@ -26,3 +26,35 @@ Route::get('checkYear', function(Request $request){
 Route::get('get_address', function(Request $request){
       return [\DB::table('provinces')->where('zipcode', $request->zipcode)->first()];
 });
+
+Route::get('getDistrict', function(Request $request) {
+      $s = \DB::table('provinces')
+      ->where('province_code', $request->provinceId)
+      ->select('amphoe', 'amphoe_code')
+      ->groupBy('amphoe', 'amphoe_code')
+      ->get()
+      ->pluck('amphoe', 'amphoe_code');
+
+      $result = array();
+
+      foreach ($s as $key => $value) {
+            $result[] = ['id' =>$key, 'text' => $value];
+      }
+      return $result;
+});
+
+Route::get('getSubDistrict', function(Request $request) {
+      $s = \DB::table('provinces')
+      ->where('amphoe_code', $request->districtId)
+      ->select('district', 'district_code')
+      ->groupBy('district', 'district_code')
+      ->get()
+      ->pluck('district', 'district_code');
+
+      $result = array();
+
+      foreach ($s as $key => $value) {
+            $result[] = ['id' =>$key, 'text' => $value];
+      }
+      return $result;
+});

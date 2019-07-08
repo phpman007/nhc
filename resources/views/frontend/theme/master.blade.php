@@ -13,6 +13,7 @@
     <link href="{{asset("frontend/css/bootstrap.min.css")}}" rel="stylesheet">
     <link href="{{asset("frontend/css/global.css")}}" rel="stylesheet">
     <link href="{{asset("frontend/css/home.css")}}" rel="stylesheet">
+    <link href="{{asset("css/select2.min.css")}}" rel="stylesheet">
     <link href="{{asset("frontend/css/font-awesome.min.css")}}" rel="stylesheet">
     <link href="{{asset("frontend/fonts/font.css")}}" rel="stylesheet">
     <link href="{{asset("frontend/css/responsive.css")}}" rel="stylesheet">
@@ -30,12 +31,38 @@
     <script src="{{asset("frontend/js/bootstrap.min.js")}}"></script>
     @yield('css')
     <style media="screen">
+    .select2-container--default .select2-selection--single{
+          height:40px;
+          padding-top: 6px;
+          font-size:25px;
+          border-radius: 12px;
+          border:1px solid #CDD4D6;
+   }
           .swal2-popup{
                 font-size: 2rem !important;
           }
           .swal2-styled.swal2-confirm {
                 background-color: #51AAAA !important;
           }
+          .input2f small, .box-checkbox2f small, .input-group small, .box-input2f small {
+                color: red;
+            }
+            .box-checkbox2f small {
+                  padding-left: 37px;
+            }
+            .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+                  background-color: #f1f1f1;
+            }
+            .form-control[readonly][name="dateOfBirth"],
+            .form-control[readonly][name="startDate"],
+            .form-control[readonly][name="endDate"],
+            .form-control[readonly][name="provinceName"],
+            .form-control[readonly][name="ngoStartDate"],
+            .form-control[readonly][name="districtName"],
+            .form-control[readonly][name="subDistrictName"]
+            {
+                  background-color: #ffffff;
+            }
     </style>
   </head>
   <body data-plyr="{{ asset('frontend/source_vdo_plyr/dist/demo.svg') }}">
@@ -84,6 +111,7 @@
   <script type="text/javascript" src="{{ asset('frontend/js/jquery.datetimepicker.js') }}"></script>
   <script type="text/javascript" src="{{ asset('frontend/js/bootstrap-datepicker.th.min.js') }}"></script>
   <script type="text/javascript" src="{{ asset('frontend/js/jquery.mask.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
     <link href="{{ asset("frontend/css/jquery.datetimepicker.css") }}" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.js" integrity="sha256-FmcrRIeUicq2hy0eo5tD5h2Iv76IBfc3A51x8r9xeIY=" crossorigin="anonymous"></script>
@@ -91,6 +119,7 @@
   <script type="text/javascript">
   var date_element;
     $(document).ready(function() {
+          $('.select2').select2();
       date_element=  $(".date-picker").datepicker({
             format: 'dd/mm/yyyy',
                 todayBtn: true,
@@ -100,13 +129,35 @@
     });
  </script>
   <script>
+  function alertConfirmForm(form, message) {
+        $(form)[0].submit();
+        return false;
+        Swal.fire({
+          title: 'ระบบแจ้งเตือน',
+          text: message,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ตกลง'
+        }).then((result) => {
+          if (result.value) {
+                $(form)[0].submit();
+          }
+        })
+ }
 	 $(document).ready(function(){
+                 $("#personalId").mask('0-0000-00000-00-0');
+                 $("#tel").mask('000000000')
+                 $("#mobile").mask('0000000000');
+                 $("#date-birdth").mask('00/00/0000');
+
 
      @if($errors->has('error'))
       Swal.fire({
         type: 'error',
         title: 'ลงทะเบียน',
-        text: '{{ $errors->first('error') }}',
+        text: '{!! $errors->first('error') !!}',
         confirmButtonText: 'ปิด',
         footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
       })
@@ -158,28 +209,28 @@
         );
       });
      /*  placeholder for IE 8 & IE 9  */
-		 $('[placeholder]').focus(function() {
-			  var input = $(this);
-			  if (input.val() == input.attr('placeholder')) {
-				  input.val('');
-				   input.removeClass('placeholder');
-			  }
-			}).blur(function() {
-			   var input = $(this);
-			   if (input.val() == '' || input.val() == input.attr('placeholder')) {
-				input.addClass('placeholder');
-				input.val(input.attr('placeholder'));
-			   }
-			}).blur();
-
-			$('[placeholder]').parents('form').submit(function() {
-			  $(this).find('[placeholder]').each(function() {
-			  var input = $(this);
-			  if (input.val() == input.attr('placeholder')) {
-				input.val('');
-			  }
-			})
-			});
+		 // $('[placeholder]').focus(function() {
+			//   var input = $(this);
+			//   if (input.val() == input.attr('placeholder')) {
+			// 	  input.val('');
+			// 	   input.removeClass('placeholder');
+			//   }
+			// }).blur(function() {
+			//    var input = $(this);
+			//    if (input.val() == '' || input.val() == input.attr('placeholder')) {
+			// 	input.addClass('placeholder');
+			// 	input.val(input.attr('placeholder'));
+			//    }
+			// }).blur();
+             //
+			// $('[placeholder]').parents('form').submit(function() {
+			//   $(this).find('[placeholder]').each(function() {
+			//   var input = $(this);
+			//   if (input.val() == input.attr('placeholder')) {
+			// 	input.val('');
+			//   }
+			// })
+			// });
       /* end  placeholder for IE 8 & IE 9  */
 
       $('.submenu_level03').slideUp('slow');
@@ -199,6 +250,10 @@
 
   </script>
   <script>
+  $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+  });
+
    $(window).on("scroll", function() {
          if($(window).scrollTop() > 100) {
              $("header").addClass("topfixed");

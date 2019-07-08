@@ -163,7 +163,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
+                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่", 'maxlength' => 7]) !!}
                                      @if($errors->has('no'))
                                      <small>{{ $errors->first('no') }}</small>
                                      @endif
@@ -223,7 +223,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์", 'maxlength'=>5]) !!}
                                   @if($errors->has('zipCode'))
                                   <small>{{ $errors->first('zipCode') }}</small>
                                   @endif
@@ -238,8 +238,11 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',Auth::user()->detail->provinceId)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
-                                      {!! Form::hidden('provinceId', Auth::user()->detail->provinceId, ['id'=>'provinceId']) !!}
+                                      <?php $provide = \DB::table('provinces')->select('province', 'province_code')->groupBy('province', 'province_code')->get()->pluck('province', 'province_code') ?>
+                                      {!! Form::select('provinceId', $provide, null, ['class'=>'form-control select2', 'placeholder' => 'จังหวัด', 'id'=>'provinceId']) !!}
+                                      @if($errors->has('provinceId'))
+                                     <small>{{ $errors->first('provinceId') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -251,8 +254,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',Auth::user()->detail->districtId)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
-                                        {!! Form::hidden('districtId', Auth::user()->detail->districtId, ['id'=>'districtId']) !!}
+                                      {!! Form::select('districtId', [], null, ['class'=>'form-control select2', 'placeholder' => 'อำเภอ/เขต', 'id'=>'districtId']) !!}
+                                      @if($errors->has('districtId'))
+                                     <small>{{ $errors->first('districtId') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -265,9 +270,10 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
 
-                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',Auth::user()->detail->subDistrictId)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
-
-                                      {!! Form::hidden('subDistrictId', Auth::user()->detail->subDistrictId, ['id'=>'subDistrictId']) !!}
+                                      {!! Form::select('subDistrictId', [], null, ['class'=>'form-control select2', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictId']) !!}
+                                      @if($errors->has('subDistrictId'))
+                                     <small>{{ $errors->first('subDistrictId') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -279,7 +285,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์']) !!}
+                                      {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์', 'id' => 'tel']) !!}
                                      @if($errors->has('tel'))
                                  <small>{{ $errors->first('tel') }}</small>
                                  @endif
@@ -294,7 +300,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์เคลื่อนที่(มือถือ)"]) !!}
+                                      {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์เคลื่อนที่(มือถือ)", 'id'=> 'mobile']) !!}
                                      @if($errors->has('mobile'))
                                  <small>{{ $errors->first('mobile') }}</small>
                                  @endif
@@ -485,8 +491,8 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::text('pastOrganization1', Auth::user()->detail->pastOrganization1, [ 'class'=>"form-control", 'placeholder'=>"องค์กร"]) !!}
-                                     @if($errors->has('องค์กร'))
-                                   <small>{{ $errors->first('องค์กร') }}</small>
+                                     @if($errors->has('pastOrganization1'))
+                                   <small>{{ $errors->first('pastOrganization1') }}</small>
                                    @endif
                                 </div>
                             </div>
@@ -599,9 +605,9 @@
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
-                      <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
+                      <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
@@ -620,6 +626,44 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
+$(document).ready(function() {
+      $(document).on('change', '#provinceId', function(event) {
+           $.getJSON('/api/getDistrict', {provinceId: $(this).val()}, function(json, textStatus) {
+                        $("#districtId").html('');
+                                  $("#subDistrictId").html('');
+                     $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+           });
+      });
+
+      $(document).on('change', '#districtId', function(event) {
+           $.getJSON('/api/getSubDistrict', {districtId: $(this).val()}, function(json, textStatus) {
+                    $("#subDistrictId").html('');
+                     $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
+           });
+      })
+      @if(!empty(old('provinceId', @Auth::user()->detail->provinceId)))
+      $("#provinceId").val({{old('provinceId', @Auth::user()->detail->provinceId)}}).trigger('change');
+      $.getJSON('/api/getDistrict', {provinceId: "{{old('provinceId', @Auth::user()->detail->provinceId)}}"}, function(json, textStatus) {
+                    $("#districtId").html('');
+                    $("#subDistrictId").html('');
+             $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"});
+             $("#districtId").val({{old('districtId', @Auth::user()->detail->districtId)}}).trigger('change');
+      });
+             @if(!empty(old('districtId', @Auth::user()->detail->districtId)))
+             setTimeout(function () {
+                    $.getJSON('/api/getSubDistrict', {districtId: "{{old('districtId', @Auth::user()->detail->districtId)}}"}, function(json, textStatus) {
+                           $("#subDistrictId").html('');
+                           $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
+                           setTimeout(function () {
+                              $("#subDistrictId").val({{old('subDistrictId', @Auth::user()->detail->subDistrictId)}}).trigger('change');
+                           }, 800);
+
+                    });
+             }, 500);
+             @endif
+      @endif
+});
+
 $("#date-birdth").on('change', function(event) {
  event.preventDefault();
  $.get('{{ url('api/checkYear') }}?date=' + $(this).val() , function(data) {
@@ -632,7 +676,7 @@ $("#date-birdth").on('change', function(event) {
       setTimeout(function () {
             $('[name="dateOfBirth"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
 
-            
+
 
             $.get('{{ url('api/checkYear') }}?date=' + $('[name="dateOfBirth"]').val() , function(data) {
               console.log(data);

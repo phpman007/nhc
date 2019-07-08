@@ -627,7 +627,7 @@
                     <div class="box-confirm2f">
                       <div class="box-checkbox2f">
                         <label class="checkbox2f">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ  หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
-                          <input type="checkbox">
+                          <input type="checkbox" checked>
                           <span class="checkmark"></span>
                         </label>
                       </div>
@@ -642,7 +642,7 @@
                         @endif
                   </div>
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border">ปิด</button>
+                       <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">ยื่นเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

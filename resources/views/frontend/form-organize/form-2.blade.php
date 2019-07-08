@@ -72,7 +72,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                     {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control select2" ,"placeholder"=>"จังหวัด"]) !!}
                                        @if($errors->has('provinceId'))
                                      <small>{{ $errors->first('provinceId') }}</small>
                                      @endif
@@ -106,7 +106,7 @@
                                       @if($errors->has('password'))
                                      <small>{{ $errors->first('password') }}</small>
                                      @endif
-                                  <span class="icon-viewpass notview">
+                                  <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                     <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                     <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
@@ -125,7 +125,7 @@
                                     @if($errors->has('password_confirmation'))
                                    <small>{{ $errors->first('password_confirmation') }}</small>
                                    @endif
-                                  <span class="icon-viewpass notview">
+                                  <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                         <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                         <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
@@ -135,7 +135,7 @@
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                    <button type="reset" name="button" class="btn btn-border">ยกเลิก</button>
+                   <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                     <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

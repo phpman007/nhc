@@ -119,9 +119,17 @@
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <h5>ทั้งนี้ ข้าพเจ้าได้ยื่นแบบขอขึ้นทะเบียนองค์กรและยืนยันการส่งผู้แทนองค์กรภาคเอกชน พร้อมเอกสารหลักฐานประกอบการขอขึ้นทะเบียน มาพร้อมนี้</h5>
-                    <p class="green2f"><span class="underline2f">สำหรับองค์กรภาคเอกชนที่เป็นนิติบุคคล</span> ประกอบด้วย</p>
+                    <p class="green2f"><span class="underline2f">
+                          @if(Auth::user()->detail->legalStastus == 1)
+                          สำหรับองค์กรภาคเอกชนที่เป็นนิติบุคคล
+                          @else
+                          สำหรับองค์กรภาคเอกชนที่ไม่เป็นนิติบุคคล
+                          @endif
+                    </span> ประกอบด้วย</p>
                     <div class="box-input2f">
-                        <div class="text-input2f nopadding">สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร</div>
+                        <div class="text-input2f nopadding">
+                              สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร
+                        </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
@@ -130,7 +138,10 @@
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file->id) }}">ลบ</a></small>
+                                   @endif
+                                   @if($errors->has('file1'))
+                                   <small>{{ $errors->first('file1') }}</small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -156,7 +167,10 @@
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file->id) }}">ลบ</a></small>
+                                   @endif
+                                   @if($errors->has('file2'))
+                                   <small>{{ $errors->first('file2') }}</small>
                                    @endif
 
                                 </div><!--end input2f-->
@@ -182,7 +196,10 @@
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file->id) }}">ลบ</a></small>
+                                   @endif
+                                   @if($errors->has('file3'))
+                                   <small>{{ $errors->first('file3') }}</small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -190,7 +207,7 @@
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn03" name="file3" type="file" class="upload">
+                                         <input id="file3" name="file3" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -207,7 +224,10 @@
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file->id) }}">ลบ</a></small>
+                                   @endif
+                                   @if($errors->has('file4'))
+                                   <small>{{ $errors->first('file4') }}</small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -215,7 +235,7 @@
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn04" name="file4" type="file" class="upload">
+                                         <input id="file4" name="file4" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -223,7 +243,14 @@
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f nopadding">หนังสือรับรองความมีอยู่และการดำเนินกิจกรรมขององค์กรภาคเอกชนที่ไม่เป็นนิติบุคคล</div>
+                        <div class="text-input2f nopadding">
+                              @if(Auth::user()->detail->legalStastus == 1)
+                                    สำเนาหลักฐานที่แสดงความเป็นนิติบุคคล
+                              @else
+                                    หนังสือรับรองความมีอยู่และการดำเนินกิจกรรมขององค์กรภาคเอกชนที่ไม่เป็นนิติบุคคล
+                              @endif
+
+                        </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
@@ -232,15 +259,18 @@
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file->id) }}">ลบ</a></small>
                                    @endif
+                                   @if($errors->has('file5'))
+                                  <small>{{ $errors->first('file5') }}</small>
+                                  @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
                                 <div class="btn-2button">
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
-                                         <input id="uploadBtn05" name="file5" type="file" class="upload">
+                                         <input id="file5" name="file5" type="file" class="upload">
                                      </div>
                                      <button type="button" name="button" class="btn btn-purple">ตัวอย่าง</button>
                                 </div><!--end btn-2button-->
@@ -249,7 +279,7 @@
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">ตรวจทานเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -269,6 +299,30 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
-
+var filename;
+document.getElementById('file1').onchange = function () {
+	filename = this.value.split(String.fromCharCode(92));
+	document.getElementById("uploadFile01").value = filename[filename.length-1];
+};
+var filename;
+document.getElementById('file2').onchange = function () {
+	filename = this.value.split(String.fromCharCode(92));
+	document.getElementById("uploadFile02").value = filename[filename.length-1];
+};
+var filename;
+document.getElementById('file3').onchange = function () {
+	filename = this.value.split(String.fromCharCode(92));
+	document.getElementById("uploadFile03").value = filename[filename.length-1];
+};
+var filename;
+document.getElementById('file4').onchange = function () {
+	filename = this.value.split(String.fromCharCode(92));
+	document.getElementById("uploadFile04").value = filename[filename.length-1];
+};
+var filename;
+document.getElementById('file5').onchange = function () {
+	filename = this.value.split(String.fromCharCode(92));
+	document.getElementById("uploadFile05").value = filename[filename.length-1];
+};
 </script>
 @endsection

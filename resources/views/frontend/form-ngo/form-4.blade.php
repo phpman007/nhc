@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-{!! Form::open() !!}
+{!! Form::open(['files' => true]) !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -53,7 +53,7 @@
                     <div class="box-input2f">
                           {!! Form::textarea('vision', Auth::user()->detail->vision, [ "rows"=>"5", "cols"=>"50", "class"=>"form-control", "placeholder"=>"วิสัยทัศน์ของข้าพเจ้าต่อการพัฒนาระบบสุขภาพแห่งชาติ"]) !!}
                           @if($errors->has('vision'))
-                          {{ $errors->first('vision') }}
+                         <small>{{ $errors->first('vision') }}</small>
                           @endif
                     </div><!--end box-input2f-->
                     <h5>ทั้งนี้  ข้าพเจ้าได้แนบสำเนาเอกสารหรือหลักฐานที่แนบมาพร้อมใบสมัคร</h5>
@@ -68,7 +68,11 @@
                                   $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                    ?>
                                    @if($file1)
-                                   <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->newName }}</a> |
+                                   <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file1->id) }}">ลบ</a></small>
+                                   @endif
+                                   @if($errors->has('uploadBtn01'))
+                                  <small>{{ $errors->first('uploadBtn01') }}</small>
                                    @endif
                                 </div><!--end input2f-->
                             </div>
@@ -92,7 +96,11 @@
                                  $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                   ?>
                                   @if($file2)
-                                  <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a></small>
+                                  <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->newName }}</a> |
+                                  <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file2->id) }}">ลบ</a></small>
+                                  @endif
+                                  @if($errors->has('uploadBtn02'))
+                                 <small>{{ $errors->first('uploadBtn02') }}</small>
                                   @endif
                                 </div><!--end input2f-->
                             </div>
@@ -118,7 +126,11 @@
                                 $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                  ?>
                                  @if($file3)
-                                 <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a></small>
+                                 <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->newName }}</a> |
+                                 <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file3->id) }}">ลบ</a></small>
+                                 @endif
+                                 @if($errors->has('uploadBtn03'))
+                                <small>{{ $errors->first('uploadBtn03') }}</small>
                                  @endif
                                 </div><!--end input2f-->
                             </div>
@@ -144,7 +156,7 @@
                   </div><!--end set-form2f-->
 
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" id="submit-btn" name="button" disabled class="btn btn-green">ตรวจสอบเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
