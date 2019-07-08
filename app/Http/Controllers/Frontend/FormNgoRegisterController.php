@@ -25,7 +25,6 @@ class FormNgoRegisterController extends Controller
             switch ($step) {
                   case 1:
                   Auth::logout();
-
                   return $this->stepOne($request);
                   break;
                   case 2:
@@ -51,12 +50,13 @@ class FormNgoRegisterController extends Controller
 
       public function stepOne(Request $request) {
 
+            $request->request->add(['personalId'=> str_replace('-', '', $request->personalId)]);
             $request->validate([
-                  'personalId' 				=> 'required|min:12|max:13',
+                  'personalId' 				=> 'required|unique:members|max:14|min:13',
                   'email' 					=> 'required|email|unique:members',
-                  'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		=> 'required|min:6|max:20',
-                  'provinceId'                  => 'required'
+                  'password'					=> 'required|min:6|max:20|confirmed|regex:/^[A-Za-z0-9]*$/',
+                  'password_confirmation'		      => 'required|min:6|max:20|regex:/^[A-Za-z0-9]*$/',
+                  'provinceId'                        => 'required'
             ]);
 
             $dataSet =  $request->only(['personalId', 'email', 'password', 'provinceId']);
@@ -71,7 +71,17 @@ class FormNgoRegisterController extends Controller
 
             $dataSet['groupId'] = 4;
 
-            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', $dataSet['groupId'])->first();
+            $member = Member::create($dataSet);
+             Auth::login($member, true);
+            $member->detail()->create(['statusId' => 1, 'provinceMemberID' => $request->provinceId]);
+            return Redirect::to('form-ngo-register/2');
+
+
+
+            $hasMember = Member::where('personalId', $dataSet['personalId'])
+            ->where('groupId', $dataSet['groupId'])
+            ->first();
+
             if($hasMember) {
                   if(Hash::check($request->password, $hasMember->password)) :
                         Auth::login($hasMember, true);
@@ -147,7 +157,10 @@ class FormNgoRegisterController extends Controller
       }
 
       public function stepThree(Request $request) {
-
+            $request->validate([
+                  'activity1' => 'required',
+                  'detail1'   => 'required'
+            ]);
             // Auth::user()->seniorGroupId = $request->seniorGroupId;
             // Auth::user()->save();
 
@@ -163,13 +176,40 @@ class FormNgoRegisterController extends Controller
       }
 
       public function stepFour(Request $request) {
-            // Rule
-            $request->validate([
+
+            $rule = [
                   'suggestNameTitle'    => 'required',
                   'suggestNameTitle'    => 'required',
                   'suggestFullname'     => 'required',
-                  'suggestPosition'     => 'required'
-            ]);
+                  'suggestPosition'     => 'required',
+                  'byNgo'               => 'required'
+            ];
+             $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
+             if(empty($file1)){
+                   $rule['file1'] = 'required|mimes:jpeg,pdf';
+             }
+             $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
+             if(empty($file2)){
+                       $rule['file2'] = 'required|mimes:jpeg,pdf';
+            }
+           $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
+               if(empty($file3)){
+                     $rule['file3'] = 'required|mimes:jpeg,pdf';
+               }
+               $file4 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
+                   if(empty($file4)){
+                        $rule['file4'] = 'required|mimes:jpeg,pdf';
+                   }
+                   $file5 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
+                      if(empty($file5)){
+                           $rule['file5'] = 'required|mimes:jpeg,pdf';
+                      }
+
+            // Rule
+            $request->validate($rule);
+
+
+
             $dataSet = $request->all();
 
             Auth::user()->update($request->all());
@@ -278,7 +318,9 @@ class FormNgoRegisterController extends Controller
 
             // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
-            return back()->with('success', true);
+            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            return Redirect::to('form-ngo/1')->with('success', true);
+            return back();
 
       }
 }

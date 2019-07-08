@@ -320,4 +320,3 @@ class orCheckController extends Controller
         //
     }
 }
-

@@ -154,7 +154,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
+                                      {!! Form::text('no', @Auth::user()->detail->no, ["class"=>"form-control" ,"placeholder"=>"เลขที่", 'maxlength' => 7]) !!}
                                      @if($errors->has('no'))
                                      <small>{{ $errors->first('no') }}</small>
                                      @endif
@@ -229,8 +229,11 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',Auth::user()->detail->provinceId)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
-                                      {!! Form::hidden('provinceId', Auth::user()->detail->provinceId, ['id'=>'provinceId']) !!}
+                                      <?php $provide = \DB::table('provinces')->select('province', 'province_code')->groupBy('province', 'province_code')->get()->pluck('province', 'province_code') ?>
+                                     {!! Form::select('provinceId', $provide, null, ['class'=>'form-control select2', 'placeholder' => 'จังหวัด', 'id'=>'provinceId']) !!}
+                                     @if($errors->has('provinceId'))
+                                    <small>{{ $errors->first('provinceId') }}</small>
+                                    @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -242,8 +245,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',Auth::user()->detail->districtId)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
-                                        {!! Form::hidden('districtId', Auth::user()->detail->districtId, ['id'=>'districtId']) !!}
+                                         {!! Form::select('districtId', [], null, ['class'=>'form-control select2', 'placeholder' => 'อำเภอ/เขต', 'id'=>'districtId']) !!}
+                                         @if($errors->has('districtId'))
+                                       <small>{{ $errors->first('districtId') }}</small>
+                                       @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -256,9 +261,10 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
 
-                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',Auth::user()->detail->subDistrictId)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
-
-                                      {!! Form::hidden('subDistrictId', Auth::user()->detail->subDistrictId, ['id'=>'subDistrictId']) !!}
+                                     {!! Form::select('subDistrictId', [], null, ['class'=>'form-control select2', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictId']) !!}
+                                     @if($errors->has('subDistrictId'))
+                                   <small>{{ $errors->first('subDistrictId') }}</small>
+                                   @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -581,9 +587,9 @@
 
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
-                      <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
+                      <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
@@ -609,8 +615,39 @@ $(document).ready(function() {
         $("#tel").mask('0-0-000-0000')
         $("#mobile").mask('00-0000-0000');
 
+        $(document).on('change', '#provinceId', function(event) {
+             $.getJSON('/api/getDistrict', {provinceId: $(this).val()}, function(json, textStatus) {
+                           $("#districtId").html('');
+                                    $("#subDistrictId").html('');
+                       $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+             });
+        });
 
-     
+        $(document).on('change', '#districtId', function(event) {
+             $.getJSON('/api/getSubDistrict', {districtId: $(this).val()}, function(json, textStatus) {
+                      $("#subDistrictId").html('');
+                       $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
+             });
+        })
+        @if(!empty(old('provinceId', @Auth::user()->detail->provinceId)))
+        $("#provinceId").val({{old('provinceId', @Auth::user()->detail->provinceId)}}).trigger('change');
+        $.getJSON('/api/getDistrict', {provinceId: "{{old('provinceId', @Auth::user()->detail->provinceId)}}"}, function(json, textStatus) {
+                      $("#districtId").html('');
+                      $("#subDistrictId").html('');
+                $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"});
+                $("#districtId").val({{old('districtId', @Auth::user()->detail->districtId)}}).trigger('change');
+        });
+                @if(!empty(old('districtId', @Auth::user()->detail->districtId)))
+                setTimeout(function () {
+                      $.getJSON('/api/getSubDistrict', {districtId: "{{old('districtId', @Auth::user()->detail->districtId)}}"}, function(json, textStatus) {
+                              $("#subDistrictId").html('');
+                              $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
+                              $("#subDistrictId").val({{old('subDistrictId', @Auth::user()->detail->subDistrictId)}}).trigger('change');
+                      });
+                }, 500);
+                @endif
+        @endif
+
 
       $("#date-birdth").on('change', function(event) {
         event.preventDefault();

@@ -132,7 +132,6 @@ class CheckSNController extends Controller
         }
 
         $listmember= $list->orderBy('members.id')->paginate(10);
-
         return view('/backend/check/snCheck',compact('listprovince','listgroupsn','liststatus','listmember','countprovince','countstatus','countgroup'));
     }
 

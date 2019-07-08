@@ -54,7 +54,7 @@
                                </div>
                                <div class="col-md-6 col-sm-8">
                                    <div class="input2f">
-                                        {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control" ,"placeholder"=>"จังหวัด"]) !!}
+                                        {!! Form::select('provinceId', Helper::getProvices(), null, ["class"=>"form-control select2" ,"placeholder"=>"จังหวัด"]) !!}
                                           @if($errors->has('provinceId'))
                                         <small>{{ $errors->first('provinceId') }}</small>
                                         @endif
@@ -88,7 +88,7 @@
                                          @if($errors->has('password'))
                                         <small>{{ $errors->first('password') }}</small>
                                         @endif
-                                     <span class="icon-viewpass notview">
+                                     <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                        <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                        <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                      </span>
@@ -107,7 +107,7 @@
                                        @if($errors->has('password_confirmation'))
                                       <small>{{ $errors->first('password_confirmation') }}</small>
                                       @endif
-                                     <span class="icon-viewpass notview">
+                                     <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                            <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                            <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                      </span>
@@ -122,7 +122,7 @@
                         @foreach(DB::table('organization_groups')->get() as $key => $val)
                         <div class="box-radio2f">
                               @if($key == 0 )
-                          {!! Form::radio('ngoGroupId', 1, ['id' => 'group-'. ($key+1)]) !!}
+                          {!! Form::radio('ngoGroupId', 1,1, ['id' => 'group-'. ($key+1)]) !!}
                               @else
                           {!! Form::radio('ngoGroupId', $val->id, $val->id == @Auth::user()->ngoGroupId ? 1 : 0, ['id' => 'group-'. ($key+1)]) !!}
                           @endif
@@ -139,6 +139,9 @@
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวประชาชน">
+                                  @if($errors->has('uploadBtn01'))
+                                  <small>{{ $errors->first('uploadBtn01') }}</small>
+                                  @endif
                                 </div><!--end input2f-->
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -160,7 +163,7 @@
                         @endif
                   </div>
                   <div class="btn-center2f">
-                    <button type="button" name="button" class="btn btn-border">ปิด</button>
+                    <a href="{{ url('/') }}" onclick="if(!confirm('ยืนยันการทำรายการ')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                     <button type="submit" name="button" class="btn btn-green">ยื่นเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -189,5 +192,25 @@ document.getElementById('uploadBtn01').onchange = function () {
 	filename = this.value.split(String.fromCharCode(92));
 	document.getElementById("uploadFile01").value = filename[filename.length-1];
 };
+$(document).ready(function() {
+  $(".icon-viewpass img").on('click', function(event) {
+        event.preventDefault();
+        var input = $(this).parents('.input2f').find('input');
+
+        // input marker
+
+        $(this).parents('.icon-viewpass').find('img').each(function(k, v) {
+            if($(v).hasClass('pass-view')) {
+                $(v).removeClass('pass-view')
+                $(v).addClass('pass-none');
+                input.attr('type', 'password')
+            } else {
+                $(v).addClass('pass-view')
+                $(v).removeClass('pass-none');
+                input.attr('type', 'text')
+            }
+        })
+    });
+});
 </script>
 @endsection

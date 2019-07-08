@@ -76,11 +76,11 @@
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'government_official_card')->first();
                                    ?>
                                    @if($file)
-                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->fileName }}</a></small>
+                                   <small><a target="_blank" href="{{asset($file->path)}}">{{ $file->newName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file->id) }}">ลบ</a>
                                    @endif
                                 </div><!--end input2f-->
                                 @if($errors->has('file_ref'))
-                                  {{ $errors->first('file_ref') }}
+                                  <small>{{ $errors->first('file_ref') }}</small>
                                 @endif
                             </div>
                             <div class="col-md-6 col-sm-4">
@@ -88,6 +88,7 @@
                                     <div class="fileUpload btn btn-blue">
                                          <span>Upload</span>
                                          {!! Form::file('file_ref', ["class"=>"upload", "id"=>"uploadBtn01"]) !!}
+
                                      </div>
                                 </div><!--end btn-2button-->
                             </div>
@@ -95,7 +96,7 @@
                     </div>
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border">ยกเลิก</button>
+                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

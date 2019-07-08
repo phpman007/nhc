@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<form method="post" enctype="multipart/formdata">
+<form id="form-step" method="post" enctype="multipart/formdata">
     {{ csrf_field() }}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -90,7 +90,7 @@
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
                                         <input type="password" name="password" value="" class="form-control" placeholder="" autocomplete="false">
-                                        <span class="icon-viewpass notview">
+                                        <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                             <img src="{{ asset("frontend/images/visibility-on.svg") }}" class="pass-view" alt="">
                                             <img src="{{ asset("frontend/images/visibility-off.svg") }}" class="pass-none" alt="">
                                         </span>
@@ -109,7 +109,7 @@
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
                                         <input type="password" name="password_confirmation" value="" class="form-control" placeholder="" autocomplete="false">
-                                        <span class="icon-viewpass notview">
+                                        <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
                                             <img src="{{ asset("frontend/images/visibility-on.svg") }}" class="pass-view" alt="">
                                             <img src="{{ asset("frontend/images/visibility-off.svg") }}" class="pass-none" alt="">
                                         </span>
@@ -126,7 +126,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
-                                <button type="reset" name="button" class="btn btn-border">ยกเลิก</button>
+                                  <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                                 <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                             </div>
                         </div>
@@ -168,7 +168,10 @@
         })
     });
     jQuery(document).ready(function($) {
-        $("#personalId").mask('0-0000-00000-00-0');
+          $('#form-step').on('submit', function(event) {
+                event.preventDefault();
+                alertConfirmForm('#form-step', 'กรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิ Step1 สำเร็จแล้ว คุณต้องการกรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิStepต่อไปไหม');
+          })
     });
 </script>
 @endsection

@@ -1,7 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-		<form method="post">  
+		<form method="post" id="form-step">
           <div class="insitepage2f">
               <div class="navication2f">
                   <div class="container">
@@ -72,7 +72,7 @@
                           </div><!--end box-input2f-->
                         </div><!--end set-form2f-->
                         <div class="btn-center2f">
-                            <a href="{{ url('form-professional/2') }}" type="button" name="button" class="btn btn-border">ยกเลิก</a>
+                             <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                             <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                         </div><!--end btn-center2f-->
                     </div><!--end content-form2f-->
@@ -92,5 +92,12 @@
 @section('js')
 
 @include('frontend.form-professional.global-js')
-
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+      $('#form-step').on('submit', function(event) {
+            event.preventDefault();
+            alertConfirmForm('#form-step', 'กรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิ Step3 สำเร็จแล้ว คุณต้องการกรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิStepต่อไปไหม');
+      })
+});
+</script>
 @endsection

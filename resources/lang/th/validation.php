@@ -82,7 +82,7 @@ return [
         'string' => ':attribute ต้องไม่เกิน :max ตัวอักษร',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => ':attribute ต้องเป็นไฟล์ประเภท :values',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => ':attribute ต้องมีอย่างน้อย :min',
@@ -94,7 +94,7 @@ return [
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'The :attribute must be a number.',
     'present' => 'The :attribute field must be present.',
-    'regex' => 'The :attribute format is invalid.',
+    'regex' => 'รูปแบบ :attribute ไม่ถูกต้อง',
     'required' => 'กรุณากรอกข้อมูล :attribute',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
@@ -129,8 +129,32 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'thaiStatus' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'ageQualify' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'enoughAbility' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'noDrug' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'noCriminal' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'noJail' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'noNHCworking' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'enoughExperience' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
+        ],
+        'enoughProfile' => [
+            'required' => 'กรุณาติ๊กในช่องว่างเพื่อยืนยันคุณสมบัติ :attribute',
         ],
     ],
 
@@ -203,6 +227,18 @@ return [
         'ngoStartDate'     => 'ก่อตั้งองค์กรวันที่',
         'ngoQtyMember'     => 'จำนวนสมาชิกในปัจจุบัน',
         'ngoObjective'     => 'วัตถุประสงค์',
+        'activity1'        => 'ชื่อกิจกรรม',
+        'detail1'             => 'สรุปผลงานที่สำคัญ',
+        "suggestNameTitle"    => 'คำนำหน้า',
+            "suggestNameTitle"      => 'คำนำหน้า',
+            "suggestFullname" => 'ชื่อ สกุล',
+            "suggestPosition" => 'ตำแหน่ง',
+            "byNgo"     => 'องค์กร',
+            "file1"     => ' ',
+            "file2"     => ' ',
+            "file3"     => ' ',
+            "file4"     => ' ',
+            "file5"     => ' ',
     ],
 
 ];

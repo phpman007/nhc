@@ -55,10 +55,10 @@ class FormProfessorController extends Controller
             $request->request->add(['personalId' => str_replace('-', '', $request->personalId)]);
 
             $request->validate([
-                  // 'personalId' 				=> 'required|unique:members|max:14|min:13',
-                  // 'email' 					=> 'required|email|unique:members',
-                  'password'					=> 'required|min:6|max:20|confirmed',
-                  'password_confirmation'		     => 'required|min:6|max:20'
+                  'personalId' 				=> 'required|unique:members|max:14|min:13',
+                  'email' 					=> 'required|email|unique:members',
+                  'password'					=> 'required|min:6|max:20|confirmed|regex:/^[A-Za-z0-9]*$/',
+                  'password_confirmation'		     => 'required|min:6|max:20|regex:/^[A-Za-z0-9]*$/'
             ]);
 
             $dataSet =  $request->all();
@@ -66,9 +66,12 @@ class FormProfessorController extends Controller
             $dataSet['username'] = $dataSet['email'];
             $dataSet['groupId'] = 1;
 
-            // $member = Member::create($dataSet);
-            $member = Member::first();
-            $hasMember = Member::where('personalId', $dataSet['personalId'])->where('groupId', 1)->first();
+            $member = Member::create($dataSet);
+             Auth::login($member, true);
+            $member->detail()->create(['statusId' => 1]);
+            return Redirect::to('form-professional/2');
+
+
         if($hasMember) {
             if(Hash::check($request->password, $hasMember->password)) :
                 Auth::login($hasMember, true);
@@ -110,9 +113,9 @@ class FormProfessorController extends Controller
       public function stepTwo(Request $request) {
 
             $request->validate([
-                  'nameTitle'		=> 'required|max:100',
-                  'firstname'		=> 'required|max:50',
-                  'lastname'		=> 'required|max:50',
+                  'nameTitle'		=> 'required|min:1|max:100',
+                  'firstname'		=> 'required|min:1|max:50',
+                  'lastname'		=> 'required|min:1|max:50',
                   'thaiStatus'    => 'required',
                   'ageQualify'    => 'required',
                   'enoughAbility' => 'required',
@@ -170,8 +173,12 @@ class FormProfessorController extends Controller
 
       public function stepFour(Request $request) {
 
+            $request->request->add(['tel' => str_replace('-', '', $request->tel)]);
+
+            $request->request->add(['mobile' => str_replace('-', '', $request->mobile)]);
+
             $request->validate([
-                  'no' 			   => 'required|max:11',
+                  'no' 			   => 'required|max:5',
                   'moo' 		   => 'required|max:151',
                   'soi' 		   => 'required|max:101',
                   'street' 		   => 'required|max:101',
@@ -180,8 +187,8 @@ class FormProfessorController extends Controller
                   'dateOfBirth'        => 'required',
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
-                  'tel'                => 'required|min:7',
-                  'mobile' 		   => 'required|min:9',
+                  'tel'                => 'required|min:9|max:10',
+                  'mobile' 		   => 'required|min:10|max:11',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'nowWork' 		   => 'required',
@@ -206,12 +213,21 @@ class FormProfessorController extends Controller
       }
 
       public function stepFive(Request $request) {
-            $request->validate([
-                  'vision'        =>'required',
-                  'uploadBtn01'   => 'required',
-                  'uploadBtn02'   => 'required',
-                  'uploadBtn03'   => 'required'
-            ]);
+            $rule = ['vision' => 'required'];
+             $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
+             if(empty($file1)){
+                   $rule['uploadBtn01'] = 'required|mimes:jpeg,pdf';
+             }
+             $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
+             if(empty($file2)){
+                       $rule['uploadBtn02'] = 'required|mimes:jpeg,pdf';
+            }
+           $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
+               if(empty($file3)){
+                     $rule['uploadBtn03'] = 'required|mimes:jpeg,pdf';
+               }
+
+            $request->validate($rule);
 
             $dataSet = $request->only(['vision']);
 
@@ -292,6 +308,9 @@ class FormProfessorController extends Controller
       {
             // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
+            // $pdf = event(new \App\Events\FinishRegister(Auth::user()));
+
+            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
             return back()->with('success', true);
       }
 }

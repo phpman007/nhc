@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth,Redirect;
+use App\Model\Frontend\Attachment;
 class FormNgoController extends Controller
 {
       protected $view = 'form-ngo';
@@ -25,6 +26,11 @@ class FormNgoController extends Controller
 
             switch ($step) {
                   case 1:
+
+                        if(@Auth::user()->groupId != 4){
+                              Auth::logout();
+                        }
+
                         return $this->stepOne($request);
                         break;
                   case 2:
@@ -88,7 +94,29 @@ class FormNgoController extends Controller
       }
 
       public function stepThree(Request $request) {
-
+            $request->validate([
+                  'no' 			   => 'required|max:7',
+                  'moo' 		   => 'required|max:151',
+                  'soi' 		   => 'required|max:101',
+                  'street' 		   => 'required|max:101',
+                  'subDistrictId'      => 'required',
+                  'districtId'         => 'required',
+                  'dateOfBirth'        => 'required',
+                  'provinceId'         => 'required',
+                  'zipCode' 		   => 'required',
+                  'tel'                => 'required|min:9|max:10',
+                  'mobile' 		   => 'required|min:10|max:11',
+                  'graduated1' 	   => 'required',
+                  'faculty1' 		   => 'required',
+                  'nowWork' 		   => 'required',
+                  'nowWorkPlace' 	   => 'required',
+                  'nowRole' 		   => 'required',
+                  'pastWork1'          => 'required',
+                  'pastOrganization1'  => 'required',
+                  'time1' 		   =>'required',
+                  'pastOrganization1'     =>'required',
+                  'importantMemo'      =>'required'
+            ]);
             $dataSet = $request->all();
 
             $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
@@ -101,12 +129,22 @@ class FormNgoController extends Controller
 
       public function stepFour(Request $request) {
 
-            $request->validate([
-                'vision'        =>'required',
-                'uploadBtn01'   => 'required',
-                'uploadBtn02'   => 'required',
-                'uploadBtn03'   => 'required'
-            ]);
+            $rule = ['vision' => 'required'];
+             $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
+             if(empty($file1)){
+                   $rule['uploadBtn01'] = 'required|mimes:jpeg,pdf';
+             }
+             $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
+             if(empty($file2)){
+                       $rule['uploadBtn02'] = 'required|mimes:jpeg,pdf';
+            }
+           $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
+               if(empty($file3)){
+                     $rule['uploadBtn03'] = 'required|mimes:jpeg,pdf';
+               }
+
+            $request->validate($rule);
+
 
             $dataSet = $request->only(['vision']);
 
@@ -121,7 +159,7 @@ class FormNgoController extends Controller
             if($request->hasFile('uploadBtn01')) {
                 if($attachFile['uploadBtn01']->isValid()) {
 
-                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn01'], 'proffessional');
+                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn01'], 'ngo');
                     Attachment::where('upload_group', $uploadGroup)->where('use_is', 'copy_personal_card')->where('member_id', $memberId)->update(['status' => 0]);
                     $attach = new Attachment();
                     $attach->path        = $fileUpload1['path'];
@@ -141,7 +179,7 @@ class FormNgoController extends Controller
             if($request->hasFile('uploadBtn02')) {
                 if($attachFile['uploadBtn02']->isValid()) {
 
-                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn02'], 'proffessional');
+                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn02'], 'ngo');
                     Attachment::where('upload_group', $uploadGroup)->where('use_is', 'personal_photo')->where('member_id', $memberId)->update(['status' => 0]);
                     $attach = new Attachment();
                     $attach->path        = $fileUpload1['path'];
@@ -162,7 +200,7 @@ class FormNgoController extends Controller
             if($request->hasFile('uploadBtn03')) {
                 if($attachFile['uploadBtn03']->isValid()) {
 
-                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn03'], 'proffessional');
+                    $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn03'], 'ngo');
                     Attachment::where('upload_group', $uploadGroup)->where('use_is', 'document1')->where('member_id', $memberId)->update(['status' => 0]);
                     $attach = new Attachment();
                     $attach->path        = $fileUpload1['path'];
@@ -186,6 +224,7 @@ class FormNgoController extends Controller
 
             // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
+            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
             return back()->with('success', true);
 
             $request->validate([

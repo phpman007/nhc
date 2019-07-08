@@ -37,7 +37,11 @@
                   </div><!--end top-manage2f-->
                   <div class="manage-login2f">
                       <div class="control-login2f">
+                           @if(Auth::check())
+                          <div class="box-login2f"><a href="{{ url('/logout') }}">ออกจากระบบ</a></div>
+                           @else
                           <div class="box-login2f"><a href="{{ url('/login') }}">เข้าสู่ระบบ</a></div>
+                          @endif
                           <div class="box-user2f">
                               <div class="img-user2f"><img src="{{asset("frontend/images/icon-user.svg")}}" alt=""></div>
                               <div class="text-username2f">2fellows</div>
@@ -152,8 +156,8 @@
                                    <li><span>ผู้แทนองค์กรภาคเอกชน (NGOs)</span>
                                      <ul class="submenu_level03" >
                                          <li><a href="">กำหนดการ</a></li>
-                                         <li><a href="{{ url('form-ngo-register/1') }}">เอกสารประกอบการสมัคร</a></li>
-                                         <li><a href="{{ url('form-ngo/1') }}">สมัคร</a></li>
+                                         <li><a href="">เอกสารประกอบการสมัคร</a></li>
+                                         <li><a href="{{ url('form-ngo-register/1') }}">สมัคร</a></li>
                                      </ul>
                                    </li>
                                   </ul>

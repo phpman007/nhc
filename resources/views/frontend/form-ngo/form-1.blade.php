@@ -127,30 +127,45 @@
                             {!! Form::checkbox('thaiStatus', 1, @Auth::user()->detail->thaiStatus, []) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("thaiStatus"))
+                          <small>{{ $errors->first('thaiStatus') }}</small>
+                          @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์
                             {!! Form::checkbox('ageQualify', 1, @Auth::user()->detail->ageQualify, []) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("ageQualify"))
+                          <small>{{ $errors->first('ageQualify') }}</small>
+                          @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
                             {!! Form::checkbox('enoughAbility', 1, @Auth::user()->detail->enoughAbility, []) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("enoughAbility"))
+                          <small>{{ $errors->first('enoughAbility') }}</small>
+                          @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
                             {!! Form::checkbox('noDrug', 1, @Auth::user()->detail->noDrug, []) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("noDrug"))
+                          <small>{{ $errors->first('noDrug') }}</small>
+                          @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๕) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
                             {!! Form::checkbox('noCriminal', 1, @Auth::user()->detail->noCriminal, []) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("noCriminal"))
+                        <small>{{ $errors->first('noCriminal') }}</small>
+                        @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
                           <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
@@ -158,14 +173,17 @@
                               {!! Form::checkbox('noJail', 1, @Auth::user()->detail->noJail, []) !!}
                             <span class="checkmark"></span>
                           </label>
+                          @if($errors->has("noJail"))
+                        <small>{{ $errors->first('noJail') }}</small>
+                        @endif
                         </div><!--end box-checkbox2f-->
                     </div><!--end input-checkbox2f-->
 
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border">ยกเลิก</button>
+                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
-                      <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
+                      <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->

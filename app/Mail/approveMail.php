@@ -32,6 +32,6 @@ class approveMail extends Mailable
     {
         return $this->from('example@example.com')
         ->subject('ผลการอนุมัติ')
-        ->view('mail.emailApprove');
+        ->view('mail.professionail');
     }
 }

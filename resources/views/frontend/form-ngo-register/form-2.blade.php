@@ -172,7 +172,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('ngoNo', @Auth::user()->detail->ngoNo, ["class"=>"form-control" ,"placeholder"=>"เลขที่"]) !!}
+                                      {!! Form::text('ngoNo', @Auth::user()->detail->ngoNo, ["class"=>"form-control" ,"placeholder"=>"เลขที่", 'maxlength'=>7]) !!}
                                      @if($errors->has('ngoNo'))
                                      <small>{{ $errors->first('ngoNo') }}</small>
                                      @endif
@@ -232,7 +232,7 @@
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                      {!! Form::number('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์",'maxlength'=>5]) !!}
                                  @if($errors->has('ngoZipCode'))
                                  <small>{{ $errors->first('ngoZipCode') }}</small>
                                  @endif
@@ -247,8 +247,13 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('provinceName', @DB::table('provinces')->where('province_code',@Auth::user()->detail->ngoProvincetID)->first()->province, ['class'=>'form-control', 'placeholder' => 'จังหวัด', 'id'=>'provinceName', 'readonly'=>'']) !!}
-                                      {!! Form::hidden('ngoProvincetID', @Auth::user()->detail->ngoProvincetID, ['id'=>'ngoProvincetID']) !!}
+                                      <?php $provide = \DB::table('provinces')->select('province', 'province_code')->groupBy('province', 'province_code')->get()->pluck('province', 'province_code') ?>
+                                      {!! Form::select('ngoProvincetID', $provide, null, ['class'=>'form-control select2', 'placeholder' => 'จังหวัด', 'id'=>'provinceId']) !!}
+                                      @if($errors->has('ngoProvincetID'))
+                                     <small>{{ $errors->first('ngoProvincetID') }}</small>
+                                     @endif
+
+
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -260,8 +265,10 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                        {!! Form::text('districtName', @DB::table('provinces')->where('amphoe_code',@Auth::user()->detail->ngoDistrictID)->first()->amphoe, ['class'=>'form-control', 'placeholder' => 'อำเภอ', 'id'=>'districtName', 'readonly'=>'']) !!}
-                                        {!! Form::hidden('ngoDistrictID', @Auth::user()->detail->ngoDistrictID, ['id'=>'ngoDistrictID']) !!}
+                                      {!! Form::select('ngoDistrictID', [], null, ['class'=>'form-control select2', 'placeholder' => 'อำเภอ/เขต', 'id'=>'districtId']) !!}
+                                      @if($errors->has('ngoDistrictID'))
+                                     <small>{{ $errors->first('ngoDistrictID') }}</small>
+                                     @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -273,10 +280,11 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
+                                      {!! Form::select('ngoSubDistrictID', [], null, ['class'=>'form-control select2', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictId']) !!}
+                                      @if($errors->has('ngoSubDistrictID'))
+                                     <small>{{ $errors->first('ngoSubDistrictID') }}</small>
+                                     @endif
 
-                                      {!! Form::text('subDistrictName', @DB::table('provinces')->where('district_code',@Auth::user()->detail->ngoSubDistrictID)->first()->district, ['class'=>'form-control', 'placeholder' => 'ตำบล/แขวง', 'id'=>'subDistrictName', 'readonly'=>'']) !!}
-
-                                      {!! Form::hidden('ngoSubDistrictID', @Auth::user()->detail->ngoSubDistrictID, ['id'=>'ngoSubDistrictID']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -336,9 +344,9 @@
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
-                      <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
+                      <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
@@ -365,6 +373,41 @@ $(document).ready(function() {
 
 	@endif
 
+      $(document).on('change', '#provinceId', function(event) {
+           $.getJSON('/api/getDistrict', {provinceId: $(this).val()}, function(json, textStatus) {
+                        $("#districtId").html('');
+                                  $("#subDistrictId").html('');
+                     $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+           });
+      });
+
+      $(document).on('change', '#districtId', function(event) {
+           $.getJSON('/api/getSubDistrict', {districtId: $(this).val()}, function(json, textStatus) {
+                    $("#subDistrictId").html('');
+                     $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
+           });
+      })
+      @if(!empty(old('ngoProvincetID', @Auth::user()->detail->ngoProvincetID)))
+      $("#provinceId").val({{old('ngoProvincetID', @Auth::user()->detail->ngoProvincetID)}}).trigger('change');
+      $.getJSON('/api/getDistrict', {provinceId: "{{old('ngoProvincetID', @Auth::user()->detail->ngoProvincetID)}}"}, function(json, textStatus) {
+                    $("#districtId").html('');
+                    $("#subDistrictId").html('');
+             $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"});
+             $("#districtId").val({{old('ngoDistrictID', @Auth::user()->detail->ngoDistrictID)}}).trigger('change');
+      });
+             @if(!empty(old('ngoDistrictID', @Auth::user()->detail->ngoDistrictID)))
+             setTimeout(function () {
+                    $.getJSON('/api/getSubDistrict', {districtId: "{{old('ngoDistrictID', @Auth::user()->detail->ngoDistrictID)}}"}, function(json, textStatus) {
+                           $("#subDistrictId").html('');
+                           $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
+                           setTimeout(function () {
+                                 $("#subDistrictId").val({{old('ngoSubDistrictID', @Auth::user()->detail->ngoSubDistrictID)}}).trigger('change');
+                           }, 800);
+
+                    });
+             }, 500);
+             @endif
+      @endif
 
       $("[name='ngoZipCode']").on('keyup', function(event) {
 		var _zipcode = $(this).val();

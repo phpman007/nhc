@@ -54,7 +54,11 @@
                     <div class="input-radio2f">
                         @foreach(DB::table('ngo_groups')->get() as $key => $item)
                         <div class="box-radio2f">
+                              @if($key == 0)
+                          {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key, 'checked' => 1]) !!}
+                              @else
                           {!! Form::radio('ngoGroupId', $item->id, $item->id == Auth::user()->ngoGroupId ? 'checked' : '', ['id' => "group".$key]) !!}
+                          @endif
                           <label for="group{{$key}}">{{$key+1}}) {{$item->groupName}}</label>
                         </div>
                         @endforeach
@@ -134,9 +138,9 @@
                       </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <button type="button" name="button" class="btn btn-border"><img src="images/left-arrow-gray.svg" alt="">ย้อนกลับ</button>
+                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
-                      <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button>
+                      <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->
