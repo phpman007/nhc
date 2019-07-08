@@ -1,11 +1,14 @@
 <?php
-$set = 5;
+$set = 7;
 
 if(Request::segment(1) == "form-organization") {
 	$active--;
 }
-if(Request::segment(1) == "form-ngo-register" || Request::segment(1) == "form-ngo") {
-	$set = 4;
+if(Request::segment(1) == "form-ngo-register" ) {
+	$set = 5;
+}
+if(Request::segment(1) == "form-ngo") {
+	$set = 6;
 }
 
  ?>

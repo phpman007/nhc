@@ -36,7 +36,7 @@
                             <ul>
                                 <li class="active"><span>&nbsp;</span></li>
                                 <li class="active"><span>&nbsp;</span></li>
-                                <li class="active"><span>&nbsp;</span></li>
+                                <li class=""><span>&nbsp;</span></li>
                                 <li><span>&nbsp;</span></li>
                             </ul>
                         </div><!--end line-progress2f-->
@@ -115,7 +115,7 @@
                         <div class="box-input2f">
                             <div class="row">
                                 <div class="col-md-2 col-sm-4 nopaddingright">
-                                    <div class="text-input2f">อายุ</div>
+                                    <div class="text-input2f">อายุ(ปี)</div>
                                 </div>
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
@@ -232,21 +232,7 @@
                                 </div>
                             </div><!--end row-->
                         </div><!--end box-input2f-->
-                        <div class="box-input2f">
-                            <div class="row">
-                                <div class="col-md-2 col-sm-4 nopaddingright">
-                                    <div class="text-input2f">รหัสไปรษณีย์</div>
-                                </div>
-                                <div class="col-md-6 col-sm-8">
-                                    <div class="input2f">
-                                        {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
-                                        @if($errors->has('zipCode'))
-                                        <small>{{ $errors->first('zipCode') }}</small>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div><!--end row-->
-                        </div><!--end box-input2f-->
+
                         <div class="box-input2f">
                             <div class="row">
                                 <div class="col-md-2 col-sm-4 nopaddingright">
@@ -294,7 +280,21 @@
                                 </div>
                             </div><!--end row-->
                         </div><!--end box-input2f-->
-
+                        <div class="box-input2f">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-4 nopaddingright">
+                                    <div class="text-input2f">รหัสไปรษณีย์</div>
+                                </div>
+                                <div class="col-md-6 col-sm-8">
+                                    <div class="input2f">
+                                        {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                        @if($errors->has('zipCode'))
+                                        <small>{{ $errors->first('zipCode') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div><!--end row-->
+                        </div><!--end box-input2f-->
 
 
                         <div class="box-input2f">
@@ -302,9 +302,18 @@
                                 <div class="col-md-2 col-sm-4 nopaddingright">
                                     <div class="text-input2f">โทรศัพท์</div>
                                 </div>
-                                <div class="col-md-6 col-sm-8">
+                                <div class="col-md-4 col-sm-6">
                                     <div class="input2f">
                                         {!! Form::text('tel', Auth::user()->detail->tel , ['id'=>'tel','class'=>'form-control', 'placeholder'=> 'โทรศํพท์']) !!}
+                                        @if($errors->has('tel'))
+                                        <small>{{ $errors->first('tel') }}</small>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <div class="input2f">
+                                          <?php $tel_slarp = substr(Auth::user()->detail->tel, 9) ?>
+                                        {!! Form::text('tel_slarp', $tel_slarp , ['id'=>'tel','class'=>'form-control', 'placeholder'=> 'ต่อ']) !!}
                                         @if($errors->has('tel'))
                                         <small>{{ $errors->first('tel') }}</small>
                                         @endif
@@ -649,14 +658,31 @@
 jQuery(document).ready(function($) {
       $('#form-step').on('submit', function(event) {
             event.preventDefault();
-            alertConfirmForm('#form-step', 'กรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิ Step4 สำเร็จแล้ว คุณต้องการกรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิStepต่อไปไหม');
+
+            if($("#tel").val() == "" || $("#mobile").val() == "") {
+                  Swal.fire({
+                    title: 'ระบบแจ้งเตือน',
+                    text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ตกลง'
+                  }).then((result) => {
+                    if (result.value) {
+                          $('#form-step')[0].submit();
+                    }
+                  })
+            }else {
+                 $('#form-step')[0].submit();
+            }
+
       })
 });
 </script>
 <script type="text/javascript">
     var address;
     jQuery(document).ready(function($) {
-
           $(document).on('change', '#provinceId', function(event) {
                $.getJSON('/api/getDistrict', {provinceId: $(this).val()}, function(json, textStatus) {
                              $("#districtId").html('');
@@ -707,33 +733,33 @@ jQuery(document).ready(function($) {
         $("[name='zipCode']").on('keyup', function(event) {
             var _zipcode = $(this).val();
 
-            $.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
-                console.log(json)
-                address = json
-                if(address[0] != null) {
-
-                    address = address[0];
-                    $("#provinceName").val(address.province);
-                    $("#provinceId").val(address.province_code);
-
-                    $("#districtName").val(address.amphoe);
-                    $("#districtId").val(address.amphoe_code);
-
-
-                    $("#subDistrictName").val(address.district);
-                    $("#subDistrictId").val(address.district_code);
-                } else {
-
-                    $("#provinceName").val("");
-                    $("#provinceId").val("");
-
-                    $("#districtName").val("");
-                    $("#districtId").val("");
-
-                    $("#subDistrictName").val("");
-                    $("#subDistrictId").val("");
-                }
-            });
+            // $.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
+            //     console.log(json)
+            //     address = json
+            //     if(address[0] != null) {
+            //
+            //         address = address[0];
+            //         $("#provinceName").val(address.province);
+            //         $("#provinceId").val(address.province_code);
+            //
+            //         $("#districtName").val(address.amphoe);
+            //         $("#districtId").val(address.amphoe_code);
+            //
+            //
+            //         $("#subDistrictName").val(address.district);
+            //         $("#subDistrictId").val(address.district_code);
+            //     } else {
+            //
+            //         $("#provinceName").val("");
+            //         $("#provinceId").val("");
+            //
+            //         $("#districtName").val("");
+            //         $("#districtId").val("");
+            //
+            //         $("#subDistrictName").val("");
+            //         $("#subDistrictId").val("");
+            //     }
+            // });
         });
     });
 </script>

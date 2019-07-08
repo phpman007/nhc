@@ -1,6 +1,12 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+.line-progress2f ul li {
+float: left;
+width: 21%;
+}
+</style>
 {!! Form::open(['files' => true]) !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -28,7 +34,7 @@
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f sixstep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">
@@ -63,12 +69,12 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile01" name="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวประชาชน"  />
+                                  <input id="uploadFile01" name="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวประชาชน"  /><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                    ?>
                                    @if($file1)
-                                   <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->newName }}</a> |
+                                   <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a> |
                                    <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file1->id) }}">ลบ</a></small>
                                    @endif
                                    @if($errors->has('uploadBtn01'))
@@ -91,12 +97,12 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile02" class="form-control" placeholder="รูปถ่าย"  />
+                                  <input id="uploadFile02" class="form-control" placeholder="รูปถ่าย"  /><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                  $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                   ?>
                                   @if($file2)
-                                  <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->newName }}</a> |
+                                  <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a> |
                                   <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file2->id) }}">ลบ</a></small>
                                   @endif
                                   @if($errors->has('uploadBtn02'))
@@ -121,12 +127,12 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input name="uploadFile03" id="uploadFile03" class="form-control" placeholder="แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชน"  />
+                                  <input name="uploadFile03" id="uploadFile03" class="form-control" placeholder="แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชน"  /><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                 $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                  ?>
                                  @if($file3)
-                                 <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->newName }}</a> |
+                                 <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a> |
                                  <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file3->id) }}">ลบ</a></small>
                                  @endif
                                  @if($errors->has('uploadBtn03'))

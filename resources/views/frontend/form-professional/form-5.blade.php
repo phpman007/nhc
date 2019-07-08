@@ -37,7 +37,7 @@
                               <li class="active"><span>&nbsp;</span></li>
                               <li class="active"><span>&nbsp;</span></li>
                               <li class="active"><span>&nbsp;</span></li>
-                              <li class="active"><span>&nbsp;</span></li>
+                              <li class=""><span>&nbsp;</span></li>
                             </ul>
                           </div><!--end line-progress2f-->
                       </div><!--end box-line-progress2f-->
@@ -70,8 +70,9 @@
                                              <?php
                                              $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                               ?>
+                                              <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                               @if($file1)
-                                              <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->newName }}</a></small> |
+                                              <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a></small> |
                                               <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file1->id) }}">ลบ</a>
                                               @endif
                                       </div><!--end input2f-->
@@ -97,11 +98,12 @@
                                       <div class="input2f">
 
 							  <input type="text" name="uploadFile02" id="uploadFile02" class="form-control" placeholder="รูปถ่าย" readonly>
+                                            <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                             <?php
                                            $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                             ?>
                                             @if($file2)
-                                            <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->newName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file2->id) }}">ลบ</a>
+                                            <small><a target="_blank" href="{{asset($file2->path)}}">{{ $file2->fileName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file2->id) }}">ลบ</a>
                                             @endif
                                       </div><!--end input2f-->
                                   </div>
@@ -127,11 +129,12 @@
                                   <div class="col-md-6 col-sm-8 nopaddingright">
                                       <div class="input2f">
 							  <input type="text" name="uploadFile03" id="uploadFile03" class="form-control" placeholder="เอกสารสรุปผลงานอันเป็นที่ประจักษ์" readonly>
+                                            <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                             <?php
                                           $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                            ?>
                                            @if($file3)
-                                           <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->newName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file3->id) }}">ลบ</a>
+                                           <small><a target="_blank" href="{{asset($file3->path)}}">{{ $file3->fileName }}</a></small> | <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file3->id) }}">ลบ</a>
                                            @endif
                                       </div><!--end input2f-->
                                   </div>

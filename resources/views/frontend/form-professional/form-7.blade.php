@@ -2,10 +2,11 @@
 
 @section('content')
 <style media="screen">
+
 .line-progress2f {
 top: 43px;
 z-index: 4;
-width: 82%;
+width: 78%;
 left: 10%;
 }
 </style>
@@ -16,7 +17,7 @@ left: 10%;
                     <ol class="breadcrumb">
                         <li><a href="">หน้าหลัก</a></li>
                         <li><a href="">สมัคร</a></li>
-                        <li class="active">ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 3</li>
+                        <li class="active">ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 7</li>
                     </ol>
                   </div>
               </div><!--end navication2f-->
@@ -42,7 +43,9 @@ left: 10%;
                           <div class="line-progress2f">
                             <ul>
                               <li class="active"><span>&nbsp;</span></li>
-                              <li class=""><span>&nbsp;</span></li>
+                              <li class="active"><span>&nbsp;</span></li>
+                              <li class="active"><span>&nbsp;</span></li>
+                              <li class="active"><span>&nbsp;</span></li>
                               <li><span>&nbsp;</span></li>
                               <li><span>&nbsp;</span></li>
                             </ul>
@@ -56,26 +59,13 @@ left: 10%;
                       <div class="clear2f"></div>
                     </div><!--end control-progress2f-->
                     <div class="content-form2f">
-                        <h4>ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 3</h4>
+                        <h4>ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 7</h4>
 
                         <div class="headform2f">การแสดงเจตนาสมัครเข้ากลุ่ม</div>
                         <div class="set-form2f">
                           <div class="box-input2f">
                               <div class="text-input2f nopadding">
                                 ข้าพเจ้ามีความประสงค์ที่จะสมัครเป็นกรรมการสุขภาพแห่งชาติจากผู้ทรงคุณวุฒิในกลุ่ม
-                              </div><!--end text-input2f-->
-                          </div><!--end box-input2f-->
-                          <div class="input-radio2f">
-                              @foreach(DB::table('senior_groups')->get() as $key => $group)
-                              <div class="box-radio2f">
-                                <input type="radio" id="group{{ $key }}" name="seniorGroupId" value="{{ $group->id }}" {{ Auth::user()->seniorGroupId == $group->id ? 'checked' : $key == 0 ? 'checked' : '' }}>
-                                <label for="group{{ $key }}">{{ $group->groupName }}</label>
-                              </div>
-                              @endforeach
-                          </div><!--end input-radio2f-->
-                          <div class="box-input2f boxremark">
-                              <div class="text-input2f nopadding">
-                                <strong>หมายเหตุ</strong>   ผู้ทรงคุณวุฒิสามารถสมัครได้กลุ่มใดกลุ่มหนึ่งใน ๖ กลุ่มนี้ เท่านั้น
                               </div><!--end text-input2f-->
                           </div><!--end box-input2f-->
                         </div><!--end set-form2f-->

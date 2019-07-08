@@ -1,7 +1,13 @@
 @extends('frontend.theme.master')
 
 @section('content')
-{!! Form::open() !!}
+{!! Form::open(['id' => 'form-step']) !!}
+<style media="screen">
+.line-progress2f ul li {
+float: left;
+width: 18%;
+}
+</style>
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -207,21 +213,7 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                           <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">รหัสไปรษณีย์</div>
-                           </div>
-                           <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
-                                 @if($errors->has('zipCode'))
-                                 <small>{{ $errors->first('zipCode') }}</small>
-                                 @endif
-                                </div>
-                           </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -270,17 +262,41 @@
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
+                        <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">รหัสไปรษณีย์</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์"]) !!}
+                                 @if($errors->has('zipCode'))
+                                 <small>{{ $errors->first('zipCode') }}</small>
+                                 @endif
+                                </div>
+                           </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
                        <div class="row">
                            <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f">โทรศัพท์</div>
                            </div>
-                           <div class="col-md-6 col-sm-8">
+                           <div class="col-md-4 col-sm-6">
                                 <div class="input2f">
                                       {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์', 'id'=>'tel']) !!}
                                       @if($errors->has('tel'))
                                   <small>{{ $errors->first('tel') }}</small>
                                   @endif
                                 </div>
+                           </div>
+                           <div class="col-md-2 col-sm-2">
+                               <div class="input2f">
+                                     <?php $tel_slarp = substr(Auth::user()->detail->tel, 9) ?>
+                                   {!! Form::text('tel_slarp', $tel_slarp , ['id'=>'tel','class'=>'form-control', 'placeholder'=> 'ต่อ']) !!}
+                                   @if($errors->has('tel'))
+                                   <small>{{ $errors->first('tel') }}</small>
+                                   @endif
+                               </div>
                            </div>
                        </div><!--end row-->
                    </div><!--end box-input2f-->
@@ -672,35 +688,59 @@ $(document).ready(function() {
 		// $('#date-birdth').datepicker('update', '{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
 	@endif
       $("[name='zipCode']").on('keyup', function(event) {
-		var _zipcode = $(this).val();
-
-		$.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
-				console.log(json)
-				address = json
-				if(address[0] != null) {
-					// จังหวัด
-					address = address[0];
-					$("#provinceName").val(address.province);
-					$("#provinceId").val(address.province_code);
-					// อำเภอ
-					$("#districtName").val(address.amphoe);
-					$("#districtId").val(address.amphoe_code);
-					// ตำบล
-					$("#subDistrictName").val(address.district);
-					$("#subDistrictId").val(address.district_code);
-				} else {
-					// จังหวัด
-					$("#provinceName").val("");
-					$("#provinceId").val("");
-					// อำเภอ
-					$("#districtName").val("");
-					$("#districtId").val("");
-					// ตำบล
-					$("#subDistrictName").val("");
-					$("#subDistrictId").val("");
-				}
-		});
+		// var _zipcode = $(this).val();
+            //
+		// $.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
+		// 		console.log(json)
+		// 		address = json
+		// 		if(address[0] != null) {
+		// 			// จังหวัด
+		// 			address = address[0];
+		// 			$("#provinceName").val(address.province);
+		// 			$("#provinceId").val(address.province_code);
+		// 			// อำเภอ
+		// 			$("#districtName").val(address.amphoe);
+		// 			$("#districtId").val(address.amphoe_code);
+		// 			// ตำบล
+		// 			$("#subDistrictName").val(address.district);
+		// 			$("#subDistrictId").val(address.district_code);
+		// 		} else {
+		// 			// จังหวัด
+		// 			$("#provinceName").val("");
+		// 			$("#provinceId").val("");
+		// 			// อำเภอ
+		// 			$("#districtName").val("");
+		// 			$("#districtId").val("");
+		// 			// ตำบล
+		// 			$("#subDistrictName").val("");
+		// 			$("#subDistrictId").val("");
+		// 		}
+		// });
 	});
+});
+$(document).ready(function() {
+      $('#form-step').on('submit', function(event) {
+            event.preventDefault();
+
+            if($("#tel").val() == "" || $("#mobile").val() == "") {
+                  Swal.fire({
+                    title: 'ระบบแจ้งเตือน',
+                    text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ตกลง'
+                  }).then((result) => {
+                    if (result.value) {
+                          $('#form-step')[0].submit();
+                    }
+                  })
+            }else {
+                 $('#form-step')[0].submit();
+            }
+
+      })
 });
 
 </script>

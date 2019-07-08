@@ -1,6 +1,12 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+.line-progress2f ul li {
+float: left;
+width: 23%;
+}
+</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -29,13 +35,33 @@
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
+                  <div class="control-progress2f">
+                   <div class="box-line-progress2f">
+                       <div class="bg-progress2f"></div>
+                       <div class="line-progress2f">
+                          <ul>
+                            <li class="active"><span>&nbsp;</span></li>
+                            <li class="active"><span>&nbsp;</span></li>
+                            <li class="active"><span>&nbsp;</span></li>
+                            <li class="active"><span>&nbsp;</span></li>
+                          </ul>
+                       </div><!--end line-progress2f-->
+                   </div><!--end box-line-progress2f-->
+                   <div class="box-step-progress2f">
+                       <ul class="list-inline">
+
+                          @include('frontend.form-professional.step-nav')
+                       </ul>
+                   </div><!--end box-step-progress2f-->
+                   <div class="clear2f"></div>
+                  </div><!--end control-progress2f-->
               <div class="content-form2f">
                   <h4>Preview สมัครผู้แทนองค์กรปกครองส่วนท้องถิ่น</h4>
                   <div class="set-form2f">
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">วัน/เดือน/พ.ศ.</div>
+                                <div class="text-input2f nopadding bold">วัน/เดือน/พ.ศ.</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -48,7 +74,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">ข้าพเจ้า</div>
+                                <div class="text-input2f nopadding bold">ข้าพเจ้า</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -60,7 +86,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">ชื่อ</div>
+                                <div class="text-input2f nopadding bold">ชื่อ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -72,7 +98,7 @@
                     <div class="box-input2f">
                         <div class="row">
                            <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">นามสกุล</div>
+                                <div class="text-input2f nopadding bold">นามสกุล</div>
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -154,7 +180,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">
+                                <div class="text-input2f bold">
                                   <span>๑)</span>
                                    คำนำหน้า
                                 </div><!--end text-input2f-->
@@ -169,7 +195,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">ชื่อ</div>
+                                <div class="text-input2f bold">ชื่อ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -181,7 +207,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">นามสกุล</div>
+                                <div class="text-input2f bold">นามสกุล</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -193,7 +219,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">
+                                <div class="text-input2f bold">
                                   <span>๒)</span>เกิดวันที่
                                 </div><!--end text-input2f-->
                             </div>
@@ -207,7 +233,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">อายุ</div>
+                                <div class="text-input2f bold">อายุ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -217,7 +243,7 @@
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f">
+                        <div class="text-input2f bold">
                           <span>๓)</span>สถานที่ ที่สามารถติดต่อได้สะดวก
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
@@ -244,7 +270,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">เลขที่</div>
+                                <div class="text-input2f bold">เลขที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -257,7 +283,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">หมู่ที่</div>
+                                <div class="text-input2f bold">หมู่ที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -269,7 +295,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">ตรอก/ซอย</div>
+                                <div class="text-input2f bold">ตรอก/ซอย</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -281,7 +307,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">ถนน</div>
+                                <div class="text-input2f bold">ถนน</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -293,11 +319,11 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">ตำบล/แขวง</div>
+                                <div class="text-input2f bold">ตำบล/แขวง</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->subDistrictId }} : {{ Auth::user()->detail->subdistrict->district }}</div>
+                                    <div class="text-input2f nopadding"> {{ Auth::user()->detail->subdistrict->district }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -305,11 +331,11 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">อำเภอ/เขต</div>
+                                <div class="text-input2f bold">อำเภอ/เขต</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->districtId }} : {{ Auth::user()->detail->district->amphoe }}</div>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->district->amphoe }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -317,11 +343,11 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">จังหวัด</div>
+                                <div class="text-input2f bold">จังหวัด</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->provinceId }} : {{ Auth::user()->detail->province->province }}</div>
+                                      <div class="text-input2f nopadding">{{ Auth::user()->detail->province->province }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -329,7 +355,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">รหัสไปรษณีย์</div>
+                                <div class="text-input2f bold">รหัสไปรษณีย์</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -341,11 +367,13 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">โทรศัพท์</div>
+                                <div class="text-input2f bold">โทรศัพท์</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->tel }}</div>
+
+                                           <?php $tel_slarp = substr(Auth::user()->detail->tel, 9) ?>
+                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->tel }}{{ !empty($tel_slarp) ? "-". $tel_slarp : '' }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -353,7 +381,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">โทรศัพท์เคลื่อนที่ (มือถือ)</div>
+                                <div class="text-input2f bold">โทรศัพท์เคลื่อนที่ (มือถือ)</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -374,7 +402,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                              <div class="text-input2f nopadding">สาขา</div>
+                              <div class="text-input2f nopadding bold">สาขา</div>
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-11">
                                 <div class="input2f">
@@ -394,7 +422,7 @@
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding">สาขา</div>
+                            <div class="text-input2f nopadding bold">สาขา</div>
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
@@ -414,7 +442,7 @@
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding">สาขา</div>
+                            <div class="text-input2f nopadding bold">สาขา</div>
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
@@ -434,7 +462,7 @@
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding">สาขา</div>
+                            <div class="text-input2f nopadding bold">สาขา</div>
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
@@ -454,7 +482,7 @@
                               </div>
                           </div>
                           <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding">สาขา</div>
+                            <div class="text-input2f nopadding bold">สาขา</div>
                           </div>
                           <div class="col-md-3 col-sm-8 col-xs-11">
                               <div class="input2f">
@@ -475,7 +503,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">ตำแหน่ง</div>
+                                <div class="text-input2f title-sm bold">ตำแหน่ง</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -487,7 +515,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">หน่วยงาน</div>
+                                <div class="text-input2f title-sm bold">หน่วยงาน</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -499,7 +527,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">ระยะเวลาการปฏิบัติหน้าที่</div>
+                                <div class="text-input2f title-sm bold">ระยะเวลาการปฏิบัติหน้าที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -512,7 +540,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">ตำแหน่ง</div>
+                                <div class="text-input2f title-sm bold">ตำแหน่ง</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -524,7 +552,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">หน่วยงาน</div>
+                                <div class="text-input2f title-sm bold">หน่วยงาน</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -536,7 +564,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">ระยะเวลาการปฏิบัติหน้าที่</div>
+                                <div class="text-input2f title-sm bold">ระยะเวลาการปฏิบัติหน้าที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -549,7 +577,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">ตำแหน่ง</div>
+                                <div class="text-input2f title-sm bold">ตำแหน่ง</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -561,7 +589,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">หน่วยงาน</div>
+                                <div class="text-input2f title-sm bold">หน่วยงาน</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -573,7 +601,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f title-sm">ระยะเวลาการปฏิบัติหน้าที่</div>
+                                <div class="text-input2f title-sm bold">ระยะเวลาการปฏิบัติหน้าที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -592,7 +620,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">
+                                <div class="text-input2f bold">
                                   <span>๑)</span>เริ่มตั้งแต่
                                 </div><!--end text-input2f-->
                             </div>
@@ -607,7 +635,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">
+                                <div class="text-input2f bold">
                                   <span>๒)</span>หมดวาระ
                                 </div><!--end text-input2f-->
                             </div>

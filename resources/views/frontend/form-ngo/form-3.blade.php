@@ -1,7 +1,13 @@
 @extends('frontend.theme.master')
 
 @section('content')
-{!! Form::open() !!}
+<style media="screen">
+.line-progress2f ul li {
+float: left;
+width: 21%;
+}
+</style>
+{!! Form::open(['id'=>'form-step']) !!}
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -28,7 +34,7 @@
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f sixstep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">
@@ -216,21 +222,7 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">รหัสไปรษณีย์</div>
-                            </div>
-                            <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์", 'maxlength'=>5]) !!}
-                                  @if($errors->has('zipCode'))
-                                  <small>{{ $errors->first('zipCode') }}</small>
-                                  @endif
-                                </div>
-                            </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -281,14 +273,38 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">โทรศัพท์</div>
+                                <div class="text-input2f">รหัสไปรษณีย์</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('zipCode',  Auth::user()->detail->zipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์", 'maxlength'=>5]) !!}
+                                  @if($errors->has('zipCode'))
+                                  <small>{{ $errors->first('zipCode') }}</small>
+                                  @endif
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">โทรศัพท์</div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
                                 <div class="input2f">
                                       {!! Form::text('tel', Auth::user()->detail->tel , ['class'=>'form-control', 'placeholder'=> 'โทรศํพท์', 'id' => 'tel']) !!}
                                      @if($errors->has('tel'))
                                  <small>{{ $errors->first('tel') }}</small>
                                  @endif
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                                <div class="input2f">
+                                      <?php $tel_slarp = substr(Auth::user()->detail->tel, 9) ?>
+                                    {!! Form::text('tel_slarp', $tel_slarp , ['id'=>'tel','class'=>'form-control', 'placeholder'=> 'ต่อ']) !!}
+                                    @if($errors->has('tel'))
+                                    <small>{{ $errors->first('tel') }}</small>
+                                    @endif
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -654,12 +670,10 @@ $(document).ready(function() {
                     $.getJSON('/api/getSubDistrict', {districtId: "{{old('districtId', @Auth::user()->detail->districtId)}}"}, function(json, textStatus) {
                            $("#subDistrictId").html('');
                            $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
-                           setTimeout(function () {
                               $("#subDistrictId").val({{old('subDistrictId', @Auth::user()->detail->subDistrictId)}}).trigger('change');
-                           }, 800);
 
                     });
-             }, 500);
+             }, 5);
              @endif
       @endif
 });
@@ -686,6 +700,30 @@ $("#date-birdth").on('change', function(event) {
 
       // $('#date-birdth').datepicker('update', '{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
 @endif
+$(document).ready(function() {
+      $('#form-step').on('submit', function(event) {
+            event.preventDefault();
+
+            if($("#tel").val() == "" || $("#mobile").val() == "") {
+                  Swal.fire({
+                    title: 'ระบบแจ้งเตือน',
+                    text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ตกลง'
+                  }).then((result) => {
+                    if (result.value) {
+                          $('#form-step')[0].submit();
+                    }
+                  })
+            }else {
+                 $('#form-step')[0].submit();
+            }
+
+      })
+});
 $("[name='zipCode']").on('keyup', function(event) {
       var _zipcode = $(this).val();
 

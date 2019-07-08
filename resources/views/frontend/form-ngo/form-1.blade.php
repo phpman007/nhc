@@ -28,7 +28,7 @@
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f sixstep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">

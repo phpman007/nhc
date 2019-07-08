@@ -28,8 +28,10 @@ class Member extends Authenticatable
 		'ngoGroupId',
 		'candidateStatus',
 		'provinceId',
+		'status_accept',
+		'last_step'
 	];
-	
+
 	public function attach() {
 		return $this->hasMany(Attachment::class, 'member_id');
 	}

@@ -31,6 +31,23 @@
     <script src="{{asset("frontend/js/bootstrap.min.js")}}"></script>
     @yield('css')
     <style media="screen">
+    .box-step-progress2f ul li {
+          width: 14%;
+          float: left;
+   }
+   .fourstep .box-step-progress2f ul li {
+     width: 20%;
+ }
+ .sixstep .box-step-progress2f ul li {
+    width: 16%;
+    float: left;
+}
+   .line-progress2f{
+         left: 10%;
+   }
+   .bold {
+         font-weight: bold;
+   }
     .select2-container--default .select2-selection--single{
           height:40px;
           padding-top: 6px;
@@ -148,7 +165,7 @@
  }
 	 $(document).ready(function(){
                  $("#personalId").mask('0-0000-00000-00-0');
-                 $("#tel").mask('000000000')
+                 $("#tel").mask('00-000-0000')
                  $("#mobile").mask('0000000000');
                  $("#date-birdth").mask('00/00/0000');
 
@@ -167,7 +184,7 @@
       Swal.fire({
          type: 'success',
          title: 'ลงทะเบียน',
-         text: 'ลงทะเบียนเรียบร้อยแล้วระบบจะส่งยืนยันไปทาง Email ภายใน 1 ชม.',
+         text: 'ลงทะเบียนเรียบร้อยแล้วระบบจะส่งยืนยันไปทาง Email ภายใน 1 ชั่วโมง',
          confirmButtonText: 'ปิด',
          footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
       })
@@ -253,7 +270,9 @@
   $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip()
   });
-
+  $.ajaxSetup({
+  async: false
+  });
    $(window).on("scroll", function() {
          if($(window).scrollTop() > 100) {
              $("header").addClass("topfixed");

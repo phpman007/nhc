@@ -30,7 +30,6 @@ class FormNgoController extends Controller
                         if(@Auth::user()->groupId != 4){
                               Auth::logout();
                         }
-
                         return $this->stepOne($request);
                         break;
                   case 2:
@@ -45,6 +44,9 @@ class FormNgoController extends Controller
               case 5:
                         return $this->stepFive($request);
                         break;
+                        case 6:
+                                  return $this->stepSix($request);
+                                  break;
                   default:
                         // code...
                         break;
@@ -104,8 +106,8 @@ class FormNgoController extends Controller
                   'dateOfBirth'        => 'required',
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
-                  'tel'                => 'required|min:9|max:10',
-                  'mobile' 		   => 'required|min:10|max:11',
+                  // 'tel'                => 'required|min:9|max:10',
+                  // 'mobile' 		   => 'required|min:10|max:11',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'nowWork' 		   => 'required',
@@ -117,8 +119,12 @@ class FormNgoController extends Controller
                   'pastOrganization1'     =>'required',
                   'importantMemo'      =>'required'
             ]);
+            if(!empty($request->tel_slarp))
+                  $request->request->add(['tel' => $request->tel .'-'. $request->tel_slarp]);
             $dataSet = $request->all();
 
+            $dataSet['tel']   = str_replace('-', '', $dataSet['tel']);
+            $dataSet['mobile']   = str_replace('-', '', $dataSet['mobile']);
             $dataSet['dateOfBirth'] = $this->dateThaiToDefault($dataSet['dateOfBirth']);
             Auth::user()->update($dataSet);
 
@@ -224,7 +230,8 @@ class FormNgoController extends Controller
 
             // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
-            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            // \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            return redirect('form-ngo/6');
             return back()->with('success', true);
 
             $request->validate([
@@ -270,5 +277,10 @@ class FormNgoController extends Controller
                        dump("Has upload", $oldNameUpload01, $attach);
                  }
             }
+     }
+     public function stepSix(){
+           Auth::user()->update(['status_accept' => 1]);
+           \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+           return back()->with('success', true);
      }
 }

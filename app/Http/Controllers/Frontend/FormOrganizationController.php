@@ -47,6 +47,9 @@ class FormOrganizationController extends Controller
                   case 7:
                   return $this->stepSix($request);
                   break;
+                  case 8:
+                  return $this->stepSevent($request);
+                  break;
                   default:
                   // code...
                   break;
@@ -268,8 +271,8 @@ class FormOrganizationController extends Controller
                   'districtId'         => 'required',
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
-                  'tel'                => 'required|min:7',
-                  'mobile' 		   => 'required|min:9',
+                  // 'tel'                => 'required|min:7',
+                  // 'mobile' 		   => 'required|min:9',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'pastWork1'          => 'required',
@@ -285,6 +288,8 @@ class FormOrganizationController extends Controller
                   'endDate'               => 'required'
                   // 'importantMemo'      =>'required'
             ]);
+            if(!empty($request->tel_slarp))
+                  $request->request->add(['tel' => $request->tel .'-'. $request->tel_slarp]);
 
             $mmember          = Auth::user()->detail;
             $dataSet          = $request->except(['_token']);
@@ -320,6 +325,14 @@ class FormOrganizationController extends Controller
       public function stepSix(Request $request) {
             // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
+            // \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            return Redirect::to('form-organization/8');
+            return back()->with('success', true);
+      }
+
+      public function stepSevent(Request $request)
+      {
+            Auth::user()->update(['status_accept' => 1]);
             \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
             return back()->with('success', true);
       }

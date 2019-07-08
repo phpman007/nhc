@@ -17,10 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('checkYear', function(Request $request){
-	$yearSelect = \Carbon\Carbon::createFromFormat('d/m/Y',$request->date)->addYears('-543')->format('Y');
-	$yearNow = now()->format('Y');
+	$yearSelect = \Carbon\Carbon::createFromFormat('d/m/Y',$request->date)->addYears('-543');
+	$yearNow = \Carbon\Carbon::now()->diffInYears($yearSelect);
 
-	return ['old' => $yearNow - $yearSelect];
+	return ['old' => $yearNow];
 });
 
 Route::get('get_address', function(Request $request){

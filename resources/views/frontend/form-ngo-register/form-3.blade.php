@@ -1,6 +1,11 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+.fourstep .line-progress2f ul li {
+width: 23.33333%;
+}
+</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">

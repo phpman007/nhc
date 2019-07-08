@@ -42,6 +42,9 @@ class FormProfessorController extends Controller
                   case 6:
                   return $this->stepSix($request);
                   break;
+                  case 7:
+                  return $this->stepSevent($request);
+                  break;
                   default:
                   // code...
                   break;
@@ -178,7 +181,7 @@ class FormProfessorController extends Controller
             $request->request->add(['mobile' => str_replace('-', '', $request->mobile)]);
 
             $request->validate([
-                  'no' 			   => 'required|max:5',
+                  'no' 			   => 'required|max:7',
                   'moo' 		   => 'required|max:151',
                   'soi' 		   => 'required|max:101',
                   'street' 		   => 'required|max:101',
@@ -187,8 +190,8 @@ class FormProfessorController extends Controller
                   'dateOfBirth'        => 'required',
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
-                  'tel'                => 'required|min:9|max:10',
-                  'mobile' 		   => 'required|min:10|max:11',
+                  // 'tel'                => 'required|min:9|max:10',
+                  // 'mobile' 		   => 'required|min:10|max:11',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'nowWork' 		   => 'required',
@@ -199,6 +202,8 @@ class FormProfessorController extends Controller
                   'time1' 		   =>'required',
                   'importantMemo'      =>'required'
             ]);
+            if(!empty($request->tel_slarp))
+                  $request->request->add(['tel' => $request->tel .'-'. $request->tel_slarp]);
 
             $mmember = Auth::user()->detail;
             $dataSet = $request->except(['_token']);
@@ -310,6 +315,15 @@ class FormProfessorController extends Controller
 
             // $pdf = event(new \App\Events\FinishRegister(Auth::user()));
 
+            // \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+
+            return redirect('form-professional/7');
+            return back()->with('success', true);
+      }
+
+      public function stepSevent(Request $request)
+      {
+            Auth::user()->update(['status_accept' => 1]);
             \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
             return back()->with('success', true);
       }

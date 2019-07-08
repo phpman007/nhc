@@ -1,5 +1,11 @@
 @extends('frontend.theme.master')
 @section('content')
+<style media="screen">
+.line-progress2f ul li {
+float: left;
+width: 24%;
+}
+</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -27,7 +33,7 @@
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f sixstep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">

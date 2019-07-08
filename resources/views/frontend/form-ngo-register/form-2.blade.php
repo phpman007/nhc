@@ -1,6 +1,11 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+.fourstep .line-progress2f ul li {
+width: 23.33333%;
+}
+</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -114,7 +119,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::select('provinceId', Helper::getProvices(), @Auth::user()->provinceId, ["class"=>"form-control" ,"placeholder"=>"จังหวัด",'readonly' => '']) !!}
+                                     {!! Form::select('ngoProvincetID', Helper::getProvices(), @Auth::user()->provinceId, ["class"=>"form-control" ,"placeholder"=>"จังหวัด",'readonly' => '']) !!}
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -225,21 +230,7 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                           <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">รหัสไปรษณีย์</div>
-                           </div>
-                           <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                      {!! Form::number('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์",'maxlength'=>5]) !!}
-                                 @if($errors->has('ngoZipCode'))
-                                 <small>{{ $errors->first('ngoZipCode') }}</small>
-                                 @endif
-                                </div>
-                           </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -287,6 +278,21 @@
 
                                 </div>
                             </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">รหัสไปรษณีย์</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::number('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์",'maxlength'=>5]) !!}
+                                 @if($errors->has('ngoZipCode'))
+                                 <small>{{ $errors->first('ngoZipCode') }}</small>
+                                 @endif
+                                </div>
+                           </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
@@ -402,7 +408,7 @@ $(document).ready(function() {
                            $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
                            setTimeout(function () {
                                  $("#subDistrictId").val({{old('ngoSubDistrictID', @Auth::user()->detail->ngoSubDistrictID)}}).trigger('change');
-                           }, 800);
+                           }, 1000);
 
                     });
              }, 500);
@@ -410,35 +416,35 @@ $(document).ready(function() {
       @endif
 
       $("[name='ngoZipCode']").on('keyup', function(event) {
-		var _zipcode = $(this).val();
-
-		$.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
-				console.log(json)
-				address = json
-				if(address[0] != null) {
-					// จังหวัด
-					address = address[0];
-					$("#provinceName").val(address.province);
-					$("#ngoProvincetID").val(address.province_code);
-					// อำเภอ
-					$("#districtName").val(address.amphoe);
-					$("#ngoDistrictID").val(address.amphoe_code);
-					// ตำบล
-					$("#subDistrictName").val(address.district);
-                              console.log(address)
-					$("#ngoSubDistrictID").val(address.district_code);
-				} else {
-					// จังหวัด
-					$("#provinceName").val("");
-					$("#ngoProvincetID").val("");
-					// อำเภอ
-					$("#districtName").val("");
-					$("#ngoDistrictID").val("");
-					// ตำบล
-					$("#subDistrictName").val("");
-					$("#ngoSubDistrictID").val("");
-				}
-		});
+		// var _zipcode = $(this).val();
+            //
+		// $.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
+		// 		console.log(json)
+		// 		address = json
+		// 		if(address[0] != null) {
+		// 			// จังหวัด
+		// 			address = address[0];
+		// 			$("#provinceName").val(address.province);
+		// 			$("#ngoProvincetID").val(address.province_code);
+		// 			// อำเภอ
+		// 			$("#districtName").val(address.amphoe);
+		// 			$("#ngoDistrictID").val(address.amphoe_code);
+		// 			// ตำบล
+		// 			$("#subDistrictName").val(address.district);
+            //                   console.log(address)
+		// 			$("#ngoSubDistrictID").val(address.district_code);
+		// 		} else {
+		// 			// จังหวัด
+		// 			$("#provinceName").val("");
+		// 			$("#ngoProvincetID").val("");
+		// 			// อำเภอ
+		// 			$("#districtName").val("");
+		// 			$("#ngoDistrictID").val("");
+		// 			// ตำบล
+		// 			$("#subDistrictName").val("");
+		// 			$("#ngoSubDistrictID").val("");
+		// 		}
+		// });
 	});
 });
 

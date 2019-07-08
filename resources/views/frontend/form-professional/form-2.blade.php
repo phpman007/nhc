@@ -1,6 +1,14 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+.line-progress2f {
+top: 43px;
+z-index: 4;
+width: 75%;
+left: 5%;
+}
+</style>
 <form method="post" id="form-step">
     <div class="insitepage2f">
         <div class="navication2f">
