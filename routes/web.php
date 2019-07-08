@@ -11,7 +11,7 @@
 |
 */
 Route::get('/', function () {
-      return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find(76), 1))[0]->stream();
+      // return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find(76), 1))[0]->stream();
       return view('frontend.homepage.index');
 });
 
