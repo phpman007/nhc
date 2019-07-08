@@ -22,6 +22,10 @@
 
 <!-- iCheck -->
 <link href="{{ asset("backend/css/plugins/iCheck/custom.css") }}" rel="stylesheet">
-
 <link href="{{ asset("backend/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css") }}" rel="stylesheet">
+
+<!-- Sweet Alert -->
+<link href="{{ asset("backend/css/plugins/sweetalert/sweetalert.css") }}" rel="stylesheet">
+<link href="{{ asset("backend/css/animate.css") }}" rel="stylesheet">
+<link href="{{ asset("backend/css/style.css") }}" rel="stylesheet">
 

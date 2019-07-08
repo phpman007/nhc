@@ -533,7 +533,7 @@
     <!-- Toastr -->
     <script src="{{url('backend/js/plugins/toastr/toastr.min.js')}}"></script>
 
-    <script src="{{ asset("js/select2.min.js") }} "></script>
+    <script src="{{ asset('js/select2.min.js') }} "></script>
 
     @yield('js')
 
@@ -646,6 +646,8 @@
 <script src="{{asset('plugins/bootstrap-datepicker-custom/dist/js/bootstrap-datepicker-custom.js')}}"></script>
 <script src="{{asset('plugins/bootstrap-datepicker-custom/dist/locales/bootstrap-datepicker.th.min.js')}}" charset="UTF-8"></script>
 
+<!-- icheckbox -->
+<script src="{{url('backend/js/plugins/iCheck/icheck.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('.i-checks').iCheck({
@@ -655,5 +657,63 @@
     });
 </script>
 
+<!-- Sweet alert -->
+<script src="{{url('backend/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
+<script>
+    $(document).ready(function () {
+
+        $('.demo1').click(function(){
+            swal({
+                title: "Welcome in Alerts",
+                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            });
+        });
+
+        $('.demo2').click(function(){
+            swal({
+                title: "Good job!",
+                text: "You clicked the button!",
+                type: "success"
+            });
+        });
+
+        $('.demo3').click(function () {
+            var id = $(this).data('id')
+            swal({
+                title: "ยืนยันลบข้อมูล?",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ลบข้อมูล!",
+                cancelButtonText:"ยกเลิก",
+                closeOnConfirm: false
+            }, function () {
+                location.href = "{{ url('backend/user/delete') }}/" + id;
+                swal("ลบข้อมูลแล้ว!", "", "success");
+            });
+        });
+
+        $('.demo4').click(function () {
+            swal({
+                title: "Are you sure?",
+                text: "Your will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: false,
+                closeOnCancel: false },
+            function (isConfirm) {
+                if (isConfirm) {
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                } else {
+                    swal("Cancelled", "Your imaginary file is safe :)", "error");
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
