@@ -288,6 +288,9 @@ class FormOrganizationController extends Controller
                   'endDate'               => 'required'
                   // 'importantMemo'      =>'required'
             ]);
+            if($request->yearOld < 20) {
+                  return back()->withInput()->withErrors(['dateOfBirth' => 'กรุณาตรวจสอบวันเดือนปีเกิดของท่าน อายุต้องมากกว่า 20 ปี']);
+            }
             if(!empty($request->tel_slarp))
                   $request->request->add(['tel' => $request->tel .'-'. $request->tel_slarp]);
 
@@ -332,8 +335,14 @@ class FormOrganizationController extends Controller
 
       public function stepSevent(Request $request)
       {
-            Auth::user()->update(['status_accept' => 1]);
-            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            try {
+
+                  Auth::user()->update(['status_accept' => 1]);
+                  \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            } catch (\Exception $e) {
+
+            }
+
             return back()->with('success', true);
       }
 }

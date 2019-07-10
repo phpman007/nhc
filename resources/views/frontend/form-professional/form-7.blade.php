@@ -61,17 +61,17 @@ left: 10%;
                     <div class="content-form2f">
                         <h4>ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 7</h4>
 
-                        <div class="headform2f">การแสดงเจตนาสมัครเข้ากลุ่ม</div>
+                        <div class="headform2f">การยืนยันข้อมูลการส่งใบสมัครผู้ทรงคุณวุฒิ</div>
                         <div class="set-form2f">
                           <div class="box-input2f">
                               <div class="text-input2f nopadding">
-                                ข้าพเจ้ามีความประสงค์ที่จะสมัครเป็นกรรมการสุขภาพแห่งชาติจากผู้ทรงคุณวุฒิในกลุ่ม
+                                หากคุณกดส่งใบสมัครแล้วจะไม่สามารถแก้ไขข้อมูลใบสมัครได้อีก
                               </div><!--end text-input2f-->
                           </div><!--end box-input2f-->
                         </div><!--end set-form2f-->
                         <div class="btn-center2f">
                              <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
-                            <button type="submit" name="button" class="btn btn-green">บันทึก</button>
+                            <button type="submit" name="button" class="btn btn-green">ตกลง</button>
                         </div><!--end btn-center2f-->
                     </div><!--end content-form2f-->
                   </div><!--end container-->

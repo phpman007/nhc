@@ -250,7 +250,7 @@ width: 27%;
                     </div><!--end box-input2f-->
 
                     <div class="box-input2f">
-                        <div class="text-input2f">
+                        <div class="text-input2f bold">
                           <span>๓)</span>สถานที่ ที่สามารถติดต่อได้สะดวก
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
@@ -377,7 +377,19 @@ width: 27%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->tel }}</div>
+                                  <div class="text-input2f nopadding">
+                                        @if(!empty(Auth::user()->detail->tel))
+                                        {{ substr(Auth::user()->detail->tel, 0, 2) }}
+                                        -
+                                        {{ substr(Auth::user()->detail->tel, 2, 4) }}
+                                        -
+                                        {{ substr(Auth::user()->detail->tel, 6, 3) }}
+                                        @if(!empty(substr(Auth::user()->detail->tel, 9)))
+                                        ต่อ
+                                        {{ substr(Auth::user()->detail->tel, 9) }}
+                                        @endif
+                                        @endif
+                                  </div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -389,7 +401,13 @@ width: 27%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->mobile }}</div>
+                                  <div class="text-input2f nopadding">
+                                        {{ substr(Auth::user()->detail->mobile, 0, 2) }}
+                                        -
+                                        {{ substr(Auth::user()->detail->mobile, 2, 4) }}
+                                        -
+                                        {{ substr(Auth::user()->detail->mobile, 6, 4) }}
+                                  </div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -497,7 +515,7 @@ width: 27%;
                     </div><!--end box-input2f-->
                     <h5>๓.  ประวัติการทำงาน</h5>
                     <div class="box-input2f">
-                        <div class="text-input2f"><span>๑)</span>หน้าที่การงานและความรับผิดชอบในปัจจุบัน</div>
+                        <div class="text-input2f bold"><span>๑)</span>หน้าที่การงานและความรับผิดชอบในปัจจุบัน</div>
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
@@ -538,9 +556,9 @@ width: 27%;
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f"><span>๒)</span>การปฏิบัติหน้าที่ในอดีต  (โปรดระบุเฉพาะหน้าที่ที่สำคัญ)</div>
+                        <div class="text-input2f bold"><span>๒)</span>การปฏิบัติหน้าที่ในอดีต  (โปรดระบุเฉพาะหน้าที่ที่สำคัญ)</div>
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber"><span>ลำดับที่ ๑</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ ๑</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -577,7 +595,7 @@ width: 27%;
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber"><span>ลำดับที่ ๒</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ ๒</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -614,7 +632,7 @@ width: 27%;
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber"><span>ลำดับที่ ๓</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ ๓</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -652,7 +670,7 @@ width: 27%;
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f"><span>๓)</span>ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้แทนองค์กรภาคเอกชนที่เลือกสมัคร</div>
+                        <div class="text-input2f bold"><span>๓)</span>ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้แทนองค์กรภาคเอกชนที่เลือกสมัคร</div>
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
@@ -672,7 +690,7 @@ width: 27%;
                     </div><!--end box-input2f-->
                     <h5>ทั้งนี้  ข้าพเจ้าได้แนบสำเนาเอกสารหรือหลักฐานที่แนบมาพร้อมใบสมัคร</h5>
                     <div class="box-input2f">
-                        <div class="text-input2f nopadding">สำเนาบัตรประจำตัวประชาชน</div>
+                        <div class="text-input2f nopadding bold">สำเนาบัตรประจำตัวประชาชน</div>
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
@@ -688,7 +706,7 @@ width: 27%;
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f nopadding">รูปถ่ายหน้าตรงไม่สวมหมวก ไม่สวมแว่นตาดำ ฉากพื้นหลังไม่มีลวดลาย  ซึ่งถ่ายมาแล้วไม่เกิน  ๖  เดือน</div>
+                        <div class="text-input2f nopadding bold">รูปถ่ายหน้าตรงไม่สวมหมวก ไม่สวมแว่นตาดำ ฉากพื้นหลังไม่มีลวดลาย  ซึ่งถ่ายมาแล้วไม่เกิน  ๖  เดือน</div>
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
@@ -704,7 +722,7 @@ width: 27%;
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f nopadding">แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชนและยืนยันการส่งผู้แทนภาคเอกชน/๒๕๖๒ พร้อมเอกสารหลักฐานประกอบ ๑ ชุด</div>
+                        <div class="text-input2f nopadding bold">แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชนและยืนยันการส่งผู้แทนภาคเอกชน/๒๕๖๒ พร้อมเอกสารหลักฐานประกอบ ๑ ชุด</div>
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
@@ -738,7 +756,7 @@ width: 27%;
                 </div>
                   <div class="btn-center2f">
                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
-                      <button type="submit" name="button" class="btn btn-green">ตรวจสอบเอกสาร</button>
+                      <button type="submit" name="button" class="btn btn-green">ยืนยันข้อมูล</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->

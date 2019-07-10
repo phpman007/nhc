@@ -61,11 +61,11 @@ left: 10%;
                     <div class="content-form2f">
                         <h4>ผู้แทนองค์กรปกครองส่วนท้องถิ่น สมัครสมาชิก ขั้นตอนที่ 7</h4>
 
-                        <div class="headform2f">การแสดงเจตนาสมัครเข้ากลุ่ม</div>
+                        <div class="headform2f">การยืนยันข้อมูลการส่งใบสมัครผู้แทนองค์กรปกครองส่วนท้องถิ่น</div>
                         <div class="set-form2f">
                           <div class="box-input2f">
                               <div class="text-input2f nopadding">
-                                ข้าพเจ้ามีความประสงค์ที่จะสมัครเป็นกรรมการสุขภาพแห่งชาติจากผู้ทรงคุณวุฒิในกลุ่ม
+                                หากคุณกดส่งใบสมัครแล้วจะไม่สามารถแก้ไขข้อมูลใบสมัครได้อีก
                               </div><!--end text-input2f-->
                           </div><!--end box-input2f-->
                         </div><!--end set-form2f-->

@@ -166,7 +166,7 @@
 	 $(document).ready(function(){
                  $("#personalId").mask('0-0000-00000-00-0');
                  $("#tel").mask('00-000-0000')
-                 $("#mobile").mask('0000000000');
+                 $("#mobile").mask('00-0000-0000');
                  $("#date-birdth").mask('00/00/0000');
 
 

@@ -373,7 +373,19 @@ width: 23%;
                                 <div class="input2f">
 
                                            <?php $tel_slarp = substr(Auth::user()->detail->tel, 9) ?>
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->tel }}{{ !empty($tel_slarp) ? "-". $tel_slarp : '' }}</div>
+                                  <div class="text-input2f nopadding">
+                                        @if(!empty(Auth::user()->detail->tel))
+                                        {{ substr(Auth::user()->detail->tel, 0, 2) }}
+                                        -
+                                        {{ substr(Auth::user()->detail->tel, 2, 4) }}
+                                        -
+                                        {{ substr(Auth::user()->detail->tel, 6, 3) }}
+                                        @if(!empty(substr(Auth::user()->detail->tel, 9)))
+                                        ต่อ
+                                        {{ substr(Auth::user()->detail->tel, 9) }}
+                                        @endif
+                                        @endif
+                                  </div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -385,7 +397,11 @@ width: 23%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->mobile }}</div>
+                                  <div class="text-input2f nopadding"> {{ substr(Auth::user()->detail->mobile, 0, 2) }}
+                                   -
+                                   {{ substr(Auth::user()->detail->mobile, 2, 4) }}
+                                   -
+                                   {{ substr(Auth::user()->detail->mobile, 6, 4) }}</div>
                                 </div>
                             </div>
                         </div><!--end row-->
@@ -499,7 +515,7 @@ width: 23%;
                     </div><!--end box-input2f-->
                     <h5>๔. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
 
-                    <div class="text-titlenumber"><span>ลำดับที่ ๑</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ ๑</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -536,7 +552,7 @@ width: 23%;
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber"><span>ลำดับที่ ๒</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ ๒</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -573,7 +589,7 @@ width: 23%;
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber"><span>ลำดับที่ ๓</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ ๓</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -671,7 +687,7 @@ width: 23%;
                   </div>
                   <div class="btn-center2f">
                        <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
-                      <button type="submit" name="button" class="btn btn-green">ยื่นเอกสาร</button>
+                      <button type="submit" name="button" class="btn btn-green">ยืนยันข้อมูล</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
             </div><!--end container-->

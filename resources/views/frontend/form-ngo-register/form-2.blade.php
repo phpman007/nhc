@@ -384,6 +384,7 @@ $(document).ready(function() {
                         $("#districtId").html('');
                                   $("#subDistrictId").html('');
                      $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+                     $("#districtId").trigger('change')
            });
       });
 

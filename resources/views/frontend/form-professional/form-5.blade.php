@@ -59,6 +59,36 @@
 					<small>{{ $errors->first('vision') }}</small>
 					@endif
                           </div><!--end box-input2f-->
+                          <div class="box-input2f">
+                             <div class="text-input2f nopadding">แนบไฟล์วิสัยทัศน์</div>
+                             <div class="row">
+                                 <div class="col-md-6 col-sm-8 nopaddingright">
+                                     <div class="input2f">
+                                            <input type="text" name="uploadFile04" id="uploadFile04" class="form-control" placeholder="แนบไฟล์วิสัยทัศน์" readonly>
+                                            <?php
+                                            $file4 = Auth::user()->attach()->where('status', 1)->where('use_is', 'vision')->first();
+                                             ?>
+                                             <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                             @if($file4)
+                                             <small><a target="_blank" href="{{asset($file4->path)}}">{{ $file4->fileName }}</a></small> |
+                                             <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file4->id) }}">ลบ</a>
+                                             @endif
+                                     </div><!--end input2f-->
+                                 </div>
+                                 <div class="col-md-6 col-sm-4">
+                                     <div class="btn-2button">
+                                         <div class="fileUpload btn btn-blue">
+                                              <span>Upload</span>
+                                              {!! Form::file('uploadBtn04', ['id' => 'uploadBtn04', 'class'=>'upload', 'accept'=>".jpg, .png, .pdf"]) !!}
+
+                                          </div>
+                                     </div><!--end btn-2button-->
+                                 </div>
+                             </div><!--end row-->
+                             @if($errors->has('uploadBtn04'))
+                             <small>{{ $errors->first('uploadBtn04') }}</small>
+                             @endif
+                        </div><!--end box-input2f-->
                           <h5>ทั้งนี้  ข้าพเจ้าได้แนบสำเนาเอกสารหรือหลักฐานที่แนบมาพร้อมใบสมัคร</h5>
 
                           <div class="box-input2f">
@@ -211,7 +241,11 @@ document.getElementById('uploadBtn03').onchange = function () {
 	filename3 = this.value.split(String.fromCharCode(92));
 	document.getElementById("uploadFile03").value = filename3[filename3.length-1];
 };
-
+var filename4;
+document.getElementById('uploadBtn04').onchange = function () {
+	filename4 = this.value.split(String.fromCharCode(92));
+	document.getElementById("uploadFile04").value = filename4[filename4.length-1];
+};
 $(function($) {
 	$('#accept').on('change', function(event) {
 		event.preventDefault();
