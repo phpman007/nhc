@@ -191,7 +191,7 @@ class FormProfessorController extends Controller
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
                   // 'tel'                => 'required|min:9|max:10',
-                  // 'mobile' 		   => 'required|min:10|max:11',
+                  'mobile' 		   => 'required|min:10|max:11',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'nowWork' 		   => 'required',
@@ -202,6 +202,9 @@ class FormProfessorController extends Controller
                   'time1' 		   =>'required',
                   'importantMemo'      =>'required'
             ]);
+            if($request->yearOld < 20) {
+                  return back()->withInput()->withErrors(['dateOfBirth' => 'กรุณาตรวจสอบวันเดือนปีเกิดของท่าน อายุต้องมากกว่า 20 ปี']);
+            }
             if(!empty($request->tel_slarp))
                   $request->request->add(['tel' => $request->tel .'-'. $request->tel_slarp]);
 
@@ -232,6 +235,11 @@ class FormProfessorController extends Controller
                      $rule['uploadBtn03'] = 'required|mimes:jpeg,pdf';
                }
 
+               $file4 = Auth::user()->attach()->where('status', 1)->where('use_is', 'vision')->first();
+               if(empty($file4)){
+                        $rule['uploadBtn04'] = 'required|mimes:jpeg,pdf';
+              }
+
             $request->validate($rule);
 
             $dataSet = $request->only(['vision']);
@@ -240,7 +248,7 @@ class FormProfessorController extends Controller
 
             $mmember->update($dataSet);
 
-            $attachFile = $request->only(['uploadBtn01' ,'uploadBtn02', 'uploadBtn03']);
+            $attachFile = $request->only(['uploadBtn01' ,'uploadBtn02', 'uploadBtn03', 'uploadBtn04']);
 
             $memberId = Auth::user()->id;
             $uploadGroup = 1;
@@ -306,6 +314,26 @@ class FormProfessorController extends Controller
 
                   }
             }
+            if($request->hasFile('uploadBtn04')) {
+                  if($attachFile['uploadBtn04']->isValid()) {
+
+                        $fileUpload1 = \Helper::uploadFile($attachFile['uploadBtn04'], 'proffessional');
+                        Attachment::where('upload_group', $uploadGroup)->where('use_is', 'vision')->where('member_id', $memberId)->update(['status' => 0]);
+                        $attach = new Attachment();
+                        $attach->path        = $fileUpload1['path'];
+                        $attach->fileName    = $fileUpload1['oldName'];
+                        $attach->newName     = $fileUpload1['filename'];
+                        $attach->status      = 1;
+                        $attach->size        = $fileUpload1['size'];
+                        $attach->type        = $fileUpload1['type'];
+                        $attach->member_id   = $memberId;
+                        $attach->upload_group = $uploadGroup;
+                        $attach->use_is      = 'vision';
+
+                        $attach->save();
+
+                  }
+            }
             return Redirect::to('form-professional/6');
       }
 
@@ -323,8 +351,14 @@ class FormProfessorController extends Controller
 
       public function stepSevent(Request $request)
       {
-            Auth::user()->update(['status_accept' => 1]);
-            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            try {
+                  Auth::user()->update(['status_accept' => 1]);
+                  \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            } catch (\Exception $e) {
+
+            }
+
+
             return back()->with('success', true);
       }
 }

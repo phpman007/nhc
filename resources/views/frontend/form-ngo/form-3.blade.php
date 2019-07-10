@@ -127,7 +127,7 @@ width: 21%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">อายุ</div>
+                                <div class="text-input2f">อาย(ปี)ุ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -457,7 +457,7 @@ width: 21%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::textarea('nowWorkPlace',  Auth::user()->detail->nowWorkPlace, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"สถานที่ปฏิบัติงาน"]) !!}
+                                      {!! Form::textarea('nowWorkPlace',  Auth::user()->detail->nowWorkPlace, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"องค์กร"]) !!}
                                      @if($errors->has('nowWorkPlace'))
                               <small>{{ $errors->first('nowWorkPlace') }}</small>
                               @endif
@@ -648,6 +648,7 @@ $(document).ready(function() {
                         $("#districtId").html('');
                                   $("#subDistrictId").html('');
                      $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+                    $("#districtId").trigger('change')
            });
       });
 
@@ -704,7 +705,7 @@ $(document).ready(function() {
       $('#form-step').on('submit', function(event) {
             event.preventDefault();
 
-            if($("#tel").val() == "" || $("#mobile").val() == "") {
+            if($("#tel").val() == "" ) {
                   Swal.fire({
                     title: 'ระบบแจ้งเตือน',
                     text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",
@@ -727,32 +728,32 @@ $(document).ready(function() {
 $("[name='zipCode']").on('keyup', function(event) {
       var _zipcode = $(this).val();
 
-      $.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
-                  console.log(json)
-                  address = json
-                  if(address[0] != null) {
-                        // จังหวัด
-                        address = address[0];
-                        $("#provinceName").val(address.province);
-                        $("#provinceId").val(address.province_code);
-                        // อำเภอ
-                        $("#districtName").val(address.amphoe);
-                        $("#districtId").val(address.amphoe_code);
-                        // ตำบล
-                        $("#subDistrictName").val(address.district);
-                        $("#subDistrictId").val(address.district_code);
-                  } else {
-                        // จังหวัด
-                        $("#provinceName").val("");
-                        $("#provinceId").val("");
-                        // อำเภอ
-                        $("#districtName").val("");
-                        $("#districtId").val("");
-                        // ตำบล
-                        $("#subDistrictName").val("");
-                        $("#subDistrictId").val("");
-                  }
-      });
+      // $.getJSON('{{ url('api/get_address') }}', {zipcode: _zipcode}, function(json, textStatus) {
+      //             console.log(json)
+      //             address = json
+      //             if(address[0] != null) {
+      //                   // จังหวัด
+      //                   address = address[0];
+      //                   $("#provinceName").val(address.province);
+      //                   $("#provinceId").val(address.province_code);
+      //                   // อำเภอ
+      //                   $("#districtName").val(address.amphoe);
+      //                   $("#districtId").val(address.amphoe_code);
+      //                   // ตำบล
+      //                   $("#subDistrictName").val(address.district);
+      //                   $("#subDistrictId").val(address.district_code);
+      //             } else {
+      //                   // จังหวัด
+      //                   $("#provinceName").val("");
+      //                   $("#provinceId").val("");
+      //                   // อำเภอ
+      //                   $("#districtName").val("");
+      //                   $("#districtId").val("");
+      //                   // ตำบล
+      //                   $("#subDistrictName").val("");
+      //                   $("#subDistrictId").val("");
+      //             }
+      // });
 });
 </script>
 @endsection

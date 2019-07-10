@@ -315,10 +315,15 @@ class FormNgoRegisterController extends Controller
       }
 
       public function stepFive(Request $request) {
+            try {
+
+                  \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+            } catch (\Exception $e) {
+
+            }
 
             // $request->validate(['g-recaptcha-response' => 'recaptcha']);
 
-            \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
             return Redirect::to('form-ngo/1')->with('success', true);
             return back();
 

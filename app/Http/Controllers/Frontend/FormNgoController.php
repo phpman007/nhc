@@ -107,7 +107,7 @@ class FormNgoController extends Controller
                   'provinceId'         => 'required',
                   'zipCode' 		   => 'required',
                   // 'tel'                => 'required|min:9|max:10',
-                  // 'mobile' 		   => 'required|min:10|max:11',
+                  'mobile' 		   => 'required|min:10|max:11',
                   'graduated1' 	   => 'required',
                   'faculty1' 		   => 'required',
                   'nowWork' 		   => 'required',
@@ -119,6 +119,9 @@ class FormNgoController extends Controller
                   'pastOrganization1'     =>'required',
                   'importantMemo'      =>'required'
             ]);
+            if($request->yearOld < 20) {
+                  return back()->withInput()->withErrors(['dateOfBirth' => 'กรุณาตรวจสอบวันเดือนปีเกิดของท่าน อายุต้องมากกว่า 20 ปี']);
+            }
             if(!empty($request->tel_slarp))
                   $request->request->add(['tel' => $request->tel .'-'. $request->tel_slarp]);
             $dataSet = $request->all();
@@ -279,8 +282,13 @@ class FormNgoController extends Controller
             }
      }
      public function stepSix(){
-           Auth::user()->update(['status_accept' => 1]);
-           \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+           try {
+                 Auth::user()->update(['status_accept' => 1]);
+                 \Mail::to(Auth::user()->email)->send(new \App\Mail\Success());
+           } catch (\Exception $e) {
+
+           }
+
            return back()->with('success', true);
      }
 }

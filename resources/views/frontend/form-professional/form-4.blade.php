@@ -469,7 +469,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
-                                        {!! Form::textarea('nowWorkPlace',  Auth::user()->detail->nowWorkPlace, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"สถานที่ปฏิบัติงาน"]) !!}
+                                        {!! Form::textarea('nowWorkPlace',  Auth::user()->detail->nowWorkPlace, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"ชื่อองค์กร"]) !!}
                                         @if($errors->has('nowWorkPlace'))
                                         <small>{{ $errors->first('nowWorkPlace') }}</small>
                                         @endif
@@ -659,7 +659,7 @@ jQuery(document).ready(function($) {
       $('#form-step').on('submit', function(event) {
             event.preventDefault();
 
-            if($("#tel").val() == "" || $("#mobile").val() == "") {
+            if($("#tel").val() == "") {
                   Swal.fire({
                     title: 'ระบบแจ้งเตือน',
                     text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",
@@ -688,9 +688,12 @@ jQuery(document).ready(function($) {
                              $("#districtId").html('');
                                       $("#subDistrictId").html('');
                          $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+
+                         // setTimeout(function () {
+                              $('#districtId').trigger('change');
+                        // }, 0);
                });
           });
-
           $(document).on('change', '#districtId', function(event) {
                $.getJSON('/api/getSubDistrict', {districtId: $(this).val()}, function(json, textStatus) {
                         $("#subDistrictId").html('');
@@ -712,9 +715,9 @@ jQuery(document).ready(function($) {
                                 $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
                                 setTimeout(function () {
                                   $("#subDistrictId").val({{old('subDistrictId', @Auth::user()->detail->subDistrictId)}}).trigger('change');
-                               }, 800);
+                            }, 10);
                         });
-                  }, 500);
+                  }, 10);
                   @endif
           @endif
         $("#date-birdth").on('change', function(event) {

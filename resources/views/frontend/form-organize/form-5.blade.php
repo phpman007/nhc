@@ -119,7 +119,7 @@ width: 18%;
                    <div class="box-input2f">
                        <div class="row">
                            <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">อายุ</div>
+                                <div class="text-input2f">อาย(ปี)ุ</div>
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -623,7 +623,6 @@ width: 18%;
 @endsection
 
 @section('js')
-
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
 $(document).ready(function() {
@@ -635,7 +634,9 @@ $(document).ready(function() {
              $.getJSON('/api/getDistrict', {provinceId: $(this).val()}, function(json, textStatus) {
                            $("#districtId").html('');
                                     $("#subDistrictId").html('');
-                       $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"})
+                       $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"});
+
+                           $('#districtId').trigger('change');
              });
         });
 
@@ -660,7 +661,7 @@ $(document).ready(function() {
                               $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
                               $("#subDistrictId").val({{old('subDistrictId', @Auth::user()->detail->subDistrictId)}}).trigger('change');
                       });
-                }, 500);
+                }, 50);
                 @endif
         @endif
 
@@ -722,7 +723,7 @@ $(document).ready(function() {
       $('#form-step').on('submit', function(event) {
             event.preventDefault();
 
-            if($("#tel").val() == "" || $("#mobile").val() == "") {
+            if($("#tel").val() == "" ) {
                   Swal.fire({
                     title: 'ระบบแจ้งเตือน',
                     text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",
