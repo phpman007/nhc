@@ -1,12 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 18%;
-}
-</style>
+
 {!! Form::open(['files' => true]) !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -41,6 +36,9 @@ width: 18%;
                       <ul>
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
+                        <li><span>&nbsp;</span></li>
+                        <li><span>&nbsp;</span></li>
+                        <li><span>&nbsp;</span></li>
                         <li><span>&nbsp;</span></li>
                         <li><span>&nbsp;</span></li>
                       </ul>
@@ -78,7 +76,7 @@ width: 18%;
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
                                   <input id="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวข้าราชการ">
-                                   <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                   <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'government_official_card')->first();
                                    ?>
@@ -115,10 +113,6 @@ width: 18%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
-
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

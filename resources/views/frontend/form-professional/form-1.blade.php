@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-8">
                                     <div class="input2f">
-                                        <input id="personalId" type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="เลขบัตรประชาชน">
+                                        <input id="personalId" type="text" name="personalId" value="{{ old('personalId') }}" class="form-control" placeholder="กรอกเฉพาะตัวเลข">
                                         @if($errors->has('personalId'))
                                         <small>{{ $errors->first('personalId') }}</small>
                                         @endif
@@ -94,10 +94,15 @@
                                             <img src="{{ asset("frontend/images/visibility-on.svg") }}" class="pass-view" alt="">
                                             <img src="{{ asset("frontend/images/visibility-off.svg") }}" class="pass-none" alt="">
                                         </span>
+                                        <div class="t-notice">ใช้ตัวอักษรอย่างน้อย 6 ตัวอักษร</div>
                                          @if($errors->has('password'))
                                         <small>{{ $errors->first('password') }}</small>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="col-md-0 col-sm-4"></div>
+                                <div class="col-md-4 col-sm-8">
+                                    <div class="t-suggestion">ท่านสามารถดูรหัสผ่านที่กรอกได้โดยคลิกที่เครื่องหมายลูกตา</div>
                                 </div>
                             </div><!--end row-->
                         </div><!--end box-input2f-->
@@ -140,10 +145,7 @@
 </form>
 @endsection
 
-@section('css')
 
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

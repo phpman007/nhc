@@ -1,11 +1,6 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.fourstep .line-progress2f ul li {
-width: 33.33333%;
-}
-</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -35,11 +30,12 @@ width: 33.33333%;
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-                  <div class="control-progress2f fourstep">
+                  <div class="control-progress2f fivestep">
                    <div class="box-line-progress2f">
                        <div class="bg-progress2f"></div>
                        <div class="line-progress2f">
                          <ul>
+                           <li class="active"><span>&nbsp;</span></li>
                            <li class="active"><span>&nbsp;</span></li>
                            <li class="active"><span>&nbsp;</span></li>
                            <li class="active"><span>&nbsp;</span></li>
@@ -659,7 +655,7 @@ width: 33.33333%;
                   <div class="box-confirm2f">
                     <div class="box-checkbox2f">
                       <label class="checkbox2f">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ
-                        หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  <br>ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
+                        หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
                         <input type="checkbox" checked>
                         <span class="checkmark"></span>
                       </label>
@@ -667,11 +663,17 @@ width: 33.33333%;
                   </div><!--end box-confirm2f-->
 
                 <div class="box-captcha2f">
-                      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                     {!! htmlFormSnippet() !!}
-                     @if($errors->has('g-recaptcha-response'))
-                     กรุณากดยืนยันตัวก่อนยื่นเอกสาร
-                     @endif
+                    <div class="row">
+                          <div class="col-sm-4"></div>  
+                          <div class="col-sm-4">
+                              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                 {!! htmlFormSnippet() !!}
+                                 @if($errors->has('g-recaptcha-response'))
+                                 กรุณากดยืนยันตัวก่อนยื่นเอกสาร
+                                 @endif
+                          </div>  
+                    </div>    
+                      
                 </div>
                   <div class="btn-center2f">
                       <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
@@ -683,11 +685,6 @@ width: 33.33333%;
 
     </div><!--end insitepage2f-->
 {!! Form::close() !!}
-@endsection
-
-@section('css')
-
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
 @endsection
 
 @section('js')

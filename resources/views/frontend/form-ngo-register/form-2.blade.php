@@ -33,7 +33,7 @@ width: 23.33333%;
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f fivestep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">
@@ -154,7 +154,7 @@ width: 23.33333%;
                                 <div class="text-input2f nopadding">๒.สถานภาพขององค์กร</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
-                                <div class="input-radio2f inline-check">
+                                <div class="input-radio2f">
                                     <div class="box-radio2f">
                                           {!! Form::radio('legalStastus', 0, @Auth::user()->detail->legalStastus == 0 ? 'checked' : '', ['id'=>'test1']) !!}
                                       <label for="test1">ไม่เป็นนิติบุคคล</label>
@@ -162,11 +162,12 @@ width: 23.33333%;
                                     <div class="box-radio2f">
                                           {!! Form::radio('legalStastus', 1, @Auth::user()->detail->legalStastus == 1 ? 'checked' : '', ['id'=>'test2']) !!}
                                       <label for="test2">เป็นนิติบุคคล</label>
+                                      <div class="input2f width65per">
+                                            {!! Form::text('ngoStatus', @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"สถานภาพขององค์กร"]) !!}
+                                      </div>
                                     </div>
                                 </div><!--end input-radio2f-->
-                                <div class="input2f">
-                                      {!! Form::text('ngoStatus', @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"สถานภาพขององค์กร"]) !!}
-                                </div>
+                                
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
@@ -336,8 +337,8 @@ width: 23.33333%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright"></div>
-                            <div class="col-md-6 col-sm-8">
+          
+                            <div class="col-md-12">
                                 <div class="input2f">
                                       {!! Form::textarea('ngoObjective', @Auth::user()->detail->ngoObjective, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
                                      "placeholder"=>"วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน"]) !!}
@@ -360,11 +361,6 @@ width: 23.33333%;
 
     </div><!--end insitepage2f-->
 {!! Form::close() !!}
-@endsection
-
-@section('css')
-
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
 @endsection
 
 @section('js')

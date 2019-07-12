@@ -106,10 +106,7 @@
 
 @endsection
 
-@section('css')
 
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

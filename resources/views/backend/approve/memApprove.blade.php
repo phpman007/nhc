@@ -1,5 +1,5 @@
 @extends('backend.theme.master')
-@section('title','NHCO ADMIN')
+@section('title','NHC ADMIN')
 
 @section('content')
 <div class="card border-info mb-3">
@@ -116,7 +116,7 @@
                             @endif
                         </td>
                         <td align="middle">{{$valmember->docId}}</td>
-                        <td align="middle"><a href="/pdf/register/{{ $valmember->id }}">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</a></td>
+                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td align="middle">{{$valmember->province}}</td>
                         @if($valmember->zipFile==null)

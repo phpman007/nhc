@@ -39,7 +39,7 @@
                                </div>
                                <div class="col-md-6 col-sm-8">
                                    <div class="input2f">
-                                        {!! Form::text('personalId', null, ["id"=>"personalId","class"=>"form-control", "placeholder"=>"เลขบัตรประชาชน"]) !!}
+                                        {!! Form::text('personalId', null, ["id"=>"personalId","class"=>"form-control", "placeholder"=>"กรอกเฉพาะตัวเลข"]) !!}
                                         @if($errors->has('personalId'))
                                         <small>{{ $errors->first('personalId') }}</small>
                                         @endif
@@ -92,8 +92,13 @@
                                        <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                        <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                      </span>
+                                     <div class="t-notice">ใช้ตัวอักษรอย่างน้อย 6 ตัวอักษร</div>
                                    </div>
                                </div>
+                               <div class="col-md-0 col-sm-4"></div>
+                               <div class="col-md-4 col-sm-8">
+                                    <div class="t-suggestion">ท่านสามารถดูรหัสผ่านที่กรอกได้โดยคลิกที่เครื่องหมายลูกตา</div>
+                                </div>
                            </div><!--end row-->
                        </div><!--end box-input2f-->
                        <div class="box-input2f">
@@ -155,12 +160,18 @@
                         </div><!--end row-->
                     </div>
                   </div><!--end set-form2f-->
-                  <div class="">
-                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                        {!! htmlFormSnippet() !!}
-                        @if($errors->has('g-recaptcha-response'))
-                        กรุณากดยืนยันตัวก่อนยื่นเอกสาร
-                        @endif
+                  <div class="box-captcha2f">
+                      <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                           <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                            {!! htmlFormSnippet() !!}
+                            @if($errors->has('g-recaptcha-response'))
+                            กรุณากดยืนยันตัวก่อนยื่นเอกสาร
+                            @endif
+                        </div>
+                      </div>  
+                       
                   </div>
                   <div class="btn-center2f">
                     <a href="{{ url('/') }}" onclick="if(!confirm('ยืนยันการทำรายการ')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>

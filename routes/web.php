@@ -11,7 +11,24 @@
 |
 */
 Route::get('/', function () {
+      // return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find(76), 1))[0]->stream();
       return view('frontend.homepage.index');
+});
+Route::get('/pdf/1', function () {
+      return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find(76), 1))[0]->stream();
+      // return view('frontend.homepage.index');
+});
+Route::get('/pdf/2', function () {
+      return $pdf = PDF::loadView('pdf.pdf2')->stream();
+      // return view('frontend.homepage.index');
+});
+Route::get('/pdf/3', function () {
+      return $pdf = PDF::loadView('pdf.pdf3')->stream();
+      // return view('frontend.homepage.index');
+});
+Route::get('/pdf/4', function () {
+      return $pdf = PDF::loadView('pdf.pdf4')->stream();
+      // return view('frontend.homepage.index');
 });
 
 Route::get('asset/remove/{id}', function($id) {
@@ -19,11 +36,6 @@ Route::get('asset/remove/{id}', function($id) {
 
       return back();
 });
-
-Route::get('/pdf/register/{id}', function($id) {
-      return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find($id), 1))[0]->stream();
-});
-
 Route::get('/login', 'Frontend\AuthController@getLogin');
 Route::get('/logout', 'Frontend\AuthController@logout');
 Route::post('/login', 'Frontend\AuthController@postLogin');

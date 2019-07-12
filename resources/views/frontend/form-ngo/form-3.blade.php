@@ -1,12 +1,6 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 21%;
-}
-</style>
 {!! Form::open(['id'=>'form-step']) !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -121,13 +115,44 @@ width: 21%;
                                       <small>{{ $errors->first('dateOfBirth') }}</small>
                                       @endif
                                 </div><!--end input_form-->
+                                <div class="control-select-date2f">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3 col-xs-3 nopaddingright">
+                                            <div class="input2f">
+                                                <select class="form-control">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                </select>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-5 col-sm-6 col-xs-5 nopaddingright">
+                                            <div class="input2f">
+                                                <select class="form-control">
+                                                    <option>มกราคม</option>
+                                                    <option>กุมภาพันธ์</option>
+                                                    <option>พฤษจิกายน</option>
+                                                    <option>ธันวาคม</option>
+                                                </select>
+                                            </div>
+                                        </div>   
+                                        <div class="col-md-4 col-sm-3 col-xs-4 nopaddingright">
+                                            <div class="input2f">
+                                                <select class="form-control">
+                                                    <option>2560</option>
+                                                    <option>2561</option>
+                                                    <option>2562</option>
+                                                </select>
+                                            </div>
+                                        </div>  
+                                    </div><!--end row-->
+                                </div><!--end control-select-date2f-->
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">อาย(ปี)ุ</div>
+                                <div class="text-input2f">อายุ(ปี)</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -288,7 +313,7 @@ width: 21%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">โทรศัพท์</div>
+                                <div class="text-input2f">โทรศัพท์บ้าน</div>
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="input2f">
@@ -299,9 +324,10 @@ width: 21%;
                                 </div>
                             </div>
                             <div class="col-md-2 col-sm-2">
+                                <div class="text-to">ต่อ</div>
                                 <div class="input2f">
                                       <?php $tel_slarp = substr(Auth::user()->detail->tel, 9) ?>
-                                    {!! Form::text('tel_slarp', $tel_slarp , ['id'=>'tel','class'=>'form-control', 'placeholder'=> 'ต่อ']) !!}
+                                    {!! Form::text('tel_slarp', $tel_slarp , ['id'=>'tel','class'=>'form-control', 'placeholder'=> '']) !!}
                                     @if($errors->has('tel'))
                                     <small>{{ $errors->first('tel') }}</small>
                                     @endif
@@ -312,11 +338,11 @@ width: 21%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">โทรศัพท์เคลื่อนที่ (มือถือ)</div>
+                                <div class="text-input2f">โทรศัพท์มือถือ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์เคลื่อนที่(มือถือ)", 'id'=> 'mobile']) !!}
+                                      {!! Form::text('mobile', Auth::user()->detail->mobile, [ 'class'=>"form-control", 'placeholder'=>"โทรศัพท์มือถือ", 'id'=> 'mobile']) !!}
                                      @if($errors->has('mobile'))
                                  <small>{{ $errors->first('mobile') }}</small>
                                  @endif
@@ -327,10 +353,10 @@ width: 21%;
                     <h5>๒.  ประวัติการศึกษา (เรียงจากวุฒิการศึกษาสูงสุดลงไปตามลำดับ)</h5>
                     <div class="box-input2f">
                         <div class="row">
-                            <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
+                            <div class="col-md-1 col-sm-1 col-xs-1 nopaddingright">
                                 <div class="text-input2f"><span>๑)</span></div>
                             </div>
-                            <div class="col-md-6 col-sm-8 col-xs-11">
+                            <div class="col-md-6 col-sm-6 col-xs-11">
                                 <div class="input2f">
                                       {!! Form::text('graduated1', Auth::user()->detail->graduated1, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                                      @if($errors->has('graduated1'))
@@ -338,10 +364,10 @@ width: 21%;
                                  @endif
                                 </div>
                             </div>
-                            <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
+                            <div class="col-md-1 col-sm-0 col-xs-1 nopadding text-major">
                               <div class="text-input2f nopadding">สาขา</div>
                             </div>
-                            <div class="col-md-3 col-sm-8 col-xs-11">
+                            <div class="col-md-3 col-sm-5 col-xs-11">
                                 <div class="input2f">
                                       {!! Form::text('faculty1', Auth::user()->detail->faculty1, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                                      @if($errors->has('faculty1'))
@@ -353,18 +379,18 @@ width: 21%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
+                          <div class="col-md-1 col-sm-1 col-xs-1 nopaddingright">
                               <div class="text-input2f"><span>๒)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
+                          <div class="col-md-6 col-sm-6 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('graduated2', Auth::user()->detail->graduated2, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
+                          <div class="col-md-1 col-sm-0 col-xs-1 nopadding text-major">
                             <div class="text-input2f nopadding">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
+                          <div class="col-md-3 col-sm-5 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('faculty2', Auth::user()->detail->faculty2, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
@@ -373,18 +399,18 @@ width: 21%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
+                          <div class="col-md-1 col-sm-1 col-xs-1 nopaddingright">
                               <div class="text-input2f"><span>๓)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
+                          <div class="col-md-6 col-sm-6 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('graduated3', Auth::user()->detail->graduated3, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
+                          <div class="col-md-1 col-sm-0 col-xs-1 nopadding text-major">
                             <div class="text-input2f nopadding">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
+                          <div class="col-md-3 col-sm-5 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('faculty3', Auth::user()->detail->faculty3, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
@@ -393,18 +419,18 @@ width: 21%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
+                          <div class="col-md-1 col-sm-1 col-xs-1 nopaddingright">
                               <div class="text-input2f"><span>๔)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
+                          <div class="col-md-6 col-sm-6 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('graduated4', Auth::user()->detail->graduated4, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
+                          <div class="col-md-1 col-sm-0 col-xs-1 nopadding text-major">
                             <div class="text-input2f nopadding">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
+                          <div class="col-md-3 col-sm-5 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('faculty4', Auth::user()->detail->faculty4, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
@@ -413,18 +439,18 @@ width: 21%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
+                          <div class="col-md-1 col-sm-1 col-xs-1 nopaddingright">
                               <div class="text-input2f"><span>๕)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
+                          <div class="col-md-6 col-sm-6 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('graduated5', Auth::user()->detail->graduated5, [ 'class'=>"form-control", 'placeholder'=>"วุฒิการศึกษา"]) !!}
                               </div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
+                          <div class="col-md-1 col-sm-0 col-xs-1 nopadding text-major">
                             <div class="text-input2f nopadding">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
+                          <div class="col-md-3 col-sm-5 col-xs-11">
                               <div class="input2f">
                                 {!! Form::text('faculty5', Auth::user()->detail->faculty5, [ 'class'=>"form-control", 'placeholder'=>"สาขา"]) !!}
                               </div>
@@ -604,14 +630,14 @@ width: 21%;
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
-                        <div class="text-input2f"><span>๓)</span>ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้แทนองค์กรภาคเอกชนที่เลือกสมัคร</div>
+                        <div class="text-input2f"><span>๓)</span>ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้แทนองค์กรภาคเอกชนที่เลือกสมัคร<br>(ท่านสามารถกรอกตัวอักษรได้ 1024 ตัวอักษร)</div>
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright"></div>
-                            <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                      {!! Form::textarea('importantMemo',  Auth::user()->detail->importantMemo, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร"]) !!}
+                 
+                            <div class="col-md-12">
+                                <div class="input2f paddingleft20">
+                                      {!! Form::textarea('importantMemo',  Auth::user()->detail->importantMemo, ['rows'=>"4" ,'cols'=>"40" ,'class'=>"form-control" ,'placeholder'=>"ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร (ท่านสามารถกรอกตัวอักษรได้ 1024 ตัวอักษร)"]) !!}
                                      @if($errors->has('importantMemo'))
                                    <small>{{ $errors->first('importantMemo') }}</small>
                                    @endif
@@ -633,10 +659,6 @@ width: 21%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
-
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

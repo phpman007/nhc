@@ -2,12 +2,7 @@
 
 @section('content')
 {!! Form::open(['id' => 'form-step']) !!}
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 18%;
-}
-</style>
+
     <div class="insitepage2f">
         <div class="navication2f">
             <div class="container">
@@ -42,6 +37,9 @@ width: 18%;
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
+                        <li><span>&nbsp;</span></li>
+                        <li><span>&nbsp;</span></li>
+                        <li><span>&nbsp;</span></li>
                         <li><span>&nbsp;</span></li>
                       </ul>
                     </div><!--end line-progress2f-->
@@ -616,11 +614,6 @@ width: 18%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
-
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-
-@endsection
 
 @section('js')
 @include('frontend.form-professional.global-js')

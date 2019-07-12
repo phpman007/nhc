@@ -1,11 +1,6 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.fourstep .line-progress2f ul li {
-width: 23.33333%;
-}
-</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -33,7 +28,7 @@ width: 23.33333%;
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f fivestep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">
@@ -155,10 +150,7 @@ width: 23.33333%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
 
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

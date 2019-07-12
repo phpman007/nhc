@@ -1,14 +1,6 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-
-.line-progress2f {
-top: 43px;
-z-index: 4;
-width: 78%;
-left: 10%;
-}
 </style>
 		<form method="post" id="form-step">
           <div class="insitepage2f">
@@ -46,8 +38,8 @@ left: 10%;
                               <li class="active"><span>&nbsp;</span></li>
                               <li class="active"><span>&nbsp;</span></li>
                               <li class="active"><span>&nbsp;</span></li>
-                              <li><span>&nbsp;</span></li>
-                              <li><span>&nbsp;</span></li>
+                              <li class="active"><span>&nbsp;</span></li>
+                              <li class="active"><span>&nbsp;</span></li>
                             </ul>
                           </div><!--end line-progress2f-->
                       </div><!--end box-line-progress2f-->
@@ -82,10 +74,6 @@ left: 10%;
       </form>
 @endsection
 
-@section('css')
-
-    <link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

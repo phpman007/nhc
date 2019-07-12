@@ -1,12 +1,6 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 21%;
-}
-</style>
 {!! Form::open(['files' => true]) !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -69,7 +63,8 @@ width: 21%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile01" name="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวประชาชน"  /><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile01" name="uploadFile01" class="form-control" placeholder="สำเนาบัตรประจำตัวประชาชน"  />
+                                  <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                    ?>
@@ -97,7 +92,8 @@ width: 21%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile02" class="form-control" placeholder="รูปถ่าย"  /><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile02" class="form-control" placeholder="รูปถ่าย"  />
+                                  <div  class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                  $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                   ?>
@@ -127,7 +123,8 @@ width: 21%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input name="uploadFile03" id="uploadFile03" class="form-control" placeholder="แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชน"  /><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input name="uploadFile03" id="uploadFile03" class="form-control" placeholder="แบบ สช./แบบขอขึ้นทะเบียนองค์กรภาคเอกชน"  />
+                                  <div  class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                 $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                  ?>
@@ -173,19 +170,7 @@ width: 21%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
 
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-<style media="screen">
-  button[disabled], html input[disabled] {
-        width:inherit !important;
-  }
-  .btnfixed .btn-center2f .btn {
-        max-width: 215px;
-        margin: 6px;
-  }
-</style>
-@endsection
 
 @section('js')
 

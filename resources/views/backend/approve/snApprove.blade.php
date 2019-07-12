@@ -1,5 +1,5 @@
 @extends('backend.theme.master')
-@section('title','NHCO ADMIN')
+@section('title','NHC ADMIN')
 
 @section('content')
 {{--  [ <a href="function_query_repor_print.php" onClick="NewWindow(this.href,'name','400','400','yes');return false">คลิก</a> ]  --}}
@@ -113,7 +113,7 @@
                         <td align="middle">{{$valmember->docId}}</td>
                         {{--  <td>{{$valmember->member->firstname}}  {{$valmember->member->lastname}}</td>
                         <td>{{$valmember->statuses->status}}</td>--}}
-                        <td align="middle"><a href="/pdf/register/{{ $valmember->id }}">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</a></td>
+                        <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
                         <td>{{$valmember->groupName}}</td>
                         <td align="middle">{{$valmember->province}}</td>
                         @if($valmember->zipFile==null)
