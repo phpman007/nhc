@@ -27,8 +27,3 @@ if(Request::segment(1) == "form-ngo") {
 
 @endfor
 
-<style type="text/css">
-	.active .box-step2f {
-		cursor:pointer;
-	}
-</style>

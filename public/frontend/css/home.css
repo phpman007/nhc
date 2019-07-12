@@ -22,13 +22,14 @@
 .paging2f .slick-dots {
     margin: 0 auto;
     display: block;
-    z-index: 100;
+    z-index: 10;
     max-width: 1140px;
     position: relative;
 }
 .paging2f .slick-dots li{
   display: inline-block;
   margin-right: 15px;
+  height: 19px;
 }
 .paging2f .slick-dots li button{
   width: 28px;
@@ -53,15 +54,12 @@
   bottom: 0;
   left: 0;
 }
-.box-countdown-in{
-  position: relative;
-}
 .box-countdown2f{
   position: absolute;
   bottom: 0;
   right: 0;
   width: 100%;
-  height: 330px;
+  height: 300px;
   max-width: 430px;
   background-color: rgba(132, 87, 163, 0.9);
   text-align: center;
@@ -71,7 +69,7 @@
   color: #fff;
   background-color: #0D255D;
   height: 40px;
-  font-size: 24px;
+  font-size: 25px;
   line-height: 20px;
   display: inline-block;
   border-radius: 20px;
@@ -135,7 +133,7 @@
 }
 .t-category2f{
   color: #ACACAE;
-  font-size: 21px;
+  font-size: 20px;
   line-height: 20px;
   margin-bottom: 5px;
 }
@@ -145,6 +143,7 @@
   font-family: 'THBaijamBold';
   margin-bottom: 8px;
   line-height: 21px;
+  font-size: 20px;
   height: 63px;
   overflow: hidden;
   color: #555555;
@@ -161,6 +160,7 @@ img.icon-filetype{
 }
 .box-link-attr2f a{
   color: #8457A3;
+  font-size: 22px;
   }
 .t-title2f a:hover,
 .t-announce2f a:hover,
@@ -321,7 +321,7 @@ img.icon-filetype{
   display: inline-block;
   border-bottom: 1px solid #51AAAA;
   color: #51AAAA;
-  font-family: 'DBHeaventBlkv3_2';
+  font-family: 'THBaijamBold';
 }
 .box-readmore2f a:hover{
   border-color: #234182;
@@ -368,8 +368,6 @@ img.icon-filetype{
   overflow: hidden;
 }
 .home-thumbnews{
-  background-image: url(../images/bg-white.png);
-  background-repeat: repeat;
   background-color: #51AAAA;
   padding-top: 130px;
   padding-bottom: 180px;
@@ -377,6 +375,21 @@ img.icon-filetype{
   margin-bottom: -180px;
   -webkit-clip-path: polygon(0 100px, 100% 0, 100% 100%, 0% 100%);
   clip-path: polygon(0 100px, 100% 0, 100% 100%, 0% 100%);
+}
+.home-thumbnews .container{
+  position: relative;
+  z-index: 2;
+}
+.home-thumbnews::before{
+  content: '';
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-image: url(../images/bg-white.png);
+  background-repeat: repeat;
+  z-index: 1;
 }
 .home-thumbnews .box-more2f a:hover{
   color:#264181;
@@ -395,30 +408,134 @@ img.icon-filetype{
   bottom: -1px;
 }
 .box-time-countdown h5{
-  font-family: 'DBHeaventv3_2';
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
-.content-vdo2f .plyr--video .plyr__controls,
+.box-vdo2f  .plyr--video.plyr--stopped .plyr__controls,
 .content-vdo2f .plyr__play-large svg{
   display: none;
 }
+.content-vdo2f .plyr--stopped video[poster]{
+  opacity: 0.7;
+}
 .content-vdo2f .plyr__play-large{
-    background-image: url(../images/icon-play.svg);
-    background-repeat: no-repeat;
-    background-size: auto 65px;
-    border: none;
-    background-color: rgba(0,0,0,0);
-    box-shadow: none;
-    width: 65px;
-    height: 65px;
-    border-radius: 100%;
-    cursor: pointer;
-    opacity: 1;
+  background-image: url(../images/icon-play.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+  width: 90px;
+  height: 90px;
+  border-radius: 100%;
+  cursor: pointer;
+  opacity: 0.7;
+  z-index: 9;
 }
 .home-listannounce .headline2f h2,
 .home-vdo-banner h2,
 .home-thumbnews h2{
   font-family: 'DBHeaventMedv3_2';
+}
+#clockdiv{
+	color: #fff;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+	font-size: 30px;
+}
+#clockdiv > div.boxtime{
+	padding: 6px;
+	border-radius: 3px;
+	display: inline-block;
+}
+#clockdiv div.boxtime > span{
+  padding: 10px 0;
+  border-radius: 0;
+  display: block;
+  width: 68px;
+  height: 71px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../images/bg-time.png);
+  color: #000;
+  font-family: 'BebasNeueRegular';
+  font-size: 60px;
+  line-height: 59px;
+  background-size: 100% auto;
+  font-weight: bold;
+  text-align: center;
+}
+.smalltext{
+	padding-top: 15px;
+	font-size: 25px;
+}
+.control-countdown2f .container{
+  position: relative;
+}
+.box-list-banner2f{
+  font-family: 'DBHeaventMedv3_2';
+}
+.home-thumbnews .box-more2f a{
+  color: #fff;
+}
+.home-thumbnews .box-more2f a > span{
+  background-color: #fff;
+  background-image: url(../images/icon-plus-purple.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.home-thumbnews .box-more2f a > span img{
+  opacity: 0;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+   /* IE10+ specific styles go here */
+   .box-polygon,.shape-banner{
+     background-color: transparent;
+     background-image: url(../images/shape-banner.png);
+     background-repeat: no-repeat;
+     background-size:100% 100px ;
+     background-position: left bottom;
+   }
+   .paging2f .slick-dots li button{ top:-3px;}
+   .box-link-attr2f a{ display: inline;}
+   .home-thumbnews::after{
+     position: absolute;
+     content: '';
+     top: 0;
+     left: 0;
+     height: 100px;
+     width: 100%;
+     background-image: url(../images/shape-green.png);
+     background-repeat: no-repeat;
+     background-size:100% 100px ;
+     background-position: left bottom;
+     background-color: #fff;
+   }
+}
+@supports (-ms-ime-align:auto) {
+  /* Edge Browser specific styles go here */
+  .box-polygon{
+    background-color: transparent;
+    background-image: url(../images/shape-banner.png);
+    background-repeat: no-repeat;
+    background-size:100% 100px ;
+    background-position: left bottom;
+  }
+  .paging2f .slick-dots li button{ top:-3px;}
+  .box-link-attr2f a{ display: inline;}
+  .home-thumbnews::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background-image: url(../images/shape-green.png);
+    background-repeat: no-repeat;
+    background-size:100% 100px ;
+    background-position: left bottom;
+    background-color: #fff;
+  }
 }
 @media (max-width: 1200px){
   #wrapper2f .container{width: 100%;}
@@ -433,7 +550,7 @@ img.icon-filetype{
   .box-time-countdown h5{margin-bottom: 10px; font-size: 21px; line-height: 21px;}
   .box-maincountdown2f img{ width: 70%; display: block; margin: 0 auto;}
   .box-polygon{ height: 50px;}
-  .box-countdown2f{    height: 250px;  max-width: 320px;}
+  .box-countdown2f{    height: 250px;  max-width: 375px;}
   .box-maincountdown2f{  height: 280px;  margin: 0 auto;max-width: 350px;}
   .content-vdo2f{ height: auto;}
   .box-banner-text .btn.btn-borderwhite {left: 50%;  margin-left: -90px;}
@@ -444,10 +561,8 @@ img.icon-filetype{
   }
 }
 @media (max-width: 767px){
-  .box-countdown2f {
-      height: 170px;
-      max-width: 250px;
-  }
+  #menu2f .navbar-default .navbar-toggle{ margin-right: 15px;}
+  .box-countdown2f {height: auto;  max-width: 100%; padding-bottom: 20px;}
   .box-maincountdown2f img{ width: 65%; }
   .headline-countdown{
     padding: 9px 15px;
@@ -461,12 +576,24 @@ img.icon-filetype{
   .box-icon-announce2f{ top:5px;}
   .detail-thumbnews2f{ padding: 20px;}
   .date-news2f{ left: 20px;}
-  .headline-countdown{ top: -10px;}
-  .box-time-countdown h5{ font-size: 19px;}
+  .headline-countdown{ top: -15px;}
   .paging2f{ bottom: 20px;}
+  #clockdiv div.boxtime > span{ font-size: 40px;line-height: 36px;   width: 48px;height: 51px;}
+  #clockdiv > div.boxtime{ padding: 0;}
+  .smalltext{ font-size: 20px; padding-top: 10px;}
+  .control-countdown2f,.box-countdown2f{ position: relative;}
+  .box-time-countdown h5{ margin-bottom: 20px;}
+  .box-polygon{ display: none;}
+  #wrapper2f .control-countdown2f .container{ padding: 0;}
+  .paging2f .slick-dots li button {width: 20px;height: 4px;    top: 6px;}
+  .paging2f .slick-dots li{ margin-right: 10px;}
+  .paging2f .slick-dots li.slick-active button{ width: 15px; height: 15px}
 }
 @media (max-width: 480px){
-  .control-countdown2f{ display: none;}
   .box-polygon { height: 30px;}
-  .box-banner-text,.home-vdo2f,.content-vdo2f{ margin-bottom: 15px; }
+  .box-banner-text,.home-vdo2f,.content-vdo2f,.box-thumbnews2f{ margin-bottom: 15px; }
+  .control-thumbnews2f > .row > .col-xs-6{ width: 100%;}
+  .home-thumbnews{ padding-top: 80px;}
+  .t-title2f a{ font-size: 22px; line-height: 22px; height: auto;}
+  .detail-thumbnews2f{ padding-top: 30px;}
 }

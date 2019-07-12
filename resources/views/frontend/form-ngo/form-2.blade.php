@@ -1,11 +1,6 @@
 @extends('frontend.theme.master')
 @section('content')
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 24%;
-}
-</style>
+
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -88,10 +83,6 @@ width: 24%;
 
 @endsection
 
-@section('css')
-
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

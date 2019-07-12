@@ -37,6 +37,9 @@
                               <li class="active"><span>&nbsp;</span></li>
                               <li class="active"><span>&nbsp;</span></li>
                               <li class="active"><span>&nbsp;</span></li>
+                              <li class="active"><span>&nbsp;</span></li>
+                              <li class=""><span>&nbsp;</span></li>
+                              <li class=""><span>&nbsp;</span></li>
                               <li class=""><span>&nbsp;</span></li>
                             </ul>
                           </div><!--end line-progress2f-->
@@ -54,7 +57,7 @@
                         <div class="headform2f">วิสัยทัศน์ของข้าพเจ้าต่อการพัฒนาระบบสุขภาพแห่งชาติ</div>
                         <div class="set-form2f">
                           <div class="box-input2f">
-					  {!! Form::textarea('vision',  Auth::user()->detail->vision, ['rows'=>"5" ,'cols'=>"50" ,'class'=>"form-control" ,'placeholder'=>"ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร"]) !!}
+					  {!! Form::textarea('vision',  Auth::user()->detail->vision, ['rows'=>"5" ,'cols'=>"50" ,'class'=>"form-control" ,'placeholder'=>"ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร (ท่านสามารถกรอกตัวอักษรได้ 1024 ตัวอักษร)"]) !!}
 					  @if($errors->has('vision'))
 					<small>{{ $errors->first('vision') }}</small>
 					@endif
@@ -68,7 +71,7 @@
                                             <?php
                                             $file4 = Auth::user()->attach()->where('status', 1)->where('use_is', 'vision')->first();
                                              ?>
-                                             <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                             <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                              @if($file4)
                                              <small><a target="_blank" href="{{asset($file4->path)}}">{{ $file4->fileName }}</a></small> |
                                              <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file4->id) }}">ลบ</a>
@@ -100,7 +103,7 @@
                                              <?php
                                              $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
                                               ?>
-                                              <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                              <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                               @if($file1)
                                               <small><a target="_blank" href="{{asset($file1->path)}}">{{ $file1->fileName }}</a></small> |
                                               <a onclick="if(!confirm('ต้องการทำรายการหรือไม่?')) return false" href="{{ url('asset/remove/'. $file1->id) }}">ลบ</a>
@@ -128,7 +131,7 @@
                                       <div class="input2f">
 
 							  <input type="text" name="uploadFile02" id="uploadFile02" class="form-control" placeholder="รูปถ่าย" readonly>
-                                            <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                            <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                             <?php
                                            $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
                                             ?>
@@ -159,7 +162,7 @@
                                   <div class="col-md-6 col-sm-8 nopaddingright">
                                       <div class="input2f">
 							  <input type="text" name="uploadFile03" id="uploadFile03" class="form-control" placeholder="เอกสารสรุปผลงานอันเป็นที่ประจักษ์" readonly>
-                                            <div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                            <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                             <?php
                                           $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
                                            ?>
@@ -186,7 +189,7 @@
                           <div class="box-confirm2f">
                             <div class="box-checkbox2f">
                               <label class="checkbox2f">ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ
-                                หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  <br>ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
+                                หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
                                 <input type="checkbox" id="accept">
                                 <span class="checkmark"></span>
                               </label>
@@ -208,19 +211,6 @@
 
 @endsection
 
-@section('css')
-
-    <link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-    <style media="screen">
-    	button[disabled], html input[disabled] {
-		width:inherit !important;
-	}
-	.btnfixed .btn-center2f .btn {
-		max-width: 215px;
-		margin: 6px;
-	}
-    </style>
-@endsection
 
 @section('js')
 

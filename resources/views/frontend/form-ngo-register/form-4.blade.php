@@ -1,11 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.fourstep .line-progress2f ul li {
-width: 24.33333%;
-}
-</style>
+
 {!! Form::open(['files' => true]) !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -33,7 +29,7 @@ width: 24.33333%;
         </div><!--end insite-banner2f-->
         <div class="control-insitepage2f">
             <div class="container">
-              <div class="control-progress2f fourstep">
+              <div class="control-progress2f fivestep">
                 <div class="box-line-progress2f">
                     <div class="bg-progress2f"></div>
                     <div class="line-progress2f">
@@ -138,7 +134,8 @@ width: 24.33333%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile01" class="form-control" placeholder=""><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile01" class="form-control" placeholder="">
+                                  <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
                                    ?>
@@ -167,7 +164,8 @@ width: 24.33333%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile02" class="form-control" placeholder=""><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile02" class="form-control" placeholder="">
+                                  <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
                                    ?>
@@ -196,7 +194,8 @@ width: 24.33333%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile03" class="form-control" placeholder=""><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile03" class="form-control" placeholder="">
+                                  <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
                                    ?>
@@ -224,7 +223,8 @@ width: 24.33333%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile04" class="form-control" placeholder=""><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile04" class="form-control" placeholder="">
+                                  <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
                                    ?>
@@ -259,7 +259,8 @@ width: 24.33333%;
                         <div class="row">
                             <div class="col-md-6 col-sm-8 nopaddingright">
                                 <div class="input2f">
-                                  <input id="uploadFile05" class="form-control" placeholder=""><div>* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
+                                  <input id="uploadFile05" class="form-control" placeholder="">
+                                  <div class="t-notice">* สามารถอัพโหลดไฟล์ .jpg, .png, .gif หรือ .pdf เท่านั้น</div>
                                   <?php
                                   $file = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
                                    ?>
@@ -295,10 +296,7 @@ width: 24.33333%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
 
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-@endsection
 
 @section('js')
 

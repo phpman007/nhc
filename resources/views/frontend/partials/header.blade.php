@@ -73,135 +73,100 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">เกี่ยวกับคณะกรรมการสรรหา<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
-                    <div class="container">
-                        <div class="dropdown_menulist2f">
-                            <h3>เกี่ยวกับคณะกรรมการสรรหา</h3>
-                              <div class="menulist2f">
-                                  <ul class="submenu_level02">
-                                    <li><span>คณะกรรมการสรรหา</span>
-                                      <ul class="submenu_level03 " >
-                                          <li><a href="">เกี่ยวกับคณะกรรมการสรรหา</a></li>
-                                          <li><a href="">โครงสร้างและ อำนาจหน้าที่ของคณะกรรมการสรรหา</a></li>
-                                          <li><a href="">รายชื่อคณะกรรมการ</a></li>
-                                      </ul>
-                                    </li>
-                                    <li><span>คณะกรรมการสุขภาพแห่งชาติ</span>
-                                      <ul class="submenu_level03" >
-                                          <li><a href="">เกี่ยวกับคณะกรรมการสุขภาพแห่งชาติ</a></li>
-                                          <li><a href="">โครงสร้างและ อำนาจหน้าที่ของคณะกรรมการสุขภาพแห่งชาติ</a></li>
-                                          <li><a href="">ภาคีความร่วมมือ</a></li>
-                                      </ul>
-                                    </li>
-                                  </ul>
-                              </div><!--end menulist2f-->
-                        </div><!--end dropdown_menulist2f-->
-                    </div>
+                      <ul class="submenu_level02">
+                        <li><span>คณะกรรมการสรรหา</span>
+                          <ul class="submenu_level03 " >
+                              <li><a href="">เกี่ยวกับคณะกรรมการสรรหา</a></li>
+                              <li><a href="">โครงสร้างและ อำนาจหน้าที่ของคณะกรรมการสรรหา</a></li>
+                              <li><a href="">รายชื่อคณะกรรมการ</a></li>
+                          </ul>
+                        </li>
+                        <li><span>คณะกรรมการสุขภาพแห่งชาติ</span>
+                          <ul class="submenu_level03" >
+                              <li><a href="">เกี่ยวกับคณะกรรมการสุขภาพแห่งชาติ</a></li>
+                              <li><a href="">โครงสร้างและ อำนาจหน้าที่ของคณะกรรมการสุขภาพแห่งชาติ</a></li>
+                              <li><a href="">ภาคีความร่วมมือ</a></li>
+                          </ul>
+                        </li>
+                      </ul>
                   </div><!--end dropdown-menu-->
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ประกาศคณะกรรมการสรรหา<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
-                    <div class="container">
-                       <div class="dropdown_menulist2f">
-                           <h3>ประกาศคณะกรรมการสรรหา</h3>
-                             <div class="menulist2f">
-                                 <ul class="submenu_level02">
-                                   <li><span>ประกาศคณะกรรมการสรรหา</span>
-                                     <ul class="submenu_level03" >
-                                         <li><a href="">ผู้ทรงคุณวุฒิ</a></li>
-                                         <li><a href="">ผู้แทนองค์กรปกครองส่วนท้องถิ่น</a></li>
-                                         <li><a href="">ผู้แทนองค์กรภาคเอกชน (NGOs)</a></li>
-                                     </ul>
-                                   </li>
-                                   <li><a href="">ประกาศบัญชีรายชื่อผู้ผ่านคุณสมบัติเข้ารับการเลือกกันเองเป็นกรรมการสุขภาพแห่งชาติ</a></li>
-                                   <li><a href="">ประกาศผลผู้ได้รับเลือกเป็นกรรมการสุขภาพแห่งชาติ</a></li>
-                                   <li><a href="">ประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติอื่นๆ</a></li>
-                                  </ul>
-                             </div><!--end menulist2f-->
-                       </div><!--end dropdown_menulist2f-->
-                     </div>
+                     <ul class="submenu_level02">
+                       <li><span>ประกาศคณะกรรมการสรรหา</span>
+                         <ul class="submenu_level03" >
+                             <li><a href="">ผู้ทรงคุณวุฒิ</a></li>
+                             <li><a href="">ผู้แทนองค์กรปกครองส่วนท้องถิ่น</a></li>
+                             <li><a href="">ผู้แทนองค์กรภาคเอกชน (NGOs)</a></li>
+                         </ul>
+                       </li>
+                       <li><a href="">ประกาศบัญชีรายชื่อผู้ผ่านคุณสมบัติเข้ารับการเลือกกันเองเป็นกรรมการสุขภาพแห่งชาติ</a></li>
+                       <li><a href="">ประกาศผลผู้ได้รับเลือกเป็นกรรมการสุขภาพแห่งชาติ</a></li>
+                       <li><a href="">ประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติอื่นๆ</a></li>
+                      </ul>
                   </div><!--end dropdown-menu-->
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">สมัคร<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
-                    <div class="container">
-                       <div class="dropdown_menulist2f">
-                           <h3>สมัคร</h3>
-                             <div class="menulist2f">
-                                 <ul class="submenu_level02">
-                                   <li><span>สื่อแนะนำการสรรหา</span>
-                                     <ul class="submenu_level03" >
-                                         <li><a href="">ภาพรวมการสรรหา</a></li>
-                                         <li><a href="">รับสมัคร</a></li>
-                                         <li><a href="">วิธีการยืนยันการใช้สิทธิ์ลงคะแนนและวิธีการลงคะแนน</a></li>
-                                     </ul>
-                                   </li>
-                                   <li><span>ผู้ทรงคุณวุฒิ</span>
-                                     <ul class="submenu_level03" >
-                                         <li><a href="">กำหนดการ</a></li>
-                                         <li><a href="">เอกสารประกอบการสมัคร</a></li>
-                                         <li><a href="{{ url('form-professional/1') }}">สมัคร</a></li>
-                                     </ul>
-                                   </li>
+                     <ul class="submenu_level02">
+                       <li><span>สื่อแนะนำการสรรหา</span>
+                         <ul class="submenu_level03" >
+                             <li><a href="">ภาพรวมการสรรหา</a></li>
+                             <li><a href="">รับสมัคร</a></li>
+                             <li><a href="">วิธีการยืนยันการใช้สิทธิ์ลงคะแนนและวิธีการลงคะแนน</a></li>
+                         </ul>
+                       </li>
+                       <li><span>ผู้ทรงคุณวุฒิ</span>
+                         <ul class="submenu_level03" >
+                             <li><a href="">กำหนดการ</a></li>
+                             <li><a href="">เอกสารประกอบการสมัคร</a></li>
+                             <li><a href="{{ url('form-professional/1') }}">สมัคร</a></li>
+                         </ul>
+                       </li>
 
-                                   <li><span>ผู้แทนองค์กรปกครองส่วนท้องถิ่น</span>
-                                     <ul class="submenu_level03" >
-                                         <li><a href="">กำหนดการ</a></li>
-                                         <li><a href="">เอกสารประกอบการสมัคร</a></li>
-                                         <li><a href="{{ url('form-organization/1') }}">สมัครรับสิทธิ์ลงคะแนนผู้แทนองค์กรส่วนท้องถิ่น</a></li>
-                                         <li><a href="{{ url('form-organization/2') }}">สมัครผู้แทนองค์กรส่วนท้องถิ่น</a></li>
-                                     </ul>
-                                   </li>
-                                   <li><span>ผู้แทนองค์กรภาคเอกชน (NGOs)</span>
-                                     <ul class="submenu_level03" >
-                                         <li><a href="">กำหนดการ</a></li>
-                                         <li><a href="">เอกสารประกอบการสมัคร</a></li>
-                                         <li><a href="{{ url('form-ngo-register/1') }}">สมัคร</a></li>
-                                     </ul>
-                                   </li>
-                                  </ul>
-                             </div><!--end menulist2f-->
-                       </div><!--end dropdown_menulist2f-->
-                     </div>
+                       <li><span>ผู้แทนองค์กรปกครองส่วนท้องถิ่น</span>
+                         <ul class="submenu_level03" >
+                             <li><a href="">กำหนดการ</a></li>
+                             <li><a href="">เอกสารประกอบการสมัคร</a></li>
+                             <li><a href="{{ url('form-organization/1') }}">สมัครรับสิทธิ์ลงคะแนนผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                             <li><a href="{{ url('form-organization/2') }}">สมัครผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+                         </ul>
+                       </li>
+                       <li><span>ผู้แทนองค์กรภาคเอกชน (NGOs)</span>
+                         <ul class="submenu_level03" >
+                             <li><a href="">กำหนดการ</a></li>
+                             <li><a href="">เอกสารประกอบการสมัคร</a></li>
+                             <li><a href="{{ url('form-ngo-register/1') }}">สมัคร</a></li>
+                         </ul>
+                       </li>
+                      </ul>
                   </div><!--end dropdown-menu-->
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ข่าวงานสรรหาคณะกรรมการ<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
-                    <div class="container">
-                       <div class="dropdown_menulist2f">
-                           <h3>ข่าวงานสรรหาคณะกรรมการ</h3>
-                             <div class="menulist2f">
-                                 <ul class="submenu_level02">
-                                   <li><a href="">บทความ/ข่าวเด่น</a></li>
-                                   <li><a href="">ข่าวจากสื่อ</a></li>
-                                   <li><span>อัลบั้มภาพกิจกรรม</span>
-                                     <ul class="submenu_level03" >
-                                         <li><a href="">คณะกรรมการสรรหา</a></li>
-                                         <li><a href="">คณะอนุกรรมการสรรหา</a></li>
-                                     </ul>
-                                   </li>
-                                  </ul>
-                             </div><!--end menulist2f-->
-                       </div><!--end dropdown_menulist2f-->
-                     </div>
+                     <ul class="submenu_level02">
+                       <li><a href="">บทความ/ข่าวเด่น</a></li>
+                       <li><a href="">ข่าวจากสื่อ</a></li>
+                       <li><span>อัลบั้มภาพกิจกรรม</span>
+                         <ul class="submenu_level03" >
+                             <li><a href="">คณะกรรมการสรรหา</a></li>
+                             <li><a href="">คณะอนุกรรมการสรรหา</a></li>
+                         </ul>
+                       </li>
+                      </ul>
                   </div><!--end dropdown-menu-->
                 </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ติดต่อเรา<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
-                    <div class="container">
-                       <div class="dropdown_menulist2f">
-                           <h3>ติดต่อเรา</h3>
-                             <div class="menulist2f">
-                                 <ul class="submenu_level02">
-                                     <li><a href="">ช่องทางการติดต่อ</a></li>
-                                     <li><a href="">เงื่อนไข/ขั้นตอน/วิธีการการร้องเรียน</a></li>
-                                  </ul>
-                             </div><!--end menulist2f-->
-                       </div><!--end dropdown_menulist2f-->
-                     </div>
+                     <ul class="submenu_level02">
+                         <li><a href="">ช่องทางการติดต่อ</a></li>
+                         <li><a href="">เงื่อนไข/ขั้นตอน/วิธีการการร้องเรียน</a></li>
+                      </ul>
                   </div><!--end dropdown-menu-->
                 </li>
               </ul>

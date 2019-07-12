@@ -1,12 +1,6 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 27%;
-}
-</style>
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -43,6 +37,7 @@ width: 27%;
                            <li class="active"><span>&nbsp;</span></li>
                            <li class="active"><span>&nbsp;</span></li>
                            <li class="active"><span>&nbsp;</span></li>
+                           <li class="active"><span>&nbsp;</span></li>
                          </ul>
                        </div><!--end line-progress2f-->
                    </div><!--end box-line-progress2f-->
@@ -53,7 +48,7 @@ width: 27%;
                    </div><!--end box-step-progress2f-->
                    <div class="clear2f"></div>
                  </div><!--end control-progress2f-->
-              <div class="content-form2f">
+              <div class="content-form2f pagepreveiw">
                   <h4>Preview สมัครผู้แทนองค์กรภาคเอกชน</h4>
                   <div class="set-form2f">
                     <div class="box-input2f">
@@ -256,20 +251,22 @@ width: 27%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright"></div>
-                            <div class="col-md-6 col-sm-8">
-                                  <div class="input-radio2f inline-check">
-                                        <div class="box-radio2f">
+                           
+                            <div class="col-md-12">
+                                  <div class="input-radio2f inline-check padddingleft40">
+                                    <div class="input-radio2f inline-check">
+                                      <div class="box-radio2f">
                                            {{ Form::radio('addressType', 1, @Auth::user()->detail->addressType == 1 ? "checked" :'checked', ['id'=>'home']) }}
                                            <label for="home">บ้าน</label>
                                         </div>
                                         <div class="box-radio2f">
                                            {{ Form::radio('addressType', 2, @Auth::user()->detail->addressType == 1 ? "checked" :'', ['id'=>'office']) }}
                                            <label for="office">ที่ทำงาน</label>
+                                           <div class="t-office">{{ @Auth::user()->detail->workPlaceName }}</div>
                                         </div>
-                                        <div class="input2f width65per">
-                                             <div class="text-input2f nopadding">{{ @Auth::user()->detail->workPlaceName }}</div>
-                                        </div>
+                                    </div>
+                                        
+                               
                                   </div><!--end input-radio2f-->
                               </div>
                         </div><!--end row-->
@@ -373,7 +370,7 @@ width: 27%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f bold">โทรศัพท์</div>
+                                <div class="text-input2f bold">โทรศัพท์บ้าน</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -397,7 +394,7 @@ width: 27%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f bold">โทรศัพท์เคลื่อนที่ (มือถือ)</div>
+                                <div class="text-input2f bold">โทรศัพท์มือถือ</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -413,106 +410,86 @@ width: 27%;
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <h5>๒.  ประวัติการศึกษา (เรียงจากวุฒิการศึกษาสูงสุดลงไปตามลำดับ)</h5>
-                    <div class="box-input2f">
+                    <div class="box-preview2f">
                         <div class="row">
-                            <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
-                                <div class="text-input2f"><span>๑)</span></div>
+                            <div class="col-sm-1 col-xs-2">
+                                <div class="input-title2f t-center2f"><span>๑)</span></div>
                             </div>
-                            <div class="col-md-6 col-sm-8 col-xs-11">
-                                <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated1 }}</div>
-                                </div>
+                            <div class="col-sm-3 col-xs-101">
+                                 <div class="input-value2f">{{ Auth::user()->detail->graduated1 }}</div>
                             </div>
-                            <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                              <div class="text-input2f nopadding bold">สาขา</div>
+                            <div class="col-sm-1 col-xs-2">
+                              <div class="input-title2f">สาขา</div>
                             </div>
-                            <div class="col-md-3 col-sm-8 col-xs-11">
-                                <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty1 }}</div>
-                                </div>
+                            <div class="col-sm-3 col-xs-10">
+                                <div class="input-value2f">{{ Auth::user()->detail->faculty1 }}</div>
                             </div>
                         </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
+                    </div><!--end box-preview2f-->
+                    <div class="box-preview2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
-                              <div class="text-input2f"><span>๒)</span></div>
+                          <div class="col-sm-1 col-xs-2">
+                              <div class="input-title2f t-center2f"><span>๒)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated2 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2f">{{ Auth::user()->detail->graduated2 }}</div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding bold">สาขา</div>
+                          <div class="col-sm-1 col-xs-2">
+                            <div class="input-title2f">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty2 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2f">{{ Auth::user()->detail->faculty2 }}</div>
                           </div>
                       </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
+                    </div><!--end box-preview2f-->
+                    <div class="box-preview2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
-                              <div class="text-input2f"><span>๓)</span></div>
+                          <div class="col-sm-1 col-xs-2">
+                              <div class="input-title2f t-center2f"><span>๓)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                  <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated3 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2f">{{ Auth::user()->detail->graduated3 }}</div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding bold">สาขา</div>
+                          <div class="col-sm-1 col-xs-2">
+                            <div class="input-title2f">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty3 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                                <div class="input-value2f">{{ Auth::user()->detail->faculty3 }}</div>
                           </div>
                       </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
+                    </div><!--end box-preview2f-->
+                    <div class="box-preview2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
-                              <div class="text-input2f"><span>๔)</span></div>
+                          <div class="col-sm-1 col-xs-2">
+                              <div class="input-title2f t-center2f"><span>๔)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated4 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2f">{{ Auth::user()->detail->graduated4 }}</div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding bold">สาขา</div>
+                          <div class="col-sm-1 col-xs-2">
+                            <div class="input-title2f">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty4 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2f">{{ Auth::user()->detail->faculty4 }}</div>
                           </div>
                       </div><!--end row-->
-                    </div><!--end box-input2f-->
-                    <div class="box-input2f">
+                    </div><!--end box-preview2f-->
+                    <div class="box-preview2f">
                       <div class="row">
-                          <div class="col-md-2 col-sm-4 col-xs-1 nopaddingright">
-                              <div class="text-input2f"><span>๕)</span></div>
+                          <div class="col-sm-1 col-xs-2">
+                              <div class="input-title2f t-center2f"><span>๕)</span></div>
                           </div>
-                          <div class="col-md-6 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->graduated5 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2f">{{ Auth::user()->detail->graduated5 }}</div>
                           </div>
-                          <div class="col-md-1 col-sm-4 col-xs-1 nopadding text-major">
-                            <div class="text-input2f nopadding bold">สาขา</div>
+                          <div class="col-sm-1 col-xs-2">
+                            <div class="input-title2f">สาขา</div>
                           </div>
-                          <div class="col-md-3 col-sm-8 col-xs-11">
-                              <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->faculty5 }}</div>
-                              </div>
+                          <div class="col-sm-3 col-xs-10">
+                              <div class="input-value2fg">{{ Auth::user()->detail->faculty5 }}</div>
                           </div>
                       </div><!--end row-->
-                    </div><!--end box-input2f-->
+                    </div><!--end box-preview2f-->
                     <h5>๓.  ประวัติการทำงาน</h5>
                     <div class="box-input2f">
                         <div class="text-input2f bold"><span>๑)</span>หน้าที่การงานและความรับผิดชอบในปัจจุบัน</div>
@@ -672,16 +649,9 @@ width: 27%;
                     <div class="box-input2f">
                         <div class="text-input2f bold"><span>๓)</span>ประสบการณ์สำคัญหรือประสบการณ์ที่ภาคภูมิใจที่สัมพันธ์กับประเภทกลุ่มผู้แทนองค์กรภาคเอกชนที่เลือกสมัคร</div>
                     </div><!--end box-input2f-->
-                    <div class="box-input2f">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-4 nopaddingright"></div>
-                            <div class="col-md-6 col-sm-8">
-                                <div class="input2f">
-                                    <div class="text-input2f nopadding">{{ Auth::user()->detail->importantMemo }}</div>
-                                </div>
-                            </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+                    <div class="box-preview2f">
+                        <div class="input-value2f paddingleft20">{{ Auth::user()->detail->importantMemo }}</div>
+                    </div><!--end box-preview2f-->
                   </div><!--end set-form2f-->
                   <div class="headform2f">วิสัยทัศน์ของข้าพเจ้าต่อการพัฒนาระบบสุขภาพแห่งชาติ</div>
                   <div class="set-form2f">
@@ -748,12 +718,17 @@ width: 27%;
                     </div>
                   </div><!--end box-confirm2f-->
                 <div class="box-captcha2f">
-                      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                     {!! htmlFormSnippet() !!}
-                     @if($errors->has('g-recaptcha-response'))
-                     กรุณากดยืนยันตัวก่อนยื่นเอกสาร
-                     @endif
-                </div>
+                  <div class="row">
+                      <div class="col-sm-4"></div>
+                      <div class="col-sm-4">
+                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                         {!! htmlFormSnippet() !!}
+                         @if($errors->has('g-recaptcha-response'))
+                         กรุณากดยืนยันตัวก่อนยื่นเอกสาร
+                         @endif
+                      </div>
+                  </div>
+                </div><!--end box-captcha2f-->
                   <div class="btn-center2f">
                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">ยืนยันข้อมูล</button>

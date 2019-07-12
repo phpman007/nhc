@@ -1,12 +1,7 @@
 @extends('frontend.theme.master')
 
 @section('content')
-<style media="screen">
-.line-progress2f ul li {
-float: left;
-width: 19%;
-}
-</style>
+
 {!! Form::open() !!}
     <div class="insitepage2f">
         <div class="navication2f">
@@ -43,6 +38,7 @@ width: 19%;
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
+                 
                       </ul>
                     </div><!--end line-progress2f-->
                 </div><!--end box-line-progress2f-->
@@ -88,19 +84,7 @@ width: 19%;
 {!! Form::close() !!}
 @endsection
 
-@section('css')
 
-<link href="{{ asset("frontend/css/insitepage.css") }}" rel="stylesheet">
-<style media="screen">
-  button[disabled], html input[disabled] {
-        width:inherit !important;
-  }
-  .btnfixed .btn-center2f .btn {
-        max-width: 215px;
-        margin: 6px;
-  }
-</style>
-@endsection
 
 @section('js')
 
