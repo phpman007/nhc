@@ -533,6 +533,9 @@
     <!-- Toastr -->
     <script src="{{url('backend/js/plugins/toastr/toastr.min.js')}}"></script>
 
+    <!-- Clock picker -->
+    <script src="{{url('backend/js/plugins/clockpicker/clockpicker.js')}}"></script>
+
     <script src="{{ asset('js/select2.min.js') }} "></script>
 
     @yield('js')
@@ -546,7 +549,7 @@
                     showMethod: 'slideDown',
                     timeOut: 2000
                 };
-                toastr.success('Responsive Admin', 'Welcome to NHC Application Builder');
+                toastr.success('Responsive Admin', 'Welcome to NHCO Application Builder');
 
             }, 1300);*/
 

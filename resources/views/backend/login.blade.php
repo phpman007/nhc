@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <title>NHC | Login</title>
+      <title>NHCO | Login</title>
 
       <link href="{{ asset("backend/css/bootstrap.min.css") }}" rel="stylesheet">
       <link href="{{ asset("backend/font-awesome/css/font-awesome.css") }}" rel="stylesheet">
@@ -24,9 +24,9 @@
       <div class="middle-box text-center loginscreen animated fadeInDown">
             <div>
                   <div>
-                        <h1 class="logo-name">NHC</h1>
+                        <h1 class="logo-name">NHCO</h1>
                   </div>
-                  <h3>NHC PHP Application Builder</h3>
+                  <h3>NHCO PHP Application Builder</h3>
                   <!-- <p>
                   Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
             </p> -->

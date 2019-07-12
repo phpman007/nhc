@@ -42,6 +42,11 @@ Route::group(['prefix' => 'election'], function () {
 
 Route::group(['prefix' => 'check'], function () {
 
+    // Route::get('/snCheckView/{id}', 'CheckSNController@snCheckView')->name('check.snCheckView');
+    // Route::get('/orCheckView/{id}', 'CheckSNController@orCheckView')->name('check.orCheckView');
+    // Route::get('/ngoCheckView/{id}', 'CheckSNController@ngoCheckView')->name('check.ngoCheckView');
+    // Route::get('/memCheckView/{id}', 'CheckSNController@memCheckView')->name('check.memCheckView');
+
     Route::match(['get', 'post'],'/index', 'CheckSNController@index')->name('check.index');
     Route::get('/editSN/{id}', 'CheckSNController@edit');
     Route::get('/excelSN', 'CheckSNController@exportExcel')->name('check.excelSN');
@@ -103,4 +108,11 @@ Route::group(['prefix' => 'draw'], function () {
     Route::get('/ngoDraw', function () {return view('backend.draw.ngoDraw');});
 
 });
+
+Route::get('/previewRegister/{id}', 'CheckSNController@snPreview');
+
+Route::get('/registerReview/{id}', function($id) {
+    return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find($id), 1))[0]->stream();
+});
+
 ?>

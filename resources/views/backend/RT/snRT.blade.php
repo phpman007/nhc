@@ -1,5 +1,5 @@
 @extends('backend.theme.master')
-@section('title','NHC ADMIN')
+@section('title','NHCO ADMIN')
 
 @section('content')
 

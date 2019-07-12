@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon, Exception;
+// use Crypt;
 
 use App\Model\Backend\Province;
 use App\Model\Backend\GroupSN;
@@ -322,4 +326,62 @@ class CheckSNController extends Controller
     {
         //
     }
+
+    public function snPreview($id)
+    {
+
+        $list=MemberDetail::join('members','members.id','=','member_details.memberId');
+        $list->select('members.*','member_details.*');
+        $list->where('members.id','=',$id);
+        $member= $list->first();
+        // $member=MemberDetail::all();
+
+        // dd($member);
+        // dd($dataSet);
+        // Auth::guard('web')->login($member, true);
+
+        // // Auth::login($member, true);
+        return view('/backend/preview/snPreview', compact('member'));
+        // return redirect('/backend/preview/previewRegister/'.$member->id);
+
+    }
+
+    // public function orCheckView($id)
+    // {
+    //     $member = Member::where('id',$id)->first();
+
+    //     $dataSet['password'] = $member->password;
+    //     $dataSet['username'] = $member->email;
+    //     // $dataSet['groupId'] = 2;
+
+    //     // Auth::login($member, true);
+    //     // return redirect()->route('views/pdf/finishRegister');
+
+    // }
+
+    // public function ngoCheckView($id)
+    // {
+    //     $member = Member::where('id',$id)->first();
+
+    //     $dataSet['password'] = $member->password;
+    //     $dataSet['username'] = $member->email;
+    //     // $dataSet['groupId'] = 3;
+
+    //     // Auth::login($member, true);
+    //     // return redirect()->route('views/pdf/finishRegister');
+    // }
+
+    // public function memCheckView($id)
+    // {
+    //     $member = Member::where('id',$id)->first();
+
+    //     $dataSet['password'] = $member->password;
+    //     $dataSet['username'] = $member->email;
+    //     // $dataSet['groupId'] = 2;
+
+    //     // Auth::login($member, true);
+    //     // return redirect()->route('views/pdf/finishRegister');
+    // }
+
+
 }

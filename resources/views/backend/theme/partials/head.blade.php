@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>@yield('title', 'Dashboard') | NHC PHP Application Builder</title>
+<title>@yield('title', 'Dashboard') | NHCO PHP Application Builder</title>
 
 <link href="{{ asset("backend/css/bootstrap.min.css") }}" rel="stylesheet">
 <link href="{{ asset("backend/font-awesome/css/font-awesome.css") }}" rel="stylesheet">
@@ -28,4 +28,7 @@
 <link href="{{ asset("backend/css/plugins/sweetalert/sweetalert.css") }}" rel="stylesheet">
 <link href="{{ asset("backend/css/animate.css") }}" rel="stylesheet">
 <link href="{{ asset("backend/css/style.css") }}" rel="stylesheet">
+
+<!-- clockpicker -->
+<link href="{{ asset("backend/css/plugins/clockpicker/clockpicker.css") }}" rel="stylesheet">
 

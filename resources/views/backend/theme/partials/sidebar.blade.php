@@ -20,7 +20,7 @@
                   </ul>--}}
             </div>
             <div class="logo-element">
-                  NHC
+                  NHCO
             </div>
       </li>
 
@@ -50,7 +50,7 @@
                     </ul>
                   </li>
 
-                  @if(Auth::guard('admin')->user()->hasRole('super-admin'))
+                  {{-- @if(Auth::guard('admin')->user()->hasRole('super-admin'))
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติผู้สมัคร</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                               <li><a href="{{ url('backend/approve/snApprove') }}">ผู้ทรงคุณวุฒิ</a></li>
@@ -59,7 +59,7 @@
                         </ul>
                   </li>
                   <li><a href="{{ url('backend/approve/memApprove') }}"><i class="fa fa-th-large"></i> <span class="nav-label">อนุมัติรับสิทธิลงคะแนน</span></a></li>
-                  @endif
+                  @endif --}}
 
             </ul>
 

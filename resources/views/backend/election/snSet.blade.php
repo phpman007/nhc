@@ -1,14 +1,16 @@
 @extends('backend.theme.master')
-@section('title','NHC ADMIN')
+@section('title','NHCO ADMIN')
 
 @section('content')
-<div class="card border-info mb-3">
+<div class="card border-info mb-3  table-responsive">
     <div class="card-header">
         <strong>ตั้งวันการลงทะเบียน ผู้ทรงคุณวุฒิ</strong>
     </div>
     <div class="card-body">
         <form id="frmsearchset" method="get" action="{{url('backend/election/snElection')}}">
         {{ csrf_field() }}
+        <div class="col-md-12">
+            <div class="form-group">
             <div class="form-row">
                 <div class="form-group col-md-6">
                 <label for="txtgroup">กลุ่มย่อย : </label>
@@ -25,19 +27,21 @@
                     @endforeach
                 </select>
                 </div>
-            </div>
+            </div></div></div>
+            <div class="col-md-12">
+                <div class="form-group">
             <div class="d-flex justify-content-center  col-md-6">
                 <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary">ค้นหา</button>&nbsp
                 <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
-            </div>
+            </div></div></div>
         </form>
 
         <hr>
-        <div>
+        <div class="table-responsive">
             @if($listmember->isEmpty())
                 <h3 class="d-flex justify-content-center">ไม่มีข้อมูล</h3>
             @else
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered  table-responsive">
                     <tr align="middle">
                         <th width="5%">ลำดับ</th>
                         <th>กลุ่มย่อย</th>
@@ -136,40 +140,20 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="Hid3[]" id="Hid3" value={{$valmember->id}}>
                             <td>
-                                <select name="txttimebegin[]" style="font-size: 13px !important;" onchange="changedate3('{{$key}}');" class="form-control">
-                                    <option value="00:00:00">เลือก</option>
-                                    <option value="06:00:00" @if($valmember->openElectionTime=="06:00:00") selected @endif>06.00 น.</option>
-                                    <option value="07:00:00" @if($valmember->openElectionTime=="07:00:00") selected @endif>07.00 น.</option>
-                                    <option value="08:00:00" @if($valmember->openElectionTime=="08:00:00") selected @endif>08.00 น.</option>
-                                    <option value="09:00:00" @if($valmember->openElectionTime=="09:00:00") selected @endif>09.00 น.</option>
-                                    <option value="10:00:00" @if($valmember->openElectionTime=="10:00:00") selected @endif>10.00 น.</option>
-                                    <option value="11:00:00" @if($valmember->openElectionTime=="11:00:00") selected @endif>11.00 น.</option>
-                                    <option value="12:00:00" @if($valmember->openElectionTime=="12:00:00") selected @endif>12.00 น.</option>
-                                    <option value="13:00:00" @if($valmember->openElectionTime=="13:00:00") selected @endif>13.00 น.</option>
-                                    <option value="14:00:00" @if($valmember->openElectionTime=="14:00:00") selected @endif>14.00 น.</option>
-                                    <option value="15:00:00" @if($valmember->openElectionTime=="15:00:00") selected @endif>15.00 น.</option>
-                                    <option value="16:00:00" @if($valmember->openElectionTime=="16:00:00") selected @endif>16.00 น.</option>
-                                    <option value="17:00:00" @if($valmember->openElectionTime=="17:00:00") selected @endif>17.00 น.</option>
-                                    <option value="18:00:00" @if($valmember->openElectionTime=="18:00:00") selected @endif>18.00 น.</option>
-                                </select>
+                                <div class="input-group clockpicker" data-autoclose="true"  data-placement="left" data-align="top" >
+                                    <input type="text" name="txttimebegin[]" class="form-control" onchange="changedate3('{{$key}}');" value="{{date_format(date_create($valmember->openElectionTime),"H:i")}}" >
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-clock-o"></span>
+                                    </span>
+                                </div>
                             </td>
                             <td>
-                                <select name="txttimeend[]" style="font-size: 13px !important;" onchange="changedate3('{{$key}}');" class="form-control">
-                                    <option value="00:00:00">เลือก</option>
-                                    <option value="06:00:00" @if($valmember->endElectionTime=="06:00:00") selected @endif>06.00 น.</option>
-                                    <option value="07:00:00" @if($valmember->endElectionTime=="07:00:00") selected @endif>07.00 น.</option>
-                                    <option value="08:00:00" @if($valmember->endElectionTime=="08:00:00") selected @endif>08.00 น.</option>
-                                    <option value="09:00:00" @if($valmember->endElectionTime=="09:00:00") selected @endif>09.00 น.</option>
-                                    <option value="10:00:00" @if($valmember->endElectionTime=="10:00:00") selected @endif>10.00 น.</option>
-                                    <option value="11:00:00" @if($valmember->endElectionTime=="11:00:00") selected @endif>11.00 น.</option>
-                                    <option value="12:00:00" @if($valmember->endElectionTime=="12:00:00") selected @endif>12.00 น.</option>
-                                    <option value="13:00:00" @if($valmember->endElectionTime=="13:00:00") selected @endif>13.00 น.</option>
-                                    <option value="14:00:00" @if($valmember->endElectionTime=="14:00:00") selected @endif>14.00 น.</option>
-                                    <option value="15:00:00" @if($valmember->endElectionTime=="15:00:00") selected @endif>15.00 น.</option>
-                                    <option value="16:00:00" @if($valmember->endElectionTime=="16:00:00") selected @endif>16.00 น.</option>
-                                    <option value="17:00:00" @if($valmember->endElectionTime=="17:00:00") selected @endif>17.00 น.</option>
-                                    <option value="18:00:00" @if($valmember->endElectionTime=="18:00:00") selected @endif>18.00 น.</option>
-                                </select>
+                                <div class="input-group clockpicker" data-autoclose="true"  data-placement="left" data-align="top" >
+                                    <input type="text" name="txttimeend[]" class="form-control" onchange="changedate3('{{$key}}');" value="{{date_format(date_create($valmember->endElectionTime),"H:i")}}" >
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-clock-o"></span>
+                                    </span>
+                                </div>
                             </td>
                         </form>
 
@@ -177,16 +161,22 @@
                 </table>
                 <div class="d-flex justify-content-center" style="font-size: 13px !important;"><b>{{ $listmember->links() }}</b></div>
             @endif
+
+
         </div>
     </div>
 </div>
-
 
 @endsection
 
 @section('js')
 
 <script>
+    function changename(id){
+        var a;
+        alert(document.getElementsByName("txtname")[0].value);
+    }
+
     $(function(){
         $('.js-example-basic-multiple').select2({
         maximumSelectionLength: 3
@@ -201,6 +191,8 @@
             //thaiyear: true              //Set เป็นปี พ.ศ.
         });
         //}).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+
+        $('.clockpicker').clockpicker();
     });
 
     @if (Session::has('success'))
@@ -267,6 +259,7 @@
     function changedate3(id){
         document.getElementsByName('frmchangedate3[]')[id].submit();
     }
+
 </script>
 
 @endsection
