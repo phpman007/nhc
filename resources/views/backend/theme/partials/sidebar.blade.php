@@ -102,11 +102,11 @@
             </ul>
             @endif
       </li>
-      @if(Auth::guard('admin')->user()->hasRole('super-admin'))
+      {{-- @if(Auth::guard('admin')->user()->hasRole('super-admin')) --}}
       <li>
             <a href="{{ url('/backend/user')}}"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการผู้ใช้</span></a>
       </li>
-      @endif
+      {{-- @endif --}}
 
       {{-- Set Permission menu --}}
       {{-- <li>

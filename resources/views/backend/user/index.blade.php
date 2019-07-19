@@ -6,7 +6,9 @@
 
     <div class="card-header">
         <strong>ข้อมูลผู้ดูแลระบบ</strong>
+        @if(Auth::guard('admin')->user()->hasRole('super-admin'))
              <a href="{{ url('backend/user/create') }}" class="btn btn-sm btn-info">เพิ่มรายการ</a>
+        @endif
     </div>
     <div class="card-body">
           <div class="table-responsive">
