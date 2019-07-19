@@ -226,7 +226,9 @@
             @endif
         </div>
     </div>
+    @if(Auth::guard('admin')->user()->hasRole('super-admin'))
     <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> ยืนยันการอนุมัติทั้งหมด</button>
+    @endif
 </div>
 
 @endsection

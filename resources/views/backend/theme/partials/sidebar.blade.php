@@ -31,6 +31,8 @@
       <li>
             <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">รับสมัคร</span> <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
+
+                @if(Auth::guard('admin')->user()->hasRole('super-admin'))
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตั้งวันการลงทะเบียน</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                               {{-- <li><a href="{{ url('backend/election/snSet') }}">ผู้ทรงคุณวุฒิ</a></li>
@@ -41,6 +43,7 @@
                               <li><a href="{{ url('backend/election/ngoElection') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
                         </ul>
                   </li>
+                  @endif
 
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐาน</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
