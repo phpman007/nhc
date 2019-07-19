@@ -163,11 +163,12 @@
                             @endif
                             @if(Auth::guard('admin')->user()->hasRole('super-admin'))
                                 <td align="middle">
+
                                     <a data-toggle="modal" name="gotomodal[]" href="#m-editstatus-{{$key}}" style="display: none;"> test {{$key}} </a>
 
                                     <form name="frmstatuschange[]" method="GET" action="{{url('backend/check/editstatusSN')}}">
                                         {{ csrf_field() }}
-                                        <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" style="font-size: 13px !important;" onchange="editstatus('{{$key}}', this);">
+                                        <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" style="font-size: 13px !important;" onchange="editstatus('{{$key}}', this);" @if($valmember->fixStatus==1) disabled="disabled" @endif>
                                             @foreach ($liststatus as $valstatus)
                                             <option @if($valmember->status!=null && $valmember->statusid == $valstatus->id) selected @endif
                                             value={{$valstatus->id}}>{{$valstatus->status}}</option>
@@ -204,8 +205,10 @@
                                         </div>
                                     </form>
                                     {{--  //end modal  --}}
+
                                 </td>
-                            @else <td align="middle">{{$valmember->status}}</td>
+                            @else
+                                <td align="middle">{{$valmember->status}}</td>
                             @endif
 
                             <td align="middle">{{$valmember->username}}</td>
@@ -220,7 +223,7 @@
         </div>
     </div>
     @if(Auth::guard('admin')->user()->hasRole('super-admin'))
-    <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> ยืนยันการอนุมัติทั้งหมด</button>
+            <a href="/backend/check/editfixstatusSN"><button type="button" class="btn btn-primary btn-block"><i class="fa fa-check-circle-o"></i> ยืนยันการอนุมัติทั้งหมด</button></a>
     @endif
 </div>
 
@@ -239,7 +242,7 @@ toastr.options = {
     closeButton: true,
     progressBar: true,
     showMethod: 'slideDown',
-    timeOut: 2000
+    timeOut: 3000
 };
 toastr.success("{{ Session::get('success') }}", '');
 @endif
@@ -249,7 +252,7 @@ toastr.success("{{ Session::get('success') }}", '');
         closeButton: true,
         progressBar: true,
         showMethod: 'slideDown',
-        timeOut: 2000
+        timeOut: 3000
     };
     toastr.error("{{ Session::get('error') }}", '');
 @endif
