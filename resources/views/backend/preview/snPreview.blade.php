@@ -44,7 +44,7 @@
     </div>
     <div class="card-body">
         @if(!empty($member->attach()->where('status',1)->where('use_is','personal_photo')->first()->path))
-        <img style="height:1.7in; width:1.5in" src="{{ asset($member->attach()->where('status',1)->where('use_is','personal_photo')->first()->path)}}" alt="" class="rounded-circle">
+            <img style="height:1.7in; width:1.5in" src="{{ asset($member->attach()->where('status',1)->where('use_is','personal_photo')->first()->path)}}" alt="" class="rounded-circle">
         @endif
 
         @if(!empty($member))
@@ -276,12 +276,20 @@
             ทั้งนี้  ข้าพเจ้าได้แนบสำเนาเอกสารหรือหลักฐานที่แนบมาพร้อมใบสมัคร <br>
             <ul>
                 <li>/	สำเนาบัตรประจำตัวประชาชน</li>
-                {{-- $member->detail->personalIDCard --}}
+                @if(!empty($member->attach()->where('status',1)->where('use_is','copy_personal_card')->first()->path))
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset($member->attach()->where('status',1)->where('use_is','copy_personal_card')->first()->path)}}">
+                    </div>
+                @endif
                 <li>/	รูปถ่ายหน้าตรงไม่สวมหมวก ไม่สวมแว่นตาดำ ดำ ฉากพื้นหลังไม่มีลวดลาย  ซึ่งถ่ายมาแล้ว
                 ไม่เกิน  ๖  เดือน</li>
-                {{-- $member->detail->memberImg --}}
+
                 <li>/ เอกสารสรุปผลงานอันเป็นที่ประจักษ์ ที่สอดคล้องกับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร {{"(ไม่เกิน ๒ หน้ากระดาษ A 4)"}} พิมพ์โดยใช้ตัวอักษรขนาดไม่ต่ำกว่า ๑๖</li>
-                {{-- $member->detail->sorChor1 --}}
+                @if(!empty($member->attach()->where('status',1)->where('use_is','document1')->first()->path))
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset($member->attach()->where('status',1)->where('use_is','document1')->first()->path)}}">
+                    </div>
+                @endif
             </ul><br>
 &nbsp;&nbsp;&nbsp;&nbsp;ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ  หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้
         </p>
