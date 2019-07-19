@@ -48,6 +48,7 @@
                 <div class="hr-line-dashed"></div>
                 @endif
 
+                @if(Auth::guard('admin')->user()->hasRole('super-admin'))
                 <div class="form-group  row"><label class="col-sm-2 col-form-label">ตำแหน่ง / กำหนดสิทธิ์</label>
                     <div class="col-sm-10">
                         <div class="form-check-inline i-checks"><label>{!! Form::radio('permission', '2', $users->permission == 'admin' ? 1 : 0) !!} <i></i> Admin </label></div>
@@ -58,6 +59,7 @@
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
+                @endif
 
                 <div class="d-flex justify-content-center">
                     <button id="add" name="add" type="submit" class="btn btn-primary">แก้ไขผู้ใช้</button>&nbsp
