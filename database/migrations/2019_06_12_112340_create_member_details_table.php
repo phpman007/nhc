@@ -129,6 +129,7 @@ class CreateMemberDetailsTable extends Migration
             $table->string('ngoApproveDoc', 255)->comment("หนังสือรับรององค์กร")->nullable();
 
             $table->string('zipFile', 255)->comment("ไฟล์บีบอัด")->nullable();
+            $table->integer('fixStatus')->comment("สถานะการแก้ไขได้ ถ้าเป็น 0 ยังแก้ไขได้ 1 แก้ไขไม่ได้แล้ว")->nullable();
 
             $table->timestamps()->nullable();
             $table->softDeletes()->nullable();

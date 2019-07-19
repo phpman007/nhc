@@ -23,7 +23,8 @@ class CreateAttachFilesTable extends Migration
             $table->integer('status')->comment("สถานะ")->nullable();
             $table->integer('size')->comment("ขนาด")->nullable();
             $table->string('type', 20)->comment("ชนิดของไฟล์")->nullable();
-            $table->string('type', 255)->comment("ใช้สำหรับ")->nullable();
+            $table->string('use_is', 255)->comment("ใช้สำหรับ")->nullable();
+
             $table->timestamps()->nullable();
             $table->softDeletes()->nullable();
         });
