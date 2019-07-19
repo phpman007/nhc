@@ -293,13 +293,13 @@ class CheckSNController extends Controller
             $list2 = MemberDetail::find($id);
             $list2->adminId = $adminId;
 
-            if($list2->update()){
-                \Session::flash('success');
-            }else{
-                \Session::flash('error');
-            }
+            // if($list2->update()){
+            //     \Session::flash('success');
+            // }else{
+            //     \Session::flash('error');
+            // }
         }else{
-            \Session::flash('error');
+            // \Session::flash('error');
         }
         return back();
     }
@@ -327,61 +327,94 @@ class CheckSNController extends Controller
         //
     }
 
-    public function snPreview($id)
+    public function editstatus()
     {
+        $input = \Request::all();
 
-        $list=MemberDetail::join('members','members.id','=','member_details.memberId');
-        $list->select('members.*','member_details.*');
-        $list->where('members.id','=',$id);
-        $member= $list->first();
-        // $member=MemberDetail::all();
+        if($input['txtstatuschange'][0]==3){
 
-        // dd($member);
-        // dd($dataSet);
-        // Auth::guard('web')->login($member, true);
+            $list2=MemberDetail::join('members','members.id','=','member_details.memberId')
+            ->select('members.candidateNumber')
+            ->where('members.groupId','=',1)
+            ->where('member_details.statusId','=',3)
+            ->orderBy('members.candidateNumber','DESC')->first();
 
-        // // Auth::login($member, true);
-        return view('/backend/preview/snPreview', compact('member'));
-        // return redirect('/backend/preview/previewRegister/'.$member->id);
+            if($list2==NULL){
+                $newnumber=1;
+            }else{
+                $newnumber=($list2->candidateNumber)+1;
+            }
 
+            $list3 = Member::find($input['Hid'][0]);
+            $list3->candidateNumber = $newnumber;
+
+            $list = MemberDetail::find($input['Hid'][0]);
+            $list->statusId = $input['txtstatuschange'][0];
+
+        }else{
+            $list = MemberDetail::find($input['Hid'][0]);
+            $list->statusId = $input['txtstatuschange'][0];
+
+            $list3 = Member::find($input['Hid'][0]);
+            $list3->candidateNumber = 0;
+        }
+
+        if($list->update() and $list3->update()){
+            $this->mail($input['Hid'][0],3);
+        }else{
+            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+        }
+        // return redirect('/backend/approve/snApprove');
+        return back();
     }
 
-    // public function orCheckView($id)
-    // {
-    //     $member = Member::where('id',$id)->first();
+    public function editnotpass()
+    {
+        $input = \Request::all();
 
-    //     $dataSet['password'] = $member->password;
-    //     $dataSet['username'] = $member->email;
-    //     // $dataSet['groupId'] = 2;
+        $list = MemberDetail::find($input['Hidmember'][0]);
+        $list->reason = $input['txtreason'][0];
+        $list->statusId = 4;
 
-    //     // Auth::login($member, true);
-    //     // return redirect()->route('views/pdf/finishRegister');
+        $list3 = Member::find($input['Hidmember'][0]);
+        $list3->candidateNumber = 0;
 
-    // }
+        if($list->update() and $list3->update()){
+             $this->mail($input['Hidmember'][0],4);
+        }else{
+            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+        }
 
-    // public function ngoCheckView($id)
-    // {
-    //     $member = Member::where('id',$id)->first();
+        // return redirect('/backend/approve/snApprove');
+        return back();
+    }
 
-    //     $dataSet['password'] = $member->password;
-    //     $dataSet['username'] = $member->email;
-    //     // $dataSet['groupId'] = 3;
+    public function mail($id,$status)
+    {
+        $list=MemberDetail::join('members','members.id','=','member_details.memberId')
+        ->join('statuses','member_details.statusId','=','statuses.id')
+        ->join('province','member_details.provinceId','=','province.provinceId')
+        ->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id')
+        ->leftJoin('users', 'member_details.adminId', '=', 'users.id')
+        ->select('members.email','member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username')
+        ->where('member_details.id','=',$id)
+        ->first();
 
-    //     // Auth::login($member, true);
-    //     // return redirect()->route('views/pdf/finishRegister');
-    // }
+        $group="ผู้ทรงคุณวุฒิ";
 
-    // public function memCheckView($id)
-    // {
-    //     $member = Member::where('id',$id)->first();
+        if($list->email!=""){
+            // Mail::to('julaluckw@gmail.com')->send(new approveMail($group,$list));
+            \Session::flash('sendemail','แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว');
+        }else{
+            \Session::flash('error','แก้ไขสถานะแล้ว แต่ส่งอีเมล์แจ้งไม่ได้!!!');
+        }
+    }
 
-    //     $dataSet['password'] = $member->password;
-    //     $dataSet['username'] = $member->email;
-    //     // $dataSet['groupId'] = 2;
-
-    //     // Auth::login($member, true);
-    //     // return redirect()->route('views/pdf/finishRegister');
-    // }
-
-
+    public function snPreview($id)
+    {
+        $liststatus=Statuses::get();
+        $member2=Member::where('groupId',1)->orderBy('id')->get();
+        $member=Member::where('id',$id)->first();
+        return view('/backend/preview/snPreview', compact('member','member2','liststatus'));
+    }
 }

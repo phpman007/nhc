@@ -26,6 +26,28 @@
                 </div>
                 <div class="hr-line-dashed"></div>
 
+                @if(Auth::guard('admin')->user()->id == $users->id)
+                <div class="form-group  row"><label class="col-sm-2 col-form-label">รหัสผ่าน</label>
+                    <div class="col-sm-10">
+                            {!! Form::password('password', ['class'=>'form-control']) !!}
+                            @if($errors->has('password'))
+                            <span style="color:red" class="form-text m-b-none">{{ $errors->first('password') }}</span>
+                            @endif
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group  row"><label class="col-sm-2 col-form-label">ยืนยันรหัสผ่าน</label>
+                    <div class="col-sm-10">
+                            {!! Form::password('password_confirmation', ['class'=>'form-control']) !!}
+                            @if($errors->has('password_confirmation'))
+                            <span style="color:red" class="form-text m-b-none">{{ $errors->first('password_confirmation') }}</span>
+                            @endif
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                @endif
+
                 <div class="form-group  row"><label class="col-sm-2 col-form-label">ตำแหน่ง / กำหนดสิทธิ์</label>
                     <div class="col-sm-10">
                         <div class="form-check-inline i-checks"><label>{!! Form::radio('permission', '2', $users->permission == 'admin' ? 1 : 0) !!} <i></i> Admin </label></div>

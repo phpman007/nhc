@@ -113,6 +113,8 @@ class UserController extends Controller
     public function update(User $user, $id, Request $request){
         $request->validate([
             'permission'    => 'required',
+            'password'					=> 'required|min:6|max:20|confirmed',
+            'password_confirmation'		=> 'required|min:6|max:20',
         ]);
 
         $input =  $request->all();
@@ -124,6 +126,7 @@ class UserController extends Controller
 
         $data = User::find($id);
         $data->permission  = $permission;
+        $data->password    = Hash::make($input['password']);
         $data->update();
 
         $data2=ModelHasRole::where('model_id','=',$id);

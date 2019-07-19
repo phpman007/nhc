@@ -75,7 +75,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="d-flex justify-content-center">
-                        <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary">ค้นหา</button>&nbsp
+                        <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
                         <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning">ล้างข้อมูล</button>
                     </div></div></div>
 
@@ -140,7 +140,9 @@
                             <th>สถานะ</th>
                             <th>ผู้ที่ตรวจสอบ</th>
                         </tr>
+
                         @foreach ($listmember as $key=>$valmember)
+
                             <tr>
                             <td align="middle">
                                 @if (!empty($_GET['page']))
@@ -150,7 +152,7 @@
                                 @endif
                             </td>
                             <td align="middle">{{$valmember->docId}}</td>
-                        <td align="middle"><a href="/backend/previewRegister/{{ $valmember->id }}">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</a></td>
+                            <td align="middle"><a href="/backend/previewRegister/{{ $valmember->id }}"> {{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</a></td>
                             <td>{{$valmember->groupName}}</td>
                             <td align="middle">{{$valmember->province}}</td>
                             @if($valmember->zipFile==null)
@@ -163,7 +165,7 @@
                                 <td align="middle">
                                     <a data-toggle="modal" name="gotomodal[]" href="#m-editstatus-{{$key}}" style="display: none;"> test {{$key}} </a>
 
-                                    <form name="frmstatuschange[]" method="GET" action="{{url('backend/approve/editstatusSN')}}">
+                                    <form name="frmstatuschange[]" method="GET" action="{{url('backend/check/editstatusSN')}}">
                                         {{ csrf_field() }}
                                         <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" class="form-control" style="font-size: 13px !important;" onchange="editstatus('{{$key}}', this);">
                                             @foreach ($liststatus as $valstatus)
@@ -175,7 +177,7 @@
                                     </form>
 
                                     {{--  //modal สถานะไม่ผ่าน  --}}
-                                    <form name"frmnotpass[]" method="GET" action="{{url('backend/approve/editnotpassSN')}}">
+                                    <form name"frmnotpass[]" method="GET" action="{{url('backend/check/editnotpassSN')}}">
                                     {{ csrf_field() }}
                                         <input type="hidden" name="Hidmember[]" value={{$valmember->id}}>
 
@@ -217,6 +219,7 @@
             @endif
         </div>
     </div>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> ยืนยันการอนุมัติทั้งหมด</button>
 </div>
 
 @endsection
@@ -236,44 +239,44 @@ toastr.options = {
     showMethod: 'slideDown',
     timeOut: 2000
 };
-toastr.success('บันทึกผู้แก้ไขเรียบร้อยแล้ว', '');
+toastr.success("{{ Session::get('success') }}", '');
 @endif
 
-    @if (Session::has( 'error' ))
-        toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            showMethod: 'slideDown',
-            timeOut: 2000
-        };
-        toastr.error('แก้ไขสถานะไม่ได้!!!', '');
-    @endif
-    @if (Session::has( 'sendemail' ))
+@if (Session::has( 'error' ))
     toastr.options = {
         closeButton: true,
         progressBar: true,
         showMethod: 'slideDown',
-        timeOut: 3000
+        timeOut: 2000
     };
-    toastr.success('แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว', '');
-    @endif
+    toastr.error("{{ Session::get('error') }}", '');
+@endif
+@if (Session::has( 'sendemail' ))
+toastr.options = {
+    closeButton: true,
+    progressBar: true,
+    showMethod: 'slideDown',
+    timeOut: 3000
+};
+toastr.success("{{ Session::get('sendemail') }}", '');
+@endif
 
-    var select_element;
-    function editstatus(id, element){
-        select_element = element
-        var status = document.getElementsByName('txtstatuschange[]')[id].value;
-        console.log(status)
+var select_element;
+function editstatus(id, element){
+    select_element = element
+    var status = document.getElementsByName('txtstatuschange[]')[id].value;
+    console.log(status)
 
-        if(status==4){
-            document.getElementsByName('gotomodal[]')[id].click();
-        }else{
-            document.getElementsByName('frmstatuschange[]')[id].submit();
-        }
-
-        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
-            console.log($(select_element).val($(select_element).data('default')))
-        });
+    if(status==4){
+        document.getElementsByName('gotomodal[]')[id].click();
+    }else{
+        document.getElementsByName('frmstatuschange[]')[id].submit();
     }
+
+    $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
+        console.log($(select_element).val($(select_element).data('default')))
+    });
+}
 
     /*function NewWindow(mypage,myname,w,h,scroll){
         var win = null;

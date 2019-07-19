@@ -41,10 +41,11 @@
                               <li><a href="{{ url('backend/election/ngoElection') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
                         </ul>
                   </li>
-                  <li><a href="{{ url('backend/check/memCheck') }}"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐานผู้รับสิทธิลงคะแนน</span></a></li>
+
                   <li><a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">ตรวจสอบหลักฐาน</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-third-level">
                           <li><a href="{{ url('backend/check/index') }}">ผู้ทรงคุณวุฒิ</a></li>
+                          <li><a href="{{ url('backend/check/memCheck') }}">ผู้รับสิทธิลงคะแนน</a></li>
                           <li><a href="{{ url('backend/check/orCheck') }}">ผู้แทนองค์กรส่วนท้องถิ่น</a></li>
                           <li><a href="{{ url('backend/check/ngoCheck') }}">ผู้แทนองค์กรภาคเอกชน</a></li>
                     </ul>
@@ -103,6 +104,14 @@
             <a href="{{ url('/backend/user')}}"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการผู้ใช้</span></a>
       </li>
       @endif
+
+      {{-- Set Permission menu --}}
+      {{-- <li>
+            <a href="{{ url('/backend/permission')}}"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการสิทธิ์</span></a>
+      </li> --}}
+
+
+
       {{-- <li>
             <a href="layouts.html"><i class="fa fa-th-large"></i> <span class="nav-label">จัดการข้อมูลคลังภาพ</span></a>
       </li>

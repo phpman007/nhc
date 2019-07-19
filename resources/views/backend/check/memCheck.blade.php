@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                    <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary">ค้นหา</button>&nbsp
+                    <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
                     <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
                 </div>
         </form>
@@ -226,6 +226,7 @@
         </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> ยืนยันการอนุมัติทั้งหมด</button>
 </div>
 
 @endsection

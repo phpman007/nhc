@@ -47,28 +47,30 @@ Route::group(['prefix' => 'check'], function () {
     // Route::get('/ngoCheckView/{id}', 'CheckSNController@ngoCheckView')->name('check.ngoCheckView');
     // Route::get('/memCheckView/{id}', 'CheckSNController@memCheckView')->name('check.memCheckView');
 
-    Route::match(['get', 'post'],'/index', 'CheckSNController@index')->name('check.index');
+    Route::match(['get', 'post'],'/index', 'CheckSNController@index');
     Route::get('/editSN/{id}', 'CheckSNController@edit');
-    Route::get('/excelSN', 'CheckSNController@exportExcel')->name('check.excelSN');
+    Route::get('/excelSN', 'CheckSNController@exportExcel');
+    Route::get('/editstatusSN', 'CheckSNController@editstatus');
+    Route::get('/editnotpassSN', 'CheckSNController@editnotpass');
 
-    Route::match(['get', 'post'],'/memCheck', 'memberCheckController@index')->name('check.memCheck');
+    Route::match(['get', 'post'],'/memCheck', 'memberCheckController@index');
     Route::get('/editMEM/{id}', 'memberCheckController@edit');
-    Route::get('/excelMEM', 'memberCheckController@exportExcel')->name('check.excelMEM');
+    Route::get('/excelMEM', 'memberCheckController@exportExcel');
 
-    Route::match(['get', 'post'],'/ngoCheck', 'ngoCheckController@index')->name('check.ngoCheck');
+    Route::match(['get', 'post'],'/ngoCheck', 'ngoCheckController@index');
     Route::get('/editNGO/{id}', 'ngoCheckController@edit');
-    Route::get('/excelNGO', 'ngoCheckController@exportExcel')->name('check.excelNGO');
+    Route::get('/excelNGO', 'ngoCheckController@exportExcel');
 
-    Route::match(['get', 'post'],'/orCheck', 'orCheckController@index')->name('check.orCheck');
+    Route::match(['get', 'post'],'/orCheck', 'orCheckController@index');
     Route::get('/editOR/{id}', 'orCheckController@edit');
-    Route::get('/excelOR', 'orCheckController@exportExcel')->name('check.excelOR');
+    Route::get('/excelOR', 'orCheckController@exportExcel');
 
 });
 
 Route::group(['prefix' => 'approve'], function () {
     Route::get('/snApprove', 'ApproveSNController@index')->name('approveSN.index');
-    Route::get('/editstatusSN', 'ApproveSNController@editstatus')->name('approveSN.editstatus');
-    Route::get('/editnotpassSN', 'ApproveSNController@editnotpass')->name('approveSN.editnotpass');
+    // Route::get('/editstatusSN', 'ApproveSNController@editstatus')->name('approveSN.editstatus');
+    // Route::get('/editnotpassSN', 'ApproveSNController@editnotpass')->name('approveSN.editnotpass');
 
     Route::get('/orApprove', 'ApproveORController@index')->name('approveOR.index');
     Route::get('/editstatusOR', 'ApproveORController@editstatus')->name('approveOR.editstatus');
@@ -115,4 +117,6 @@ Route::get('/registerReview/{id}', function($id) {
     return event(new App\Events\FinishRegister(App\Model\Frontend\Member::find($id), 1))[0]->stream();
 });
 
+Route::get('/permission', function () {return view('backend/permission/index');});
+Route::get('/permission/create', function () {return view('backend/permission/form');});
 ?>
