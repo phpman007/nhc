@@ -43,8 +43,9 @@
         </div>
     </div>
     <div class="card-body">
-
-            <img style="height:1.7in; width:1.5in" src="{{ url('backend/img/ceo.jpg') }}" alt="" class="rounded-circle">
+        @if(!empty($member->attach()->where('status',1)->where('use_is','personal_photo')->first()->path))
+        <img style="height:1.7in; width:1.5in" src="{{ asset($member->attach()->where('status',1)->where('use_is','personal_photo')->first()->path)}}" alt="" class="rounded-circle">
+        @endif
 
         @if(!empty($member))
         แบบฟอร์ม สช./ใบสมัครผู้ทรงคุณวุฒิ/๒๕๖๒
@@ -53,7 +54,7 @@
         <div style="position:absolute">
             <img style="height:1.6in; width:1.34in" src="{{ url('backend/img/logo-pdf.jpg') }}" alt="">
         </div>
-            {{-- $member->detail->memberImg --}}
+
         <p class="text-center h1">
             ใบสมัครผู้ทรงคุณวุฒิ <br>
             เข้ารับการเลือกเป็นกรรมการสุขภาพแห่งชาติ <br>
@@ -290,7 +291,7 @@
 
             <form id="frmstatuschange" method="GET" action="{{url('backend/check/editstatusSN')}}">
                 {{ csrf_field() }}
-                <select data-default="{{$member->detail->statusId}}" name="txtstatuschange[]" class="form-control" style="font-size: 15pt; height:1cm;" onchange="editstatus(0,this);">
+                <select data-default="{{$member->detail->statusId}}" name="txtstatuschange[]" class="form-control" style="font-size: 15pt; height:1cm;" onchange="editstatus(0,this);" @if($member->detail->fixStatus==1) disabled="disabled" @endif>
                     @foreach ($liststatus as $valstatus)
                     <option @if($member->detail->statusId == $valstatus->id) selected @endif
                     value={{$valstatus->id}}>{{$valstatus->status}}</option>
