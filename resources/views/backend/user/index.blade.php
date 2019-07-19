@@ -32,7 +32,11 @@
                         <td align="middle">{{ $user->permission }}</td>
                         <td align="middle">
                             <a href="{{ url('backend/user/edit/'.$user->id) }}" class="btn btn-sm btn-info">แก้ไข</a>
-                            <button type="button" data-id="{{$user->id}}" class="btn btn-sm btn-danger demo3">ลบ</button>
+
+                            @if(Auth::guard('admin')->user()->hasRole('super-admin'))
+                                <button type="button" data-id="{{$user->id}}" class="btn btn-sm btn-danger demo3">ลบ</button>
+                            @endif
+
                         </td>
                       </tr>
                       @empty
