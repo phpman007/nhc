@@ -12,4 +12,6 @@ class reason extends Model
     {
         return $this->belongsTo('App\Model\Backend\memberDetail');
     }
+
+
 }

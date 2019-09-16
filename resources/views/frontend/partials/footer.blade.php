@@ -7,7 +7,7 @@
                         <a href=""><img src="{{asset("frontend/images/logo-small.png")}}" alt=""></a>
                       </div>
                       <div class="row">
-                          <div class="col-sm-3">
+                          <!-- <div class="col-sm-3">
                               <div class="footer-list2f">
                                   <h5>เกี่ยวกับคณะกรรมการสรรหา</h5>
                                   <ul class="submenu-level02">
@@ -25,8 +25,8 @@
                                         </ul>
                                     </li>
                                   </ul>
-                              </div><!--end footer-list2f-->
-                          </div>
+                              </div>
+                          </div> -->
                           <div class="col-sm-3">
                               <div class="footer-list2f">
                                   <h5>ประกาศคณะกรรมการสรรหา</h5>
@@ -38,9 +38,7 @@
                                           <li><a href="">ผู้แทนองค์กรภาคเอกชน (NGOs)</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="">ประกาศบัญชีรายชื่อผู้ผ่านคุณสมบัติเข้ารับการเลือกกันเองเป็นกรรมการสุขภาพแห่งชาติ</a></li>
-                                    <li><a href="">ประกาศผลผู้ได้รับเลือกเป็นกรรมการสุขภาพแห่งชาติ</a></li>
-                                    <li><a href="">ประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติอื่นๆ</a></li>
+
                                   </ul>
                               </div><!--end footer-list2f-->
                           </div>
@@ -81,7 +79,7 @@
                               </div><!--end footer-list2f-->
                           </div>
                           <div class="col-sm-3">
-                              <div class="footer-list2f">
+                              <!-- <div class="footer-list2f">
                                   <h5>ข่าวงานสรรหาคณะกรรมการ</h5>
                                   <ul class="submenu-level02">
                                     <li><a href="">บทความ/ข่าวเด่น</a></li>
@@ -93,7 +91,7 @@
                                         </ul>
                                     </li>
                                   </ul>
-                              </div><!--end footer-list2f-->
+                              </div> -->
 
                               <div class="footer-list2f">
                                   <h5>ติดต่อเรา</h5>

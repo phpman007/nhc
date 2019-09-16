@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use DB;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,8 +24,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+          try {
+                $items = DB::table('elections')->get();
+                foreach ($items as $key => $item) {
+                      $dateTime = \Carbon\Carbon::parse($item->confirmDate);
+                      $schedule->command('confirmRegister:sendingMail '. $item->id)
+                               ->cron('* * ' . (int)$dateTime->format('d') . ' '. (int)$dateTime->format('m') .' *');
+                }
+
+          } catch (\Exception $e) {
+                \Log::error("errros ". $e->getMessage(). " Line " . $e->getLine());
+          }
+
+
     }
 
     /**

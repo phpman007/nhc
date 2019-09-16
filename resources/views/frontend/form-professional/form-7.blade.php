@@ -7,9 +7,9 @@
               <div class="navication2f">
                   <div class="container">
                     <ol class="breadcrumb">
-                        <li><a href="">หน้าหลัก</a></li>
+                        <li><a href="{{ url('/') }}">หน้าหลัก</a></li>
                         <li><a href="">สมัคร</a></li>
-                        <li class="active">ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 7</li>
+                        <li class="active">ผู้ทรงคุณวุฒิ สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 7</li>
                     </ol>
                   </div>
               </div><!--end navication2f-->
@@ -51,19 +51,20 @@
                       <div class="clear2f"></div>
                     </div><!--end control-progress2f-->
                     <div class="content-form2f">
-                        <h4>ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 7</h4>
+                        <h4>ผู้ทรงคุณวุฒิ สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 7</h4>
 
                         <div class="headform2f">การยืนยันข้อมูลการส่งใบสมัครผู้ทรงคุณวุฒิ</div>
                         <div class="set-form2f">
                           <div class="box-input2f">
-                              <div class="text-input2f nopadding">
-                                หากคุณกดส่งใบสมัครแล้วจะไม่สามารถแก้ไขข้อมูลใบสมัครได้อีก
+                              <div class="text-input2f nopadding" style="color:red;font-size:30px !important">
+                                ท่านสามารถแก้ไขข้อมูลใบสมัคร และส่งใบสมัครให้แล้วเสร็จภายในวันที่ 13 กันยายน 2562 เวลา 16.30 น.
                               </div><!--end text-input2f-->
                           </div><!--end box-input2f-->
                         </div><!--end set-form2f-->
                         <div class="btn-center2f">
-                             <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
-                            <button type="submit" name="button" class="btn btn-green">ตกลง</button>
+                             <a href="{{ url('/form-professional/6') }}" class="btn btn-border">ย้อนกลับ</a>
+		                         <a href="{{ url('/cancel-form') }}/1/7" class="btn btn-border confirmed-alert">ส่งใบสมัครภายหลัง</a>
+                            <button type="submit" name="button" class="btn btn-green">ยืนยันการส่งใบสมัคร</button>
                         </div><!--end btn-center2f-->
                     </div><!--end content-form2f-->
                   </div><!--end container-->
@@ -84,6 +85,17 @@ jQuery(document).ready(function($) {
             event.preventDefault();
             alertConfirmForm('#form-step', 'กรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิ Step3 สำเร็จแล้ว คุณต้องการกรอกแบบฟอร์มสมัครผู้ทรงคุณวุฒิStepต่อไปไหม');
       })
+	@if(session('success'))
+      Swal.fire({
+         type: 'success',
+         title: 'สำเร็จ',
+	   showCancelButton: false,
+	   showConfirmButton: false,
+         html : 'ท่านได้ยื่นใบสมัครเข้ารับการเลือกเป็นกรรมการสุขภาพแห่งชาติเรียบร้อยแล้ว <br>ท่านสามารถสั่งพิมพ์ใบสมัครได้ โดยการ<a style="color:blue;font-weight:bold" target="_blank" href="{{asset('pdf/professional-merge/'.Auth::user()->detail->docId.'.pdf')}}"> "คลิกที่นี่"</a> <br><br>หมายเหตุ : ระบบจะจัดส่งไฟล์ "ใบสมัครกรรมการสุขภาพแห่งชาติ" ไปยังอีเมลของท่าน <br>หากไม่พบในกล่องจดหมาย (Inbox) กรุณาตรวจสอบในกล่องจดหมายขยะ (Spam)',
+         confirmButtonText: 'ปิด',
+         footer: '<a style="font-size: 29px;font-weight: bold;" href="{{ url('/') }}">กลับหน้าแรก</a>'
+      })
+      @endif
 });
 </script>
 @endsection

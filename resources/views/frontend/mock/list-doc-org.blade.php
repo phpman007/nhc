@@ -1,0 +1,65 @@
+@extends('frontend.theme.master')
+
+@section('content')
+<div id="wrapper2f">
+<div class="insitepage2f">
+  <div class="navication2f">
+      <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="">หน้าหลัก</a></li>
+            <!-- <li><a href="">ข่าวงานสรรหาคณะกรรมการ</a></li> -->
+            <li class="active">รายการเอกสารที่ต้องใช้ประกอบการสมัคร สำหรับผู้ทรงคุณวุฒิ</li>
+        </ol>
+      </div>
+  </div><!--end navication2f-->
+  <div class="insite-banner2f">
+      <div class="control-bannertext2f">
+          <div class="container">
+            <div class="headline2f line-brown">
+             <h1>รายการเอกสารที่ต้องใช้ประกอบการสมัคร สำหรับองค์กรภาคเอกชนที่เป็นนิติบุคคลิ</h1>
+            </div>
+          </div><!--end container-->
+      </div><!--end control-bannertext2f-->
+      <div class="img-banner2f">
+        <img src="{{asset("frontend/images/insite-banner04.jpg")}}" alt="">
+      </div>
+      <div class="bg-banner"><img src="{{asset("frontend/images/bg-banner.png")}}" alt=""></div>
+      <div class="shape-banner"></div>
+  </div><!--end insite-banner2f-->
+  <div class="control-insitepage2f">
+      <div class="container">
+        <div class="list-announce2f listcontent">
+          <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="box-announce2f">
+                          <h2 class="text-center">  รายการเอกสารที่ต้องใช้ประกอบการสมัคร <br> สำหรับผู้แทนองค์กรปกครองส่วนท้องถิ่น
+                          </h2><br>
+                          <ul>
+                                <li> 1. สำเนาบัตรประชาชน</li>
+                              <li> 2. สำเนาบัตรประจำตัวข้าราชการที่แสดงการดำรงตำแหน่งนายกองค์กรปกครองส่วนท้องถิ่นอยู่ ณ วันที่ยื่นใบสมัคร</li>
+                                            <li>
+                                           3. รูปถ่ายหน้าตรงไม่สวมหมวก ไม่สวมแว่นตาดำ ขนาด  ๒  นิ้ว ถ่ายมาแล้วไม่เกิน  ๖  เดือน</li>
+                          </ul>
+                    </div><!--end box-announce2f-->
+                </div>
+
+
+
+
+          </div><!--end row-->
+      </div><!--end list-announce2f-->
+
+      </div><!--end container-->
+  </div><!--end control-insitepage2f-->
+
+</div><!--end insitepage2f-->
+</div><!--end wrapper2f-->
+@endsection
+
+@section('css')
+@endsection
+
+@section('js')
+<script type="text/javascript"></script>
+@endsection

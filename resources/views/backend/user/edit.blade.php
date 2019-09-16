@@ -27,37 +27,84 @@
                 <div class="hr-line-dashed"></div>
 
                 @if(Auth::guard('admin')->user()->id == $users->id)
+
                 <div class="form-group  row"><label class="col-sm-2 col-form-label">รหัสผ่าน</label>
                     <div class="col-sm-10">
                             {!! Form::password('password', ['class'=>'form-control']) !!}
                             @if($errors->has('password'))
-                            <span style="color:red" class="form-text m-b-none">{{ $errors->first('password') }}</span>
+                                <span style="color:red" class="form-text m-b-none">{{ $errors->first('password') }}</span>
                             @endif
                     </div>
                 </div>
+
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group  row"><label class="col-sm-2 col-form-label">ยืนยันรหัสผ่าน</label>
                     <div class="col-sm-10">
                             {!! Form::password('password_confirmation', ['class'=>'form-control']) !!}
                             @if($errors->has('password_confirmation'))
-                            <span style="color:red" class="form-text m-b-none">{{ $errors->first('password_confirmation') }}</span>
+                                <span style="color:red" class="form-text m-b-none">{{ $errors->first('password_confirmation') }}</span>
                             @endif
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 @endif
 
-                @if(Auth::guard('admin')->user()->hasRole('super-admin'))
+                @if(true)
                 <div class="form-group  row"><label class="col-sm-2 col-form-label">ตำแหน่ง / กำหนดสิทธิ์</label>
                     <div class="col-sm-10">
-                        <div class="form-check-inline i-checks"><label>{!! Form::radio('permission', '2', $users->permission == 'admin' ? 1 : 0) !!} <i></i> Admin </label></div>
-                        <div class="form-check-inline i-checks"><label>{!! Form::radio('permission', '1',  $users->permission == 'super admin' ? 1 : 0) !!} <i></i> Super Admin </label></div>
+                          <ul>
+                                @foreach(\DB::table('roles')->where('guard_name', 'admin')->get() as $g)
+                                <li style="list-style:none;"><div class="form-check-inline i-checks"><label>{!! Form::radio('permission', $g->id, $users->permission == $g->id ? 1 : 0) !!} <i></i> {{$g->name}} </label></div></li>
+                                @endforeach
+                          </ul>
+
                         @if($errors->has('permission'))
                             <span style="color:red" class="form-text m-b-none">{{ $errors->first('permission') }}</span>
                         @endif
                     </div>
                 </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group  row"><label class="col-sm-2 col-form-label">กำหนดสิทธิ์ตามเขต</label>
+                    <div class="col-sm-10">
+                          <ul>
+
+                        {{-- {{ dd(json_decode($users->sectionControl)) }} --}}
+                    @if (!empty($users->sectionControl))
+                        @php
+                         $check = json_decode($users->sectionControl)
+                        @endphp
+
+                        @for($i=1; $i<=13; $i++)
+
+                            <input type="checkbox" value="{{$i}}" id="chk01" name="chk[]"
+                                @if (in_array($i, $check))
+                                    checked
+                                @endif
+                            >
+                            <label for="chk01">เขต {{$i}} </label><br>
+
+                        @endfor
+
+                    @else
+
+                        @for($i=1; $i<=13; $i++)
+                            <input type="checkbox" value="{{$i}}" id="chk01" name="chk[]">
+                            <label for="chk01">เขต {{$i}} </label><br>
+                        @endfor
+
+                    @endif
+
+                        {{-- @foreach ($check as $item)
+                            <input type="checkbox" value="1" id="chk01" name="chk[]">
+                            <label for="chk01">เขต {{$item}} </label><br>
+                        @endforeach --}}
+
+                          </ul>
+                    </div>
+                </div>
+
                 <div class="hr-line-dashed"></div>
                 @endif
 

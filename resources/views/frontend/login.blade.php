@@ -31,6 +31,7 @@
 
               <div class="content-form2f loginpage">
                   <h4>เข้าสู่ระบบ</h4><Br>
+                        <input type="hidden" name="send" value="{{ @$_GET['send'] }}">
                   <div class="set-form2f">
                     <div class="box-input2f">
                         <div class="row">
@@ -56,6 +57,10 @@
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       {!! Form::password('password', ["class"=>"form-control"]) !!}
+                                      <span class="icon-viewpass notview" data-toggle="tooltip" data-placement="top" title="แสดงรหัสผ่าน">
+                                          <img src="{{ asset("frontend/images/visibility-on.svg") }}" class="pass-view" alt="">
+                                          <img src="{{ asset("frontend/images/visibility-off.svg") }}" class="pass-none" alt="">
+                                      </span>
                                       @if($errors->has('password'))
                                       <small>{{ $errors->first('password') }}</small>
                                       @endif
@@ -72,12 +77,12 @@
                                    <div class="row">
                                        <div class="col-xs-6">
                                            <div class="t-forgetpass2f">
-                                             <a href="">ลืมรหัสผ่าน?</a>
+                                             <a href="{{ url('forget-password') }}">ลืมรหัสผ่าน?</a>
                                            </div>
                                        </div>
                                        <div class="col-xs-6">
-                                           <div class="t-regis2f t-right2f">
-                                             <a href="">สมัครสมาชิก</a>
+                                           <div class=" t-right2f t-forgetpass2f">
+                                             <a href="{{ url('delete/member') }}">ยกเลิกaccount</a>
                                            </div>
                                        </div>
                                    </div><!--end row-->
@@ -112,6 +117,24 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
+$(".icon-viewpass img").on('click', function(event) {
+    event.preventDefault();
+    var input = $(this).parents('.input2f').find('input');
 
+    // input marker
+
+
+    $(this).parents('.icon-viewpass').find('img').each(function(k, v) {
+       if($(v).hasClass('pass-view')) {
+            $(v).removeClass('pass-view')
+            $(v).addClass('pass-none');
+            input.attr('type', 'password')
+       } else {
+            $(v).addClass('pass-view')
+            $(v).removeClass('pass-none');
+            input.attr('type', 'text')
+       }
+    })
+});
 </script>
 @endsection

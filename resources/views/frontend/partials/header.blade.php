@@ -4,7 +4,7 @@
             <div class="row">
               <div class="col-md-4 col-sm-0">
                 <div class="top-logo2f">
-                  <a href=""><img src="{{asset("frontend/images/logo.png")}}" alt=""></a>
+                  <a href="{{url('/')}}"><img src="{{asset("frontend/images/logo.png")}}" alt=""></a>
                 </div>
               </div>
               <div class="col-md-8 col-sm-12">
@@ -38,7 +38,7 @@
                   <div class="manage-login2f">
                       <div class="control-login2f">
                            @if(Auth::check())
-                          <div class="box-login2f"><a href="{{ url('/logout') }}">ออกจากระบบ</a></div>
+                          <div class="box-login2f">{{@Auth::user()->nameTitle}} {{@Auth::user()->firstname}} {{@Auth::user()->lastname}} | <a href="{{ url('/logout') }}">ออกจากระบบ</a></div>
                            @else
                           <div class="box-login2f"><a href="{{ url('/login') }}">เข้าสู่ระบบ</a></div>
                           @endif
@@ -69,8 +69,8 @@
             </div>
             <div class="collapse navbar-collapse btnCollapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">หน้าหลัก</a></li>
-                <li class="dropdown">
+                <li class="active"><a href="{{url('/')}}">หน้าหลัก</a></li>
+                <!-- <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">เกี่ยวกับคณะกรรมการสรรหา<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
                       <ul class="submenu_level02">
@@ -89,6 +89,25 @@
                           </ul>
                         </li>
                       </ul>
+                  </div>
+                </li> -->
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">เกี่ยวกับคณะกรรมการสรรหา<span class="caret"></span></a>
+                  <div class="dropdown-menu" role="menu">
+                     <ul class="submenu_level02">
+                       <li><span>เกี่ยวกับคณะกรรมการสรรหา</span>
+                         <ul class="submenu_level03" >
+                             <li><a target="_blank" href="{{ asset('mock/menu/pdf1.pdf') }}">คณะกรรมการสรรหากรรมการสุขภาพแห่งชาติ</a></li>
+                             <!-- <li><a href="">ผู้แทนองค์กรปกครองส่วนท้องถิ่น</a></li> -->
+                             <li><a target="_blank" href="{{ asset('mock/menu/2.png') }}">องค์ประกอบของคณะกรรมการสุขภาพแห่งชาติ</a></li>
+                             <li><a target="_blank" href="{{ asset('mock/menu/3.png') }}">กรรมการสุขภาพแห่งชาติที่มาจากกระบวนการเลือกกันเอง</a></li>
+                             <li><a target="_blank" href="{{ asset('mock/menu/4.png') }}">หน้าที่และอำนาจคณะกรรมการสุขภาพแห่งชาติ (คสช.)</a></li>
+
+                             <li><a target="_blank" href="{{ url('documentcontact') }}">แบบฟอร์มข้อมูลติดต่อเจ้าหน้าที่สำนักงานสาธารณสุขจังหวัด</a></li>
+                         </ul>
+                       </li>
+
+                      </ul>
                   </div><!--end dropdown-menu-->
                 </li>
                 <li class="dropdown">
@@ -97,55 +116,77 @@
                      <ul class="submenu_level02">
                        <li><span>ประกาศคณะกรรมการสรรหา</span>
                          <ul class="submenu_level03" >
-                             <li><a href="">ผู้ทรงคุณวุฒิ</a></li>
-                             <li><a href="">ผู้แทนองค์กรปกครองส่วนท้องถิ่น</a></li>
-                             <li><a href="">ผู้แทนองค์กรภาคเอกชน (NGOs)</a></li>
+                             <li><a href="{{ url('listprofessional-file') }}">ผู้ทรงคุณวุฒิ</a></li>
+                             <!-- <li><a href="">ผู้แทนองค์กรปกครองส่วนท้องถิ่น</a></li> -->
+                             <li><a href="{{ url('listngo-file') }}">ผู้แทนองค์กรภาคเอกชน (NGOs)</a></li>
                          </ul>
                        </li>
-                       <li><a href="">ประกาศบัญชีรายชื่อผู้ผ่านคุณสมบัติเข้ารับการเลือกกันเองเป็นกรรมการสุขภาพแห่งชาติ</a></li>
-                       <li><a href="">ประกาศผลผู้ได้รับเลือกเป็นกรรมการสุขภาพแห่งชาติ</a></li>
-                       <li><a href="">ประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติอื่นๆ</a></li>
+
                       </ul>
                   </div><!--end dropdown-menu-->
                 </li>
+		    @if(now() <= Carbon\Carbon::parse(config('time.register.date')) && now() >= Carbon\Carbon::parse('2019-09-04'))
+		      <!-- <li class="active"><a href="{{ url('form-professional/1') }}">สมัคร</a></li> -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">สมัคร<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
                      <ul class="submenu_level02">
-                       <li><span>สื่อแนะนำการสรรหา</span>
+                       <!-- <li><span>สื่อแนะนำการสรรหา</span>
                          <ul class="submenu_level03" >
-                             <li><a href="">ภาพรวมการสรรหา</a></li>
                              <li><a href="">รับสมัคร</a></li>
-                             <li><a href="">วิธีการยืนยันการใช้สิทธิ์ลงคะแนนและวิธีการลงคะแนน</a></li>
                          </ul>
-                       </li>
+                       </li> -->
                        <li><span>ผู้ทรงคุณวุฒิ</span>
                          <ul class="submenu_level03" >
-                             <li><a href="">กำหนดการ</a></li>
-                             <li><a href="">เอกสารประกอบการสมัคร</a></li>
+
+                                     <li><a href="{{ url('list-doc-pro') }}">รายการเอกสารที่ต้องใช้ประกอบการสมัคร</a></li>
                              <li><a href="{{ url('form-professional/1') }}">สมัคร</a></li>
+                            <li><a href="{{ url('form-professional/2') }}?get_page=1">แก้ไขข้อมูลใบสมัคร</a></li>
                          </ul>
                        </li>
 
-                       <li><span>ผู้แทนองค์กรปกครองส่วนท้องถิ่น</span>
+                       <!-- <li><span>ผู้แทนองค์กรปกครองส่วนท้องถิ่น</span>
                          <ul class="submenu_level03" >
-                             <li><a href="">กำหนดการ</a></li>
-                             <li><a href="">เอกสารประกอบการสมัคร</a></li>
-                             <li><a href="{{ url('form-organization/1') }}">สมัครรับสิทธิ์ลงคะแนนผู้แทนองค์กรส่วนท้องถิ่น</a></li>
-                             <li><a href="{{ url('form-organization/2') }}">สมัครผู้แทนองค์กรส่วนท้องถิ่น</a></li>
+
+                                     <li><a href="{{ url('list-doc-org') }}">รายการเอกสารที่ต้องใช้ประกอบการสมัคร</a></li>
+                             <li><a href="{{ url('form-organization/2') }}">สมัคร</a></li>
+                            <li><a href="{{ url('form-organization/3') }}?get_page=1">แก้ไขข้อมูลใบสมัคร</a></li>
                          </ul>
-                       </li>
+                       </li> -->
                        <li><span>ผู้แทนองค์กรภาคเอกชน (NGOs)</span>
                          <ul class="submenu_level03" >
-                             <li><a href="">กำหนดการ</a></li>
-                             <li><a href="">เอกสารประกอบการสมัคร</a></li>
-                             <li><a href="{{ url('form-ngo-register/1') }}">สมัคร</a></li>
+                               <li><a href="{{ url('list-doc-ngo') }}">รายการเอกสารที่ต้องใช้ประกอบการสมัคร</a></li>
+                             <li><a href="{{ url('form-ngo-register/1') }}">ขอขึ้นทะเบียนองค์กรภาคเอกชน</a></li>
+                             <li><a href="{{ url('form-ngo-register/2') }}?get_page=1">แก้ไขข้อมูลแบบขอขึ้นทะเบียน</a></li>
+                            <li><a href="{{ url('form-ngo/1') }}">สมัคร</a></li>
+                            <li><a href="{{ url('form-ngo/2') }}?get_page=1">แก้ไขข้อมูลใบสมัคร</a></li>
+
                          </ul>
                        </li>
                       </ul>
                   </div><!--end dropdown-menu-->
                 </li>
-                <li class="dropdown">
+            @elseif(now() >= Carbon\Carbon::parse(config('time.register.date')) && now() >= Carbon\Carbon::parse('2019-11-04'))
+                <li class="active"><a href="{{url('/vote-schedule')}}">กำหนดการใช้สิทธิลงคะแนน</a></li>
+            @elseif ( Carbon\Carbon::parse(config('time.vote_menu_confirm.start_date'))  <= now() && Carbon\Carbon::parse(config('time.vote_menu_confirm.end_date')) >= now() )
+
+                @if (@Auth::user()->detail->statusId == '4')
+                    {{-- <li class="active"><a href="{{url('/vote-confirm')}}">ยืนยันการใช้สิทธิ </a></li> --}}
+                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ </a></li>
+                @elseif (@Auth::user()->detail->statusId == '3')
+                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ </a></li>
+                @else
+                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ </a></li>
+                @endif
+
+                {{-- vote-confirm
+                vote-confirm-notpass
+                vote-confirm-notpass2 --}}
+
+		    @else
+                  <li class="active"><a href="{{url('/vote')}}">ลงคะแนน</a></li>
+		    @endif
+                <!-- <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ข่าวงานสรรหาคณะกรรมการ<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
                      <ul class="submenu_level02">
@@ -158,14 +199,13 @@
                          </ul>
                        </li>
                       </ul>
-                  </div><!--end dropdown-menu-->
-                </li>
+                  </div>
+                </li> -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">ติดต่อเรา<span class="caret"></span></a>
                   <div class="dropdown-menu" role="menu">
                      <ul class="submenu_level02">
-                         <li><a href="">ช่องทางการติดต่อ</a></li>
-                         <li><a href="">เงื่อนไข/ขั้นตอน/วิธีการการร้องเรียน</a></li>
+                         <li><a href="{{url('contact-us')}}">ช่องทางการติดต่อ</a></li>
                       </ul>
                   </div><!--end dropdown-menu-->
                 </li>

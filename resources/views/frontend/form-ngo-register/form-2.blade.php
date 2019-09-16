@@ -54,7 +54,7 @@ width: 23.33333%;
               <div class="content-form2f">
                   <h4>ผู้แทนองค์กรภาคเอกชน ขอขึ้นทะเบียนองค์กรภาคเอกชน ขั้นตอนที่ 2</h4>
                   <div class="set-form2f">
-                    <div class="box-input2f">
+                    <!-- <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f nopadding">วัน/เดือน/พ.ศ.</div>
@@ -63,10 +63,10 @@ width: 23.33333%;
                                 <div class="box-date input-group date">
                                       {!! Form::text('date_create', now()->addYears(543)->format("d/m/Y"), [ "class"=>"form-control" , "placeholder"=>"วัน/เดือน/พ.ศ.", 'readonly'=>'']) !!}
                                   <span class="input-group-addon"><img src="images/icon-calendar-gray.svg" alt="" data-pin-nopin="true"></span>
-                                </div><!--end input_form-->
+                                </div>
                             </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+                        </div>
+                    </div> -->
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -74,7 +74,7 @@ width: 23.33333%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                      {!! Form::text('nameTitle', Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว", 'maxlength' => '80']) !!}
                                       @if($errors->has("nameTitle"))
                                       <small>{{ $errors->first('nameTitle') }}</small>
                                       @endif
@@ -89,7 +89,7 @@ width: 23.33333%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                      {!! Form::text('firstname', Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ", 'maxlength' => '150']) !!}
                                       @if($errors->has("firstname"))
                                       <small>{{ $errors->first('firstname') }}</small>
                                       @endif
@@ -104,7 +104,7 @@ width: 23.33333%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                      {!! Form::text('lastname', Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล", 'maxlength' => '150']) !!}
                                       @if($errors->has("lastname"))
                                       <small>{{ $errors->first('lastname') }}</small>
                                       @endif
@@ -112,7 +112,7 @@ width: 23.33333%;
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="box-input2f">
+                    <!-- <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f nopadding">จังหวัด</div>
@@ -122,12 +122,12 @@ width: 23.33333%;
                                      {!! Form::select('ngoProvincetID', Helper::getProvices(), @Auth::user()->provinceId, ["class"=>"form-control" ,"placeholder"=>"จังหวัด",'readonly' => '']) !!}
                                 </div>
                             </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+                        </div>
+                    </div> -->
                     <div class="box-input2f">
                         <div class="text-input2f nopadding">
-                          ซึ่งเป็นผู้มีอำนาจกระทำการแทนองค์กร  ประสงค์จะขึ้นทะเบียนเป็นองค์กรผู้มีสิทธิเสนอชื่อผู้แทนเข้ารับการเลือกเป็นกรรมการสุขภาพแห่งชาติ
-โดยมีรายละเอียดดังนี้
+                             ซึ่งเป็นผู้แจ้งรายละเอียดเพื่อขอขึ้นทะเบียนเป็นองค์กรผู้มีสิทธิเสนอชื่อผู้แทนเข้ารับการเลือกเป็นกรรมการสุขภาพแห่งชาติ
+                               โดยมีรายละเอียดดังนี้
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
@@ -136,11 +136,11 @@ width: 23.33333%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">๑.ชื่อองค์กร</div>
+                                <div class="text-input2f nopadding">1.ชื่อองค์กร</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                     {!! Form::text('ngoName', @Auth::user()->detail->ngoName, ["class"=>"form-control", "placeholder"=>"ชื่อองค์กร"]) !!}
+                                     {!! Form::text('ngoName', @Auth::user()->detail->ngoName, ["class"=>"form-control", "placeholder"=>"ชื่อองค์กร", 'maxlength' => '150']) !!}
                                      @if($errors->has('ngoName'))
                                      <small>{{ $errors->first('ngoName') }}</small>
                                      @endif
@@ -151,23 +151,26 @@ width: 23.33333%;
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">๒.สถานภาพขององค์กร</div>
+                                <div class="text-input2f nopadding">2.ประเภทขององค์กร</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input-radio2f">
                                     <div class="box-radio2f">
-                                          {!! Form::radio('legalStastus', 0, @Auth::user()->detail->legalStastus == 0 ? 'checked' : '', ['id'=>'test1']) !!}
-                                      <label for="test1">ไม่เป็นนิติบุคคล</label>
+                                      <?php $optionsArray = ['ไม่เป็นนิติบุคคล' , 'เป็นนิติบุคคล'] ?>
+                                      {!! Form::select('legalStastus', $optionsArray, @Auth::user()->detail->legalStastus, ['class'=>'form-control']) !!}
+
                                     </div>
-                                    <div class="box-radio2f">
-                                          {!! Form::radio('legalStastus', 1, @Auth::user()->detail->legalStastus == 1 ? 'checked' : '', ['id'=>'test2']) !!}
-                                      <label for="test2">เป็นนิติบุคคล</label>
-                                      <div class="input2f width65per">
-                                            {!! Form::text('ngoStatus', @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"สถานภาพขององค์กร"]) !!}
-                                      </div>
-                                    </div>
+
                                 </div><!--end input-radio2f-->
-                                
+                                <div class="box-radio2f">
+
+                                 <div class="input2f ">
+                                      {!! Form::select('ngoStatus', ["มูลนิธิ"=> 'มูลนิธิ', 'สมาคม' => 'สมาคม'], @Auth::user()->detail->ngoStatus, ["class"=>"form-control", "placeholder"=>"เลือกสถานภาพขององค์กร" , 'maxlength' => '255']) !!}
+                                      @if($errors->has('ngoStatus'))
+                                     <small>{{ $errors->first('ngoStatus') }}</small>
+                                     @endif
+                                 </div>
+                                </div>
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
@@ -193,7 +196,7 @@ width: 23.33333%;
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('ngoMoo', @Auth::user()->detail->ngoMoo, ["class"=>"form-control" ,"placeholder"=>"หมู่ที่"]) !!}
+                                      {!! Form::text('ngoMoo', @Auth::user()->detail->ngoMoo, ["class"=>"form-control" ,"placeholder"=>"หมู่ที่" , 'maxlength' => '10']) !!}
                                      @if($errors->has('ngoMoo'))
                                      <small>{{ $errors->first('ngoMoo') }}</small>
                                      @endif
@@ -208,7 +211,7 @@ width: 23.33333%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('ngoSoi', @Auth::user()->detail->ngoSoi, ["class"=>"form-control" ,"placeholder"=>"ซอย"]) !!}
+                                      {!! Form::text('ngoSoi', @Auth::user()->detail->ngoSoi, ["class"=>"form-control" ,"placeholder"=>"ซอย" , 'maxlength' => '150']) !!}
                                     @if($errors->has('ngoSoi'))
                                     <small>{{ $errors->first('ngoSoi') }}</small>
                                     @endif
@@ -223,7 +226,7 @@ width: 23.33333%;
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('ngoStreet', @Auth::user()->detail->ngoStreet, ["class"=>"form-control" ,"placeholder"=>"ถนน"]) !!}
+                                      {!! Form::text('ngoStreet', @Auth::user()->detail->ngoStreet, ["class"=>"form-control" ,"placeholder"=>"ถนน" , 'maxlength' => '150']) !!}
                                      @if($errors->has('ngoStreet'))
                                      <small>{{ $errors->first('ngoStreet') }}</small>
                                      @endif
@@ -240,7 +243,7 @@ width: 23.33333%;
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                       <?php $provide = \DB::table('provinces')->select('province', 'province_code')->groupBy('province', 'province_code')->get()->pluck('province', 'province_code') ?>
-                                      {!! Form::select('ngoProvincetID', $provide, null, ['class'=>'form-control select2', 'placeholder' => 'จังหวัด', 'id'=>'provinceId']) !!}
+                                      {!! Form::select('ngoProvincetID', [Auth::user()->provinceId => $provide[Auth::user()->provinceId]], Auth::user()->provinceId, ['class'=>'form-control readonly select2', 'placeholder' => 'จังหวัด', 'id'=>'provinceId', 'readonly' =>'']) !!}
                                       @if($errors->has('ngoProvincetID'))
                                      <small>{{ $errors->first('ngoProvincetID') }}</small>
                                      @endif
@@ -288,7 +291,7 @@ width: 23.33333%;
                            </div>
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::number('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์",'maxlength'=>5]) !!}
+                                      {!! Form::text('ngoZipCode',  @Auth::user()->detail->ngoZipCode , ["class"=>"form-control" , "placeholder"=>"รหัสไปรษณีย์", 'maxlength' => '10']) !!}
                                  @if($errors->has('ngoZipCode'))
                                  <small>{{ $errors->first('ngoZipCode') }}</small>
                                  @endif
@@ -298,18 +301,91 @@ width: 23.33333%;
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
+                           <div class="col-md-2 col-sm-4 nopaddingright">
+                                <div class="text-input2f">เบอร์โทรศํพท์</div>
+                           </div>
+                           <div class="col-md-6 col-sm-8">
+                                <div class="input2f">
+                                      {!! Form::text('suggestTel',  @Auth::user()->detail->suggestTel , ["class"=>"form-control" , "placeholder"=>"เบอร์โทรศํพท์", 'maxlength' => '50']) !!}
+                                 @if($errors->has('suggestTel'))
+                                 <small>{{ $errors->first('suggestTel') }}</small>
+                                 @endif
+                                </div>
+                           </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <div class="box-input2f">
+                        <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f nopadding">๔.ก่อตั้งองค์กรวันที่</div>
+                                <div class="text-input2f nopadding">4.ก่อตั้งองค์กรวันที่</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
-                                <div class="box-date input-group date">
-                                      {!! Form::text('ngoStartDate',@Auth::user()->detail->ngoStartDate, ['class'=>'form-control date-picker', 'placeholder' => 'ก่อตั้งองค์กรวันที่','readonly' => '']) !!}
-                                      @if($errors->has('ngoStartDate'))
-                                      <small>{{ $errors->first('ngoStartDate') }}</small>
-                                      @endif
-                                  <span class="input-group-addon"><img src="images/icon-calendar-gray.svg" alt="" data-pin-nopin="true"></span>
-                                </div><!--end input_form-->
+                                <div class="control-select-date2f">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3 col-xs-2 nopaddingright">
+                                            <div class="input2f">
+                                                  <?php
+
+                                                  $sday = array();
+                                                  for($i = 1; $i <= 31; $i++) {
+                                                        $sday[$i] = $i;
+                                                  }
+                                                   ?>
+                                                   @if(!empty(Auth::user()->detail->ngoStartDate))
+                                                  {!! Form::select('sday', $sday, Carbon\Carbon::parse(Auth::user()->detail->ngoStartDate)->format("d"), [ "class"=>"form-control"]) !!}
+                                                   @else
+                                                  {!! Form::select('sday', $sday, null, [ "class"=>"form-control"]) !!}
+                                                  @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-6 col-xs-6 nopaddingright">
+                                            <div class="input2f">
+                                              <?php
+                                              $month = [
+                                                '1' => "มกราคม",
+                                                 "2"=>   "กุมภาพันธ์",
+                                                 "3"=>  "มีนาคม",
+                                                 "4"=>  "เมษายน",
+                                                 "5"=>  "พฤษภาคม",
+                                                 "6"=>  "มิถุนายน",
+                                                 "7"=>  "กรกฎาคม",
+                                                 "8"=>  "สิงหาคม",
+                                                 "9"=>  "กันยายน",
+                                                 "10"=>  "ตุลาคม",
+                                                 "11"=>  "พฤษจิกายน",
+                                                 "12"=>  "ธันวาคม",
+                                              ];
+                                               ?>
+                                               @if(!empty(Auth::user()->detail->ngoStartDate))
+                                              {!! Form::select('smonth', $month, (int)Carbon\Carbon::parse(Auth::user()->detail->ngoStartDate)->format("m"), [ "class"=>"form-control"]) !!}
+                                               @else
+                                              {!! Form::select('smonth', $month, null, [ "class"=>"form-control"]) !!}
+                                              @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-3 col-xs-4 nopaddingright">
+                                            <div class="input2f">
+                                              <?php
+
+                                              $syear = array();
+                                              for($i = (date('Y')); $i >= (date('Y')-115); $i--) {
+                                                    $syear[$i+543] = $i+543;
+                                              }
+                                               ?>
+                                               @if(!empty(Auth::user()->detail->ngoStartDate))
+                                              {!! Form::select('syear', $syear, (int)Carbon\Carbon::parse(Auth::user()->detail->ngoStartDate)->format("Y") +543, [ "class"=>"form-control"]) !!}
+                                               @else
+                                              {!! Form::select('syear', $syear, null, [ "class"=>"form-control"]) !!}
+                                              @endif
+                                            </div>
+                                        </div>
+                                    </div><!--end row-->
+                                    @if($errors->has('ngoStartDate'))
+                                    <small>{{ $errors->first('ngoStartDate') }}</small>
+                                    @endif
+                                </div><!--end control-select-date2f-->
                             </div>
+
                         </div><!--end row-->
                     </div><!--end box-input2f-->
 
@@ -320,7 +396,7 @@ width: 23.33333%;
                             </div>
                             <div class="col-md-3 col-sm-8 col-xs-9">
                                 <div class="input2f">
-                                  {!! Form::text('ngoQtyMember',@Auth::user()->detail->ngoQtyMember, ['class'=>'form-control', 'placeholder' => 'จำนวนสมาชิก']) !!}
+                                  {!! Form::number('ngoQtyMember',@Auth::user()->detail->ngoQtyMember, ['class'=>'form-control', 'placeholder' => 'จำนวนสมาชิก', 'max' => 99999]) !!}
                                   @if($errors->has('ngoQtyMember'))
                                   <small>{{ $errors->first('ngoQtyMember') }}</small>
                                   @endif
@@ -333,15 +409,16 @@ width: 23.33333%;
                     </div><!--end box-input2f-->
 
                     <div class="box-input2f">
-                        <div class="text-input2f nopadding">๕.วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน</div>
+                        <div class="text-input2f nopadding">5.วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน</div>
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="row">
-          
+
                             <div class="col-md-12">
                                 <div class="input2f">
-                                      {!! Form::textarea('ngoObjective', @Auth::user()->detail->ngoObjective, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
+                                      {!! Form::textarea('ngoObjective', @Auth::user()->detail->ngoObjective, ["rows"=>"4", "cols"=>"40",'onkeyup' => 'countChar(this, 1024, "charNum")', "class"=>"form-control",
                                      "placeholder"=>"วัตถุประสงค์ขององค์กรที่สอดคล้องกับกลุ่มกิจกรรมที่ขอขึ้นทะเบียน"]) !!}
+						 ท่านพิมพ์ได้อีก <span id="charNum">1024</span> ตัวอักษร
                                      @if($errors->has('ngoObjective'))
                                      <small>{{ $errors->first('ngoObjective') }}</small>
                                      @endif
@@ -351,7 +428,7 @@ width: 23.33333%;
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                      <a href="{{ url('/cancel-form') }}/2/2" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
@@ -366,8 +443,40 @@ width: 23.33333%;
 @section('js')
 
 @include('frontend.form-professional.global-js')
+
 <script type="text/javascript">
+function countChar(val, set_num, select) {
+  var len = val.value.length;
+  if (len >= set_num) {
+    val.value = val.value.substring(0, set_num);
+      $('#' + select).text(0);
+  } else {
+    $('#' + select).text(set_num - len);
+  }
+}
+countChar($('[name="ngoObjective"]')[0], 1024, 'charNum')
+</script>
+
+
+<script type="text/javascript">
+
+
 $(document).ready(function() {
+	if($('[name="legalStastus"]').val() == 1) {
+	     $('[name="ngoStatus"]').show();
+	} else {
+	     $('[name="ngoStatus"]').hide();
+	}
+
+	$('[name="legalStastus"]').on('change', function() {
+		   var type = $(this).val();
+
+		   if(type == 1) {
+			  $('[name="ngoStatus"]').show();
+		   } else {
+			  $('[name="ngoStatus"]').hide();
+		   }
+	});
       @if(!empty(Auth::user()->detail->ngoStartDate))
 		setTimeout(function () {
                   $('[name="ngoStartDate"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->ngoStartDate)->format('d/m/Y') }}');
@@ -390,9 +499,9 @@ $(document).ready(function() {
                      $("#subDistrictId").select2({data:json, placeholder: "ตำบล/แขวง"})
            });
       })
-      @if(!empty(old('ngoProvincetID', @Auth::user()->detail->ngoProvincetID)))
-      $("#provinceId").val({{old('ngoProvincetID', @Auth::user()->detail->ngoProvincetID)}}).trigger('change');
-      $.getJSON('/api/getDistrict', {provinceId: "{{old('ngoProvincetID', @Auth::user()->detail->ngoProvincetID)}}"}, function(json, textStatus) {
+      @if(!empty(old('ngoProvincetID', Auth::user()->provinceId)))
+      $("#provinceId").val({{old('ngoProvincetID', Auth::user()->provinceId)}}).trigger('change');
+      $.getJSON('/api/getDistrict', {provinceId: "{{old('ngoProvincetID', Auth::user()->provinceId)}}"}, function(json, textStatus) {
                     $("#districtId").html('');
                     $("#subDistrictId").html('');
              $("#districtId").select2({data:json, placeholder: "อำเภอ/เขต"});
@@ -411,6 +520,7 @@ $(document).ready(function() {
              }, 500);
              @endif
       @endif
+
 
       $("[name='ngoZipCode']").on('keyup', function(event) {
 		// var _zipcode = $(this).val();

@@ -12,4 +12,6 @@ class ngoGroup extends Model
     {
         return $this->hasMany('App\Model\Backend\member');
     }
+
+
 }

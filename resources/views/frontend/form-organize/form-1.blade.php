@@ -170,11 +170,11 @@
                             กรุณากดยืนยันตัวก่อนยื่นเอกสาร
                             @endif
                         </div>
-                      </div>  
-                       
+                      </div>
+
                   </div>
                   <div class="btn-center2f">
-                    <a href="{{ url('/') }}" onclick="if(!confirm('ยืนยันการทำรายการ')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                    <a href="{{ url('/') }}" class="btn btn-border confirmed-alert">ยกเลิก</a>
                     <button type="submit" name="button" class="btn btn-green">ยื่นเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

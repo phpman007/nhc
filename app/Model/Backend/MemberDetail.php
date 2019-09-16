@@ -4,46 +4,36 @@ namespace App\Model\Backend;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MemberDetail extends Model
+class memberDetail extends Model
 {
     protected $table='member_details';
 
-    public function member()
-    {
-        return $this->hasOne(Member::class, 'id', 'memberId');
+    public function member() {
+        return $this->belongsTo(Member::class, 'member_id');
     }
 
-    public function statuses()
-    {
-        return $this->belongsTo(Statuses::class, 'statusId', 'id');
+    public function statuses() {
+        return $this->belongsTo(Statuses::class, 'statusId','id');
     }
 
-    // public function province()
-    // {
-    //     return $this->hasOne(Province::class, 'district_code', 'subDistrictId');
-    // }
+    public function users() {
+        return $this->belongsTo(Admin::class, 'adminId','id');
+    }
 
-    // public function addressTypes()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\addressType');
-    // }
+    public function subdistrict() {
+        return $this->belongsTo(Province2::class, 'subDistrictId', 'district_code');
+    }
 
-    // public function genders()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\gender');
-    // }
+    public function district() {
+        return $this->belongsTo(Province2::class, 'districtId', 'amphoe_code');
+    }
 
-    // public function admin()
-    // {
-    //     return $this->hasMany('App\Model\Backend\Admin');
-    // }
+    public function province() {
+        return $this->belongsTo(Province2::class, 'provinceId', 'province_code');
+    }
 
-    // public function reasons()
-    // {
-    //     return $this->hasMany('App\Model\Backend\reason');
-    // }
-
-
-
+    public function ngo_section() {
+        return $this->belongsTo(ngoSection::class, 'provinceId', 'provinceId');
+    }
 
 }

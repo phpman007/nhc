@@ -11,6 +11,7 @@ use App\Model\Backend\Statuses;
 use App\Model\Backend\Member;
 use App\Model\Backend\MemberDetail;
 use App\Model\Backend\Admin;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;

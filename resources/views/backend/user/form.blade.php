@@ -32,7 +32,7 @@
                 </div>
                 <div class="hr-line-dashed"></div>
 
-                <div class="form-group  row"><label class="col-sm-2 col-form-label">แก้ไขรหัสผ่าน</label>
+                <div class="form-group  row"><label class="col-sm-2 col-form-label">รหัสผ่าน</label>
                     <div class="col-sm-10">
                             {!! Form::password('password', ['class'=>'form-control']) !!}
                             @if($errors->has('password'))
@@ -53,27 +53,24 @@
                 <div class="hr-line-dashed"></div>
 
                 <div class="form-group  row"><label class="col-sm-2 col-form-label">ตำแหน่ง / กำหนดสิทธิ์</label>
-                    <div class="col-sm-10">
-                        <div class="form-check-inline i-checks"><label>{!! Form::radio('permission', '2', ['checked' => true]) !!} <i></i> Admin </label></div>
-                        <div class="form-check-inline i-checks"><label>{!! Form::radio('permission', '1') !!} <i></i> Super Admin </label></div>
-                        @if($errors->has('permission'))
-                            <span style="color:red" class="form-text m-b-none">{{ $errors->first('permission') }}</span>
-                        @endif
+                      <div class="col-sm-10">
+                           <ul>
+                                 @foreach(\DB::table('roles')->where('guard_name', 'admin')->get() as $g)
+                                 <li style="list-style:none;"><div class="form-check-inline i-checks"><label>{!! Form::radio('permission', $g->id, null) !!} <i></i> {{$g->name}} </label></div></li>
+                                 @endforeach
+                           </ul>
 
-                        {{-- <select data-default="" name="txtstatuschange[]" class="form-control" style="font-size: 15pt; height:1cm;" onchange="editstatus(0,this);">
-                            @foreach ($liststatus as $valstatus)
-                            <option @if($member->detail->statusId == $valstatus->id) selected @endif
-                            value={{$valstatus->id}}>{{$valstatus->status}}</option>
-                            @endforeach
-                        </select> --}}
 
-                    </div>
+                         @if($errors->has('permission'))
+                             <span style="color:red" class="form-text m-b-none">{{ $errors->first('permission') }}</span>
+                         @endif
+                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
 
                 <div class="d-flex justify-content-center">
                     <button id="add" name="add" type="submit" class="btn btn-primary">เพิ่มผู้ใช้</button>&nbsp
-                    <button id="clear" name="clear" type="reset" class="btn btn-warning">ล้างข้อมูล</button>&nbsp
+                    <button id="clear" name="clear" type="reset" class="btn btn-warning">ล้างคำค้น</button>&nbsp
                     <a href="{{ url('backend/user') }}"><button id="back" name="back" type="button" class="btn btn-primary">กลับ</button></a>
                 </div>
 

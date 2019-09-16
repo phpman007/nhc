@@ -6,9 +6,9 @@
         <div class="navication2f">
             <div class="container">
               <ol class="breadcrumb">
-                  <li><a href="">หน้าหลัก</a></li>
+                  <li><a href="{{ url('/') }}">หน้าหลัก</a></li>
                   <li><a href="">สมัคร</a></li>
-                  <li class="active">ผู้แทนองค์กรภาคเอกชน สมัครสมาชิก ขั้นตอนที่ 2</li>
+                  <li class="active">ผู้แทนองค์กรภาคเอกชน สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 2</li>
               </ol>
             </div>
         </div><!--end navication2f-->
@@ -47,7 +47,7 @@
                 <div class="clear2f"></div>
               </div><!--end control-progress2f-->
               <div class="content-form2f">
-                  <h4>ผู้แทนองค์กรภาคเอกชน สมัครสมาชิก ขั้นตอนที่ 2</h4>
+                  <h4>ผู้แทนองค์กรภาคเอกชน สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 2</h4>
                   <div class="headform2f">การแสดงเจตนาสมัครเข้ากลุ่ม</div>
                   <div class="set-form2f">
                     <div class="box-input2f">
@@ -65,12 +65,13 @@
                     </div><!--end input-radio2f-->
                     <div class="box-input2f boxremark">
                         <div class="text-input2f nopadding">
-                          <strong>หมายเหตุ</strong>   ผู้สมัครผู้แทนองค์กรภาคเอกชนสามารถสมัครได้กลุ่มใดกลุ่มหนึ่งใน ๕ กลุ่มนี้ เท่านั้น
+                          <strong>หมายเหตุ</strong>   ผู้สมัครผู้แทนองค์กรภาคเอกชนสามารถสมัครได้กลุ่มใดกลุ่มหนึ่งใน 5 กลุ่มนี้ เท่านั้น
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+			     <a href="{{ url('/form-ngo/1') }}" class="btn btn-border">ย้อนกลับ</a>
+                      <a href="{{ url('/cancel-form') }}/3/2" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
@@ -89,5 +90,6 @@
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
 
+      $('input, radio').attr("disabled", 'true');
 </script>
 @endsection

@@ -103,6 +103,72 @@
                                 </div><!--end text-input2f-->
                            </div>
                            <div class="col-md-6 col-sm-8">
+                               <div class="control-select-date2f">
+                                   <div class="row">
+                                       <div class="col-md-3 col-sm-3 col-xs-2 nopaddingright">
+                                           <div class="input2f">
+                                                 <?php
+
+                                                 $sday = array();
+                                                 for($i = 1; $i <= 31; $i++) {
+                                                       $sday[$i] = $i;
+                                                 }
+                                                  ?>
+                                                  @if(!empty(Auth::user()->detail->dateOfBirth))
+                                                 {!! Form::select('sday', $sday, Carbon\Carbon::parse(Auth::user()->detail->dateOfBirth)->format("d"), [ "class"=>"form-control"]) !!}
+                                                  @else
+                                                 {!! Form::select('sday', $sday, null, [ "class"=>"form-control"]) !!}
+                                                 @endif
+                                           </div>
+                                       </div>
+                                       <div class="col-md-5 col-sm-6 col-xs-6 nopaddingright">
+                                           <div class="input2f">
+                                             <?php
+                                             $month = [
+                                               '1' => "มกราคม",
+                                                "2"=>   "กุมภาพันธ์",
+                                                "3"=>  "มีนาคม",
+                                                "4"=>  "เมษายน",
+                                                "5"=>  "พฤษภาคม",
+                                                "6"=>  "มิถุนายน",
+                                                "7"=>  "กรกฎาคม",
+                                                "8"=>  "สิงหาคม",
+                                                "9"=>  "กันยายน",
+                                                "10"=>  "ตุลาคม",
+                                                "11"=>  "พฤษจิกายน",
+                                                "12"=>  "ธันวาคม",
+                                             ];
+                                              ?>
+                                              @if(!empty(Auth::user()->detail->dateOfBirth))
+                                             {!! Form::select('smonth', $month, (int)Carbon\Carbon::parse(Auth::user()->detail->dateOfBirth)->format("m"), [ "class"=>"form-control"]) !!}
+                                              @else
+                                             {!! Form::select('smonth', $month, null, [ "class"=>"form-control"]) !!}
+                                             @endif
+                                           </div>
+                                       </div>
+                                       <div class="col-md-4 col-sm-3 col-xs-4 nopaddingright">
+                                           <div class="input2f">
+                                             <?php
+
+                                             $syear = array();
+                                             for($i = (date('Y')); $i >= (date('Y')-115); $i--) {
+                                                   $syear[$i+543] = $i+543;
+                                             }
+                                              ?>
+                                              @if(!empty(Auth::user()->detail->dateOfBirth))
+                                             {!! Form::select('syear', $syear, (int)Carbon\Carbon::parse(Auth::user()->detail->dateOfBirth)->format("Y") +543, [ "class"=>"form-control"]) !!}
+                                              @else
+                                             {!! Form::select('syear', $syear, null, [ "class"=>"form-control"]) !!}
+                                             @endif
+                                           </div>
+                                       </div>
+                                   </div><!--end row-->
+                                   @if($errors->has('dateOfBirth'))
+                                   <small>{{ $errors->first('dateOfBirth') }}</small>
+                                   @endif
+                               </div><!--end control-select-date2f-->
+                           </div>
+                           <!-- <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
                                   {{ Form::text('dateOfBirth', null, ['class'=> 'form-control date-picker', 'id' => 'date-birdth', 'readonly'=>'', 'placeholder'=>'วัน/เดือน/พ.ศ.']) }}
 
@@ -110,8 +176,8 @@
                                   @if($errors->has('dateOfBirth'))
                                   <small>{{ $errors->first('dateOfBirth') }}</small>
                                   @endif
-                                </div><!--end input_form-->
-                           </div>
+                                </div>
+                           </div> -->
                        </div><!--end row-->
                    </div><!--end box-input2f-->
                    <div class="box-input2f">
@@ -122,6 +188,11 @@
                            <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
                                   <input readonly="" type="text" id="yearOld" name="yearOld" value="{{ !empty(@Auth::user()->detail->yearOld) ? @Auth::user()->detail->yearOld : old('yearOld') }}" class="form-control" placeholder="อายุ">
+                                  <div class="t-notice">กรรมการสุขภาพแห่งชาติจะต้องมีอายุไม่ต่ำกว่า 20 ปี บริบูรณ์  </div>
+                                  @if($errors->has('yearOld'))
+                                  <small>{{ $errors->first('yearOld') }}</small>
+                                  @endif
+
                                 </div>
                            </div>
                        </div><!--end row-->
@@ -301,7 +372,7 @@
                    <div class="box-input2f">
                        <div class="row">
                            <div class="col-md-2 col-sm-4 nopaddingright">
-                              <div class="text-input2f">โทรศัพท์เคลื่อนที่ (มือถือ)</div>
+                              <div class="text-input2f">โทรศัพท์มือถือ</div>
                            </div>
                            <div class="col-md-6 col-sm-8">
                               <div class="input2f">
@@ -423,7 +494,7 @@
                     <h5>๓. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
                     <div class="box-input2f">
                       <div class="input2f">
-                           {!! Form::textarea('portfolio', Auth::user()->detail->portfolio, ["rows"=>"5", "cols"=>"50", "class"=>"form-control", "placeholder"=>"ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ"]) !!}
+                           {!! Form::textarea('portfolio', Auth::user()->detail->portfolio, ["rows"=>"5", "cols"=>"50", "id" => "target1", "class"=>"form-control", "placeholder"=>"ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ"]) !!}
                             @if($errors->has('portfolio'))
                                   <small>{{ $errors->first('portfolio') }}</small>
                                   @endif
@@ -571,8 +642,35 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                    {!! Form::text('startDate',  null, ["class"=>"form-control date-picker", "placeholder"=>"วัน/เดือน/พ.ศ.", "readonly" =>""]) !!}
-                                  <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
+                                  <div class="row">
+                                      <div class="col-md-3 col-sm-3 col-xs-2 nopaddingright">
+                                          <div class="input2f">
+                                                 @if(!empty(Auth::user()->detail->startDate))
+                                                {!! Form::select('stday', $sday, Carbon\Carbon::parse(Auth::user()->detail->startDate)->format("d"), [ "class"=>"form-control"]) !!}
+                                                 @else
+                                                {!! Form::select('stday', $sday, null, [ "class"=>"form-control"]) !!}
+                                                @endif
+                                          </div>
+                                      </div>
+                                      <div class="col-md-5 col-sm-6 col-xs-6 nopaddingright">
+                                          <div class="input2f">
+                                            @if(!empty(Auth::user()->detail->startDate))
+                                           {!! Form::select('stmonth', $month, (int)Carbon\Carbon::parse(Auth::user()->detail->startDate)->format("m"), [ "class"=>"form-control"]) !!}
+                                            @else
+                                           {!! Form::select('stmonth', $month, null, [ "class"=>"form-control"]) !!}
+                                           @endif
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4 col-sm-3 col-xs-4 nopaddingright">
+                                          <div class="input2f">
+                                            @if(!empty(Auth::user()->detail->startDate))
+                                           {!! Form::select('styear', $syear, (int)Carbon\Carbon::parse(Auth::user()->detail->startDate)->format("Y") +543, [ "class"=>"form-control"]) !!}
+                                            @else
+                                           {!! Form::select('styear', $syear, null, [ "class"=>"form-control"]) !!}
+                                           @endif
+                                          </div>
+                                      </div>
+                                  </div><!--end row-->
                                   @if($errors->has('startDate'))
                                   <small>{{ $errors->first('startDate') }}</small>
                                   @endif
@@ -589,8 +687,35 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="box-date input-group date">
-                                      {!! Form::text('endDate',  null, ["class"=>"form-control date-picker", "placeholder"=>"วัน/เดือน/พ.ศ.", "readonly" =>""]) !!}
-                                  <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
+                                  <div class="row">
+                                      <div class="col-md-3 col-sm-3 col-xs-2 nopaddingright">
+                                          <div class="input2f">
+                                                 @if(!empty(Auth::user()->detail->endDate))
+                                                {!! Form::select('etday', $sday, Carbon\Carbon::parse(Auth::user()->detail->endDate)->format("d"), [ "class"=>"form-control"]) !!}
+                                                 @else
+                                                {!! Form::select('etday', $sday, null, [ "class"=>"form-control"]) !!}
+                                                @endif
+                                          </div>
+                                      </div>
+                                      <div class="col-md-5 col-sm-6 col-xs-6 nopaddingright">
+                                          <div class="input2f">
+                                            @if(!empty(Auth::user()->detail->endDate))
+                                           {!! Form::select('etmonth', $month, (int)Carbon\Carbon::parse(Auth::user()->detail->endDate)->format("m"), [ "class"=>"form-control"]) !!}
+                                            @else
+                                           {!! Form::select('etmonth', $month, null, [ "class"=>"form-control"]) !!}
+                                           @endif
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4 col-sm-3 col-xs-4 nopaddingright">
+                                          <div class="input2f">
+                                          @if(!empty(Auth::user()->detail->endDate))
+                                         {!! Form::select('etyear', $syear, (int)Carbon\Carbon::parse(Auth::user()->detail->endDate)->format("Y") +543, [ "class"=>"form-control"]) !!}
+                                          @else
+                                         {!! Form::select('etyear', $syear, null, [ "class"=>"form-control"]) !!}
+                                         @endif
+                                          </div>
+                                      </div>
+                                  </div><!--end row-->
                                   @if($errors->has('endDate'))
                                   <small>{{ $errors->first('endDate') }}</small>
                                   @endif
@@ -601,7 +726,7 @@
 
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                       <a href="{{ url('/cancel-form') }}" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
@@ -620,6 +745,12 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+  @if(!empty(Auth::user()->detail->dateOfBirth))
+  setTimeout(function () {
+      $('[name="sday"]').trigger('change')
+  }, 500);
+
+  @endif
         $("#tel").mask('0-0-000-0000')
         $("#mobile").mask('00-0000-0000');
 
@@ -659,13 +790,12 @@ $(document).ready(function() {
         @endif
 
 
-      $("#date-birdth").on('change', function(event) {
-        event.preventDefault();
-        $.get('{{ url('api/checkYear') }}?date=' + $(this).val() , function(data) {
-          console.log(data);
-          $('#yearOld').val(data.old)
+        $('[name="sday"], [name="smonth"], [name="syear"]').on('change', function(event) {
+              $.get('{{ url('api/checkYear') }}?date=' + $("[name='sday']").val() + "/"+ $("[name='smonth']").val() + "/" + (parseInt($("[name='syear']").val()) ) , function(data) {
+                  console.log(data);
+                  $('#yearOld').val(data.old)
+              });
         });
-      });
       @if(!empty(Auth::user()->detail->dateOfBirth))
 		setTimeout(function () {
 			$('[name="dateOfBirth"]').datepicker('update','{{ Carbon\Carbon::createFromFormat("Y-m-d",Auth::user()->detail->dateOfBirth)->format('d/m/Y') }}');
@@ -716,7 +846,7 @@ $(document).ready(function() {
       $('#form-step').on('submit', function(event) {
             event.preventDefault();
 
-            if($("#tel").val() == "" ) {
+            if($("#tel").val() == "" || $("#mobile").val() == "") {
                   Swal.fire({
                     title: 'ระบบแจ้งเตือน',
                     text: "ท่านไม่ได้ระบุหมายเลขโทรศัพท์ ต้องการทำรายการต่อหรือไม่",

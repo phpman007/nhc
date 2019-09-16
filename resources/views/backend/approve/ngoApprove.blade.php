@@ -3,268 +3,219 @@
 
 @section('content')
 
+    <nav aria-label="breadcrumb">
+        <h4>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/backend/home">&nbsp;&nbsp;หน้าแรก</a></li>
+                <li class="breadcrumb-item active" aria-current="page">อนุมัติผู้สมัครผู้แทนองค์กรภาคเอกชน</li>
+            </ol>
+        </h4>
+    </nav>
+
 <div class="card border-info mb-3">
 
     <div class="card-header">
         <strong>อนุมัติผู้สมัคร ผู้แทนองค์กรภาคเอกชน</strong>
     </div>
     <div class="card-body">
+        @if(empty(json_decode(Auth::guard('admin')->user()->sectionControl)))
+            ผู้ใช้ไม่มีสิทธิ์ใช้งาน กรุณากำหนดสิทธิ์การใช้งาน
+        @else
+            <form id="frmsearchapprove" method="get" action="{{url('backend/approve/ngoApprove/index')}}">
+            {{ csrf_field() }}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
 
-        <form id="frmsearchapprove" method="get" action="{{url('backend/approve/ngoApprove')}}">
-        {{ csrf_field() }}
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="txtname">ค้นหาจาก : </label>
-                <input class="form-control" style="font-size: 13px !important;" @if(request()->input('ok')=="1") value="{{request()->input('txtname')}}" @else value="" @endif
-                name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเอกสาร">
-                </div>
+                        <label for="txtsection">เขต : </label>
+                        <select id="txtsection" class="form-control" name="txtsection" onchange="search(1);">
+                            <option @if(request()->input('txtsection')==null)
+                                    selected
+                                    @endif value="">เลือกเขต</option>
+                            <option @if(request()->input('txtsection')==1)
+                                    selected
+                                    @endif value="1">เขต1</option>
+                            <option @if(request()->input('txtsection')==2)
+                                    selected
+                                    @endif value="2">เขต2</option>
+                            <option @if(request()->input('txtsection')==3)
+                                    selected
+                                    @endif value="3">เขต3</option>
+                            <option @if(request()->input('txtsection')==4)
+                                    selected
+                                    @endif value="4">เขต4</option>
+                            <option @if(request()->input('txtsection')==5)
+                                    selected
+                                    @endif value="5">เขต5</option>
+                            <option @if(request()->input('txtsection')==6)
+                                    selected
+                                    @endif value="6">เขต6</option>
+                            <option @if(request()->input('txtsection')==7)
+                                    selected
+                                    @endif value="7">เขต7</option>
+                            <option @if(request()->input('txtsection')==8)
+                                    selected
+                                    @endif value="8">เขต8</option>
+                            <option @if(request()->input('txtsection')==9)
+                                    selected
+                                    @endif value="9">เขต9</option>
+                            <option @if(request()->input('txtsection')==10)
+                                    selected
+                                    @endif value="10">เขต10</option>
+                            <option @if(request()->input('txtsection')==11)
+                                    selected
+                                    @endif value="11">เขต11</option>
+                            <option  @if(request()->input('txtsection')==12)
+                                    selected
+                                    @endif value="12">เขต12</option>
+                            <option @if(request()->input('txtsection')==13)
+                                    selected
+                                    @endif value="13">เขต13</option>
+                        </select>
+                    </div>
 
-                <div class="form-group col-md-6">
-                <label for="txtgroup">กลุ่มย่อย : </label>
-                <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
-
-                    @foreach ($listgroupor as $valgroup)
-                        <option
-                            @for($i=0;$i<$countgroup;$i++)
-                                @if(request()->input('txtgroup')[$i]!=null && request()->input('ok')=="1" && request()->input('txtgroup')[$i] == $valgroup->id)
-                                selected
-                                @endif
-                            @endfor
-                        value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
-                    @endforeach
-                </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="txtprovince">จังหวัด : </label>
-                    <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
-                        @foreach ($listprovince as $valprovince)
-                        <option
-                            @for($i=0;$i<$countprovince;$i++)
-                                @if(request()->input('txtprovince')[$i]!=null && request()->input('ok')=="1" && request()->input('txtprovince')[$i] == $valprovince->provinceId)
-                                selected
-                                @endif
-                            @endfor
-                        value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="txtsection">เขต : </label>
-                    <select id="txtsection" name="txtsection[]" class="js-example-basic-multiple form-control" multiple="multiple">
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 1)
-                                selected
-                                @endif
-                            @endfor
-                        value="1">เขต 1</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 2)
-                                selected
-                                @endif
-                            @endfor
-                        value="2">เขต 2</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 3)
-                                selected
-                                @endif
-                            @endfor
-                        value="3">เขต 3</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 4)
-                                selected
-                                @endif
-                            @endfor
-                        value="4">เขต 4</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 5)
-                                selected
-                                @endif
-                            @endfor
-                        value="5">เขต 5</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 6)
-                                selected
-                                @endif
-                            @endfor
-                        value="6">เขต 6</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 7)
-                                selected
-                                @endif
-                            @endfor
-                        value="7">เขต 7</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 8)
-                                selected
-                                @endif
-                            @endfor
-                        value="8">เขต 8</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 9)
-                                selected
-                                @endif
-                            @endfor
-                        value="9">เขต 9</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 10)
-                                selected
-                                @endif
-                            @endfor
-                        value="10">เขต 10</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 11)
-                                selected
-                                @endif
-                            @endfor
-                        value="11">เขต 11</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 12)
-                                selected
-                                @endif
-                            @endfor
-                        value="12">เขต 12</option>
-                        <option
-                            @for($i=0;$i<$countsection;$i++)
-                                @if(request()->input('txtsection')[$i]!=null && request()->input('ok')=="1" && request()->input('txtsection')[$i] == 13)
-                                selected
-                                @endif
-                            @endfor
-                        value="13">เขต 13</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="txtstatus">สถานะ : </label>
-                    <select id="txtstatus" name="txtstatus[]" class="js-example-basic-multiple form-control" multiple="multiple">
-                        @foreach ($liststatus as $valstatus)
+                    <div class="form-group col-md-6">
+                        <label for="txtprovince">จังหวัด : </label>
+                        <select id="txtprovince" class="form-control" name="txtprovince" onchange="search(2);">
                             <option
-                                @for($i=0;$i<$countstatus;$i++)
-                                    @if(request()->input('txtstatus')[$i]!=null && request()->input('ok')=="1" && request()->input('txtstatus')[$i] == $valstatus->id)
+                                @if(request()->input('txtprovince')==null)
+                                selected
+                                @endif
+                                value="" >
+                                เลือกจังหวัด
+                            </option>
+                            @if(!empty($listprovince))
+                            @foreach ($listprovince as $valprovince)
+                            <option
+                                    @if(request()->input('txtprovince')!=null && request()->input('txtprovince') == $valprovince->provinceId)
                                     selected
                                     @endif
-                                @endfor
-                            value={{$valstatus->id}}>{{$valstatus->status}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-center">
-                <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary">ค้นหา</button>&nbsp
-                <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
-            </div>
-
-        </form>
-        <hr>
-        <div>
-
-            @if($listmember->isEmpty())
-                <h3 class="d-flex justify-content-center">ไม่มีข้อมูล</h3>
-            @else
-                <table class="table table-striped table-bordered">
-                    <tr align="middle">
-                        <th width="5%">ลำดับ</th>
-                        <th width="5%">รหัสเอกสาร</th>
-                        <th width="15%">ชื่อ - สกุล</th>
-                        <th width="25%">กลุ่มย่อย</th>
-                        <th width="10%">จังหวัด</th>
-                        <th width="5%">เขต</th>
-                        <th width="5%">ดาวน์โหลด</th>
-                        <th width="20%">สถานะ</th>
-                        <th width="10%">ผู้ที่ตรวจสอบ</th>
-                    </tr>
-                    @foreach ($listmember as $key=>$valmember)
-                        <tr>
-                        <td align="middle">
-                            @if (!empty($_GET['page']))
-                                {{ $key + ($_GET['page'] - 1) * $listmember->PerPage() + 1  }}
-                            @else
-                                {{$key + 1}}
+                                    value={{$valprovince->provinceId}}> {{$valprovince->province}}
+                            </option>
+                            @endforeach
                             @endif
-                        </td>
-                        <td align="middle">{{$valmember->docId}}</td>
-                        <td align="middle"><a href="/pdf/register/{{ $valmember->id }}">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</a></td>
-                        <td>{{$valmember->groupName}}</td>
-                        <td align="middle">{{$valmember->province}}</td>
-                        <td align="middle">{{$valmember->section}}</td>
-                        @if($valmember->zipFile==null)
-                            <td></td>
-                        @else
-                            <td align="middle"><a href="{{ asset('uploads/'.$valmember->zipFile) }}"><button type="button" class="btn btn-primary">ดาวน์โหลด</button></a></td>
-                        @endif
-                        {{-- สถานะ  --}}
-                        <td align="middle">
-                            <a data-toggle="modal" name="gotomodal[]" href="#m-editstatus-{{$key}}" style="display: none;"> test {{$key}} </a>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <hr>
 
-                            <form name="frmstatuschange[]" method="GET" action="{{url('backend/approve/editstatusNGO')}}">
-                                {{ csrf_field() }}
-                                <select data-default="{{$valmember->statusid}}" name="txtstatuschange[]" style="font-size: 13px !important;" class="form-control" onchange="editstatus('{{$key}}', this);">
-                                    @foreach ($liststatus as $valstatus)
-                                    <option @if($valmember->status!=null && $valmember->statusid == $valstatus->id) selected @endif
-                                    value={{$valstatus->id}}>{{$valstatus->status}}</option>
-                                    @endforeach
-                                </select>
-                                <input type="hidden" name="Hid[]" id="Hid" value={{$valmember->id}}>
-                            </form>
+            @if (!empty($listgroupngo) )
+            <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <tr>
+                                    <th class="text-center">ลำดับ</th>
+                                    <th class="text-center" width="50%">กลุ่มย่อย</th>
+                                    <th class="text-center">สถานะ</th>
+                                    <th class="text-center">วันที่อนุมัติ</th>
+                                    {{-- <th class="text-center">ส่งอีเมล์</th>
+                                    <th class="text-center">Export Word</th> --}}
+                                </tr>
+                                @foreach ($listgroupngo as $key=>$valgroup)
+                                    @php
 
-                            {{--  //modal สถานะไม่ผ่าน  --}}
-                            <form name"frmnotpass[]" method="GET" action="{{url('backend/approve/editnotpassNGO')}}">
-                                {{ csrf_field() }}
-                                    <input type="hidden" name="Hidmember[]" value={{$valmember->id}}>
+                                    //จำนวนยืนยันทั้งหมด
+                                    $list1=$valgroup
+                                    ->member()
+                                    ->join('member_details','members.id','=','member_details.memberId')
+                                    ->where('members.groupId','=',3)
+                                    ->where('members.provinceId','=',request()->input('txtprovince'))
+                                    ->where('members.ngoGroupId','=',$valgroup->id)
+                                    //->where('members.status_accept','=',1)
+                                    ->where('members.confirmed_at', '!=', null)
+                                    ->where(function ($query) {
+                                        $query->where('members.deleted_at',NULL)
+                                        ->where('member_details.deleted_at',NULL);
+                                    })
+                                    ->get();
 
-                                    <div id="m-editstatus-{{$key}}" class="modal fade" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title">กำหนดเหตุผลสถานะไม่ผ่าน</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <label for="txtreason[]">เหตุผลสถานะไม่ผ่าน :</label>
-                                                    <textarea name="txtreason[]" rows="10" class="form-control" required></textarea>
-                                                    {{-- @if($valmember->reason!=""){{$valmember->reason}} @endif --}}
+                                    //จำนวนยืนยัน และสถานะผ่าน หรือไม่ผ่าน
+                                    $list2=$valgroup
+                                    ->member()
+                                    ->join('member_details','members.id','=','member_details.memberId')
+                                    ->where('members.groupId','=',3)
+                                    ->where('members.provinceId','=',request()->input('txtprovince'))
+                                    ->where('members.ngoGroupId','=',$valgroup->id)
+                                    //->where('members.status_accept','=',1)
+                                    ->where('members.confirmed_at', '!=', null)
+                                    ->whereIn('member_details.statusId',[3,4])
+                                    ->where(function ($query) {
+                                        $query->where('members.deleted_at',NULL)
+                                        ->where('member_details.deleted_at',NULL);
+                                    })
+                                    ->get();
 
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">บันทึก</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                {{--  //end modal  --}}
-                        </td>
+                                    //จำนวนยืนยัน และสถานะผ่านไม่ผ่าน และอนุมัติแล้ว
+                                    $list3=$valgroup
+                                    ->member()
+                                    ->join('member_details','members.id','=','member_details.memberId')
+                                    ->where('members.groupId','=',3)
+                                    ->where('members.provinceId','=',request()->input('txtprovince'))
+                                    ->where('members.ngoGroupId','=',$valgroup->id)
+                                    //->where('members.status_accept','=',1)
+                                    ->where('members.confirmed_at', '!=', null)
+                                    ->whereIn('member_details.statusId',[3,4])
+                                    ->where('member_details.fixStatus','=',1)
+                                    ->where(function ($query) {
+                                        $query->where('members.deleted_at',NULL)
+                                        ->where('member_details.deleted_at',NULL);
+                                    })
+                                    ->get();
 
-                        <td align="middle">{{$valmember->username}}</td>
+                                    @endphp
 
-                        </tr>
-                    @endforeach
-                </table>
-                <div class="d-flex justify-content-center" style="font-size: 13px !important;"><b>{{ $listmember->links() }}</b></div>
-            @endif
+                                    <tr>
+                                        <td align="middle">
+                                            @if (!empty($_GET['page']))
+                                                {{ $key + ($_GET['page'] - 1) * $listmember->PerPage() + 1  }}
+                                            @else
+                                                {{$key + 1}}
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if((count($list1) == count($list2)) and (count($list1)>0))
+                                                <a href="/backend/approveAll/ngoApproveAll/{{ request()->input('txtprovince') }}/{{$valgroup->id}}/{{ request()->input('txtsection') }}">{{$valgroup->groupName}}</a>
+                                            @else
+                                                {{$valgroup->groupName}}
+                                            @endif
+                                        </td>
+
+
+                                        <td align="middle">
+                                             {{-- count1 {{count($list1)}} count2 {{count($list2)}} count3 {{count($list3)}}
+                                            <br><br> --}}
+                                            @if(count($list1) == 0)
+                                                ยังไม่มีผู้สมัครที่ยืนยันการสมัคร
+                                            @elseif ((count($list1) == count($list3)) and (count($list1)>0))
+                                                อนุมัติแล้ว
+                                            @elseif ((count($list1)==count($list2)) and (count($list1)>0))
+                                                รอการอนุมัติ
+                                            @else
+                                                รอการตรวจสอบ
+                                            @endif
+                                        </td>
+
+                                        <td align="middle">
+                                            @if ((count($list3)==count($list1)) and  (count($list1)>0))
+                                                อนุมัติเรียบร้อยเมื่อ <br>
+                                                {{ Carbon\Carbon::parse($list3->first()->approveDate)->addYears(543)->format('d/m/Y H:i:s') }}
+                                            @endif
+
+                                        </td>
+
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                @endif
         </div>
-    </div>
+        @endif
 </div>
+
+
 
 @endsection
 
@@ -305,22 +256,16 @@
     toastr.success('แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว', '');
     @endif
 
-    var select_element;
-    function editstatus(id, element){
-        select_element = element
-        var status = document.getElementsByName('txtstatuschange[]')[id].value;
-        console.log(status)
-
-        if(status==4){
-            document.getElementsByName('gotomodal[]')[id].click();
+    function search(bt){
+        if(bt==1){
+            document.getElementById('txtprovince').value="";
+            document.getElementById('frmsearchapprove').submit();
         }else{
-            document.getElementsByName('frmstatuschange[]')[id].submit();
+            document.getElementById('frmsearchapprove').submit();
         }
-
-        $('#m-editstatus-'+id).on('hidden.bs.modal', function() {
-            console.log($(select_element).val($(select_element).data('default')))
-        });
+        // alert ('AAAA');
     }
+
 </script>
 
 @endsection

@@ -27,6 +27,6 @@ class SendMailCancelRegister
      */
     public function handle(CancelRegisterEvent $event)
     {
-        Mail::to($event->member->email)->send(new CancelRegister($event->member));
+        Mail::to($event->member->email)->send(new CancelRegister($event->member, $this->groups, $this->step));
     }
 }

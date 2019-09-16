@@ -3,13 +3,14 @@
 @section('content')
 
 		<form method="post" id="form-step">
+    {!! Form::hidden('last_step', 3, []) !!}
           <div class="insitepage2f">
               <div class="navication2f">
                   <div class="container">
                     <ol class="breadcrumb">
-                        <li><a href="">หน้าหลัก</a></li>
+                        <li><a href="{{ url('/') }}">หน้าหลัก</a></li>
                         <li><a href="">สมัคร</a></li>
-                        <li class="active">ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 3</li>
+                        <li class="active">ผู้ทรงคุณวุฒิ สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 3</li>
                     </ol>
                   </div>
               </div><!--end navication2f-->
@@ -52,7 +53,7 @@
                       <div class="clear2f"></div>
                     </div><!--end control-progress2f-->
                     <div class="content-form2f">
-                        <h4>ผู้ทรงคุณวุฒิ สมัครสมาชิก ขั้นตอนที่ 3</h4>
+                        <h4>ผู้ทรงคุณวุฒิ สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 3</h4>
 
                         <div class="headform2f">การแสดงเจตนาสมัครเข้ากลุ่ม</div>
                         <div class="set-form2f">
@@ -71,12 +72,13 @@
                           </div><!--end input-radio2f-->
                           <div class="box-input2f boxremark">
                               <div class="text-input2f nopadding">
-                                <strong>หมายเหตุ</strong>   ผู้ทรงคุณวุฒิสามารถสมัครได้กลุ่มใดกลุ่มหนึ่งใน ๖ กลุ่มนี้ เท่านั้น
+                                <strong>หมายเหตุ</strong>   ผู้ทรงคุณวุฒิสามารถสมัครได้กลุ่มใดกลุ่มหนึ่งใน 6 กลุ่มนี้ เท่านั้น
                               </div><!--end text-input2f-->
                           </div><!--end box-input2f-->
                         </div><!--end set-form2f-->
                         <div class="btn-center2f">
-                             <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                             <a href="{{ url('/form-professional/2') }}" class="btn btn-border">ย้อนกลับ</a>
+                             <a href="{{ url('/cancel-form') }}/1/3" class="btn btn-border confirmed-alert">ยกเลิก</a>
                             <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                         </div><!--end btn-center2f-->
                     </div><!--end content-form2f-->

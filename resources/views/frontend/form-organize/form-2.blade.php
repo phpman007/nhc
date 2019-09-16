@@ -140,7 +140,7 @@
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                   <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                   <a href="{{ url('/') }}" class="btn btn-border confirmed-alert">ยกเลิก</a>
                     <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

@@ -116,40 +116,40 @@
                           ข้าพเจ้าเป็นผู้มีคุณสมบัติของผู้ทรงคุณวุฒิที่จะเข้ารับการเลือกเป็นกรรมการสุขภาพแห่งชาติครบถ้วน  ดังนี้
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
-                    <h5>๑.  คุณสมบัติทั่วไป</h5>
+                    <h5>1.  คุณสมบัติทั่วไป</h5>
                     <div class="input-checkbox2f">
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๑) มีสัญชาติไทย
+                          <label class="checkbox2f">1) มีสัญชาติไทย
                             {!! Form::checkbox('thaiStatus', 1, @Auth::user()->detail->thaiStatus, ["class"=>"checkmark", 'disabled'=>'']) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์ ณ วันที่สมัคร
+                          <label class="checkbox2f">2) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์ ณ วันที่สมัคร
                             {!! Form::checkbox('ageQualify', 1, @Auth::user()->detail->ageQualify, ["class"=>"checkmark", 'disabled'=>'']) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
+                          <label class="checkbox2f">3) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
                             {!! Form::checkbox('enoughAbility', 1, @Auth::user()->detail->enoughAbility, ["class"=>"checkmark", 'disabled'=>'']) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
+                          <label class="checkbox2f">4) ไม่ติดยาเสพติดให้โทษ
                             {!! Form::checkbox('noDrug', 1, @Auth::user()->detail->noDrug, ["class"=>"checkmark", 'disabled'=>'']) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๕) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
+                          <label class="checkbox2f">5) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
                             {!! Form::checkbox('noCriminal', 1, @Auth::user()->detail->noCriminal, ["class"=>"checkmark", 'disabled'=>'']) !!}
                             <span class="checkmark"></span>
                           </label>
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
+                          <label class="checkbox2f">6) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
                             เว้นแต่เป็นโทษสำหรับความผิดที่ได้กระทำโดยประมาทหรือ ความผิดลหุโทษ
                               {!! Form::checkbox('noJail', 1, @Auth::user()->detail->noJail, ["class"=>"checkmark", 'disabled'=>'']) !!}
                             <span class="checkmark"></span>
@@ -172,12 +172,12 @@
                   </div><!--end set-form2f-->
                   <div class="headform2f">ข้อมูลประวัติ</div>
                   <div class="set-form2f">
-                    <h5>๑.  ข้อมูลทั่วไป</h5>
+                    <h5>1.  ข้อมูลทั่วไป</h5>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f bold">
-                                  <span>๑)</span>
+                                  <span>1)</span>
                                    คำนำหน้า
                                 </div><!--end text-input2f-->
                             </div>
@@ -216,7 +216,7 @@
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f bold">
-                                  <span>๒)</span>เกิดวันที่
+                                  <span>2)</span>เกิดวันที่
                                 </div><!--end text-input2f-->
                             </div>
                             <div class="col-md-6 col-sm-8">
@@ -240,7 +240,7 @@
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
                         <div class="text-input2f bold">
-                          <span>๓)</span>สถานที่ ที่สามารถติดต่อได้สะดวก
+                          <span>3)</span>สถานที่ ที่สามารถติดต่อได้สะดวก
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
                     <div class="box-input2f">
@@ -256,7 +256,7 @@
                                         <label for="office">ที่ทำงาน</label>
                                         <div class="t-office">{{ Auth::user()->detail->workPlaceName }}</div>
                                       </div>
-                                     
+
                                   </div><!--end input-radio2f-->
                               </div>
                         </div><!--end row-->
@@ -400,114 +400,156 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <h5>๒.  ประวัติการศึกษา (เรียงจากวุฒิการศึกษาสูงสุดลงไปตามลำดับ)</h5>
+                    <h5>2.  ประวัติการศึกษา (เรียงจากวุฒิการศึกษาสูงสุดลงไปตามลำดับ)</h5>
                     <div class="box-preview2f">
                         <div class="row">
                             <div class="col-sm-1 col-xs-2">
-                                <div class="input-title2f t-center2f"><span>๑)</span></div>
+                                <div class="input-title2f t-center2f"><span>1)</span></div>
                             </div>
-                            <div class="col-sm-3 col-xs-10">
-                              
-                                    <div class="input-value2f">{{ Auth::user()->detail->graduated1 }}</div>
-                                
+                            <div class="col-sm-4 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->graduated1 }}</div>
                             </div>
                             <div class="col-sm-1 col-xs-2">
                               <div class="input-title2f">สาขา</div>
                             </div>
                             <div class="col-sm-3 col-xs-10">
-                          
-                                    <div class="input-value2f">{{ Auth::user()->detail->faculty1 }}</div>
-                         
+                            <div class="input-value2f">{{ Auth::user()->detail->faculty1 }}</div>
                             </div>
                         </div><!--end row-->
-                    </div><!--end box-preview2f-->
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2"></div>
+                            <div class="col-sm-4 col-xs-10">
+                                <div class="input-value2f">สถาบัน </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2 nopaddingright">
+                              <div class="input-title2f">ปีที่จบ</div>
+                            </div>
+                            <div class="col-sm-2 col-xs-10">
+                                <div class="input-value2f"></div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
                     <div class="box-preview2f">
-                      <div class="row">
-                          <div class="col-sm-1 col-xs-2">
-                              <div class="input-title2f t-center2f"><span>๒)</span></div>
-                          </div>
-                          <div class="col-sm-3 col-xs-10">
-                                  <div class="input-value2f">{{ Auth::user()->detail->graduated2 }}
-                              </div>
-                          </div>
-                          <div class="col-sm-1 col-xs-2">
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                <div class="input-title2f t-center2f"><span>2)</span></div>
+                            </div>
+                            <div class="col-sm-4 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->graduated2 }}</div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2">
                               <div class="input-title2f">สาขา</div>
                             </div>
-                          <div class="col-sm-3 col-xs-10">
-                        
-                                  <div class="input-value2f">{{ Auth::user()->detail->faculty2 }}</div>
-                        
-                          </div>
-                      </div><!--end row-->
-                    </div><!--end box-preview2f-->
+                            <div class="col-sm-3 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->faculty2 }}</div>
+                            </div>
+                        </div><!--end row-->
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2"></div>
+                            <div class="col-sm-4 col-xs-10">
+                                <div class="input-value2f">สถาบัน </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2 nopaddingright">
+                              <div class="input-title2f">ปีที่จบ</div>
+                            </div>
+                            <div class="col-sm-2 col-xs-10">
+                                <div class="input-value2f"></div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
                     <div class="box-preview2f">
-                      <div class="row">
-                          <div class="col-sm-1 col-xs-2">
-                              <div class="input-title2f t-center2f"><span>๓)</span></div>
-                          </div>
-                          <div class="col-sm-3 col-xs-10">
-                         
-                                  <div class="input-value2f">{{ Auth::user()->detail->graduated3 }}</div>
-                      
-                          </div>
-                          <div class="col-sm-1 col-xs-2">
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                <div class="input-title2f t-center2f"><span>3)</span></div>
+                            </div>
+                            <div class="col-sm-4 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->graduated3 }}</div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2">
                               <div class="input-title2f">สาขา</div>
                             </div>
-                          <div class="col-sm-3 col-xs-10">
-                            
-                                    <div class="input-value2f">{{ Auth::user()->detail->faculty3 }}</div>
-                          
-                          </div>
-                      </div><!--end row-->
-                    </div><!--end box-preview2f-->
+                            <div class="col-sm-3 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->faculty3 }}</div>
+                            </div>
+                        </div><!--end row-->
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2"></div>
+                            <div class="col-sm-4 col-xs-10">
+                                <div class="input-value2f">สถาบัน </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2 nopaddingright">
+                              <div class="input-title2f">ปีที่จบ</div>
+                            </div>
+                            <div class="col-sm-2 col-xs-10">
+                                <div class="input-value2f"></div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
                     <div class="box-preview2f">
-                      <div class="row">
-                          <div class="col-sm-1 col-xs-2">
-                              <div class="input-title2f t-center2f"><span>๔)</span></div>
-                          </div>
-                          <div class="col-sm-3 col-xs-10">
-                          
-                                    <div class="input-value2f">{{ Auth::user()->detail->graduated4 }}</div>
-                             
-                          </div>
-                          <div class="col-sm-1 col-xs-2">
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                <div class="input-title2f t-center2f"><span>4)</span></div>
+                            </div>
+                            <div class="col-sm-4 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->graduated4 }}</div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2">
                               <div class="input-title2f">สาขา</div>
                             </div>
-                          <div class="col-sm-3 col-xs-10">
-                        
-                                    <div class="input-value2f">{{ Auth::user()->detail->faculty4 }}</div>
-                         
-                          </div>
-                      </div><!--end row-->
-                    </div><!--end box-preview2f-->
+                            <div class="col-sm-3 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->faculty4 }}</div>
+                            </div>
+                        </div><!--end row-->
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2"></div>
+                            <div class="col-sm-4 col-xs-10">
+                                <div class="input-value2f">สถาบัน </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2 nopaddingright">
+                              <div class="input-title2f">ปีที่จบ</div>
+                            </div>
+                            <div class="col-sm-2 col-xs-10">
+                                <div class="input-value2f"></div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
                     <div class="box-preview2f">
-                      <div class="row">
-                          <div class="col-sm-1 col-xs-2">
-                              <div class="input-title2f t-center2f"><span>๕)</span></div>
-                          </div>
-                          <div class="col-sm-3 col-xs-10">
-                            
-                                    <div class="input-value2f">{{ Auth::user()->detail->graduated5 }}</div>
-                             
-                          </div>
-                          <div class="col-sm-1 col-xs-2">
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                <div class="input-title2f t-center2f"><span>5)</span></div>
+                            </div>
+                            <div class="col-sm-4 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->graduated5 }}</div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2">
                               <div class="input-title2f">สาขา</div>
                             </div>
-                          <div class="col-sm-3 col-xs-10">
-                                    <div class="input-value2f">{{ Auth::user()->detail->faculty5 }}</div>
-                          
-                          </div>
-                      </div><!--end row-->
-                    </div><!--end box-preview2f-->
-                    <h5>๓. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
+                            <div class="col-sm-3 col-xs-10">
+                            <div class="input-value2f">{{ Auth::user()->detail->faculty5 }}</div>
+                            </div>
+                        </div><!--end row-->
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2"></div>
+                            <div class="col-sm-4 col-xs-10">
+                                <div class="input-value2f">สถาบัน </div>
+                            </div>
+                            <div class="col-sm-1 col-xs-2 nopaddingright">
+                              <div class="input-title2f">ปีที่จบ</div>
+                            </div>
+                            <div class="col-sm-2 col-xs-10">
+                                <div class="input-value2f"></div>
+                            </div>
+                        </div><!--end row-->
+                    </div><!--end box-input2f-->
+                    <h5>3. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
                     <div class="box-input2f">
                       <div class="input2f">
                         <div class="text-input2f nopadding">{{ Auth::user()->detail->portfolio }}</div>
                       </div>
                     </div><!--end box-input2f-->
-                    <h5>๔. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
+                    <h5>4. ผลงาน หรือประสบการณ์ที่ดำเนินงานเกี่ยวกับด้านสุขภาพ</h5>
 
-                    <div class="text-titlenumber bold"><span>ลำดับที่ ๑</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ 1</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -544,7 +586,7 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber bold"><span>ลำดับที่ ๒</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ 2</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -581,7 +623,7 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-                    <div class="text-titlenumber bold"><span>ลำดับที่ ๓</span></div>
+                    <div class="text-titlenumber bold"><span>ลำดับที่ 3</span></div>
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -619,7 +661,7 @@
                         </div><!--end row-->
                     </div><!--end box-input2f-->
                     <div class="headlineform2f">
-                      <h5>๕. วาระการดำรงตำแหน่งในองค์กรปกครองส่วนท้องถิ่น (ปัจจุบัน)</h5>
+                      <h5>4. วาระการดำรงตำแหน่งในองค์กรปกครองส่วนท้องถิ่น (ปัจจุบัน)</h5>
                       <div class="input2f width200 input-center">
                         <div class="text-input2f nopadding">{{ Auth::user()->detail->roleTimeLeft }}</div>
                       </div>
@@ -629,7 +671,7 @@
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f bold">
-                                  <span>๑)</span>เริ่มตั้งแต่
+                                  <span>1)</span>เริ่มตั้งแต่
                                 </div><!--end text-input2f-->
                             </div>
                             <div class="col-md-6 col-sm-8">
@@ -644,7 +686,7 @@
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f bold">
-                                  <span>๒)</span>หมดวาระ
+                                  <span>2)</span>หมดวาระ
                                 </div><!--end text-input2f-->
                             </div>
                             <div class="col-md-6 col-sm-8">
@@ -675,16 +717,16 @@
                         <div class="col-sm-4"></div>
                         <div class="col-sm-4">
                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                          {!! htmlFormSnippet() !!}
-                          @if($errors->has('g-recaptcha-response'))
-                          กรุณากดยืนยันตัวก่อนยื่นเอกสาร
-                          @endif
+                           <input type="text" name="captcha" class="form-control" value="">
+                           @if($errors->has('captcha'))
+                           <span> ระบบข้อมูลไม่ถูกต้อง</span>
+                           @endif
                         </div>
                     </div>
-                       
+
                   </div>
                   <div class="btn-center2f">
-                       <a href="{{ url('/') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                       <a href="{{ url('/') }}" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">ยืนยันข้อมูล</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->
@@ -709,6 +751,8 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
+      $('input, radio').attr("disabled", 'true');
+      $('[name="captcha"]').removeAttr('disabled');
 $(document).ready(function() {
       @if(Session::get('success'))
       Swal.fire({

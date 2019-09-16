@@ -1,6 +1,6 @@
 @php
 header("Content-type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=MEMcheck.xls");
+header("Content-Disposition: attachment; filename=MEMcheck".date('Y-m-d-His').".xls");
 	//header("content-type: text charset=tis-620");
 @endphp
 <html>
@@ -36,12 +36,12 @@ header("Content-Disposition: attachment; filename=MEMcheck.xls");
                         {{$key + 1}}
                     @endif
                 </td>
-                <td align="middle">{{$valmember->docId}}</td>
+                <td align="middle">{{$valmember->detail->docId}}</td>
                 <td align="middle">{{$valmember->nameTitle}}{{$valmember->firstname}}  {{$valmember->lastname}}</td>
-                <td>{{$valmember->groupName}}</td>
-                <td align="middle">{{$valmember->province}}</td>
-                <td align="middle">{{$valmember->status}}</td>
-                <td align="middle">{{$valmember->username}}</td>
+                <td>{{$valmember->groupOR->groupName}}</td>
+                <td align="middle">{{$valmember->detail->province->province}}</td>
+                <td align="middle">{{$valmember->detail->statuses->status}}</td>
+                <td align="middle">{{ @ $valmember->detail->users->username}}</td>
                 </tr>
             @endforeach
         </table>

@@ -20,7 +20,11 @@ Route::get('checkYear', function(Request $request){
 	$yearSelect = \Carbon\Carbon::createFromFormat('d/m/Y',$request->date)->addYears('-543');
 	$yearNow = \Carbon\Carbon::now()->diffInYears($yearSelect);
 
-	return ['old' => $yearNow];
+     $datetime1 = new DateTime($yearSelect);
+     $datetime2 = new DateTime(now());
+     $interval = $datetime1->diff($datetime2);
+
+	return ['olds' => $yearNow, 'old'=> $interval->format('%y ปี %m เดือน และ %d วัน')];
 });
 
 Route::get('get_address', function(Request $request){

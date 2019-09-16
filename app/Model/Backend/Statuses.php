@@ -8,7 +8,7 @@ class Statuses extends Model
 {
     protected $table ='statuses';
 
-    public function memberDetails()
+    public function detail()
     {
         return $this->hasMany(memberDetails::class, 'statusId', 'id');
     }

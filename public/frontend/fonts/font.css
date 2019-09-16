@@ -70,3 +70,12 @@
          url('THBaijamItalic.ttf') format('truetype'),
          url('THBaijamItalic.svg#THBaijamItalic') format('svg');
 }
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('BebasNeueRegular.eot');
+    src: url('BebasNeueRegular.eot') format('embedded-opentype'),
+         url('BebasNeueRegular.woff2') format('woff2'),
+         url('BebasNeueRegular.woff') format('woff'),
+         url('BebasNeueRegular.ttf') format('truetype'),
+         url('BebasNeueRegular.svg#BebasNeueRegular') format('svg');
+}

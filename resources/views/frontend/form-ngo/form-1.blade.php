@@ -6,9 +6,9 @@
         <div class="navication2f">
             <div class="container">
               <ol class="breadcrumb">
-                  <li><a href="">หน้าหลัก</a></li>
+                  <li><a href="{{ url('/') }}">หน้าหลัก</a></li>
                   <li><a href="">สมัคร</a></li>
-                  <li class="active">ผู้แทนองค์กรภาคเอกชน สมัครสมาชิก ขั้นตอนที่ 1</li>
+                  <li class="active">ผู้แทนองค์กรภาคเอกชน สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 1</li>
               </ol>
             </div>
         </div><!--end navication2f-->
@@ -47,9 +47,9 @@
                 <div class="clear2f"></div>
               </div><!--end control-progress2f-->
               <div class="content-form2f">
-                  <h4>ผู้แทนองค์กรภาคเอกชน สมัครสมาชิก ขั้นตอนที่ 1</h4>
+                  <h4>ผู้แทนองค์กรภาคเอกชน สมัครเป็นกรรมการสุขภาพแห่งชาติ ขั้นตอนที่ 1</h4>
                   <div class="set-form2f">
-                    <div class="box-input2f">
+                    <!-- <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
                                 <div class="text-input2f nopadding">วัน/เดือน/พ.ศ.</div>
@@ -58,10 +58,10 @@
                                 <div class="box-date input-group date">
                                       {!! Form::text('date_create', now()->addYears(543)->format("d/m/Y"), [ "class"=>"form-control" , "placeholder"=>"วัน/เดือน/พ.ศ.", 'readonly'=>'']) !!}
                                  <span class="input-group-addon"><img src="{{asset("frontend/images/icon-calendar-gray.svg")}}" alt="" data-pin-nopin="true"></span>
-                                </div><!--end input_form-->
+                                </div>
                             </div>
-                        </div><!--end row-->
-                    </div><!--end box-input2f-->
+                        </div>
+                    </div> -->
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('nameTitle', @Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว"]) !!}
+                                      {!! Form::text('nameTitle', @Auth::user()->nameTitle, ["class"=>"form-control", "placeholder"=>"นาย/นาง/นางสาว", 'readonly' => '' , 'maxlength' => 80]) !!}
                                       @if($errors->has("nameTitle"))
                                       <small>{{ $errors->first('nameTitle') }}</small>
                                       @endif
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('firstname', @Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ"]) !!}
+                                      {!! Form::text('firstname', @Auth::user()->firstname, ["class"=>"form-control", "placeholder"=>"ชื่อ", 'readonly' => '', 'maxlength' => '150']) !!}
                                       @if($errors->has("firstname"))
                                       <small>{{ $errors->first('firstname') }}</small>
                                       @endif
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
-                                      {!! Form::text('lastname', @Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล"]) !!}
+                                      {!! Form::text('lastname', @Auth::user()->lastname, ["class"=>"form-control", "placeholder"=>"นามสกุล", 'readonly' => '', 'maxlength' => '150']) !!}
                                       @if($errors->has("lastname"))
                                       <small>{{ $errors->first('lastname') }}</small>
                                       @endif
@@ -120,10 +120,10 @@
                           ข้าพเจ้าเป็นผู้มีคุณสมบัติของผู้ทรงคุณวุฒิที่จะเข้ารับการเลือกเป็นกรรมการสุขภาพแห่งชาติครบถ้วน  ดังนี้
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
-                    <h5>๑.  คุณสมบัติทั่วไป</h5>
+                    <h5>1.  คุณสมบัติทั่วไป</h5>
                     <div class="input-checkbox2f">
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๑) มีสัญชาติไทย
+                          <label class="checkbox2f">1) มีสัญชาติไทย
                             {!! Form::checkbox('thaiStatus', 1, @Auth::user()->detail->thaiStatus, []) !!}
                             <span class="checkmark"></span>
                           </label>
@@ -132,7 +132,7 @@
                           @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๒) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์
+                          <label class="checkbox2f">2) มีอายุไม่ต่ำกว่ายี่สิบปีบริบูรณ์
                             {!! Form::checkbox('ageQualify', 1, @Auth::user()->detail->ageQualify, []) !!}
                             <span class="checkmark"></span>
                           </label>
@@ -141,7 +141,7 @@
                           @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๓) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
+                          <label class="checkbox2f">3) ไม่เป็นคนไร้ความสามารถหรือคนเสมือนไร้ความสามารถ
                             {!! Form::checkbox('enoughAbility', 1, @Auth::user()->detail->enoughAbility, []) !!}
                             <span class="checkmark"></span>
                           </label>
@@ -150,7 +150,7 @@
                           @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๔) ไม่ติดยาเสพติดให้โทษ
+                          <label class="checkbox2f">4) ไม่ติดยาเสพติดให้โทษ
                             {!! Form::checkbox('noDrug', 1, @Auth::user()->detail->noDrug, []) !!}
                             <span class="checkmark"></span>
                           </label>
@@ -159,7 +159,7 @@
                           @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๕) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
+                          <label class="checkbox2f">5) ไม่เคยถูกลงโทษไล่ออก ปลดออก เลิกจ้าง หรือพ้นจากตำแหน่ง เพราะเหตุจากการทุจริตหรือประพฤติมิชอบ
                             {!! Form::checkbox('noCriminal', 1, @Auth::user()->detail->noCriminal, []) !!}
                             <span class="checkmark"></span>
                           </label>
@@ -168,7 +168,7 @@
                         @endif
                         </div><!--end box-checkbox2f-->
                         <div class="box-checkbox2f">
-                          <label class="checkbox2f">๖) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
+                          <label class="checkbox2f">6) ไม่เคยได้รับโทษจำคุกโดยคำพิพากษาถึงที่สุดให้จำคุก ไม่ว่าจะถูกจำคุกจริงหรือไม่ก็ตาม
                             เว้นแต่เป็นโทษสำหรับความผิดที่ได้กระทำโดยประมาทหรือ ความผิดลหุโทษ
                               {!! Form::checkbox('noJail', 1, @Auth::user()->detail->noJail, []) !!}
                             <span class="checkmark"></span>
@@ -181,7 +181,8 @@
 
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+			     <a href="{{ url('/form-ngo-register/5') }}" class="btn btn-border">ย้อนกลับ</a>
+                      <a href="{{ url('/cancel-form') }}/3/1" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->

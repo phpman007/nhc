@@ -50,7 +50,7 @@
                   <h4>ผู้แทนองค์กรภาคเอกชน ขอขึ้นทะเบียนองค์กรภาคเอกชน ขั้นตอนที่ 3</h4>
                   <div class="headform2f">ข้อมูลประกอบการขึ้นทะเบียน</div>
                   <div class="set-form2f">
-                    <h5>๑. องค์กรฯ ประสงค์ขอขึ้นทะเบียนในกลุ่ม (เลือกได้เพียงหนึ่งกลุ่มเท่านั้น)</h5>
+                    <h5>1. องค์กรฯ ประสงค์ขอขึ้นทะเบียนในกลุ่ม (เลือกได้เพียงหนึ่งกลุ่มเท่านั้น)</h5>
                     <div class="input-radio2f">
                         @foreach(DB::table('ngo_groups')->get() as $key => $item)
                         <div class="box-radio2f">
@@ -66,13 +66,14 @@
                     </div><!--end input-radio2f-->
                     <div class="box-input2f boxremark">
                         <div class="text-input2f nopadding">
-                          <strong>หมายเหตุ</strong>   โปรดพิจารณารายละเอียดการจัดกลุ่มกิจกรรมที่เกี่ยวข้องกับสุขภาพ สำหรับองค์กรภาคเอกชนท้ายประกาศฯ
+                          <strong>หมายเหตุ</strong>   โปรดพิจารณารายละเอียดการจัดกลุ่มกิจกรรมที่เกี่ยวข้องกับสุขภาพ สำหรับองค์กรภาคเอกชนท้ายประกาศฯ  <a href="{{asset('mock/ngo-doc3.pdf')}}" target="_blank" style="font-weight:bold; "><u>รายละเอียดเพิ่มเติม</u></a>
                         </div><!--end text-input2f-->
                     </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="set-form2f">
-                      <h5>๒. กิจกรรมการดำเนินงานที่เกี่ยวข้องกับสุขภาพในกลุ่มที่ขอขึ้นทะเบียนในพื้นที่จังหวัด(เขต) ๒ กิจกรรมที่สำคัญ ในระยะเวลาไม่เกิน ๓ ปี มีดังนี้</h5>
-                      <div class="text-titlenumber"><span>กิจกรรมที่  ๑</span></div>
+                      <h5>2. กิจกรรมการดำเนินงานที่เกี่ยวข้องกับสุขภาพในกลุ่มที่ขอขึ้นทะเบียนในพื้นที่จังหวัด 2 กิจกรรม ที่สำคัญในระยะเวลาไม่เกิน 3 ปี มีดังนี้
+</h5>
+                      <div class="text-titlenumber"><span>กิจกรรมที่  1</span></div>
                       <div class="box-input2f">
                           <div class="row">
                               <div class="col-md-2 col-sm-4 nopaddingright">
@@ -80,7 +81,7 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                        {!! Form::text('activity1', Auth::user()->detail->activity1, ["class"=>"form-control", "placeholder"=>"ชื่อกิจกรรม"]) !!}
+                                        {!! Form::text('activity1', Auth::user()->detail->activity1, ["class"=>"form-control", "placeholder"=>"ชื่อกิจกรรม", 'maxlength' => '255']) !!}
                                         @if($errors->has("activity1"))
                                         <small>{{ $errors->first('activity1') }}</small>
                                         @endif
@@ -95,8 +96,9 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                    {!! Form::textarea('detail1', @Auth::user()->detail->detail1, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
+                                    {!! Form::textarea('detail1', @Auth::user()->detail->detail1, ["rows"=>"4", "cols"=>"40", "class"=>"form-control", "onkeyup"=>"countChar(this, 800, 'charNum-1')",
                                    "placeholder"=>"สรุปผลงานที่สำคัญ"]) !!}
+					    ท่านพิมพ์ได้อีก <span id="charNum-1">800</span> ตัวอักษร
                                    @if($errors->has('detail1'))
                                    <small>{{ $errors->first('detail1') }}</small>
                                    @endif
@@ -104,7 +106,7 @@
                               </div>
                           </div><!--end row-->
                       </div><!--end box-input2f-->
-                      <div class="text-titlenumber"><span>กิจกรรมที่  ๒</span></div>
+                      <div class="text-titlenumber"><span>กิจกรรมที่  2</span></div>
                       <div class="box-input2f">
                           <div class="row">
                               <div class="col-md-2 col-sm-4 nopaddingright">
@@ -112,7 +114,8 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                        {!! Form::text('activity2', Auth::user()->detail->activity2, ["class"=>"form-control", "placeholder"=>"ชื่อกิจกรรม"]) !!}
+                                        {!! Form::text('activity2', Auth::user()->detail->activity2, ["class"=>"form-control", "placeholder"=>"ชื่อกิจกรรม", 'maxlength' => '255']) !!}
+
                                         @if($errors->has("activity2"))
                                         <small>{{ $errors->first('activity2') }}</small>
                                         @endif
@@ -127,8 +130,9 @@
                               </div>
                               <div class="col-md-6 col-sm-8">
                                   <div class="input2f">
-                                        {!! Form::textarea('detail2', @Auth::user()->detail->detail2, ["rows"=>"4", "cols"=>"40", "class"=>"form-control",
+                                        {!! Form::textarea('detail2', @Auth::user()->detail->detail2, ["rows"=>"4", "cols"=>"40", "class"=>"form-control", 'onkeyup'=>"countChar(this, 800, 'charNum-2')",
                                        "placeholder"=>"สรุปผลงานที่สำคัญ"]) !!}
+						      ท่านพิมพ์ได้อีก <span id="charNum-2">800</span> ตัวอักษร
                                        @if($errors->has('detail2'))
                                        <small>{{ $errors->first('detail2') }}</small>
                                        @endif
@@ -138,7 +142,8 @@
                       </div><!--end box-input2f-->
                   </div><!--end set-form2f-->
                   <div class="btn-center2f">
-                      <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+			     <a href="{{ url('/form-ngo-register/2') }}" class="btn btn-border">ย้อนกลับ</a>
+                      <a href="{{ url('/cancel-form') }}/2/3" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" name="button" class="btn btn-green">บันทึก</button>
                       <!-- <button type="button" name="button" class="btn btn-border">หน้าถัดไป<img src="images/right-arrow-gray.svg" alt=""></button> -->
                   </div><!--end btn-center2f-->
@@ -156,6 +161,16 @@
 
 @include('frontend.form-professional.global-js')
 <script type="text/javascript">
-
+function countChar(val, set_num, select) {
+  var len = val.value.length;
+  if (len >= set_num) {
+    val.value = val.value.substring(0, set_num);
+      $('#' + select).text(0);
+  } else {
+    $('#' + select).text(set_num - len);
+  }
+}
+countChar($('[name="detail1"]')[0], 800, 'charNum-1')
+countChar($('[name="detail2"]')[0], 800, 'charNum-2')
 </script>
 @endsection

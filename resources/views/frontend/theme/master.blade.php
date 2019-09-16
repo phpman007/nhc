@@ -5,8 +5,9 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>สำนักงานคณะกรรมการสุขภาพแห่งชาติ</title>
-
+    <title>คณะกรรมการสุขภาพแห่งชาติ</title>
+    <meta name="keywords" content="คณะกรรมการสุขภาพแห่งชาติ">
+    <meta name="description" content="คณะกรรมการสุขภาพแห่งชาติ">
     <!-- CSS Layout -->
     <link rel="shortcut icon" href="{{asset("frontend/images/favicon.ico")}}" type="image/x-icon">
 	  <link rel="icon" href="{{asset("frontend/images/favicon.ico")}}" type="image/x-icon">
@@ -35,7 +36,7 @@
   </head>
   <body >
     <a href="#" class="cd-top cd-is-visible cd-fade-out">
-      <img src="{{asset("frontend/images/top.svg")}}" alt="">
+      <img src="{{asset("frontend/images/top.png")}}" alt="">
     </a>
     @include('frontend.partials.header')
       <div class="popup_topsearch2f">
@@ -98,64 +99,10 @@
         });
     });
  </script>
-  <script>
-  function alertConfirmForm(form, message) {
-        $(form)[0].submit();
-        return false;
-        Swal.fire({
-          title: 'ระบบแจ้งเตือน',
-          text: message,
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'ตกลง'
-        }).then((result) => {
-          if (result.value) {
-                $(form)[0].submit();
-          }
-        })
- }
-	 $(document).ready(function(){
-                 $("#personalId").mask('0-0000-00000-00-0');
-                 $("#tel").mask('00-000-0000')
-                 $("#mobile").mask('0000000000');
-                 $("#date-birdth").mask('00/00/0000');
 
-
-     @if($errors->has('error'))
-      Swal.fire({
-        type: 'error',
-        title: 'ลงทะเบียน',
-        text: '{!! $errors->first('error') !!}',
-        confirmButtonText: 'ปิด',
-        footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
-      })
-      @endif
-
-      @if(session('success'))
-      Swal.fire({
-         type: 'success',
-         title: 'ลงทะเบียน',
-         text: 'ลงทะเบียนเรียบร้อยแล้วระบบจะส่งยืนยันไปทาง Email ภายใน 1 ชั่วโมง',
-         confirmButtonText: 'ปิด',
-         footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
-      })
-      @endif
-      @if(session('info'))
-      Swal.fire({
-         type: 'success',
-         title: 'ลงทะเบียน',
-         text: '{{ Session::get('info') }}',
-         confirmButtonText: 'ปิด',
-         footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
-      })
-      @endif
-     $('.bigbanner').slick({
-        dots: true
-     });
-     // js navbar dropdown hover
-     function toggleNavbarMethod() {
+<script>
+$(document).ready(function() {
+    function toggleNavbarMethod() {
         if ($(window).width() > 991) {
             $('.navbar .dropdown').on('mouseover', function(){
                 $('.dropdown-toggle', this).trigger('click');
@@ -169,7 +116,78 @@
     }
     toggleNavbarMethod();
     $(window).resize(toggleNavbarMethod);
-    // end js navbar dropdown hover
+});
+</script>
+  <script>
+  function alertConfirmForm(form, message) {
+        $(form)[0].submit();
+        return false;
+        Swal.fire({
+          title: 'ระบบแจ้งเตือน',
+          text: message,
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ตกลง'
+    }).then(function(result) {
+          if (result.value) {
+                $(form)[0].submit();
+          }
+        })
+ }
+	 $(document).ready(function(){
+                 $("#personalId").mask('0-0000-00000-00-0');
+                 // $("#tel").mask('00-000-0000')
+                 // $("#mobile").mask('0000000000');
+                 $("#date-birdth").mask('00/00/0000');
+                 $("[name='ngoZipCode']").mask('00000');
+                 $("[name='zipCode']").mask('00000');
+
+      $(".confirmed-alert").on('click', function(e){
+        e.preventDefault();
+        var url = $(this).attr('href');
+        Swal.fire({
+            title: 'ระบบแจ้งเตือน',
+            text: "ระบบจะไม่ทำการบันทึกข้อมูลและจะกลับไปยังหน้าแรก",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ตกลง'
+	}).then(function (result) {
+            if (result.value) {
+                  location.href = url;
+            }
+          })
+      });
+
+     @if($errors->has('error'))
+      Swal.fire({
+        type: 'error',
+        title: 'ลงทะเบียน',
+        text: '{!! $errors->first('error') !!}',
+        confirmButtonText: 'ปิด',
+        footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
+      })
+      @endif
+
+
+      @if(session('info'))
+      Swal.fire({
+         type: 'info',
+         title: 'แจ้งเตือน',
+         html: '{!! Session::get('info') !!}',
+         confirmButtonText: 'ปิด'
+         // ,footer: '<a href="{{ url('/') }}">กลับหน้าแรก</a>'
+      })
+      @endif
+     $('.bigbanner').slick({
+        dots: true,
+	  autoplay : true,
+  		autoplaySpeed: 7000,
+     });
+
      // browser window scroll (in pixels) after which the "back to top" link is shown
      var offset = 300,
       //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
@@ -195,10 +213,10 @@
         );
       });
 
-      // js scroll button submit  
+      // js scroll button submit
      // $('.btn-center2f').scrollFix({
      //      side: 'bottom'
-     //  }); 
+     //  });
 
 
     });

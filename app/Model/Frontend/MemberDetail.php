@@ -102,6 +102,26 @@ class MemberDetail extends Model
 		'ngoSignatureDoc',
 		'ngoApproveDoc',
 		'zipFile',
+		// สร้างใหม่
+		'institution1',
+		'yearend1',
+		'institution2',
+		'yearend2',
+		'institution3',
+		'yearend3',
+		'institution4',
+		'yearend4',
+		'institution5',
+		'yearend5',
+		'fromyear1',
+		'fromyear2',
+		'fromyear3',
+		'toyear1',
+		'toyear2',
+		'suggestLastName',
+		'suggestFirstName',
+		'toyear3',
+		'suggestTel'
 	];
 
 	public function subdistrict() {

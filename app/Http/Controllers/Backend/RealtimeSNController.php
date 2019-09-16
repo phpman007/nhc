@@ -9,13 +9,17 @@ use App\Model\Backend\Province;
 use App\Model\Backend\GroupSN;
 use App\Model\Backend\Group;
 use App\Model\Backend\Member;
+use App\Model\Backend\electionVote;
+use App\Model\Backend\electionPoint;
 use App\Model\Backend\MemberDetail;
+use App\Model\Backend\election;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use DB;
 
 class RealtimeSNController extends Controller
 {
@@ -28,108 +32,182 @@ class RealtimeSNController extends Controller
     {
         $input = \Request::all();
 
-        $listprovince=Province::orderBy('province')->get();
         $listgroup=GroupSN::get();
 
-        $list=MemberDetail::join('members','members.id','=','member_details.memberId');
-        $list->join('groups','members.groupId','=','groups.id');
-        $list->join('province','member_details.provinceId','=','province.provinceId');
-        $list->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id');
-        $list->select('members.id','members.candidateNumber','members.nameTitle','members.firstname','members.lastname','groups.groupName','senior_groups.groupName as SNgroup','province.province');
-        $list->where('members.groupId','=',1);
+        return view('/backend/RT/snRT',compact('listgroup'));
+    }
 
-        if(!empty($input['txtname'])){
-            $list->where('member_details.statusId','=',3)
-            ->where(function ($query) {
-                $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
-                      ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%');
-            });
-        }else{
-            $list->where('member_details.statusId','=',3);
-        }
+    public function snRTAll($group_id)
+    {
+        //selectหาข้อมูล electionPoint
+        $listpoint=electionPoint::orderBy('draw_status','desc')->orderBy('memberPoint','desc')
+        ->whereHas('member',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        ->get();
 
-        if(!empty($input['txtgroup'])){
-            $countgroup=count($input['txtgroup']);
-            if($countgroup==1){
-                $list->where('member_details.statusId','=',3)
-                ->where(function ($query) {
-                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0]);
-                });
-            }elseif($countgroup==2){
-                $list->where('member_details.statusId','=',3)
-                ->where(function ($query) {
-                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0])
-                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[1]);
-                });
-            }elseif($countgroup==3){
-                $list->where('member_details.statusId','=',3)
-                ->where(function ($query) {
-                    $query->where('members.organizationGroupId','=',\Request::get('txtgroup')[0])
-                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[1])
-                        ->orWhere('members.organizationGroupId','=',\Request::get('txtgroup')[2]);
-                });
+        //หาชื่อกลุ่ม
+        $group=GroupSN::where('id','=',$group_id)->first();
+
+        //หาวันที่ เวลา การลงคะแนน
+        $listelection=election::where('groupid',1)
+        ->where('seniorGroupId',$group_id)
+        ->first();
+
+        //หาข้อมูลผู้ชนะในกลุ่มนั้น
+        $listwin=electionPoint::orderBy('memberPoint','desc')
+        ->whereHas('member',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        ->where('draw_status',1)
+        ->get();
+
+        $listvote = electionVote::selectRaw('*,sum(point) as sumPoints')
+        ->whereHas('memberVoteTo',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        ->groupBy('voteTo')
+        ->orderBy('sumPoints','desc')
+        ->get();
+
+        return view('backend.RT.snRTAll',compact('group','group_id','listwin','listvote','listelection','listpoint'));
+    }
+
+    public function comfirmvote($group_id)
+    {
+        //หาชื่อกลุ่ม
+        $group=GroupSN::where('id','=',$group_id)->first();
+
+         //selectหาข้อมูลว่ามีการรวมคะแนนไว้ใน electionpoint หรือยัง ถ้ายังก็ให้รวมข้อมูลจากตาราง electionvote ไปใส่ในตาราง electionpoint
+         $listpoint=electionPoint::whereHas('member',function($q)use($group_id){
+             $q->where('groupid',1)
+             ->where('seniorGroupId',$group_id);
+         })
+         ->get();
+
+        if($listpoint->isEmpty()){
+
+            //ข้อมูล sum point จากตาราง electionvote select ขึ้นมาเพื่อนำไปใส่ในตาราง electionpoint
+            $list = electionVote::selectRaw('*,sum(point) as sumPoints')
+            ->whereHas('memberVoteTo',function($q)use($group_id){
+                $q->where('groupid',1)
+                ->where('seniorGroupId',$group_id);
+            })
+            ->groupBy('voteTo')
+            ->orderBy('sumPoints','desc')
+            ->get();
+
+            //นำข้อมูล $list มาวนinsert ใส่ในตาราง electionpoint
+            foreach($list as $val){
+                $data['electionId']     = $val->electionId;
+                $data['memberId']       = $val->memberVoteTo->id;
+                $data['memberPoint']    = $val->sumPoints;
+                electionPoint::create($data);
             }
 
-        }else{
-            $countgroup=0;
-            $list->where('member_details.statusId','=',3);
-        }
+            //selectหาข้อมูล คะแนนมากที่สุด
+            $list1=electionPoint::orderBy('memberPoint','desc')
+            ->whereHas('member',function($q)use($group_id){
+                $q->where('groupid',1)
+                ->where('seniorGroupId',$group_id);
+            })
+            // ->where('draw_status','!=',1)
+            ->first();
 
-        if(!empty($input['txtprovince'])){
-            $countprovince=count($input['txtprovince']);
-            if($countprovince==1){
-                $list->where('member_details.statusId','=',3)
-                ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0]);
-                });
-            }elseif($countprovince==2){
-                $list->where('member_details.statusId','=',3)
-                ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1]);
-                });
-            }elseif($countprovince==3){
-                $list->where('member_details.statusId','=',3)
-                ->where(function ($query) {
-                    $query->where('province.province','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[1])
-                        ->orWhere('province.province','=',\Request::get('txtprovince')[2]);
-                });
+
+            if(!empty($list1)){
+                //selectหาข้อมูล คะแนนมากที่สุดมีกี่คน
+                $list2=electionPoint::orderBy('memberPoint','desc')
+                ->whereHas('member',function($q)use($group_id){
+                    $q->where('groupid',1)
+                    ->where('seniorGroupId',$group_id);
+                })
+                ->where('memberPoint','=',$list1->memberPoint)
+                // ->whereNull('draw_status')
+                ->get();
+
+                $No1point=count($list2);
+
+            }else{
+                $No1point=0;
+            }
+
+            //ถ้าคนที่ได้มากที่สุดมี 1 คน ให้ draw_status=1
+            if($No1point==1){
+                $id=$list2->first()->id;
+
+                $list = electionPoint::find($id);
+                $list->draw_status = 1;
+                $list->update();
             }
         }else{
-            $countprovince=0;
-            $list->where('member_details.statusId','=',3);
+            $No1point=0;
         }
 
-        // if(!empty($input['txtgroup'])){
-        //     $countgroup=count($input['txtgroup']);
-        //     for($i=0;$i<$countgroup;$i++){
-        //         if($i==0){
-        //             $list->where('members.seniorgroupId','=',$input['txtgroup'][0]);
-        //         }else{
-        //             $list->orwhere('members.seniorgroupId','=',$input['txtgroup'][$i]);
-        //         }
-        //     }
-        // }else{$countgroup=0;}
+        //selectหาข้อมูล เพื่อจะนำไปใส่ในตารางหน้า blade
+        $listpoint=electionPoint::orderBy('memberPoint','desc')
+        ->whereHas('member',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        ->get();
 
 
-        // if(!empty($input['txtprovince'])){
-        //     $countprovince=count($input['txtprovince']);
-        //     for($i=0;$i<$countprovince;$i++){
-        //         if($i==0){
-        //             $list->where('province.province','=',$input['txtprovince'][0]);
-        //         }else{
-        //             $list->orwhere('province.province','=',$input['txtprovince'][$i]);
-        //         }
-        //     }
-        // }else{$countprovince=0;}
-        $list->orderBy('members.id');
-        $listmember= $list->paginate(10)->appends($input);
-
-        return view('/backend/RT/snRT',compact('listmember','listprovince','listgroup','countgroup','countprovince'));
+        return view('backend.RT.snConfirmvote',compact('group','group_id','listpoint','No1point'));
     }
 
 
+    public function selectvote($group_id, $id)
+    {
+        $list = electionPoint::find($id);
+        $list->draw_status = 1;
+        $list->update();
+
+        // $list=electionPoint::where('id','=',$id)
+        // ->update(['draw_status'=>1]);
+
+        //หาชื่อกลุ่ม
+        $group=GroupSN::where('id','=',$group_id)->first();
+
+        //selectหาข้อมูล เพื่อจะนำไปใส่ในตารางหน้า blade
+        $listpoint=electionPoint::orderBy('memberPoint','desc')
+        ->whereHas('member',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        ->get();
+
+        //selectหาข้อมูล คะแนนมากที่สุด
+        $list1=electionPoint::orderBy('memberPoint','desc')
+        ->whereHas('member',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        // ->where('draw_status','!=',1)
+        ->first();
+
+        //selectหาข้อมูล คะแนนมากที่สุดมีกี่คน
+        $list2=electionPoint::orderBy('memberPoint','desc')
+        ->whereHas('member',function($q)use($group_id){
+            $q->where('groupid',1)
+            ->where('seniorGroupId',$group_id);
+        })
+        ->where('memberPoint','=',$list1->memberPoint)
+        ->whereNull('draw_status')
+        ->get();
+
+        $No1point=count($list2);
+
+        if($list2!=NULL){
+            \Session::flash('success','เลือกผู้ชนะแล้ว');
+        }else{
+            \Session::flash('error','เลือกผู้ชนะไม่สำเร็จ!!!');
+        }
+        return view('backend.RT.snConfirmvote',compact('group','group_id','listpoint','No1point'));
+    }
 
     /**
      * Show the form for creating a new resource.

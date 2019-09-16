@@ -344,8 +344,8 @@ select.form-control{
   color: #AAAAAA;
   display: inline-block;
   border-radius: 0;
-  height: 130px;
-  width: 100px;
+  height: 92px;
+  width: 72px;
   position: fixed;
   bottom: 40px;
   right: 0;
@@ -357,6 +357,22 @@ select.form-control{
   transition: all 0.3s;
   z-index: 9999;
   visibility: hidden;
+}
+.cd-top img{
+  position: relative;
+  z-index: 999;
+  width: 72px;
+}
+.cd-top::after{
+  position: absolute;
+  right: 0;
+  top: 0;
+  content: '';
+  width: 72px;
+  height: 70px;
+  box-shadow: 0px 10px 31px rgba(0,0,0,.15);
+  background-color: transparent;
+  z-index: 900;
 }
 .cd-top span {
   position: relative;
@@ -540,6 +556,14 @@ background-color: #fff;
   height: 100%;
   object-fit: contain;*/
   margin: 0 auto;
+  max-width: 100%;
+}
+.topfixed .img-user2f{
+  width: 30px;
+  height: 30px;
+}
+.topfixed .box-login2f a{
+  font-size: 21px;
 }
 .box-user2f > div{
   display: inline-block;
@@ -590,6 +614,12 @@ background-color: #fff;
 #menu2f .nav>li:last-child{
   padding-right: 0;
 }
+/*
+#menu2f .nav>li:last-child > .dropdown-menu{
+	left: auto;
+	right: 0;
+}
+*/
 #menu2f .nav>li>a{
   color: #fff;
   font-size: 24px;
@@ -654,7 +684,7 @@ background-color: #fff;
 }
 #menu2f .dropdown-menu ul li span{
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.7);
     padding-top: 5px;
     padding-bottom: 3px;
@@ -667,12 +697,14 @@ ul.submenu_level03 > li{
   margin-bottom: 3px;
 }
 ul.submenu_level03 > li > a{
-  color: #fff;
-  padding-left: 15px;
-  background-image: url(../images/dot-white.png);
-  background-repeat: no-repeat;
-  background-position: 0 7px;
-  display: block;
+    color: #fff;
+    padding-left: 12px;
+    background-image: url(../images/dot-white.png);
+    background-repeat: no-repeat;
+    background-position: 0 9px;
+    display: block;
+    font-size: 20px;
+    background-size: auto 5px;
 }
 ul.submenu_level03 > li > a:hover,
 ul.submenu_level03 > li > a:focus{
@@ -700,14 +732,50 @@ ul.submenu_level03 > li > a:focus{
   transition-timing-function: ease-out;
 }
 .topfixed #top2f{
-  padding-top: 14px;
+  padding-top: 10px;
   padding-bottom: 0;
 }
 .topfixed .top-logo2f img{
-  height: 65px;
+  height: 55px;
+  padding-top: 5px;
 }
 .topfixed .box-search2f{
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+  top: -4px;
+}
+.topfixed .box-search2f .form-control{
+  height: 30px;
+  font-size: 22px;
+}
+.topfixed .box-search2f .btn{
+  top: 5px;
+}
+.topfixed  .box-user2f{
+  height: 30px;
+}
+.topfixed #menu2f .dropdown-menu{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: calc(100vh - 120px);
+}
+/* width */
+#menu2f .dropdown-menu::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+#menu2f .dropdown-menu::-webkit-scrollbar-track {
+  background:transparent; 
+}
+ 
+/* Handle */
+#menu2f .dropdown-menu::-webkit-scrollbar-thumb {
+  background:transparent; 
+}
+
+/* Handle on hover */
+#menu2f .dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: transparent; 
 }
 #menu2f .nav>li{
   padding-top:10px;
@@ -1138,7 +1206,7 @@ video {
     right: 25px;
     top: 20px;
   }
-  #menu2f .dropdown-menu{ width: 100%; padding: 0 !important; font-size: 25px; line-height: 25px;}
+  #menu2f .dropdown-menu{ width: 100%; padding: 0 !important; font-size: 25px; line-height: 25px; -webkit-box-shadow:none;box-shadow: none;}
   #menu2f .dropdown-menu ul li span,.submenu_level03,ul.submenu_level02 > li, ul.submenu_level03 > li{ margin: 0;}
   #menu2f .dropdown-menu ul li span,
   #menu2f .dropdown-menu a{ padding: 10px 15px; display: block;}

@@ -52,7 +52,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">เลขบัตรประชาชน</div>
+                                <div class="text-input2f">เลขบัตรประชาชน (ของผู้สมัคร)</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -67,7 +67,7 @@
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 nopaddingright">
-                                <div class="text-input2f">จังหวัด</div>
+                                <div class="text-input2f">จังหวัดที่ขอขึ้นทะเบียน</div>
                             </div>
                             <div class="col-md-6 col-sm-8">
                                 <div class="input2f">
@@ -109,7 +109,7 @@
                                     <img src="{{asset("frontend/images/visibility-on.svg")}}" class="pass-view" alt="">
                                     <img src="{{asset("frontend/images/visibility-off.svg")}}" class="pass-none" alt="">
                                   </span>
-                                  <div class="t-notice">ใช้ตัวอักษรอย่างน้อย 6 ตัวอักษร</div>
+                                  <div class="t-notice">กำหนดรหัสผ่าน (Password) เป็นตัวอักษรภาษาอังกฤษ และมีตัวเลขด้วย รวมกันจำนวน 8 ตัวอักษร </div>
                                 </div>
                             </div>
                             <div class="col-md-0 col-sm-4"></div>

@@ -1,0 +1,14 @@
+{
+    "name": "TestManger",
+    "alias": "testmanger",
+    "description": "Test MangerTest MangerTest MangerTest MangerTest Manger",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\TestManger\\Providers\\TestMangerServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

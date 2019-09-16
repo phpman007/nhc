@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Model\Backend\Province;
 use App\Model\Backend\GroupOR;
+use Illuminate\Support\Facades\Redirect;
 use App\Model\Backend\election;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -21,29 +24,34 @@ class ElectionORController extends Controller
      */
     public function index()
     {
-        $input = \Request::all();
+        if (Auth::guard('admin')->user()->can('set_date_register_organize')) {
 
-        $listprovince=Province::orderBy('province')->get();
-        $listgroup=GroupOR::get();
+            $input = \Request::all();
 
-        $list=election::join('organization_groups', 'elections.organizationGroupId', '=', 'organization_groups.id');
-        $list->select('elections.id','organization_groups.groupName','elections.openDate','elections.endDate','elections.confirmDate','elections.electionDate','elections.openElectionTime','elections.endElectionTime');
-        $list->where('elections.groupId','=',2);
+            $listprovince=Province::orderBy('province')->get();
+            $listgroup=GroupOR::get();
 
-        if(!empty($input['txtgroup'])){
-            $countgroup=count($input['txtgroup']);
-            for($i=0;$i<$countgroup;$i++){
-                if($i==0){
-                    $list->where('elections.organizationGroupId','=',$input['txtgroup'][0]);
-                }else{
-                    $list->orwhere('elections.organizationGroupId','=',$input['txtgroup'][$i]);
+            $list=election::join('organization_groups', 'elections.organizationGroupId', '=', 'organization_groups.id');
+            $list->select('elections.id','organization_groups.groupName','elections.openDate','elections.endDate','elections.confirmDate','elections.electionDate','elections.openElectionTime','elections.endElectionTime');
+            $list->where('elections.groupId','=',2);
+
+            if(!empty($input['txtgroup'])){
+                $countgroup=count($input['txtgroup']);
+                for($i=0;$i<$countgroup;$i++){
+                    if($i==0){
+                        $list->where('elections.organizationGroupId','=',$input['txtgroup'][0]);
+                    }else{
+                        $list->orwhere('elections.organizationGroupId','=',$input['txtgroup'][$i]);
+                    }
                 }
-            }
-        }else{$countgroup=0;}
+            }else{$countgroup=0;}
 
-        $listmember= $list->orderBy('elections.id')->paginate(10)->appends($input);
+            $listmember= $list->orderBy('elections.id')->paginate(10)->appends($input);
 
-        return view('/backend/election/orSet',compact('listmember','listprovince','listgroup','countgroup'));
+            return view('/backend/election/orSet',compact('listmember','listprovince','listgroup','countgroup'));
+        } else {
+            return redirect('/backend/home');
+        }
     }
 
     /**
@@ -91,7 +99,7 @@ class ElectionORController extends Controller
         if($input['txtdatebegin'][0]==NULL or $input['txtdateend'][0]==NULL or $input['txtdateconfirm'][0]==NULL or $input['txtdateelection'][0]==NULL){
             \Session::flash('warning2');
         }else{
-            if($input['txtdatebegin'][0]<=$input['txtdateend'][0] and $input['txtdateend'][0]<=$input['txtdateconfirm'][0] and $input['txtdateconfirm'][0]<=$input['txtdateelection'][0]){
+            if(Carbon::createFromFormat('d/m/Y', $input['txtdatebegin'][0])<=Carbon::createFromFormat('d/m/Y', $input['txtdateend'][0]) and Carbon::createFromFormat('d/m/Y', $input['txtdateend'][0])<=Carbon::createFromFormat('d/m/Y', $input['txtdateconfirm'][0]) and Carbon::createFromFormat('d/m/Y', $input['txtdateconfirm'][0])<=Carbon::createFromFormat('d/m/Y', $input['txtdateelection'][0])){
 
                 $dateTH1=explode("/",$input['txtdatebegin'][0]);
                 $dateENG1=$dateTH1[2]."-".$dateTH1[1]."-".$dateTH1[0];

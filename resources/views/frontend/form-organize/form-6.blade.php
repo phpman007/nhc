@@ -38,7 +38,7 @@
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
                         <li class="active"><span>&nbsp;</span></li>
-                 
+
                       </ul>
                     </div><!--end line-progress2f-->
                 </div><!--end box-line-progress2f-->
@@ -72,7 +72,7 @@
                   </div><!--end set-form2f-->
 
                   <div class="btn-center2f">
-                       <a href="{{ url('/cancel-form') }}" onclick="if(!confirm('ระบบจะไม่บันทึกข้อมูลและกลับไปยังหน้าแรก')) return false" class="btn btn-border confirmed-alert">ยกเลิก</a>
+                       <a href="{{ url('/cancel-form') }}" class="btn btn-border confirmed-alert">ยกเลิก</a>
                       <button type="submit" id="submit-btn" name="button" disabled class="btn btn-green">ตรวจสอบเอกสาร</button>
                   </div><!--end btn-center2f-->
               </div><!--end content-form2f-->

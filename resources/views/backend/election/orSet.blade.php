@@ -2,42 +2,57 @@
 @section('title','NHCO ADMIN')
 
 @section('content')
+
+    <nav aria-label="breadcrumb">
+        <h4>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/backend/home">&nbsp;&nbsp;หน้าแรก</a></li>
+                <li class="breadcrumb-item active" aria-current="page">ตั้งวันการลงทะเบียนผู้แทนองค์กรส่วนท้องถิ่น</li>
+            </ol>
+        </h4>
+    </nav>
+
 <div class="card border-info mb-3  table-responsive">
     <div class="card-header">
         <strong>ตั้งวันการลงทะเบียน ผู้แทนองค์กรส่วนท้องถิ่น</strong>
     </div>
     <div class="card-body">
         <form id="frmsearchset" method="get" action="{{url('backend/election/orElection')}}">
-        {{ csrf_field() }}
-        <div class="col-md-12">
-            <div class="form-group">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="txtgroup">กลุ่มย่อย : </label>
-                <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
-
-                    @foreach ($listgroup as $valgroup)
-                        <option
-                            @for($i=0;$i<$countgroup;$i++)
-                                @if(request()->input('txtgroup')[$i]!=null && request()->input('ok')=="1" && request()->input('txtgroup')[$i] == $valgroup->id)
-                                selected
-                                @endif
-                            @endfor
-                        value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
-                    @endforeach
-                </select>
-                </div>
-
-            </div></div></div>
+            {{ csrf_field() }}
             <div class="col-md-12">
                 <div class="form-group">
-            <div class="d-flex justify-content-center  col-md-6">
-                <button id="ok" name="ok" type="submit" value="1" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
-                <button id="clear" name="clear" type="submit" value="2" class="btn btn-warning" onclick="">ล้างข้อมูล</button>
-            </div></div></div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="txtgroup">กลุ่มย่อย : </label>
+                            <select id="txtgroup" name="txtgroup[]" class="js-example-basic-multiple form-control" multiple="multiple">
+
+                                @foreach ($listgroup as $valgroup)
+                                    <option
+                                        @for($i=0;$i<$countgroup;$i++)
+                                            @if(request()->input('txtgroup')[$i]!=null && request()->input('txtgroup')[$i] == $valgroup->id)
+                                            selected
+                                            @endif
+                                        @endfor
+                                    value={{$valgroup->id}}>{{$valgroup->groupName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="d-flex justify-content-center  col-md-6">
+                        <button id="ok" name="ok" type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
+                        <a href="{{url('backend/election/orElection')}}"><button id="clear" name="clear" type="button" class="btn btn-warning" onclick="">ล้างข้อมูล</button></a>
+                    </div>
+                </div>
+            </div>
         </form>
 
         <hr>
+        <span style="color:red;"> * ให้กำหนดวันที่เปิดรับสมัคร < วันที่ปิดรับสมัคร < วันที่ยืนยันใช้สิทธิ์ < วันที่ลงคะแนน *</span>
+
         <div class="table-responsive">
             @if($listmember->isEmpty())
                 <h3 class="d-flex justify-content-center">ไม่มีข้อมูล</h3>

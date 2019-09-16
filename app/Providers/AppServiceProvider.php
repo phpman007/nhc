@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(\App\Repository\ElectionMemberInterface::class, App\Repository\ElectionMemberRepo::class);
     }
 
     /**

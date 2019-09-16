@@ -2,13 +2,13 @@
 <html>
 
 <head>
-<title>@yield('title')</title>
+
+<title>@yield('title')NHCO ADMIN</title>
 
   @include('backend.theme.partials.head')
   <!-- Font Awesome JS -->
   {{--  <script defer src="{{url('js/solid.js')}}" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
   <script defer src="{{url('js/fontawesome.js')}}" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>  --}}
-
 
 </head>
 
@@ -500,6 +500,8 @@
     <script src="{{url('backend/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{url('backend/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
+
+
     <!-- Flot -->
     <script src="{{url('backend/js/plugins/flot/jquery.flot.js')}}"></script>
     <script src="{{url('backend/js/plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
@@ -597,48 +599,50 @@
                     }
             );
 
-            var doughnutData = {
-                labels: ["App","Software","Laptop" ],
-                datasets: [{
-                    data: [300,50,100],
-                    backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
-                }]
-            } ;
+            // var doughnutData = {
+            //     labels: ["App","Software","Laptop" ],
+            //     datasets: [{
+            //         data: [300,50,100],
+            //         backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+            //     }]
+            // } ;
 
 
-            var doughnutOptions = {
-                responsive: false,
-                legend: {
-                    display: false
-                }
-            };
+            // var doughnutOptions = {
+            //     responsive: false,
+            //     legend: {
+            //         display: false
+            //     }
+            // };
 
 
-            var ctx4 = document.getElementById("doughnutChart").getContext("2d");
-            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+            // var ctx4 = document.getElementById("doughnutChart").getContext("2d");
+            // new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
 
-            var doughnutData = {
-                labels: ["App","Software","Laptop" ],
-                datasets: [{
-                    data: [70,27,85],
-                    backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
-                }]
-            } ;
-
-
-            var doughnutOptions = {
-                responsive: false,
-                legend: {
-                    display: false
-                }
-            };
+            // var doughnutData = {
+            //     labels: ["App","Software","Laptop" ],
+            //     datasets: [{
+            //         data: [70,27,85],
+            //         backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+            //     }]
+            // } ;
 
 
-            var ctx4 = document.getElementById("doughnutChart2").getContext("2d");
-            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+            // var doughnutOptions = {
+            //     responsive: false,
+            //     legend: {
+            //         display: false
+            //     }
+            // };
+
+
+            // var ctx4 = document.getElementById("doughnutChart2").getContext("2d");
+            // new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
 
         });
     </script>
+
+
 
 {{--  //datepicker  --}}
 {{--  <link href="{{asset('plugins/bootstrap-datepicker-custom/bootstrap-3.3.7-dist/css/bootstrap.css')}}" rel="stylesheet" />  --}}
@@ -717,6 +721,7 @@
             });
         });
     });
+
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Carbon\Carbon, Exception;
+use Carbon\Carbon, Exception, DB;
 // use Crypt;
 
 use App\Model\Backend\Province;
@@ -19,6 +19,9 @@ use App\Model\Backend\Admin;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\approveMail;
+
 
 class CheckSNController extends Controller
 {
@@ -29,220 +32,199 @@ class CheckSNController extends Controller
      */
     public function index()
     {
-        // if (Session::get('users') == NULL) {
-        //     return back();
-        // }
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $input = \Request::all();
 
-        $input = \Request::all();
+            $listprovince=Province::orderBy('province')->get();
+            $listgroupsn=GroupSN::get();
+            $liststatus=Statuses::get();
 
-        $listprovince=Province::orderBy('province')->get();
-        $listgroupsn=GroupSN::get();
-        $liststatus=Statuses::get();
-
-        $list=MemberDetail::join('members','members.id','=','member_details.memberId');
-        $list->join('statuses','member_details.statusId','=','statuses.id');
-        $list->join('province','member_details.provinceId','=','province.provinceId');
-        $list->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id');
-        $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username');
-
-        if(!empty($input['txtname'])){
-            $list->where('members.groupId','=',1)
+            $list=Member::leftJoin('member_details','member_details.memberId','=','members.id');
+            $list->leftJoin('statuses','member_details.statusId','=','statuses.id');
+            $list->leftJoin('province','member_details.provinceId','=','province.provinceId');
+            $list->leftJoin('senior_groups', 'members.seniorGroupId', '=', 'senior_groups.id');
+            $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+            $list->select('members.seniorGroupId','members.status_accept','member_details.fixStatus','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username', 'member_details.updateStatusTime', 'members.confirmed_at', 'members.updated_at');
+            // $list->where('members.groupId', '=', 1);
+            // $list->where('members.status_accept', '=', 1)
+            $list->where('members.confirmed_at', '!=', null)
             ->where(function ($query) {
-                $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
-                      ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%')
-                      ->orWhere('member_details.docId','like','%'.\Request::get('txtname').'%');
+                $query->where('members.deleted_at','=',null)
+                ->where('member_details.deleted_at','=',null);
             });
-        }else{
-            $list->where('members.groupId','=',1);
-        }
 
-        if(!empty($input['txtgroup'])){
-            $countgroup=count($input['txtgroup']);
-            if($countgroup==1){
+            // $count=$list->get();
+
+            if(!empty($input['txtname'])){
                 $list->where('members.groupId','=',1)
                 ->where(function ($query) {
-                    $query->where('members.seniorGroupId','=',\Request::get('txtgroup')[0]);
+                    $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
+                        ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%')
+                        ->orWhere('member_details.docId','like','%'.\Request::get('txtname').'%')
+                        ->orWhere('members.username','like','%'.\Request::get('txtname').'%');
                 });
-            }elseif($countgroup==2){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('members.seniorGroupId','=',\Request::get('txtgroup')[0])
-                        ->orWhere('members.seniorGroupId','=',\Request::get('txtgroup')[1]);
-                });
-            }elseif($countgroup==3){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('members.seniorGroupId','=',\Request::get('txtgroup')[0])
-                        ->orWhere('members.seniorGroupId','=',\Request::get('txtgroup')[1])
-                        ->orWhere('members.seniorGroupId','=',\Request::get('txtgroup')[2]);
-                });
+
+            }else{
+                $list->where('members.groupId','=',1);
             }
-        }else{
-            $list->where('members.groupId','=',1);
-            $countgroup=0;
-        }
 
-        if(!empty($input['txtstatus'])){
-            $countstatus=count($input['txtstatus']);
-            if($countstatus==1){
+            if(!empty($input['txtgroup'])){
+                $countgroup=count($input['txtgroup']);
                 $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0]);
+                ->where(function ($query){
+                    $query->whereIn('members.seniorGroupId',\Request::get('txtgroup'));
                 });
-            }elseif($countstatus==2){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
-                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1]);
-                });
-            }elseif($countstatus==3){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('member_details.statusId','=',\Request::get('txtstatus')[0])
-                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[1])
-                        ->orWhere('member_details.statusId','=',\Request::get('txtstatus')[2]);
-                });
+
+            }else{
+                $list->where('members.groupId','=',1);
+                $countgroup=0;
             }
-        }else{
-            $countstatus=0;
-            $list->where('members.groupId','=',1);
-        }
 
-        if(!empty($input['txtprovince'])){
-            $countprovince=count($input['txtprovince']);
-            if($countprovince==1){
+            if(!empty($input['txtstatus'])){
+                $countstatus=count($input['txtstatus']);
+                $txtstatus = request()->input('txtstatus');
+
                 $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0]);
+                ->where(function ($query){
+                    $query->whereIn('member_details.statusId',\Request::get('txtstatus'));
                 });
-            }elseif($countprovince==2){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1]);
-                });
-            }elseif($countprovince==3){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('province.provinceId','=',\Request::get('txtprovince')[0])
-                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[1])
-                        ->orWhere('province.provinceId','=',\Request::get('txtprovince')[2]);
-                });
+
+
+                // if(in_array(0, $txtstatus) and in_array(1, $txtstatus)) {//ถ้าในอะเรย์มีค่า 0 and 1
+                //     // $key = array_search(0, $txtstatus); //หาคีย์อะเรย์ตำแหน่งที่มีค่า 0
+                //     // unset($txtstatus[$key]);//ลบอะเรย์ที่มีค่า 0 ออกจากอะเรย์
+
+                //     $list->where('members.groupId','=',1)
+                //     ->where(function ($query3) use($txtstatus){
+                //         $query3->whereIn('member_details.statusId',$txtstatus);
+                //     });
+
+                // }elseif(in_array(0, $txtstatus)) {//ถ้าในอะเรย์มีค่า 0  ค้นหายังไม่ยืนยัน
+
+                //     $list->where('members.groupId','=',1)
+                //     ->where(function ($query1){
+                //         $query1->whereNull('members.status_accept')
+                //         ->orWhere('members.status_accept','=',2)
+                //         ->orWhere('members.status_accept','=',0);
+                //     });
+                //     $list->whereIn('member_details.statusId',[0,1]);
+
+                // }elseif(in_array(1, $txtstatus)) {//ถ้าในอะเรย์มีค่า 1 ค้นหารอตรวจสอบคุณสมบัติ
+                //     $list->where('members.groupId','=',1)
+                //     ->where(function ($query1){
+                //         $query1->where('members.status_accept',1)
+                //         ->where('member_details.statusId',1);
+                //     });
+                // }
+            }else{
+                $list->where('members.groupId','=',1);
+
+                $countstatus=0;
             }
-        }else{
-            $countprovince=0;
-            $list->where('members.groupId','=',1);
-        }
 
-        $listmember= $list->orderBy('members.id')->paginate(10);
-        return view('/backend/check/snCheck',compact('listprovince','listgroupsn','liststatus','listmember','countprovince','countstatus','countgroup'));
+            // if(!empty($input['txtprovince'])){
+            //     $countprovince=count($input['txtprovince']);
+            //     $txtprovince = request()->input('txtprovince');
+
+            //     $list->where('members.groupId','=',1)
+            //     ->where(function ($query1){
+            //         $query1->whereIn('member_details.provinceId',request()->input('txtprovince'));
+            //     });
+
+            // }else{
+            //     $list->where('members.groupId','=',1);
+            //     $countprovince=0;
+            // }
+
+            $list1=$list->get();
+
+            $listmember= $list->orderBy('member_details.updated_at','ASC')->paginate(10)->appends($input);
+
+            $countmember1=$list1->where('seniorGroupId',1)->count();
+            $countmember2=$list1->where('seniorGroupId',2)->count();
+            $countmember3=$list1->where('seniorGroupId',3)->count();
+            $countmember4=$list1->where('seniorGroupId',4)->count();
+            $countmember5=$list1->where('seniorGroupId',5)->count();
+            $countmember6=$list1->where('seniorGroupId',6)->count();
+
+
+            // dd($countmember1,$countmember2,$countmember3,$countmember4,$countmember5,$countmember6);
+
+            return view('backend.check.snCheck',compact('listprovince','listgroupsn','liststatus','listmember','countstatus','countgroup', 'countmember1', 'countmember2', 'countmember3', 'countmember4', 'countmember5', 'countmember6'));
+        } else {
+            return redirect('/backend/home');
+        }
     }
 
     public function exportExcel(){
-        $input = \Request::all();
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
 
-        $list=MemberDetail::join('members','members.id','=','member_details.memberId');
-        $list->join('statuses','member_details.statusId','=','statuses.id');
-        $list->join('province','member_details.provinceId','=','province.provinceId');
-        $list->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id');
-        $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
-        $list->select('members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.province','senior_groups.groupName','users.username');
-        $list->where('members.groupId','=',1);
+            $input = \Request::all();
 
-        if(!empty($input['Hname'])){
-            $list->where('members.groupId','=',1)
+            $list=Member::leftJoin('member_details','member_details.memberId','=','members.id');
+            $list->leftJoin('statuses','member_details.statusId','=','statuses.id');
+            $list->leftJoin('province','member_details.provinceId','=','province.provinceId');
+            $list->leftJoin('senior_groups', 'members.seniorGroupId', '=', 'senior_groups.id');
+            $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+            $list->select('member_details.reason','members.seniorGroupId','members.status_accept','member_details.fixStatus','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username', 'member_details.updateStatusTime', 'members.confirmed_at', 'members.updated_at');
+            // $list->where('members.status_accept', '=', 1)
+            $list->where('members.confirmed_at', '!=', null)
             ->where(function ($query) {
-                $query->where('members.firstname','like','%'.\Request::get('Hname').'%')
-                      ->orWhere('members.lastname','like','%'.\Request::get('Hname').'%')
-                      ->orWhere('member_details.docId','like','%'.\Request::get('Hname').'%');
+                $query->where('members.deleted_at','=',null)
+                ->where('member_details.deleted_at','=',null);
             });
-        }else{
-            $list->where('members.groupId','=',1);
-        }
 
-        if(!empty($input['Hgroup'])){
-            $countgroup=count($input['Hgroup']);
-            if($countgroup==1){
+            if(!empty($input['Hname'])){
                 $list->where('members.groupId','=',1)
                 ->where(function ($query) {
-                    $query->where('members.seniorGroupId','=',\Request::get('Hgroup')[0]);
+                    $query->where('members.firstname','like','%'.\Request::get('Hname').'%')
+                        ->orWhere('members.lastname','like','%'.\Request::get('Hname').'%')
+                        ->orWhere('member_details.docId','like','%'.\Request::get('Hname').'%')
+                        ->orWhere('members.username','like','%'.\Request::get('Hname').'%');
                 });
-            }elseif($countgroup==2){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('members.seniorGroupId','=',\Request::get('Hgroup')[0])
-                        ->orWhere('members.seniorGroupId','=',\Request::get('Hgroup')[1]);
-                });
-            }elseif($countgroup==3){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('members.seniorGroupId','=',\Request::get('Hgroup')[0])
-                        ->orWhere('members.seniorGroupId','=',\Request::get('Hgroup')[1])
-                        ->orWhere('members.seniorGroupId','=',\Request::get('Hgroup')[2]);
-                });
+
+            }else{
+                $list->where('members.groupId','=',1);
             }
-        }else{
-            $list->where('members.groupId','=',1);
-            $countgroup=0;
-        }
 
-        if(!empty($input['Hstatus'])){
-            $countstatus=count($input['Hstatus']);
-            if($countstatus==1){
+            if(!empty($input['Hgroup'])){
                 $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('member_details.statusId','=',\Request::get('Hstatus')[0]);
+                ->where(function ($query){
+                    $query->whereIn('members.seniorGroupId',\Request::get('Hgroup'));
                 });
-            }elseif($countstatus==2){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('member_details.statusId','=',\Request::get('Hstatus')[0])
-                        ->orWhere('member_details.statusId','=',\Request::get('Hstatus')[1]);
-                });
-            }elseif($countstatus==3){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('member_details.statusId','=',\Request::get('Hstatus')[0])
-                        ->orWhere('member_details.statusId','=',\Request::get('Hstatus')[1])
-                        ->orWhere('member_details.statusId','=',\Request::get('Hstatus')[2]);
-                });
+
+            }else{
+                $list->where('members.groupId','=',1);
+                $countgroup=0;
             }
-        }else{
-            $countstatus=0;
-            $list->where('members.groupId','=',1);
-        }
 
-        if(!empty($input['Hprovince'])){
-            $countprovince=count($input['Hprovince']);
-            if($countprovince==1){
+            if(!empty($input['Hstatus'])){
+
                 $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('province.provinceId','=',\Request::get('Hprovince')[0]);
+                ->where(function ($query){
+                    $query->whereIn('member_details.statusId',\Request::get('Hstatus'));
                 });
-            }elseif($countprovince==2){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('province.provinceId','=',\Request::get('Hprovince')[0])
-                        ->orWhere('province.provinceId','=',\Request::get('Hprovince')[1]);
-                });
-            }elseif($countprovince==3){
-                $list->where('members.groupId','=',1)
-                ->where(function ($query) {
-                    $query->where('province.provinceId','=',\Request::get('Hprovince')[0])
-                        ->orWhere('province.provinceId','=',\Request::get('Hprovince')[1])
-                        ->orWhere('province.provinceId','=',\Request::get('Hprovince')[2]);
-                });
+
+            }else{
+                $list->where('members.groupId','=',1);
+                $countstatus=0;
             }
-        }else{
-            $countprovince=0;
-            $list->where('members.groupId','=',1);
+
+            $list1=$list->get();
+
+            $listmember= $list->orderBy('member_details.updated_at','ASC')->get();
+
+            $countmember1=$list1->where('seniorGroupId',1)->count();
+            $countmember2=$list1->where('seniorGroupId',2)->count();
+            $countmember3=$list1->where('seniorGroupId',3)->count();
+            $countmember4=$list1->where('seniorGroupId',4)->count();
+            $countmember5=$list1->where('seniorGroupId',5)->count();
+            $countmember6=$list1->where('seniorGroupId',6)->count();
+
+            return view('backend.check.snCheckExcel',compact('listmember','countmember1', 'countmember2', 'countmember3', 'countmember4', 'countmember5', 'countmember6'));
+        } else {
+            return redirect('/backend/home');
         }
-
-        $listmember= $list->orderBy('members.id')->get();
-
-        return view('/backend/check/snCheckExcel',compact('listmember'));
-
     }
 
     /**
@@ -283,25 +265,29 @@ class CheckSNController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)//ดาวน์โหลดแล้วใส่ไอดีผู้ใช้คนแรกที่กดดาวน์โหลด
     {
-        $list1=MemberDetail::where('id','=',$id)->whereNull('adminId')->first();
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $list1=MemberDetail::where('id','=',$id)->whereNull('adminId')->first();
 
-        if($list1!=NULL){
-            $adminId=Auth::guard('admin')->user()->id;
+            if($list1!=NULL){
+                $adminId=Auth::guard('admin')->user()->id;
 
-            $list2 = MemberDetail::find($id);
-            $list2->adminId = $adminId;
+                $list2=MemberDetail::where('memberId','=',$id)
+                ->update(['adminId'=>$adminId]);
 
-            // if($list2->update()){
-            //     \Session::flash('success');
-            // }else{
-            //     \Session::flash('error');
-            // }
-        }else{
-            // \Session::flash('error');
+                // if($list2->update()){
+                //     \Session::flash('success');
+                // }else{
+                //     \Session::flash('error');
+                // }
+            //}else{
+                // \Session::flash('error');
+            }
+            return back();
+        } else {
+            return redirect('/backend/home');
         }
-        return back();
     }
 
     /**
@@ -327,94 +313,313 @@ class CheckSNController extends Controller
         //
     }
 
-    public function editstatus()
+    public function editstatus()//แก้ไขกรณีสถานะ ผ่าน ,รอ ,ระหว่าง
     {
-        $input = \Request::all();
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $input = \Request::all();
 
-        if($input['txtstatuschange'][0]==3){
+            // dd($input['txtstatuschange'][0]);
 
-            $list2=MemberDetail::join('members','members.id','=','member_details.memberId')
-            ->select('members.candidateNumber')
-            ->where('members.groupId','=',1)
-            ->where('member_details.statusId','=',3)
-            ->orderBy('members.candidateNumber','DESC')->first();
+            if($input['txtstatuschange'][0]==3){//ผ่าน
 
-            if($list2==NULL){
-                $newnumber=1;
-            }else{
-                $newnumber=($list2->candidateNumber)+1;
+                // $list2=MemberDetail::join('members','members.id','=','member_details.memberId')
+                // ->select('members.candidateNumber')
+                // ->where('members.groupId','=',1)
+                // ->where('member_details.statusId','=',3)
+                // ->orderBy('members.candidateNumber','DESC')->first();
+
+                // if($list2==NULL){
+                //     $newnumber=1;
+                // }else{
+                //     $newnumber=($list2->candidateNumber)+1;
+                // }
+
+                // $list3 = Member::find($input['Hid'][0]);
+                // $list3->candidateNumber = $newnumber;
+
+                $list=MemberDetail::where('memberId','=',$input['Hid'][0])
+                ->update(['reason'=>NULL,'statusId'=>$input['txtstatuschange'][0], 'adminId'=>Auth::guard('admin')->user()->id, 'updateStatusTime'=>date('Y-m-d H:i:s')]);
+
+                // $idprovince = $input['Hidprovince'][0];
+
+                // $list2 = Member::where('groupId','=','3');
+                // $list2->where('ngoGroupId', $input['Hidgroup'][0]);
+                // $list2->whereHas('detail', function($query3) use($idprovince){
+                //     $query3->where('provinceId','=',$idprovince);
+                //     $query3->whereIn('statusId', [1,2]);
+                // });
+
+                // $liststatus2 = $list2->get();
+
+            }else{//สถานะรอตรวจสอบ สถานะระหว่างตรวจสอบ
+                $list=MemberDetail::where('memberId','=',$input['Hid'][0])
+                ->update(['reason'=>NULL,'statusId'=>$input['txtstatuschange'][0], 'adminId'=>Auth::guard('admin')->user()->id, 'updateStatusTime'=>date('Y-m-d H:i:s')]);
             }
 
-            $list3 = Member::find($input['Hid'][0]);
-            $list3->candidateNumber = $newnumber;
-
-            $list = MemberDetail::find($input['Hid'][0]);
-            $list->statusId = $input['txtstatuschange'][0];
-
-        }else{
-            $list = MemberDetail::find($input['Hid'][0]);
-            $list->statusId = $input['txtstatuschange'][0];
-
-            $list3 = Member::find($input['Hid'][0]);
-            $list3->candidateNumber = 0;
+            if($list!=NULL){
+                // $this->mail($input['Hid'][0],3);//ส่งเมล์กรณีผ่าน
+                \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+            }else{
+                \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+            }
+            // return redirect('/backend/approve/snApprove');
+            return back();
+        } else {
+            return redirect('/backend/home');
         }
-
-        if($list->update() and $list3->update()){
-            $this->mail($input['Hid'][0],3);
-        }else{
-            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
-        }
-        // return redirect('/backend/approve/snApprove');
-        return back();
     }
 
-    public function editnotpass()
+    public function editnotpass()//แก้ไขสถานะกรณีไม่ผ่าน
     {
-        $input = \Request::all();
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $input = \Request::all();
 
-        $list = MemberDetail::find($input['Hidmember'][0]);
-        $list->reason = $input['txtreason'][0];
-        $list->statusId = 4;
+            $list=MemberDetail::where('memberId','=',$input['Hidmember'][0])
+            ->update(['reason'=>$input['txtreason'][0], 'statusId'=>4, 'adminId'=>Auth::guard('admin')->user()->id, 'updateStatusTime'=>date('Y-m-d H:i:s')]);
 
-        $list3 = Member::find($input['Hidmember'][0]);
-        $list3->candidateNumber = 0;
+            // $list3 = Member::find($input['Hidmember'][0]);
+            // $list3->candidateNumber = 0;
 
-        if($list->update() and $list3->update()){
-             $this->mail($input['Hidmember'][0],4);
-        }else{
-            \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+            if($list!=NULL){
+                //  $this->mail($input['Hidmember'][0],4);//ส่งเมล์กรณีไม่ผ่าน
+                \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+            }else{
+                \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+            }
+
+            // return redirect('/backend/approve/snApprove');
+            return back();
+        } else {
+            return redirect('/backend/home');
         }
-
-        // return redirect('/backend/approve/snApprove');
-        return back();
     }
 
-    public function mail($id,$status)
+    public function snPreview($id,$name,$group1,$group2,$group3,$status1,$status2,$status3)
     {
-        $list=MemberDetail::join('members','members.id','=','member_details.memberId')
-        ->join('statuses','member_details.statusId','=','statuses.id')
-        ->join('province','member_details.provinceId','=','province.provinceId')
-        ->join('senior_groups', 'members.seniorgroupId', '=', 'senior_groups.id')
-        ->leftJoin('users', 'member_details.adminId', '=', 'users.id')
-        ->select('members.email','member_details.reason','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','statuses.id as statusid','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username')
-        ->where('member_details.id','=',$id)
-        ->first();
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $liststatus=Statuses::get();
+            // $member2=Member::where('groupId',1)
+            // ->where('status_accept','=',1)
+            // ->orderBy('id')->get();
 
-        $group="ผู้ทรงคุณวุฒิ";
+            $list=MemberDetail::join('members','members.id','=','member_details.memberId');
+            $list->leftJoin('statuses','member_details.statusId','=','statuses.id');
+            $list->leftJoin('province','member_details.provinceId','=','province.provinceId');
+            $list->leftJoin('senior_groups', 'members.seniorGroupId', '=', 'senior_groups.id');
+            $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+            $list->select('members.seniorGroupId','members.status_accept','member_details.fixStatus','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','province.provinceId','province.province','senior_groups.groupName','users.username', 'member_details.updateStatusTime');
+            // $list->where('members.status_accept',1);
+            $list->where('members.confirmed_at', '!=', null);
+            $list->where('member_details.statusId','!=',2)
+            // $list->where('member_details.docId','!=',null)
+            ->where(function ($query) {
+                $query->where('members.deleted_at','=',null)
+                ->where('member_details.deleted_at','=',null);
+            });
 
-        if($list->email!=""){
-            // Mail::to('julaluckw@gmail.com')->send(new approveMail($group,$list));
-            \Session::flash('sendemail','แก้ไขสถานะ และส่งอีเมล์แจ้งเรียบร้อยแล้ว');
-        }else{
-            \Session::flash('error','แก้ไขสถานะแล้ว แต่ส่งอีเมล์แจ้งไม่ได้!!!');
+            if($name != '0'){
+                $list->where('members.groupId','=',1)
+                ->where(function ($query) use($name) {
+                    $query->where('members.firstname','like','%'.$name.'%')
+                        ->orWhere('members.lastname','like','%'.$name.'%')
+                        ->orWhere('member_details.docId','like','%'.$name.'%');
+                });
+            }else{
+                $list->where('members.groupId',1);
+            }
+
+            if($group1 != '0'){
+                $list->where('members.groupId','=',1)
+                ->where(function ($query) use($group1,$group2,$group3){
+                    $query->whereIn('members.seniorGroupId',[$group1,$group2,$group3]);
+                });
+            }else{
+                $list->where('members.groupId','=',1);
+            }
+
+            if($status1 != '0'){
+                $list->where('members.groupId','=',1)
+                ->where(function ($query) use($status1,$status2,$status3){
+                    $query->whereIn('member_details.statusId',[$status1,$status2,$status3]);
+                });
+            }else{
+                $list->where('members.groupId','=',1);
+            }
+
+            $member2= $list->orderBy('member_details.updated_at','ASC')->get();
+    // dd($member2, $name, $a);
+
+            //preview รหัสที่คลิก
+            $member=Member::where('id','=',$id)->first();
+
+            return view('backend.preview.snPreview', compact('member','member2','liststatus','name','group1','group2','group3','status1','status2','status3'));
+
+        } else {
+            return redirect('/backend/home');
         }
     }
 
-    public function snPreview($id)
+    public function ngoPreview($id,$name,$group1,$group2,$group3,$status1,$status2,$status3,$section1,$section2,$section3,$pro1,$pro2,$pro3)
+    {
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $liststatus=Statuses::get();
+            // $member2=Member::where('groupId',3)
+            // ->where('status_accept','=',1)
+            // ->orderBy('id')->get();
+
+            $a=json_decode(Auth::guard('admin')->user()->sectionControl);
+
+            // if(!empty($a)) {
+            if(true) {
+
+                $list=Member::leftJoin('member_details','member_details.memberId','=','members.id');
+                $list->leftJoin('statuses','member_details.statusId','=','statuses.id');
+                $list->leftJoin('province','members.provinceId','=','province.provinceId');
+                $list->leftJoin('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
+                $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+                $list->leftJoin('ngo_sections','members.provinceId','=','ngo_sections.provinceId');
+                $list->select('ngo_sections.section','members.ngoGroupId','members.status_accept','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','province.provinceId','province.province','ngo_groups.groupName','users.username', 'users.sectionControl', 'member_details.updateStatusTime');
+
+                // $list->where('members.status_accept',1);
+                $list->where('members.confirmed_at', '!=', null)
+                // $list->where('member_details.docId','!=',null)
+                ->where(function ($query) {
+                    $query->where('members.deleted_at','=',null)
+                    ->where('member_details.deleted_at','=',null);
+                });
+                // $list->where('members.groupId',3);
+
+                if($name != '0'){
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query) use($name) {
+                        $query->where('members.firstname','like','%'.$name.'%')
+                            ->orWhere('members.lastname','like','%'.$name.'%')
+                            ->orWhere('member_details.docId','like','%'.$name.'%');
+                    });
+                }else{
+                    $list->where('members.groupId',3);
+                }
+
+                if($group1 != '0'){
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query) use($group1,$group2,$group3){
+                        $query->whereIn('members.ngoGroupId',[$group1,$group2,$group3]);
+                    });
+                }else{
+                    $list->where('members.groupId','=',3);
+                }
+
+                if($status1 != '0'){
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query) use($status1,$status2,$status3){
+                        $query->whereIn('member_details.statusId',[$status1,$status2,$status3]);
+                    });
+                }else{
+                    $list->where('members.groupId','=',3);
+                }
+
+                if($section1 != '0'){
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query) use($section1,$section2,$section3){
+                        $query->whereIn('ngo_sections.section',[$section1,$section2,$section3]);
+                    });
+                }else{
+                    $list->where('members.groupId','=',3);
+                }
+
+                if($pro1 != '0'){
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query) use($pro1,$pro2,$pro3){
+                        $query->whereIn('members.provinceId',[$pro1,$pro2,$pro3]);
+                    });
+                }else{
+                    $list->where('members.groupId','=',3);
+                }
+
+                $member2= $list->orderBy('member_details.updated_at','ASC')->get();
+            }else{
+                $member2="";
+            }
+
+            $member=Member::where('id',$id)->first();
+
+            return view('backend.preview.ngoPreview', compact('member','member2','liststatus','name','group1','group2','group3','status1','status2','status3','section1','section2','section3','pro1','pro2','pro3'));
+
+        } else {
+            return redirect('/backend/home');
+        }
+    }
+
+    public function orPreview($id)
     {
         $liststatus=Statuses::get();
-        $member2=Member::where('groupId',1)->orderBy('id')->get();
+        $member2=Member::where('groupId',2)->where('status_accept','=','1')->where('candidateStatus',1)->orderBy('id')->get();
         $member=Member::where('id',$id)->first();
-        return view('/backend/preview/snPreview', compact('member','member2','liststatus'));
+        return view('backend.preview.orPreview', compact('member','member2','liststatus'));
     }
+
+    public function memPreview($id)
+    {
+        $liststatus=Statuses::get();
+        $member2=Member::where('groupId',2)->where('status_accept','=','1')->where('candidateStatus',2)->orderBy('id')->get();
+        $member=Member::where('id',$id)->first();
+        return view('backend.preview.memPreview', compact('member','member2','liststatus'));
+    }
+
+    public function snPreviewV($id)
+    {
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $liststatus=Statuses::get();
+            $member2=Member::where('groupId',1)
+            ->where('members.confirmed_at', '=', null)
+            ->orWhere('status_accept','!=','1')
+            // ->whereHas('detail', function ($query1){
+            //     $query1->where('statusId','<>',0);
+            // })
+            ->orderBy('id')->get();
+            $member=Member::where('id',$id)->first();
+
+            // dd($member2);
+            return view('backend.preview.snPreviewV', compact('member','member2','liststatus'));
+        } else {
+            return redirect('/backend/home');
+        }
+    }
+
+    public function ngoPreviewV($id)
+    {
+        if (Auth::guard('admin')->user()->can('check_evidence_professional')) {
+            $liststatus=Statuses::get();
+            $member2=Member::where('groupId',3)
+            ->where('members.confirmed_at', '=', null)
+            ->orWhere('status_accept','!=','1')
+            // ->where('status_accept','=','1')
+            // ->whereHas('detail', function ($query1){
+            //     $query1->whereIn('statusId',[1,2,3,4]);
+            // })
+            ->orderBy('id')->get();
+            $member=Member::where('id',$id)->first();
+
+            return view('backend.preview.ngoPreviewV', compact('member','member2','liststatus'));
+        } else {
+            return redirect('/backend/home');
+        }
+    }
+
+    public function orPreviewV($id)
+    {
+        $liststatus=Statuses::get();
+        $member2=Member::where('groupId',2)->where('status_accept','=','1')->where('candidateStatus',1)->orderBy('id')->get();
+        $member=Member::where('id',$id)->first();
+        return view('backend.preview.orPreviewV', compact('member','member2','liststatus'));
+    }
+
+    public function memPreviewV($id)
+    {
+        $liststatus=Statuses::get();
+        $member2=Member::where('groupId',2)->where('status_accept','=','1')->where('candidateStatus',2)->orderBy('id')->get();
+        $member=Member::where('id',$id)->first();
+        return view('backend.preview.memPreviewV', compact('member','member2','liststatus'));
+    }
+
 }

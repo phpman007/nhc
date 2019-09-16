@@ -26,7 +26,15 @@ class CreatePdfFile
      */
     public function handle(FinishRegister $event)
     {
-             return $pdf = PDF::loadView('pdf.finishRegister', ['member' => $event->member]);
+            if($event->form == 1) {
+                  $view = 'pdf2';
+            } elseif($event->form == 3) {
+                  $view = 'pdf5';
+            }
+            else {
+               $view = 'pdf4';
+            }
+             return $pdf = PDF::loadView('pdf.'.$view , ['member' => $event->member]);
              return $pdf->save('document/testpdf.pdf');
     }
 }

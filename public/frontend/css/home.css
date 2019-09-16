@@ -199,6 +199,19 @@ img.icon-filetype{
 .home-vdo2f{
   margin-bottom: 30px;
 }
+.content-vdo2f{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.content-vdo2f iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
 /* end content-vdo */
 .content-vdo2f,.box-banner-text{
   height: 310px;
@@ -408,7 +421,7 @@ img.icon-filetype{
   bottom: -1px;
 }
 .box-time-countdown h5{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .box-vdo2f  .plyr--video.plyr--stopped .plyr__controls,
 .content-vdo2f .plyr__play-large svg{
@@ -466,7 +479,7 @@ img.icon-filetype{
   text-align: center;
 }
 .smalltext{
-	padding-top: 15px;
+	padding-top: 10px;
 	font-size: 25px;
 }
 .control-countdown2f .container{
@@ -588,6 +601,7 @@ img.icon-filetype{
   .paging2f .slick-dots li button {width: 20px;height: 4px;    top: 6px;}
   .paging2f .slick-dots li{ margin-right: 10px;}
   .paging2f .slick-dots li.slick-active button{ width: 15px; height: 15px}
+  .box-maincountdown2f{ height: auto;}
 }
 @media (max-width: 480px){
   .box-polygon { height: 30px;}

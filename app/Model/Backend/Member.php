@@ -4,38 +4,54 @@ namespace App\Model\Backend;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+use Illuminate\Database\Eloquent\SoftDeletes;
+class member extends Model
 {
+	use SoftDeletes;
     protected $table='members';
 
-    public function memberDetails()
-    {
-        return $this->hasOne(memberDetails::class, 'id', 'memberId');
+    public function attach() {
+		return $this->hasMany(Attachment::class, 'member_id','id');
+	}
+
+	public function detail() {
+		return $this->hasOne(MemberDetail::class, 'memberId','id');
+	}
+
+	public function groupSN() {
+		return $this->belongsTo(GroupSN::class, 'seniorGroupId','id');
+	}
+
+	public function groupOR() {
+		return $this->belongsTo(GroupOR::class, 'organizationGroupId','id');
+	}
+
+	public function groupNGO() {
+		return $this->belongsTo(GroupNGO::class, 'ngoGroupId','id');
     }
 
-    // public function groups()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\group');
+    public function points() {
+        return $this->hasOne(electionPoint::class, 'memberId', 'id');
+    }
+
+    public function voteTo() {
+        return $this->hasMany(electionVote::class, 'id', 'voteTo');
+    }
+
+    public function votes() {
+        return $this->hasMany(electionVote::class, 'memberId', 'id');
+    }
+
+    // public function subdistrict() {
+    //     return $this->belongsTo(Province2::class, 'subDistrictId', 'district_code');
     // }
 
-    // public function seniorGroups()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\seniorGroup');
+    // public function district() {
+    //     return $this->belongsTo(Province2::class, 'districtId', 'amphoe_code');
     // }
 
-    // public function organizationGroups()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\organizationGroup');
-    // }
-
-    // public function ngoGroups()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\ngoGroup');
-    // }
-
-    // public function candidateTypes()
-    // {
-    //     return $this->belongsTo('App\Model\Backend\candidateType');
-    // }
+    public function province() {
+        return $this->belongsTo(Province2::class, 'provinceId', 'province_code');
+    }
 
 }
