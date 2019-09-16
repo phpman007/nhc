@@ -86,115 +86,35 @@
                 <div class="form-group">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                                <label for="txtprovince">จังหวัด : </label>
-                                <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
-                                    {{--  <option value="" selected>จังหวัด ...</option>  --}}
-                                    @foreach ($listprovince as $valprovince)
-                                    <option
-                                        @for($i=0;$i<$countprovince;$i++)
-                                            @if(request()->input('txtprovince')[$i]!=null && request()->input('txtprovince')[$i] == $valprovince->provinceId)
-                                            selected
-                                            @endif
-                                        @endfor
-                                    value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
-                                    @endforeach
-                                </select>
+                            <label for="txtsection">เขต : </label>
+                            <select id="txtsection" name="txtsection[]"  onchange="search(1);" class="js-example-basic-multiple form-control" multiple="multiple">
+                                @foreach($listsection as $valsection)
+                                <option
+                                    @for($i=0;$i<$countsection;$i++)
+                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == $valsection->section)
+                                        selected
+                                        @endif
+                                    @endfor
+                                value={{$valsection->section}}>เขต{{$valsection->section}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="txtsection">เขต : </label>
-                            <select id="txtsection" name="txtsection[]" class="js-example-basic-multiple form-control" multiple="multiple">
+                            <label for="txtprovince">จังหวัด : </label>
+                            <select id="txtprovince" class="js-example-basic-multiple form-control" name="txtprovince[]" multiple="multiple">
+                                {{--  <option value="" selected>จังหวัด ...</option>  --}}
+                                @if(!empty($listprovince))
+                                @foreach ($listprovince as $valprovince)
                                 <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 1)
+                                    @for($i=0;$i<$countprovince;$i++)
+                                        @if(request()->input('txtprovince')[$i]!=null && request()->input('txtprovince')[$i] == $valprovince->provinceId)
                                         selected
                                         @endif
                                     @endfor
-                                value="1">เขต 1</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 2)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="2">เขต 2</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 3)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="3">เขต 3</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 4)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="4">เขต 4</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 5)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="5">เขต 5</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 6)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="6">เขต 6</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 7)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="7">เขต 7</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 8)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="8">เขต 8</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 9)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="9">เขต 9</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 10)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="10">เขต 10</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 11)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="11">เขต 11</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 12)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="12">เขต 12</option>
-                                <option
-                                    @for($i=0;$i<$countsection;$i++)
-                                        @if(request()->input('txtsection')[$i]!=null && request()->input('txtsection')[$i] == 13)
-                                        selected
-                                        @endif
-                                    @endfor
-                                value="13">เขต 13</option>
+                                value={{$valprovince->provinceId}}>{{$valprovince->province}}</option>
+                                @endforeach
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -505,6 +425,16 @@
 
 @section('js')
 <script>
+    function search(bt){
+        //alert ('AAAA');
+        if(bt==1){
+            document.getElementById('txtprovince').value="";
+            document.getElementById('frmsearchngocheck').submit();
+        }else{
+            document.getElementById('frmsearchngocheck').submit();
+        }
+    }
+
     $(function(){
         $('.js-example-basic-multiple').select2({
         maximumSelectionLength: 3

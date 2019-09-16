@@ -6,7 +6,7 @@
   <div class="navication2f">
       <div class="container">
         <ol class="breadcrumb">
-            <li><a href="">หน้าหลัก</a></li>
+            <li><a href="/">หน้าหลัก</a></li>
             <!-- <li><a href="">ข่าวงานสรรหาคณะกรรมการ</a></li> -->
             <li class="active">ติดต่อเรา</li>
         </ol>

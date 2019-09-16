@@ -17,7 +17,6 @@
                                 <th class="text-center">กลุ่มย่อย</th>
                             </tr>
                             @foreach ($listgroup as $key=>$valgroup)
-
                                 <tr>
                                     <td align="middle">
                                         @if (!empty($_GET['page']))
@@ -28,7 +27,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="/backend/RT/snRTAll/{{$valgroup->id}}">{{$valgroup->groupName}}</a>
+                                        <a href="/backend/RT/snRTAll/{{$valgroup->seniorGroupId}}">{{$valgroup->groupName}}</a>
                                     </td>
                                 </tr>
                             @endforeach

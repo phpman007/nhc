@@ -207,12 +207,11 @@
                 </p>
                 <br>
                 <div class="text-right">
-                        @if(!empty($member->created_at))
-                            วันที่ {{ $member->created_at->addYears('543')->format('d') }} เดือน {{ Helper::monthThai( @ $member->created_at->addYears('543')->format('m')) }} พ.ศ.{{ $member->created_at->addYears('543')->format('Y') }}
+                        @if(!empty($member->confirmed_at))
+                            วันที่ {{ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('d') }} เดือน {{ Helper::monthThai( @ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('m')) }} พ.ศ.{{ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('Y') }}
                         @else
                             วันที่ ........ เดือน ................. ปี ............
                         @endif
-
                 </div>
                 <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้าพเจ้า <div class="box-input" style="width:600px;">{{ $member->nameTitle }} {{ $member->firstname }} {{ $member->lastname }}</div> <br>
@@ -268,7 +267,7 @@
                         {{-- {{ Helper::dateToThai($member->detail->ngoStartDate) }} --}}
                         {{-- {{date('d', strtotime($member->detail->ngoStartDate))}} เดือน {{date('m', strtotime($member->detail->ngoStartDate))}} ปี {{date('Y', strtotime($member->detail->ngoStartDate))}} --}}
 
-                        {{ Helper::dateMonthThai(Helper::dateToThai($member->detail->ngoStartDate)) }}
+                        {{ Helper::dateToThai(Carbon\Carbon::parse($member->detail->ngoStartDate)) }}
                     </div>
 
                     <strong style="padding-left:15px;">จำนวนสมาชิกในปัจจุบัน <div class="box-input" style="width:100px;"> {{ number_format($member->detail->ngoQtyMember) }}</div> คน</strong>
@@ -737,7 +736,11 @@
                 พ.ศ. 2562
             </p><br>
             <div class="text-right">
-                วันที่ {{ $member->created_at->format('d') }} เดือน {{ Helper::monthThai( @ $member->created_at->addYears('543')->format('m')) }} พ.ศ.{{ $member->created_at->addYears(543)->format('Y') }}
+                @if(!empty($member->confirmed_at))
+                    วันที่ {{ Carbon\Carbon::parse($member->confirmed_at)->format('d') }} เดือน {{ Helper::monthThai( @ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('m')) }} พ.ศ.{{ Carbon\Carbon::parse($member->confirmed_at)->addYears(543)->format('Y') }}
+                @else
+                    วันที่ ........ เดือน ................. ปี ............
+                @endif
             </div>
 
             <br>
@@ -1173,7 +1176,7 @@
             <div class="form-group">
                 <a data-toggle="modal" id="gotomodal" href="#m-editstatus" style="display: none;"> test </a>
             @if(!empty($member->detail))
-            @if ($member->detail->fixStatus != 1 and $member->status_accept == 1)
+            @if ($member->confirmed_at != null and $member->detail->fixStatus != 1)
                 <form id="frmstatuschange" method="GET" action="{{url('backend/check/editstatusNGO')}}">
                     {{ csrf_field() }}
                     {{-- <select data-default="{{$member->detail->statusId}}" name="txtstatuschange[]" class="form-control bg-warning" style="font-size: 15pt; height:1cm;" onchange="editstatus(0,this);" @if($member->detail->fixStatus==1) disabled="disabled" @endif>
@@ -1230,7 +1233,7 @@
 
             @elseif($member->detail->fixStatus == 1)
                 <div class="text-center">** ข้อมูลได้รับการอนุมัติแล้วไม่สามารถแก้ไขได้ **</div>
-            @elseif($member->status_accept != 1)
+            @elseif($member->confirmed_at != null and $member->detail->fixStatus != 1)
                 <div class="text-center">** ยังไม่ยืนยันการสมัคร **</div>
             @endif
             @endif

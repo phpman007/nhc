@@ -149,8 +149,11 @@
             พ.ศ. 2562
         </p><br>
         <div class="text-right">
-        วันที่ {{ $member->created_at->format('d') }} เดือน {{ Helper::monthThai($member->created_at->format('m')) }} พ.ศ.{{ $member->created_at->addYears(543)->format('Y') }}
-
+                @if(!empty($member->confirmed_at))
+                    วันที่ {{ Carbon\Carbon::parse($member->confirmed_at)->format('d') }} เดือน {{ Helper::monthThai(Carbon\Carbon::parse($member->confirmed_at)->format('m')) }} พ.ศ.{{ Carbon\Carbon::parse($member->confirmed_at)->addYears(543)->format('Y') }}
+                @else
+                    วันที่ ........ เดือน ................. ปี ............
+                @endif
         </div>
         <br>
         <div>
@@ -310,7 +313,7 @@
                             &nbsp;ตรอก/ซอย<div class="box-input" style="width:275px;">{{ @ $member->detail->soi }}</div>
                             <br>
                             &nbsp;ถนน<div class="box-input" style="width:350px;">{{ @ $member->detail->street }}</div>
-                            &nbsp;ตำบล/แขวง<div class="box-input" style="width:350px;">{{ @ $memberdetail->detail->province->district }}</div>
+                            &nbsp;ตำบล/แขวง<div class="box-input" style="width:350px;">{{ @ $member->detail->province->district }}</div>
                             <br>
                             &nbsp;อำเภอ/เขต<div class="box-input" style="width:250px;">{{ @$member->detail->province->amphoe }}</div>
                             &nbsp;จังหวัด<div class="box-input" style="width:250px;">{{ @ $member->detail->province->province }}</div>

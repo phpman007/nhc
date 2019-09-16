@@ -25,51 +25,25 @@
             {{ csrf_field() }}
                 <div class="form-row">
                     <div class="form-group col-md-6">
-
                         <label for="txtsection">เขต : </label>
                         <select id="txtsection" class="form-control" name="txtsection" onchange="search(1);">
-                            <option @if(request()->input('txtsection')==null)
+                            <option
+                                @if(request()->input('txtsection')==null)
+                                selected
+                                @endif
+                                value="" >
+                                เลือกเขต
+                            </option>
+                            @if(!empty($listsection))
+                                @foreach ($listsection as $valsection)
+                                <option
+                                    @if(request()->input('txtsection')!=null && request()->input('txtsection') == $valsection->section)
                                     selected
-                                    @endif value="">เลือกเขต</option>
-                            <option @if(request()->input('txtsection')==1)
-                                    selected
-                                    @endif value="1">เขต1</option>
-                            <option @if(request()->input('txtsection')==2)
-                                    selected
-                                    @endif value="2">เขต2</option>
-                            <option @if(request()->input('txtsection')==3)
-                                    selected
-                                    @endif value="3">เขต3</option>
-                            <option @if(request()->input('txtsection')==4)
-                                    selected
-                                    @endif value="4">เขต4</option>
-                            <option @if(request()->input('txtsection')==5)
-                                    selected
-                                    @endif value="5">เขต5</option>
-                            <option @if(request()->input('txtsection')==6)
-                                    selected
-                                    @endif value="6">เขต6</option>
-                            <option @if(request()->input('txtsection')==7)
-                                    selected
-                                    @endif value="7">เขต7</option>
-                            <option @if(request()->input('txtsection')==8)
-                                    selected
-                                    @endif value="8">เขต8</option>
-                            <option @if(request()->input('txtsection')==9)
-                                    selected
-                                    @endif value="9">เขต9</option>
-                            <option @if(request()->input('txtsection')==10)
-                                    selected
-                                    @endif value="10">เขต10</option>
-                            <option @if(request()->input('txtsection')==11)
-                                    selected
-                                    @endif value="11">เขต11</option>
-                            <option  @if(request()->input('txtsection')==12)
-                                    selected
-                                    @endif value="12">เขต12</option>
-                            <option @if(request()->input('txtsection')==13)
-                                    selected
-                                    @endif value="13">เขต13</option>
+                                    @endif
+                                    value={{$valsection->section}}> เขต{{$valsection->section}}
+                                </option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
 
@@ -84,14 +58,14 @@
                                 เลือกจังหวัด
                             </option>
                             @if(!empty($listprovince))
-                            @foreach ($listprovince as $valprovince)
-                            <option
+                                @foreach ($listprovince as $valprovince)
+                                <option
                                     @if(request()->input('txtprovince')!=null && request()->input('txtprovince') == $valprovince->provinceId)
                                     selected
                                     @endif
                                     value={{$valprovince->provinceId}}> {{$valprovince->province}}
-                            </option>
-                            @endforeach
+                                </option>
+                                @endforeach
                             @endif
                         </select>
                     </div>

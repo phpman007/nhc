@@ -74,7 +74,11 @@
             พ.ศ. ๒๕๖๒
       </p>
       <div class="text-right">
-      วันที่ {{ $member->created_at->format('d') }} เดือน {{ $member->created_at->format('m') }} พ.ศ.{{ $member->created_at->addYears(543)->format('Y') }}
+            @if(!empty($member->confirmed_at))
+                วันที่ {{ Carbon\Carbon::parse($member->confirmed_at)->format('d') }} เดือน {{ Helper::monthThai(Carbon\Carbon::parse($member->confirmed_at)->format('m')) }} พ.ศ.{{ Carbon\Carbon::parse($member->confirmed_at)->addYears(543)->format('Y') }}
+            @else
+                วันที่ ........ เดือน ................. ปี ............
+            @endif
       </div>
 
       <div>

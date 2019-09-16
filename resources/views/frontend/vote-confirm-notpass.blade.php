@@ -1,6 +1,11 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+	.btn {
+		font-size: 28px;
+	}
+</style>
 <div id="wrapper2f">
 	<div class="insitepage2f">
 		<div class="insite-banner2f">
@@ -29,12 +34,12 @@
 									<br>
 									<br>
 									<p class="text-center">
-										ท่านไม่ผ่านคุณสมบัติ ไม่สามารถยืนยันการใช้สิทธิ
+										ท่านไม่สามารถยืนยันการใช้สิทธิ์ได้ เนื่องจากท่านไม่ผ่านคุณสมบัติการเลือกกันเองเป็นกรรมการสุขภาพแห่งชาติ
 										<br>
 										<br>
                                         <br>
                                             <div class="form-group">
-                                                <a style="width:100%" href="{{ url('/') }}" class="btn btn-info">กลับไปหน้าแรก</a>
+                                                <a style="width:100%" href="{{ url('/') }}" class="btn btn-primary">กลับไปหน้าแรก</a>
                                             </div>
 									</p>
 								</div>

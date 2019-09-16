@@ -10,9 +10,11 @@
 |
 */
 Route::get('flip/test', function() {
-	dd(1);
+	return view('flipbook.flip_test_1');
 });
-
+Route::get('no-vote', function() {
+	return redirect('/')->with('info', 'ท่านได้เลือกลงคะแนนไม่ประสงค์ลงคะแนนเรียบร้อยแล้ว');
+});
 Route::get('/gen-word/{id}', function($id) {
 	// dd(1);
 	// return view('wordHtml.c1');

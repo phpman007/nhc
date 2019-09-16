@@ -138,7 +138,8 @@ class CheckSNController extends Controller
 
             $list1=$list->get();
 
-            $listmember= $list->orderBy('member_details.updated_at','ASC')->paginate(10)->appends($input);
+            $list->orderBy('members.firstname', 'ASC');
+            $listmember= $list->paginate(10)->appends($input);
 
             $countmember1=$list1->where('seniorGroupId',1)->count();
             $countmember2=$list1->where('seniorGroupId',2)->count();
@@ -210,18 +211,18 @@ class CheckSNController extends Controller
                 $countstatus=0;
             }
 
-            $list1=$list->get();
+            // $list1=$list->get();
+            $list->orderBy('members.firstname', 'ASC');
+            $listmember= $list->get();
 
-            $listmember= $list->orderBy('member_details.updated_at','ASC')->get();
+            // $countmember1=$list1->where('seniorGroupId',1)->count();
+            // $countmember2=$list1->where('seniorGroupId',2)->count();
+            // $countmember3=$list1->where('seniorGroupId',3)->count();
+            // $countmember4=$list1->where('seniorGroupId',4)->count();
+            // $countmember5=$list1->where('seniorGroupId',5)->count();
+            // $countmember6=$list1->where('seniorGroupId',6)->count();
 
-            $countmember1=$list1->where('seniorGroupId',1)->count();
-            $countmember2=$list1->where('seniorGroupId',2)->count();
-            $countmember3=$list1->where('seniorGroupId',3)->count();
-            $countmember4=$list1->where('seniorGroupId',4)->count();
-            $countmember5=$list1->where('seniorGroupId',5)->count();
-            $countmember6=$list1->where('seniorGroupId',6)->count();
-
-            return view('backend.check.snCheckExcel',compact('listmember','countmember1', 'countmember2', 'countmember3', 'countmember4', 'countmember5', 'countmember6'));
+            return view('backend.check.snCheckExcel',compact('listmember'));
         } else {
             return redirect('/backend/home');
         }

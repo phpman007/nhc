@@ -126,9 +126,9 @@
       				<tr>
       					<td width="100%">
       						<div style="text-align: left;padding-left:400px">
-      							<strong>วัน <span style="border-bottom:1px dotted #000000;width: 30px;"> {{ now()->addYears('543')->format('d') }}</span></strong>
-      							<strong>เดือน <span style="border-bottom:1px dotted #000000;width: 120px;"> {{ Helper::monthThai(now()->addYears('543')->format('m')) }}</span></strong>
-      							<strong>พ.ศ. <span style="border-bottom:1px dotted #000000;width: 70px;"> {{ now()->addYears('543')->format('Y') }}</span></strong>
+								<strong>วัน <span style="border-bottom:1px dotted #006600;width: 30px;"> {{ \Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('d') }}</span></strong>
+      							<strong>เดือน <span style="border-bottom:1px dotted #006600;width: 120px;"> {{ Helper::monthThai(\Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('m')) }}</span></strong>
+      							<strong>พ.ศ. <span style="border-bottom:1px dotted #006600;width: 70px;"> {{ \Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('Y') }}</span></strong>
       						</div>
       					</td>
       				</tr>

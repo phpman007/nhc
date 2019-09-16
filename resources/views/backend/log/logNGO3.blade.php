@@ -107,6 +107,9 @@
                                     @elseif($vallog->action == "NGO4")
                                         <td align="middle">ขั้นตอนที่ 4</td>
                                         <td align="middle">สมัครขั้นตอนที่ 4</td>
+                                    @elseif($vallog->action == "NGO5")
+                                        <td align="middle">ขั้นตอนที่ 5</td>
+                                        <td align="middle">สมัครขั้นตอนที่ 5</td>
                                     @elseif($vallog->action == "NGOcomplete")
                                         <td align="middle">หน้าส่งใบสมัคร</td>
                                         <td align="middle">สมัครเสร็จสิ้น</td>
@@ -116,6 +119,7 @@
                                     @elseif($vallog->action == "logout")
                                         <td align="middle">หน้าออกจากระบบ</td>
                                         <td align="middle">ออกจากระบบ</td>
+
                                     @endif
 
                                     <td align="middle">{{$vallog->dt}}</td>

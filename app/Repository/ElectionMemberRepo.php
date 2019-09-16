@@ -36,7 +36,6 @@ class ElectionMemberRepo implements ElectionMemberInterface
                 $field = 'seniorGroupId';
                 break;
             }
-
         return Member::where('groupId', $member->groupId)
         ->where('status_accept', 1)
         ->where($field, $member->{$field})

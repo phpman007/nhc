@@ -14,7 +14,7 @@ class FormNgoRegisterController extends Controller
 	protected $view = 'form-ngo-register';
 
 	public function formView($step) {
-		if(now() >= "2019-09-13 16:30:00") {
+		if(now() >= "2019-09-17 16:30:00") {
      			return redirect('/')->with('info','<span style="font-size:35px">ขณะนี้สิ้นสุดเวลารับสมัครการเป็นกรรมการสุขภาพแห่งชาติ ตามประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติฯ แล้ว</span>');
      		}
 		if(Auth::check()) {
@@ -43,7 +43,7 @@ class FormNgoRegisterController extends Controller
 	}
 
 	public function formPost($step, Request $request) {
-		if(now() >= "2019-09-13 16:30:00") {
+		if(now() >= "2019-09-17 16:30:00") {
 			return redirect('/')->with('info','<span style="font-size:35px">ขณะนี้สิ้นสุดเวลารับสมัครการเป็นกรรมการสุขภาพแห่งชาติ ตามประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติฯ แล้ว</span>');
 		}
 		switch ($step) {
@@ -395,63 +395,6 @@ class FormNgoRegisterController extends Controller
 				$numberIs = $number->number+1;
 				DB::table('number_file')->where('id', $number->id)->update(['number'=>$numberIs]);
 			}
-
-			if(Auth::user()->detail->legalStastus == 1) {
-				$file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
-				if(empty($file1) ){
-					$rule['file1'] = 'กรุณาอัพโหลดข้อมูล : สำเนาหนังสือสำคัญที่แสดงความเป็นนิติบุคคล';
-				}
-
-				$file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
-				if(empty($file2) ){
-					$rule['file2'] = 'กรุณาอัพโหลดข้อมูล : สำเนาหลักฐานซึ่งแสดงถึงการดำเนินกิจกรรมในพื้นที่จังหวัดนั้นตามกลุ่มองค์กรที่ขอขึ้นทะเบียน มาแล้วไม่เกิน 3 ปี นับถึงวันที่สมัคร จำนวน 2 กิจกรรมขึ้นไป เช่น โครงการ รายงานการดำเนินโครงการ รูปถ่ายกิจกรรมโดยระบุสถานที่จัดกิจกรรม เป็นต้น';
-				}
-
-				$file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
-				if(empty($file3) ){
-					$rule['file3'] = 'กรุณาอัพโหลดข้อมูล : สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร';
-				}
-
-				$file4 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
-				if(empty($file4) ){
-					$rule['file4'] = 'กรุณาอัพโหลดข้อมูล : สำเนาคำสั่งแต่งตั้งประธานองค์กรหรือรายงานการประชุมที่ระบุชื่อและตำแหน่งประธานองค์กร';
-				}
-
-				$file5 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
-				if(empty($file5) ){
-					$rule['file5'] = 'กรุณาอัพโหลดข้อมูล : สำเนาบัตรประจำตัวประชาชนของประธานองค์กร';
-				}
-			} else {
-				$file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_history_copy')->first();
-				if(empty($file1) ){
-					$rule['file1'] = 'กรุณาอัพโหลดข้อมูล : สำเนาหลักฐานที่แสดงถึงวัตถุประสงค์การก่อตั้งองค์กร';
-				}
-
-				$file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'company_verify_year')->first();
-				if(empty($file2) ){
-					$rule['file2'] = 'กรุณาอัพโหลดข้อมูล : สำเนาหลักฐานซึ่งแสดงถึงกิจกรรมการดำเนินงานที่เกี่ยวข้องกับสุขภาพในกลุ่มที่ขอขึ้นทะเบียนในพื้นที่จังหวัด 2 กิจกรรมที่สำคัญในระยะเวลาไม่เกิน 3 ปีนับถึงวันที่สมัคร(กิจกรรมในระหว่างเดือนสิงหาคม 2559 - ปัจจุบัน) เช่น โครงการ รายงานการดำเนินโครงการ รูปถ่ายกิจกรรม โดยระบุสถานที่จัดกิจกรรม เป็นต้น';
-				}
-
-				$file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_copy')->first();
-				if(empty($file3) ){
-					$rule['file3'] = 'กรุณาอัพโหลดข้อมูล : สำเนาหนังสือที่แสดงว่าผู้ลงลายมือชื่อในแบบขอขึ้นทะเบียนองค์กรภาคเอกชนเป็นประธาน องค์กร หรือรายงานประชุมที่ระบุชื่อและตำแหน่งประธานองค์กร';
-				}
-
-				$file4 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_copy')->first();
-				if(empty($file4) ){
-					$rule['file4'] = 'กรุณาอัพโหลดข้อมูล : สำเนาบัตรประจำตัวประชาชนของประธานองค์กร';
-				}
-
-				$file5 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document_verify_has_company_copy')->first();
-				if(empty($file5) ){
-					$rule['file5'] = 'กรุณาอัพโหลดข้อมูล : หนังสือรับรองความมีอยู่และการดำเนินกิจกรรมขององค์กรภาคเอกชนที่ไม่เป็นนิติบุคคล';
-				}
-			}
-
-			if(!empty($rule))
-               {
-                    return redirect('form-ngo-register/4')->withErrors($rule);
-               }
 
 			$filename_gen = sprintf('nhc-ngoREP-%03d%02d',Auth::user()->id, now()->format('d'));
 

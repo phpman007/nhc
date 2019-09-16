@@ -68,7 +68,23 @@
                             </div>
                         </div><!--end row-->
                     </div><!--end box-input2f-->
-
+			  @if ( Carbon\Carbon::parse(config('time.vote.start_date'))  <= now() && Carbon\Carbon::parse(config('time.vote.end_date')) >= now() )
+			  <div class="box-input2f">
+				<div class="row">
+				    <div class="col-md-3 col-sm-4 nopaddingright">
+					  <div class="text-input2f t-right2f">รหัสเลือกตั้ง</div>
+				    </div>
+				    <div class="col-md-6 col-sm-8">
+					  <div class="input2f">
+						  {!! Form::text('verify_register_code', null, ["class"=>"form-control", "placeholder"=>"รหัสเลือกตั้ง"]) !!}
+						  @if($errors->has('verify_register_code'))
+						  <small>{{ $errors->first('verify_register_code') }}</small>
+						  @endif
+					  </div>
+				    </div>
+				</div><!--end row-->
+			  </div><!--end box-input2f-->
+			  @endif
                     <div class="box-input2f">
                         <div class="row">
                             <div class="col-md-3 col-sm-4 nopaddingright"></div>
@@ -82,7 +98,7 @@
                                        </div>
                                        <div class="col-xs-6">
                                            <div class=" t-right2f t-forgetpass2f">
-                                             <a href="{{ url('delete/member') }}">ยกเลิกaccount</a>
+                                             <a href="{{ url('delete/member') }}">ยกเลิก Account</a>
                                            </div>
                                        </div>
                                    </div><!--end row-->
@@ -96,7 +112,8 @@
                       <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-8">
-                          <button type="submit" name="button" class="btn btn-green">เข้าสู่ระบบ</button>
+                          <button type="submit" name="button" class="btn btn-green">เข้าสู่ระบบ</button><br>
+				 <span>หากมีปัญหาเกี่ยวกับการสมัคร โทร 0814576165</span>
                         </div>
                       </div>
 

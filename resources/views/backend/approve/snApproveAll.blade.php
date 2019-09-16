@@ -35,27 +35,24 @@
             </div>
         @endif
             @php  $idgroup=request()->idgroup; @endphp
-        <form id="frmsearchsnapproveall" method="GET" action="{{url('backend/approveAll/snApproveSearch/'.$idgroup)}}">
-            {{ csrf_field() }}
-
-
-            <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="txtname">ค้นหาจาก : </label>
-                                <input class="form-control" value="{{request()->input('txtname')}}" name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเผู้สมัคร">
+            <form id="frmsearchsnapproveall" method="GET" action="{{url('backend/approveAll/snApproveSearch/'.$idgroup)}}">
+                {{ csrf_field() }}
+                <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="txtname">ค้นหาจาก : </label>
+                                    <input class="form-control" value="{{request()->input('txtname')}}" name="txtname" id="txtname" placeholder="ค้นหาชื่อ, สกุล หรือรหัสเผู้สมัคร">
+                                </div>
+                            <div class="form-group col-md-12 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
+                                <a href="{{url('backend/approveAll/snApproveSearch/'.$idgroup)}}"><button type="button" class="btn btn-warning">ล้างข้อมูล</button></a>
                             </div>
-                        <div class="form-group col-md-12 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
-                            <a href="{{url('backend/approveAll/snApproveSearch/'.$idgroup)}}"><button type="button" class="btn btn-warning">ล้างข้อมูล</button></a>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </form>
-        <hr>
+            </form>
+            <hr>
         @if($listmember->isEmpty())
             <div class="text-center text-danger"><strong>** ไม่มีข้อมูล **</strong></div>
         @else
@@ -118,7 +115,8 @@
                         @if(count($list4)==count($list2))
                             <div class="text-warning"><strong>** กลุ่มนี้ได้รับการอนุมัติเป็นที่เรียบร้อยแล้ว **</strong></div>
                         @elseif(count($list2) == count($list3))
-                            @if(Auth::guard('admin')->user()->hasRole('super-admin'))
+                            {{-- @if(Auth::guard('admin')->user()->hasRole('super-admin')) --}}
+                            @if (Auth::guard('admin')->user()->can('approve_professional'))
                                 <a href="/backend/approve/editfixstatusSN/{{request()->idgroup}}"><button type="button" style="width:500px" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> ยืนยันการอนุมัติทั้งหมด</button></a>
                             @endif
                         @else

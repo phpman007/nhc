@@ -1,6 +1,11 @@
 @extends('frontend.theme.master')
 
 @section('content')
+<style media="screen">
+	.btn {
+		font-size: 28px;
+	}
+</style>
 <div id="wrapper2f">
 	<div class="insitepage2f">
 		<div class="navication2f">
@@ -47,17 +52,17 @@
                                         @if(Auth::user()->verify_status_confirm != 1)
 
                                             <div class="form-group">
-                                                <a style="width:100%" href="{{ url('vote-confirm/confirm') }}" class="btn btn-info">ยืนยันการใช้สิทธิ์ลงคะแนน</a>
+                                                <a style="width:100%" href="{{ url('vote-confirm/confirm') }}" class="btn btn-primary">ยืนยันการใช้สิทธิ์ลงคะแนน</a>
                                             </div>
 
 										@elseif(Auth::user()->verify_status_confirm == 1)
 
                                             <div class="form-group">
-                                                <a style="width:100%" href="{{ url('vote-confirm/resend') }}" class="btn btn-info">ส่งรหัสการลงคะแนนอีกครั้ง</a>
+                                                <a style="width:100%" href="{{ url('vote-confirm/resend') }}" class="btn btn-primary">ส่งรหัสการลงคะแนนอีกครั้ง</a>
                                             </div>
                                             <br>
                                             <div class="text-center">
-                                                <a style="width:100%" href="{{ url('vote-confirm/flipbook_page') }}" class="btn btn-info">บัญชีรายชื่อผู้สมัคร</a>
+                                                <a style="width:100%" href="{{ url('vote-confirm/flipbook_page') }}" class="btn btn-primary">ข้อมูลการลงคะแนนและบัญชีรายชื่อผู้สมัคร</a>
                                             </div>
 
 										@endif

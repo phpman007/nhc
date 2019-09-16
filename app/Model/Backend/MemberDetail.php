@@ -32,8 +32,6 @@ class memberDetail extends Model
         return $this->belongsTo(Province2::class, 'provinceId', 'province_code');
     }
 
-    public function ngo_section() {
-        return $this->belongsTo(ngoSection::class, 'provinceId', 'provinceId');
-    }
+
 
 }

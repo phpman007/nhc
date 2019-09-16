@@ -144,29 +144,16 @@ Route::group(['prefix' => 'confirm'], function () {
 
 });
 
-// Route::group(['prefix' => 'RT'], function () {
-//     Route::match(['get', 'post'],'/snRT', 'RealtimeSNController@index');
-//     Route::get('/snRTAll/{group_id}', 'RealtimeSNController@snRTAll');
-//     Route::get('/SNconfirmvote/{group_id}', 'RealtimeSNController@comfirmvote');
-//     Route::get('/SNselect/{id}', 'RealtimeSNController@selectvote');
-//     // Route::get('/snRT', function () {return view('backend.RT.snRT');});
-//     Route::get('/orRT', function () {return view('backend.RT.orRT');});
-//     // Route::get('/ngoRT', function () {return view('backend.RT.ngoRT');});
-//     Route::get('/ngoRT', 'RealtimeNGOController@ngoRT');
-//     Route::get('/ngoRT/index', 'RealtimeNGOController@index');
-//     Route::get('/ngoRTAll/{province_id}/{group_id}', 'RealtimeNGOController@ngoAll');
-// });
-
 Route::group(['prefix' => 'RT'], function () {
     Route::get('/snRT', 'RealtimeSNController@index');
     Route::get('/snRTAll/{group_id}', 'RealtimeSNController@snRTAll');
-    Route::get('/SNconfirm/{group_id}', 'RealtimeSNController@comfirmvote');
-    Route::get('/SNselect/{group_id}/{id}', 'RealtimeSNController@selectvote');
+    Route::post('/SNconfirm', 'RealtimeSNController@confirmvote');
+    // Route::get('/SNselect/{group_id}/{id}', 'RealtimeSNController@selectvote');
 
     Route::get('/ngoRT', 'RealtimeNGOController@index');
-    Route::get('/ngoRTAll/{group_id}', 'RealtimeNGOController@ngoRTAll');
-    Route::get('/NGOconfirm/{group_id}', 'RealtimeNGOController@comfirmvote');
-    Route::get('/NGOselect/{group_id}/{id}', 'RealtimeNGOController@selectvote');
+    Route::get('/ngoRTAll/{group_id}/{provinceid}/{sectionid}/{level}', 'RealtimeNGOController@ngoRTAll');
+    Route::post('/NGOconfirm', 'RealtimeNGOController@confirmvote');
+    // Route::get('/NGOselect/{group_id}/{id}', 'RealtimeNGOController@selectvote');
 });
 
 Route::group(['prefix' => 'draw'], function () {
@@ -224,6 +211,7 @@ Route::group(['prefix' => 'menu'], function () {
     Route::post('/update','MenuController@update')->name('menu.update');
     Route::post('/destroy','MenuController@destroy')->name('menu.destroy');
   });
+
 Route::get('home', 'LogController@index'
 
 // function() {
@@ -243,5 +231,10 @@ Route::get('/aaa','MailFrontEndController@index');
 Route::get('/bbb','MailFrontEndController@send3');
 Route::get('/ccc','MailFrontEndController@send1');
 // Route::get('/aaa', function () {return view('backend.mailFrontEnd');});
+
+Route::group(['prefix' => 'ElectionConfirm'], function () {
+    Route::get('/snEConfirm','ElectionConfirmController@snEConfirm');
+    Route::get('/ngoEConfirm','ElectionConfirmController@ngoEConfirm');
+});
 
 ?>

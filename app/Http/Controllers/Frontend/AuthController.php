@@ -20,7 +20,12 @@ class AuthController extends Controller
 			return redirect('vote-confirm');
 		}
 		elseif( Carbon::parse(config('time.vote.start_date'))  <= now() && Carbon::parse(config('time.vote.end_date')) >= now() ) {
-
+			if(Auth::check())
+			{
+				if(empty(Auth::user()->confirmedStatus)) {
+					return redirect('/')->with('info' ,'ยังไม่ผ่านการยืนยันการลงคะแนน');
+				}
+			}
 			return redirect('election');
 			// echo 'vote';
 		}
@@ -40,9 +45,11 @@ class AuthController extends Controller
 		}
 		$member 					= Auth::user();
 		$member->verify_status_confirm 	= 1;
-		$member->verify_register_code		= "nhc". str_random(5);
+		$member->confirmedStatus 	      = 1;
+		$member->confirmed_status_date 	= now()->format("Y-m-d H:i:s");
+		$member->verify_register_code		= "nhc". rand(1000,9999);
 		$member->save();
-
+		 \Mail::to($member->email)->send(new \App\Mail\ConfirmVote());
 		return back()->with('info', 'คุณได้ทำการยืนยันการใช่สิทธิ์ลงคะแนนเรียบร้อยแล้ว');
 	}
 
@@ -54,6 +61,7 @@ class AuthController extends Controller
 		if(!Auth::check()) {
 			return redirect('login');
 		}
+		\Mail::to(Auth::user()->email)->send(new \App\Mail\ConfirmVote());
 		return back()->with('info', 'ระบบได้จัดส่งอีเมลเรียบร้อยแล้ว');
 	}
 
@@ -121,9 +129,13 @@ class AuthController extends Controller
 		$member = Member::where('username', $request->username)->first();
 
 		if($member == null) :
-			return back()->withErrors(['username' =>'ไม่พบข้อมูลผู้ใช้งาน โปรดติดต่อเจ้าหน้าที่']);
+			return back()->withErrors(['username' =>'ไม่พบข้อมูลผู้ใช้งาน โปรดติดต่อเจ้าหน้าที่ หากมีปัญหาเกี่ยวกับการสมัคร โทร 0814576165']);
 		endif;
-
+		if ( Carbon::parse(config('time.vote.start_date'))  <= now() && Carbon::parse(config('time.vote.end_date')) >= now() ) {
+			if($member->verify_register_code != $request->verify_register_code) {
+				return back()->withErrors(['verify_register_code' =>'ไม่ถูกต้อง']);
+			}
+		}
 		if(Hash::check($request->password, $member->password)) :
 			Auth::login($member);
 			switch ($member->groupId)
@@ -177,11 +189,11 @@ class AuthController extends Controller
 			if(now() <= Carbon::parse(config('time.register.date')) && now() >= Carbon::parse('2019-09-04')) {
 				return \Redirect::to($redirect)->with('info', 'เข้าสู่ระบบเรียบร้อยแล้ว');
 			} else {
-				return redirect('vote-schedule');
+				return redirect('/');
 			}
 
 		else:
-			return back()->withErrors(['username'=> 'รหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบแล้วลองใหม่อีก']);
+			return back()->withErrors(['username'=> 'รหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบแล้วลองใหม่อีก หากมีปัญหาเกี่ยวกับการสมัคร โทร 0814576165']);
 		endif;
 	}
 
@@ -220,6 +232,7 @@ class AuthController extends Controller
 		$req->validate(['username'=> 'required' , 'password' => 'required']);
 
 		$member = Member::where('email', $req->username)->first();
+		$senior_groups = \DB::table('senior_groups')->where('status', 1)->get()->pluck('id', 'id')->toArray();
 
 		if(empty($member)) {
 			return back()->withErrors(['username' => 'ไม่พบข้อมูลผู้ใช้งานระบบ หรือรหัสผ่านไม่ถูกต้อง']);
@@ -227,6 +240,13 @@ class AuthController extends Controller
 		if(!Hash::check( $req->password, $member->password)) {
 			return back()->withErrors(['username' => 'ไม่พบข้อมูลผู้ใช้งานระบบ หรือรหัสผ่านไม่ถูกต้อง']);
 
+		}
+		if($member->groupId == 1)
+		{
+			if(!in_array($member->seniorGroupId, $senior_groups)) {
+
+					return back()->withErrors(['username' => 'ไม่สามารถทำรายการได้เนื่องจากอยู่ในกลุ่มที่ไม่ได้เปิดลงทะเบียน']);
+			}
 		}
 
 		$member->delete();
@@ -243,8 +263,9 @@ class AuthController extends Controller
 			return redirect('/')->with('info', 'การยืนยันผิดพลาด หรือมีการยืนยันรหัสไปเรียบร้อยแล้ว');
 		}
 
-		$member->verfiy_register_confirm 	= NULL;
+		$member->verfiy_register_confirm 		= NULL;
 		$member->verify_status_confirm		= 1;
+		$member->confirmedStatus			= 1;
 		$member->verify_register_code 		= str_random(5);
 		$member->save();
 		\Mail::to($member->email)->send(new \App\Mail\emailConfirmLast($member->verify_register_code));

@@ -51,10 +51,10 @@
                     </div><!--end content-listvdo2f-->
 
                      <div class="content-seat2f">
-                        <h3>ทำเนียบผู้สมัคร</h3>
+                        <h3>บัญชีรายชื่อสมัคร</h3>
                         <h5>กรรมการสุขภาพแห่งชาติ</h5>
                         <div class="control-linkseat2f">
-                            <div id="flipbook" >
+                            {{-- <div id="flipbook" >
                                 <div class="hard">  <img src="{{url('plugins/turnjs/pages/0001.jpg')}}" width="400px" height="400px"   class="page-1"> </div>
                                 <div class="hard">  <img src="{{url('plugins/turnjs/pages/0002.jpg')}}" width="400px" height="400px"   class="page-2"></div>
                                 <div>  <img src="{{url('plugins/turnjs/pages/0003.jpg')}}" width="400px" height="400px"   class="page-3"> </div>
@@ -62,13 +62,17 @@
 
                                 <div class="hard"><img src="{{url('plugins/turnjs/pages/0001.jpg')}}" width="400px" height="400px" class="page-5"></div>
                                 <div class="hard"><img src="{{url('plugins/turnjs/pages/0001.jpg')}}" width="400px" height="400px" class="page-6"></div>
-                            </div>
+                            </div> --}}
+
+                        <div class="row">
+                            <a href="http://192.168.200.1/flipbook/pdf_1_test/"><img src="{{ asset('frontend/images/img-seat.svg') }}"></a>
+                        </div>
 
                           <div class="box-link-in">
-                            {{-- <a href="">
+                            <a href="http://192.168.200.1/flipbook/pdf_1_test/">
                               <img src="{{url('frontend/images/icon-plus-white.svg')}}" alt="">
                               <span>ดูทั้งหมด</span>
-                            </a> --}}
+                            </a>
                           </div><!--end box-link-in-->
                         </div>
                      </div><!--end content-seat2f-->

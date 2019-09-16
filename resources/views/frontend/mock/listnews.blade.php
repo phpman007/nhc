@@ -6,9 +6,9 @@
   <div class="navication2f">
       <div class="container">
         <ol class="breadcrumb">
-            <li><a href="">หน้าหลัก</a></li>
+            <li><a href="/">หน้าหลัก</a></li>
             <!-- <li><a href="">ข่าวงานสรรหาคณะกรรมการ</a></li> -->
-            <li class="active">ประกาศคณะกรรมการสรรหา</li>
+            <li class="active">ข่าวเด่น | ข่าวจากสื่อ</li>
         </ol>
       </div>
   </div><!--end navication2f-->
@@ -16,7 +16,7 @@
       <div class="control-bannertext2f">
           <div class="container">
             <div class="headline2f line-brown">
-             <h1>ข่าวจากสื่อ</h1>
+             <h1>ข่าวเด่น / ข่าวจากสื่อ</h1>
             </div>
           </div><!--end container-->
       </div><!--end control-bannertext2f-->

@@ -46,7 +46,7 @@ class Member extends Authenticatable
 	}
 	public function getGroup() {
 		if($this->groupId == 1) {
-			return "ผู้ผู้ทรงคุณวุฒิ";
+			return "ผู้ทรงคุณวุฒิ";
 		} elseif($this->groupId == 2) {
 			return "";
 		} else {
@@ -72,6 +72,11 @@ class Member extends Authenticatable
 	}
 	public function getAvatar()
 	{
-		return $this->attach()->where('use_is', 'personal_photo')->where('status', 1)->first()->path;
+		if($this->groupId == 1) {
+			return $this->attach()->where('use_is', 'personal_photo')->where('status', 1)->first()->path;
+		} else {
+			return $this->attach()->where('use_is', 'personal_photo')->where('status', 1)->first()->path;
+		}
+
 	}
 }

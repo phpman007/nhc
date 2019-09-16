@@ -64,8 +64,8 @@
                 </p>
                 <br>
                 <div class="text-right">
-                        @if(!empty($member->created_at))
-                            วันที่ {{ $member->created_at->addYears('543')->format('d') }} เดือน {{ Helper::monthThai( @ $member->created_at->addYears('543')->format('m')) }} พ.ศ.{{ $member->created_at->addYears('543')->format('Y') }}
+                        @if(!empty($member->confirmed_at))
+                            วันที่ {{ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('d') }} เดือน {{ Helper::monthThai( @ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('m')) }} พ.ศ.{{ Carbon\Carbon::parse($member->confirmed_at)->addYears('543')->format('Y') }}
                         @else
                             วันที่ ........ เดือน ................. ปี ............
                         @endif
@@ -595,7 +595,11 @@
                 พ.ศ. 2562
             </p><br>
             <div class="text-right">
-                วันที่ {{ $member->created_at->format('d') }} เดือน {{ Helper::monthThai( @ $member->created_at->addYears('543')->format('m')) }} พ.ศ.{{ $member->created_at->addYears(543)->format('Y') }}
+                @if (!empty($member->confirmed_at))
+                    วันที่ {{ $member->confirmed_at->format('d') }} เดือน {{ Helper::monthThai( @ $member->confirmed_at->addYears('543')->format('m')) }} พ.ศ.{{ $member->confirmed_at->addYears(543)->format('Y') }}
+                @else
+                    วันที่ ........ เดือน ................. ปี ............
+                @endif
             </div>
 
             <br>
@@ -1040,7 +1044,11 @@
 
 
                 </ul>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="height:30px; width:30px" src="{{ url('backend/img/timesquare.png') }}"> ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ  หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้<br>
+                @if(!empty($member->attach()->where('status',1)->where('use_is','document1')->first()->path))
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="height:30px; width:30px" src="{{ url('backend/img/timesquare.png') }}"> ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ  หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้<br>
+                @else
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="height:30px; width:30px" src="{{ url('backend/img/square.png') }}"> ข้าพเจ้าขอรับรองว่าข้อมูลที่กรอกข้างต้น  และเอกสารที่แนบมาพร้อมใบสมัครเป็นความจริงทุกประการ  หากมีข้อมูลใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง  ข้าพเจ้ายินยอมให้ถูกตัดสิทธิ์จากการเป็นผู้สมัครหรือผู้ถูกเสนอชื่อในครั้งนี้<br>
+                @endif
             </p>
 
             <div class="form-group">

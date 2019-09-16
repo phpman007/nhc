@@ -63,7 +63,7 @@ header("Content-Disposition: attachment; filename=ตรวจสอบหลั
                     @if($countmember2 < 10)
                     <td align="middle">ผู้สมัครไม่ถึง 10 คน</td>
                     @else
-                        {{$valmember->status}}
+                        <td align="middle">{{$valmember->status}}</td>
                     @endif
                 @elseif($valmember->seniorGroupId==3)
                     @if($countmember3 < 10)
@@ -89,6 +89,7 @@ header("Content-Disposition: attachment; filename=ตรวจสอบหลั
                     @else
                         <td align="middle">{{$valmember->status}}</td>
                     @endif
+
                 @endif
 
                 @if(!empty($valmember->confirmed_at))

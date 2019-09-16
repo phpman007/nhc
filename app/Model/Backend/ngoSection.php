@@ -9,7 +9,7 @@ class ngoSection extends Model
 {
     protected $table='ngo_sections';
 
-    public function detail() {
+    public function member() {
 		return $this->hasMany(MemberDetail::class, 'provinceId','provinceId');
     }
 }

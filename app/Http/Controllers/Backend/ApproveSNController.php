@@ -28,7 +28,6 @@ use App\Mail\approveMail;
 use DB;
 use PDF;
 
-
 use Illuminate\Support\Facades\Auth;
 
 class ApproveSNController extends Controller
@@ -341,6 +340,7 @@ class ApproveSNController extends Controller
 
     public function mail($id)
     {
+
         if (Auth::guard('admin')->user()->can('approve_professional')) {
 
             $list=Member::join('member_details','members.id','=','member_details.memberId')
@@ -364,15 +364,17 @@ class ApproveSNController extends Controller
             $list2=GroupSN::where('id','=',$id)
             ->first();
 
-            // dd($list2);
+            // dd($list2,public_path($list2->pdf_complete), \Swift_Attachment::fromPath($list2->pdf_complete));
 
             $subject="แจ้งผลประกาศบัญชีรายชื่อผู้ทรงคุณวุฒิที่มีคุณสมบัติเข้ารับการเลือกกันเองเป็นกรรมการสุขภาพแห่งชาติ";
 
             $groupid=1;
 
+            // dd(public_path($list2->pdf_complete));
+
             foreach($list as $val){
                 if($val->email!=""){
-                    Mail::to($val->email)
+                    Mail::to("2cs.siriluck@gmail.com")
                     ->send(new approveMail($val->nameTitle, $val->firstname, $val->lastname, $val->statusId, $val->groupName, $val->reason, $list2->pdf_complete, $subject, $groupid, 0, 0));
                     // $val->email
                     if(Mail::failures()){
@@ -395,61 +397,60 @@ class ApproveSNController extends Controller
                 }
             }
 
-            Mail::to('julaluckw@gmail.com')
-            ->send(new approveMail("นาง", "จุฬาลักษณ์", "แพร่พาณิชวัฒน์", 1, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์", "ทดสอบ", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
-            if(Mail::failures()){
+            // Mail::to('julaluckw@gmail.com')
+            // ->send(new approveMail("นาง", "จุฬาลักษณ์", "แพร่พาณิชวัฒน์", 3, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์","", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
+            // if(Mail::failures()){
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "julaluckw@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "f";
+            //     Logmail::create($data);
+            // }else{
 
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "julaluckw@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "f";
-                Logmail::create($data);
-            }else{
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "julaluckw@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "s";
+            //     Logmail::create($data);
+            // }
 
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "julaluckw@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "s";
-                Logmail::create($data);
-            }
+            // Mail::to('Vasit.srithimakul@gmail.com')
+            // ->send(new approveMail("Mr.", "Vasit", "Srithimakul", 3, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์","", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
+            // if(Mail::failures()){
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "Vasit.srithimakul@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "f";
+            //     Logmail::create($data);
+            // }else{
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "Vasit.srithimakul@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "s";
+            //     Logmail::create($data);
+            // }
 
-            Mail::to('Vasit.srithimakul@gmail.com')
-            ->send(new approveMail("คุณ", "Vasit", "Srithimakul", 1, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์", "ทดสอบ", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
-            if(Mail::failures()){
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "Vasit.srithimakul@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "f";
-                Logmail::create($data);
-            }else{
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "Vasit.srithimakul@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "s";
-                Logmail::create($data);
-            }
-
-            Mail::to('zzlosecontrol@gmail.com')
-            ->send(new approveMail("คุณ", "สมชัย", "สิมมา", 1, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์", "ทดสอบ", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
-            if(Mail::failures()){
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "zzlosecontrol@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "f";
-                Logmail::create($data);
-            }else{
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "zzlosecontrol@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "s";
-                Logmail::create($data);
-            }
+            // Mail::to('zzlosecontrol@gmail.com')
+            // ->send(new approveMail("นาย", "สมชัย", "สิมมา", 3, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์","", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
+            // if(Mail::failures()){
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "zzlosecontrol@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "f";
+            //     Logmail::create($data);
+            // }else{
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "zzlosecontrol@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "s";
+            //     Logmail::create($data);
+            // }
 
             $list4 = GroupSN::find($id);
             $list4->statusmail = 1;

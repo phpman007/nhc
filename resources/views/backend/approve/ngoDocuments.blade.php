@@ -64,7 +64,7 @@
     <div class="card-body">
 
         @if (!empty($listdocs))
-        <div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-12">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
@@ -81,7 +81,7 @@
 
                             <tr>
                                 <td align="middle">
-                                    {{$valdocs->section}}
+                                    {{$key + 1}}
                                         {{-- {{$valgroup->id}} --}}
 
                                     {{-- @if (!empty($_GET['page']))
@@ -265,7 +265,9 @@
                                             @if( $valdocs->pdf_complete != NULL)
                                                 @if($valdocs->statusmail == 1)
                                                     <button type="button" class="btn btn-primary" onclick="location.href='{{ asset('backend/approve/mailNGO/'.$valdocs->id) }}'; " id="emailSpinners{{$key+1}}">ส่งอีเมล์อีกครั้ง</button>
-                                                    <br>{{ Carbon\Carbon::parse($valdocs>sendmail_date)->addYears(543)->format('d/m/Y H:i:s') }}
+                                                    @if($valdocs->sendmail_date!=NULL)
+                                                    <br>{{ Carbon\Carbon::parse($valdocs->sendmail_date)->addYears(543)->format('d/m/Y H:i:s') }}
+                                                    @endif
                                                 @else
                                                     <button type="button" class="btn btn-primary" onclick="location.href='{{ asset('backend/approve/mailNGO/'.$valdocs->id) }}'; " id="emailSpinners{{$key+1}}">ส่งอีเมล์</button>
                                                 @endif
@@ -279,9 +281,7 @@
                     </div>
                 </div>
             </div>
-            @endif
-
-            {{$key}}
+        @endif
     </div>
 </div>
 

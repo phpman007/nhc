@@ -12,17 +12,17 @@
                       <div class="manage-color2f">
                         <ul class="list-inline">
                           <li><span>การแสดงผล</span></li>
-                          <li><a href="" class="icon-color color-frontwhite">C</a></li>
-                          <li><a href="" class="icon-color color-default">C</a></li>
-                          <li><a href="" class="icon-color color-frontyellow">C</a></li>
+				  <li><a onclick="$('body').addClass('templatewhite');$('body').removeClass('templateyellow')" href="javascript:void(0)" class="icon-color color-frontwhite">C</a></li>
+ 				 <li><a onclick="$('body').removeClass('templatewhite');$('body').removeClass('templateyellow')" href="javascript:void(0)" class="icon-color color-default">C</a></li>
+ 				 <li><a onclick="$('body').addClass('templateyellow');$('body').removeClass('templatewhite')" href="javascript:void(0)" class="icon-color color-frontyellow">C</a></li>
                         </ul>
                       </div><!--end manage-color2f-->
                       <div class="manage-font2f">
                           <ul class="list-inline">
                             <li><span>ขนาดตัวอักษร</span></li>
-                            <li><a href="" class="icon-font fontdecrease">-</a></li>
-                            <li><a href="" class="icon-font fontdefault">ก</a></li>
-                            <li><a href="" class="icon-font fontincrease">+</a></li>
+                            <li><a onclick="$('body').addClass('fontdecrease');$('body').removeClass('fontincrease')" href="javascript:void(0)" class="icon-font fontdecrease">-</a></li>
+                            <li><a onclick="$('body').removeClass('fontincrease');$('body').removeClass('fontdecrease')" href="javascript:void(0)" class="icon-font fontdefault">ก</a></li>
+                            <li><a onclick="$('body').addClass('fontincrease');$('body').removeClass('fontdecrease')" href="javascript:void(0)" class="icon-font fontincrease">+</a></li>
                           </ul>
                       </div><!--end manage-font2f-->
                       <div class="manage-lang2f">
@@ -167,16 +167,16 @@
                   </div><!--end dropdown-menu-->
                 </li>
             @elseif(now() >= Carbon\Carbon::parse(config('time.register.date')) && now() >= Carbon\Carbon::parse('2019-11-04'))
-                <li class="active"><a href="{{url('/vote-schedule')}}">กำหนดการใช้สิทธิลงคะแนน</a></li>
+                <li class="active"><a href="{{url('/vote-schedule')}}">กำหนดการใช้สิทธิ์ลงคะแนน</a></li>
             @elseif ( Carbon\Carbon::parse(config('time.vote_menu_confirm.start_date'))  <= now() && Carbon\Carbon::parse(config('time.vote_menu_confirm.end_date')) >= now() )
 
                 @if (@Auth::user()->detail->statusId == '4')
-                    {{-- <li class="active"><a href="{{url('/vote-confirm')}}">ยืนยันการใช้สิทธิ </a></li> --}}
-                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ </a></li>
+                    {{-- <li class="active"><a href="{{url('/vote-confirm')}}">ยืนยันการใช้สิทธิ์ </a></li> --}}
+                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ์ </a></li>
                 @elseif (@Auth::user()->detail->statusId == '3')
-                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ </a></li>
+                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ์ </a></li>
                 @else
-                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ </a></li>
+                    <li class="active"><a href="{{url('/login')}}">ยืนยันการใช้สิทธิ์ </a></li>
                 @endif
 
                 {{-- vote-confirm

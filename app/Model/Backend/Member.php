@@ -42,6 +42,10 @@ class member extends Model
         return $this->hasMany(electionVote::class, 'memberId', 'id');
     }
 
+    public function ngo_section() {
+        return $this->belongsTo(ngoSection::class, 'provinceId', 'provinceId');
+    }
+
     // public function subdistrict() {
     //     return $this->belongsTo(Province2::class, 'subDistrictId', 'district_code');
     // }

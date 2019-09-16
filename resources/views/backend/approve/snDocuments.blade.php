@@ -203,7 +203,7 @@
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h3 class="modal-title">อัพโหลดไฟล์PDF รายชื่อผู้สมัครที่ลงนามเรียบร้อยแล้ว</h3>
+                                                                        <h3 class="modal-title">อัพโหลดไฟล์ PDF ประกาศรายชื่อผู้ผ่านคุณสมบัติที่ลงนามเรียบร้อยแล้ว</h3>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -265,7 +265,9 @@
                                             @if($valgroup->pdf_complete != NULL)
                                                 @if($valgroup->statusmail == 1)
                                                     <button type="button" class="btn btn-primary" onclick="location.href='{{ asset('backend/approve/mailSN/'.$valgroup->id) }}'; " id="emailSpinners{{$key+1}}">ส่งอีเมล์อีกครั้ง</button>
+                                                    @if($valgroup->sendmail_date!=NULL)
                                                     <br>{{ Carbon\Carbon::parse($valgroup->sendmail_date)->addYears(543)->format('d/m/Y H:i:s') }}
+                                                    @endif
                                                 @else
                                                     <button type="button" class="btn btn-primary" onclick="location.href='{{ asset('backend/approve/mailSN/'.$valgroup->id) }}'; " id="emailSpinners{{$key+1}}">ส่งอีเมล์</button>
                                                 @endif

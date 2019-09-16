@@ -17,7 +17,7 @@ class approveMail extends Mailable
      *
      * @return void
      */
-    public function _construct($title,$firstname,$lastname,$statusid,$group,$reason,$pdfpath,$subject,$groupid,$province,$section)
+    public function __construct($title,$firstname,$lastname,$statusid,$group,$reason,$pdfpath,$subject,$groupid,$province,$section)
     {
         $this->title = $title;
         $this->firstname = $firstname;
@@ -43,16 +43,17 @@ class approveMail extends Mailable
         return $this->subject("แจ้งผลประกาศบัญชีรายชื่อ")
         ->attach(public_path($this->pdfpath))
         ->view('mail.emailApprove',
-        ['title'     => $this->title,
+        ['title'    => $this->title,
         'firstname' => $this->firstname,
         'lastname'  => $this->lastname,
         'statusid'  => $this->statusid,
         'group'     => $this->group,
         'reason'    => $this->reason,
+        'pdfpath'   => $this->pdfpath,
         'subject'   => $this->subject,
         'groupid'   => $this->groupid,
         'province'  => $this->province,
-        'section'   => $this->section,
+        'section'   => $this->section
         ]);
 
         // ->view('mail.emailApprove', ['title'  => $this->title,'firstname' => $this->firstname,'lastname'  => $this->lastname]);

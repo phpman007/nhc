@@ -43,18 +43,31 @@ class ApproveNGOController extends Controller
 
             $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-            if($input['txtsection']!="" and $input['txtprovince']==""){
+            if($input['txtsection']!="" and $input['txtprovince']=="" and !empty($a)){
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
+
                 $listprovince=ngoSection::join('province','ngo_sections.provinceId','=','province.provinceId')
                 ->where('section',$input['txtsection'])
+                ->whereIn('ngo_sections.section',$a)
                 ->select('province.province','ngo_sections.provinceId')
                 ->orderBy('ngo_sections.id')
                 ->get();
 
                 $listgroupngo="";
 
-            }elseif($input['txtsection']!="" and $input['txtprovince']!=""){
+            }elseif($input['txtsection']!="" and $input['txtprovince']!="" and !empty($a)){
+
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
+
                 $listprovince=ngoSection::join('province','ngo_sections.provinceId','=','province.provinceId')
                 ->where('section',$input['txtsection'])
+                ->whereIn('ngo_sections.section',$a)
                 ->select('province.province','ngo_sections.provinceId')
                 ->orderBy('ngo_sections.id')
                 ->get();
@@ -63,9 +76,13 @@ class ApproveNGOController extends Controller
             }else{
                 $listgroupngo="";
                 $listprovince="";
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
             }
 
-            return view('backend.approve.ngoApprove',compact('listprovince','listgroupngo'));
+            return view('backend.approve.ngoApprove',compact('listprovince','listgroupngo','listsection'));
 
         } else {
             return redirect('/backend/home');
@@ -81,67 +98,82 @@ class ApproveNGOController extends Controller
             $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
             if(!empty($a)) {
+
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
+
                 $listprovince=Province::join('ngo_sections','province.provinceId','=','ngo_sections.provinceId')
                 ->whereIn('ngo_sections.section',$a)
                 ->orderBy('ngo_sections.provinceId')
                 ->get();
             }else{
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
+
                 $listprovince="";
+                $listsection="";
             }
 
             $listgroupngo="";
 
-            return view('backend.approve.ngoApprove',compact('listprovince','listgroupngo'));
+            return view('backend.approve.ngoApprove',compact('listprovince','listgroupngo','listsection'));
         } else {
             return redirect('/backend/home');
         }
     }
 
-    public function editstatus()
-    {
+    // public function editstatus()
+    // {
+    //     $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-        if (Auth::guard('admin')->user()->can('approve_ngo')) {
-            $input = \Request::all();
-            // dd($input);
+    //     if (Auth::guard('admin')->user()->can('approve_ngo') and !empty($a)) {
+    //         $input = \Request::all();
+    //         // dd($input);
 
-            $list = MemberDetail::find($input['Hid'][0]);
-            $list->statusId = $input['txtstatuschange'][0];
+    //         $list = MemberDetail::find($input['Hid'][0]);
+    //         $list->statusId = $input['txtstatuschange'][0];
 
+    //         if($list->update()){
+    //             // $this->mail($input['Hid'][0],3);
+    //             \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+    //         }else{
+    //             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+    //         }
+    //         return back();
+    //         // return redirect('/backend/approve/ngoApprove');
+    //     } else {
+    //         return redirect('/backend/home');
+    //     }
+    // }
 
-            if($list->update()){
-                // $this->mail($input['Hid'][0],3);
-                \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
-            }else{
-                \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
-            }
-            return back();
-            // return redirect('/backend/approve/ngoApprove');
-        } else {
-            return redirect('/backend/home');
-        }
-    }
+    // public function editnotpass()
+    // {
+    //     $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-    public function editnotpass()
-    {
-        if (Auth::guard('admin')->user()->can('approve_ngo')) {
-            $input = \Request::all();
+    //     if (Auth::guard('admin')->user()->can('approve_ngo') and !empty($a)) {
 
-            $list = MemberDetail::find($input['Hidmember'][0]);
-            $list->reason = $input['txtreason'][0];
-            $list->statusId = 4;
+    //         $input = \Request::all();
 
-            if($list->update()){
-                // $this->mail($input['Hidmember'][0],4);
-                \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
-            }else{
-                \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
-            }
-            return back();
-            // return redirect('/backend/approve/ngoApprove');
-        } else {
-            return redirect('/backend/home');
-        }
-    }
+    //         $list = MemberDetail::find($input['Hidmember'][0]);
+    //         $list->reason = $input['txtreason'][0];
+    //         $list->statusId = 4;
+
+    //         if($list->update()){
+    //             // $this->mail($input['Hidmember'][0],4);
+    //             \Session::flash('success','แก้ไขสถานะเรียบร้อยแล้ว');
+    //         }else{
+    //             \Session::flash('error','แก้ไขสถานะไม่ได้!!!');
+    //         }
+    //         return back();
+    //         // return redirect('/backend/approve/ngoApprove');
+    //     } else {
+    //         return redirect('/backend/home');
+    //     }
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -211,13 +243,18 @@ class ApproveNGOController extends Controller
 
     public function ngoApproveAll($idprovince, $idgroup, $idsection)
     {
-        if (Auth::guard('admin')->user()->can('approve_ngo')) {
+        $a=json_decode(Auth::guard('admin')->user()->sectionControl);
+
+        if (Auth::guard('admin')->user()->can('approve_ngo') and !empty($a)) {
+            // dd($a);
+
             $input = \Request::all();
 
             // $liststatus = Statuses::get();
             // $idgroup = request()->idgroup;
 
             $list2 = Member::join('member_details','members.id','=','member_details.memberId')
+            ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
             ->where('members.groupId','=',3)
             ->where('members.ngoGroupId','=',$idgroup)
             // ->where('members.status_accept','=',1)
@@ -227,9 +264,11 @@ class ApproveNGOController extends Controller
                 $query->where('members.deleted_at',NULL)
                 ->where('member_details.deleted_at',NULL);
             })
+            ->whereIn('ngo_sections.section',$a)
             ->get();
 
             $list3 = Member::join('member_details','members.id','=','member_details.memberId')
+            ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
             ->where('members.groupId','=',3)
             ->where('members.ngoGroupId','=',$idgroup)
             // ->where('members.status_accept','=',1)
@@ -240,10 +279,12 @@ class ApproveNGOController extends Controller
                 $query->where('members.deleted_at',NULL)
                 ->where('member_details.deleted_at',NULL);
             })
+            ->whereIn('ngo_sections.section',$a)
             ->get();
 
 
             $list4 = Member::join('member_details','members.id','=','member_details.memberId')
+            ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
             ->where('members.groupId','=',3)
             ->where('members.ngoGroupId','=',$idgroup)
             // ->where('members.status_accept','=',1)
@@ -255,6 +296,7 @@ class ApproveNGOController extends Controller
                 $query->where('members.deleted_at',NULL)
                 ->where('member_details.deleted_at',NULL);
             })
+            ->whereIn('ngo_sections.section',$a)
             ->get();
 
             $list=Member::join('member_details','members.id','=','member_details.memberId')
@@ -262,7 +304,7 @@ class ApproveNGOController extends Controller
             ->leftJoin('users', 'member_details.adminId', '=', 'users.id')
             ->leftJoin('statuses','member_details.statusId','=','statuses.id')
             ->leftJoin('province','members.provinceId','=','province.provinceId')
-            ->leftJoin('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
+            ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
             // ->where('members.groupId','=',3)
             ->where('members.ngoGroupId', $idgroup)
             ->where('members.provinceId','=',$idprovince)
@@ -274,10 +316,11 @@ class ApproveNGOController extends Controller
                 $query->where('members.deleted_at',NULL)
                 ->where('member_details.deleted_at',NULL);
             })
+            ->whereIn('ngo_sections.section',$a)
             ->select('province.province','ngo_sections.section','member_details.docId','members.nameTitle','members.firstname','members.lastname','members.personalId','ngo_groups.groupName','member_details.statusId','users.username','member_details.updateStatusTime','member_details.reason','statuses.status');
 
-            if(empty($input['txtname'])){
-                $txtname = request()->input('txtname');
+            if(!empty($input['txtname'])){
+                $txtname = $input['txtname'];
 
                 $list->where('members.groupId','=',3)
                 ->where(function ($query) use($txtname) {
@@ -302,9 +345,12 @@ class ApproveNGOController extends Controller
 
     public function editfixstatus($idprovince , $idgroup)
     {
-        if (Auth::guard('admin')->user()->can('approve_ngo')) {
+        $a=json_decode(Auth::guard('admin')->user()->sectionControl);
+
+        if (Auth::guard('admin')->user()->can('approve_ngo') and !empty($a)) {
 
             $list=MemberDetail::join('members','members.id','=','member_details.memberId')
+            ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
             ->where('members.groupId','=',3)
             ->where('members.provinceId','=',$idprovince)
             ->where('members.ngoGroupId','=',$idgroup)
@@ -316,10 +362,12 @@ class ApproveNGOController extends Controller
                 $query->where('members.deleted_at',NULL)
                 ->where('member_details.deleted_at',NULL);
             })
+            ->whereIn('ngo_sections.section',$a)
             ->get();
 
             if(count($list)==0){
-                $list2=DB::statement("update member_details,members set member_details.fixStatus=1, member_details.approveDate='".date("Y-m-d H:i:s")."' where members.groupId=3 and members.ngoGroupId=".$idgroup." and members.provinceId=".$idprovince." and members.confirmed_at IS NOT NULL and member_details.memberId=members.id and member_details.statusId in (3,4)");
+                $b=implode(",", $a);
+                $list2=DB::statement("update member_details,members,ngo_sections set member_details.fixStatus=1, member_details.approveDate='".date("Y-m-d H:i:s")."' where members.groupId=3 and members.ngoGroupId=".$idgroup." and members.provinceId=".$idprovince." and members.confirmed_at IS NOT NULL and member_details.memberId=members.id and member_details.statusId in (3,4) and members.provinceId = ngo_sections.provinceId and ngo_sections.section in (".$b.")");
                 if($list2){
 
                     $list3=Member::where('groupId',3)
@@ -328,10 +376,13 @@ class ApproveNGOController extends Controller
                     ->where('confirmed_at', '!=', null)
                     ->where('deleted_at',NULL)
                     ->where('provinceId',$idprovince)
-                    ->whereHas('detail', function($query2) use($idprovince) {
+                    ->whereHas('detail', function($query2) {
                         $query2->where('fixStatus',1)
                             ->where('deleted_at',NULL)
                             ->where('statusId',3);
+                    })
+                    ->whereHas('ngo_section', function($query2) use($a) {
+                        $query2->whereIn('section',$a);
                     })
                     ->orderBy('firstname')->get();
 
@@ -364,9 +415,11 @@ class ApproveNGOController extends Controller
 
     public function documents()
     {
-        if (Auth::guard('admin')->user()->can('approve_ngo')) {
+        $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-            $listdocs=Docs::all();
+        if (Auth::guard('admin')->user()->can('approve_ngo') and !empty($a)) {
+
+            $listdocs=Docs::whereIn('section',$a)->get();
 
             return view('backend.approve.ngoDocuments',compact('listdocs'));
         } else {
@@ -392,7 +445,7 @@ class ApproveNGOController extends Controller
                 $query->where('members.deleted_at',NULL)
                 ->where('member_details.deleted_at',NULL);
             })
-            ->select('members.nameTitle','members.firstname','members.lastname','members.email'
+            ->select('members.id','members.nameTitle','members.firstname','members.lastname','members.email'
             ,'member_details.statusId','ngo_groups.groupName','member_details.reason','province.province','ngo_sections.section')
             ->get();
 
@@ -406,7 +459,7 @@ class ApproveNGOController extends Controller
 
             foreach($list as $val){
                 if($val->email!=""){
-                    Mail::to($val->email)
+                    Mail::to("2cs.siriluck@gmail.com")
                     ->send(new approveMail($val->nameTitle, $val->firstname, $val->lastname, $val->statusId, $val->groupName, $val->reason, $list2->pdf_complete, $subject, $groupid, $val->province, $val->section));
                     // $val->email
 
@@ -428,59 +481,60 @@ class ApproveNGOController extends Controller
                 }
             }
 
-            Mail::to('julaluckw@gmail.com')
-            ->send(new approveMail("นาง", "จุฬาลักษณ์", "แพร่พาณิชวัฒน์", 1, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์", "ทดสอบ", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
-            if(Mail::failures()){
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "julaluckw@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "f";
-                Logmail::create($data);
-            }else{
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "julaluckw@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "s";
-                Logmail::create($data);
-            }
+            // Mail::to('julaluckw@gmail.com')
+            // ->send(new approveMail("นาง", "จุฬาลักษณ์", "แพร่พาณิชวัฒน์", 3, "กลุ่มขององค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพของตนเองและสมาชิก","", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
+            // if(Mail::failures()){
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "julaluckw@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "f";
+            //     Logmail::create($data);
+            // }else{
 
-            Mail::to('Vasit.srithimakul@gmail.com')
-            ->send(new approveMail("คุณ", "Vasit", "Srithimakul", 1, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์", "ทดสอบ", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
-            if(Mail::failures()){
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "Vasit.srithimakul@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "f";
-                Logmail::create($data);
-            }else{
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "Vasit.srithimakul@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "s";
-                Logmail::create($data);
-            }
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "julaluckw@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "s";
+            //     Logmail::create($data);
+            // }
 
-            Mail::to('zzlosecontrol@gmail.com')
-            ->send(new approveMail("คุณ", "สมชัย", "สิมมา", 1, "กลุ่มบริหาร นโยบายสาธารณะ รัฐศาสตร์ นิติศาสตร์", "ทดสอบ", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
-            if(Mail::failures()){
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "zzlosecontrol@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "f";
-                Logmail::create($data);
-            }else{
-                $data['member_id']      = 1;
-                $data['user_id']        = Auth::guard('admin')->user()->id;
-                $data['email']          = "zzlosecontrol@gmail.com";
-                $data['send_at']        = date('Y-m-d H:i:s');
-                $data['status']         = "s";
-                Logmail::create($data);
-            }
+            // Mail::to('Vasit.srithimakul@gmail.com')
+            // ->send(new approveMail("Mr.", "Vasit", "Srithimakul", 3, "กลุ่มขององค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพของตนเองและสมาชิก","", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
+            // if(Mail::failures()){
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "Vasit.srithimakul@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "f";
+            //     Logmail::create($data);
+            // }else{
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "Vasit.srithimakul@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "s";
+            //     Logmail::create($data);
+            // }
+
+            // Mail::to('zzlosecontrol@gmail.com')
+            // ->send(new approveMail("นาย", "สมชัย", "สิมมา", 3, "กลุ่มขององค์กรที่ดำเนินงานเกี่ยวกับการดูแลสุขภาพของตนเองและสมาชิก","", $list2->pdf_complete, $subject, $groupid,"กรุงเทพมหานคร",13));
+            // if(Mail::failures()){
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "zzlosecontrol@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "f";
+            //     Logmail::create($data);
+            // }else{
+            //     $data['member_id']      = 1;
+            //     $data['user_id']        = Auth::guard('admin')->user()->id;
+            //     $data['email']          = "zzlosecontrol@gmail.com";
+            //     $data['send_at']        = date('Y-m-d H:i:s');
+            //     $data['status']         = "s";
+            //     Logmail::create($data);
+            // }
 
             $list4 = Docs::find($id);
             $list4->statusmail = 1;

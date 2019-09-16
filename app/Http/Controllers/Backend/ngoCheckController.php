@@ -11,6 +11,7 @@ use App\Model\Backend\Member;
 use Illuminate\Support\Facades\Redirect;
 use App\Model\Backend\MemberDetail;
 use App\Model\Backend\Admin;
+use App\Model\Backend\ngoSection;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -29,21 +30,26 @@ class ngoCheckController extends Controller
 
             $input = \Request::all();
 
-            $listprovince=Province::orderBy('province')->get();
-            $listgroupngo=ngoGroup::get();
-            $liststatus=Statuses::get();
-
             $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
             if(!empty($a)) {
+                $listgroupngo=ngoGroup::get();
+                $liststatus=Statuses::get();
 
-                // $list=Member::leftJoin('member_details','member_details.memberId','=','members.id');
-                // $list->leftJoin('statuses','member_details.statusId','=','statuses.id');
-                // $list->leftJoin('province','member_details.provinceId','=','province.provinceId');
-                // $list->leftJoin('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
-                // $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
-                // $list->join('ngo_sections','member_details.provinceId','=','ngo_sections.provinceId');
-                // $list->select('ngo_sections.section','members.ngoGroupId','members.status_accept','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','member_details.provinceId','province.province','ngo_groups.groupName','users.username', 'users.sectionControl', 'member_details.updateStatusTime', 'members.confirmed_at', 'members.updated_at');
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
+                $countsection=count($listsection);
+
+                if(!empty($input['txtsection'])){
+                    $listprovince=Province::join('ngo_sections','province.provinceId','=','ngo_sections.provinceId');
+                    $listprovince->whereIn('ngo_sections.section',$input['txtsection']);
+                    $listprovince->select('province.provinceId','province.province');
+                    $listprovince=$listprovince->orderBy('province')->get();
+                }else{
+                    $listprovince="";
+                }
 
                 $list=Member::leftJoin('member_details','member_details.memberId','=','members.id');
                 $list->leftJoin('statuses','member_details.statusId','=','statuses.id');
@@ -183,11 +189,21 @@ class ngoCheckController extends Controller
                 $countgroup=0;
                 $countprovince=0;
                 $countstatus=0;
-                $listmember=0;
+                $listsection="";
+                $listmember="";
+                $listprovince="";
+                $listgroupngo="";
+                $liststatus="";
+
+                $countmember=0;
+                $countmember1=0;
+                $countmember2=0;
+                $countmember3=0;
+                $countmember4=0;
+                $countmember5=0;
             }
 
-            return view('backend.check.ngoCheck',compact('listprovince','listgroupngo','liststatus','listmember','countprovince','countstatus','countgroup','countsection', 'countmember', 'countmember1', 'countmember2', 'countmember3', 'countmember4', 'countmember5'));
-
+            return view('backend.check.ngoCheck',compact('listprovince','listgroupngo','liststatus','listmember','listsection','countprovince','countstatus','countgroup','countsection', 'countmember', 'countmember1', 'countmember2', 'countmember3', 'countmember4', 'countmember5'));
 
         } else {
             return redirect('/backend/home');
@@ -325,34 +341,41 @@ class ngoCheckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)//ดาวน์โหลดแล้วใส่ไอดีผู้ใช้คนแรกที่กดดาวน์โหลด
-    {
-        if (Auth::guard('admin')->user()->can('check_evidence_ngo')) {
-            $list1=MemberDetail::where('id','=',$id)->whereNull('adminId')->first();
+    // public function edit($id)
+    // {
+    //     $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-            if($list1!=NULL){
-                $adminId=Auth::guard('admin')->user()->id;
+    //     if (Auth::guard('admin')->user()->can('check_evidence_ngo') and !empty($a)) {
+    //         $list1=MemberDetail::where('id','=',$id)->whereNull('adminId')->first();
 
-                $list2=MemberDetail::where('memberId','=',$id)
-                ->update(['adminId'=>$adminId]);
+    //         if($list1!=NULL){
+    //             $adminId=Auth::guard('admin')->user()->id;
 
-                // if($list2->update()){
-                //     \Session::flash('success');
-                // }else{
-                //     \Session::flash('error');
-                // }
-            //}else{
-                // \Session::flash('error');
-            }
-            return back();
-        } else {
-            return redirect('/backend/home');
-        }
-    }
+    //             $list2=MemberDetail::where('memberId','=',$id)
+    //             ->update(['adminId'=>$adminId]);
+
+    //             // if($list2->update()){
+    //             //     \Session::flash('success');
+    //             // }else{
+    //             //     \Session::flash('error');
+    //             // }
+    //         //}else{
+    //             // \Session::flash('error');
+    //         }
+    //         return back();
+    //     } else {
+    //         return redirect('/backend/home');
+    //     }
+    // }
 
     public function editstatus()//แก้ไขกรณีสถานะ ผ่าน ,รอ ,ระหว่าง
     {
-        if (Auth::guard('admin')->user()->can('check_evidence_ngo')) {
+        $a=json_decode(Auth::guard('admin')->user()->sectionControl);
+
+
+
+        if (Auth::guard('admin')->user()->can('check_evidence_ngo') and !empty($a)) {
+            // dd($a);
             $input = \Request::all();
 
             if($input['txtstatuschange'][0]==3){//ผ่าน
@@ -372,11 +395,17 @@ class ngoCheckController extends Controller
                 // $list3 = Member::find($input['Hid'][0]);
                 // $list3->candidateNumber = $newnumber;
 
-                $list=MemberDetail::where('memberId','=',$input['Hid'][0])
+                $list=Member::join('member_details','member_details.memberId','=','members.id')
+                ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
+                ->where('member_details.memberId','=',$input['Hid'][0])
+                ->whereIn('ngo_sections.section',$a)
                 ->update(['reason'=>NULL,'statusId'=>$input['txtstatuschange'][0], 'adminId'=>Auth::guard('admin')->user()->id, 'updateStatusTime'=>date('Y-m-d H:i:s')]);
 
             }else{//สถานะรอตรวจสอบ สถานะระหว่างตรวจสอบ
-                $list=MemberDetail::where('memberId','=',$input['Hid'][0])
+                $list=Member::join('member_details','member_details.memberId','=','members.id')
+                ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
+                ->where('member_details.memberId','=',$input['Hid'][0])
+                ->whereIn('ngo_sections.section',$a)
                 ->update(['reason'=>NULL,'statusId'=>$input['txtstatuschange'][0], 'adminId'=>Auth::guard('admin')->user()->id, 'updateStatusTime'=>date('Y-m-d H:i:s')]);
             }
 
@@ -395,10 +424,15 @@ class ngoCheckController extends Controller
 
     public function editnotpass()//แก้ไขสถานะกรณีไม่ผ่าน
     {
-        if (Auth::guard('admin')->user()->can('check_evidence_ngo')) {
+        $a=json_decode(Auth::guard('admin')->user()->sectionControl);
+
+        if (Auth::guard('admin')->user()->can('check_evidence_ngo') and !empty($a)) {
             $input = \Request::all();
 
-            $list=MemberDetail::where('memberId','=',$input['Hidmember'][0])
+            $list=Member::join('member_details','member_details.memberId','=','members.id')
+            ->join('ngo_sections','members.provinceId','=','ngo_sections.provinceId')
+            ->where('member_details.memberId','=',$input['Hidmember'][0])
+            ->whereIn('ngo_sections.section',$a)
             ->update(['reason'=>$input['txtreason'][0], 'statusId'=>4, 'adminId'=>Auth::guard('admin')->user()->id, 'updateStatusTime'=>date('Y-m-d H:i:s')]);
 
             // $list3 = Member::find($input['Hidmember'][0]);

@@ -18,7 +18,7 @@ class FormProfessorController extends Controller
 
      public function formView($step) {
 
-	     if(now() >= "2019-09-13 16:30:00") {
+	     if(now() >= "2019-09-17 16:30:00") {
      			return redirect('/')->with('info','<span style="font-size:35px">ขณะนี้สิ้นสุดเวลารับสมัครการเป็นกรรมการสุขภาพแห่งชาติ ตามประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติฯ แล้ว</span>');
      		}
           if(Auth::check()) {
@@ -51,7 +51,7 @@ class FormProfessorController extends Controller
 
      public function formPost($step, Request $request) {
 
-     		if(now() >= "2019-09-13 16:30:00") {
+     		if(now() >= "2019-09-17 16:30:00") {
      			return redirect('/')->with('info','<span style="font-size:35px">ขณะนี้สิ้นสุดเวลารับสมัครการเป็นกรรมการสุขภาพแห่งชาติ ตามประกาศคณะกรรมการสรรหากรรมการสุขภาพแห่งชาติฯ แล้ว</span>');
      		}
           switch ($step) {
@@ -98,7 +98,7 @@ class FormProfessorController extends Controller
           ]);
 
 	    $c = filter_var($request->email, FILTER_VALIDATE_EMAIL);
-	    
+
 	    if(!$c) {
 		    return back()->withInput()->withErrors(['email' => 'Email ที่กรอกไม่ถูกต้อง']);
 	    }
@@ -430,23 +430,6 @@ class FormProfessorController extends Controller
                     return redirect('form-professional/4')->withErrors(['dateOfBirth' => "อายุน้อยกว่า 20 ไม่สามารถลงทะเบียนได้"]);
                }
 
-               $file1 = Auth::user()->attach()->where('status', 1)->where('use_is', 'copy_personal_card')->first();
-               if(empty($file1)){
-                    $rule['uploadBtn01'] = 'กรุณาอัพโหลดข้อมูล สำเนาบัตรประจำตัวประชาชน';
-               }
-               $file2 = Auth::user()->attach()->where('status', 1)->where('use_is', 'personal_photo')->first();
-               if(empty($file2)){
-                    $rule['uploadBtn02'] = 'กรุณาอัพโหลดข้อมูล รูปถ่ายหน้าตรงไม่สวมหมวก ไม่สวมแว่นตาดำ ฉากพื้นหลังไม่มีลวดลาย  ซึ่งถ่ายมาแล้วไม่เกิน  6  เดือน';
-               }
-               $file3 = Auth::user()->attach()->where('status', 1)->where('use_is', 'document1')->first();
-               if(empty($file3)){
-                    $rule['uploadBtn03'] = 'กรุณาอัพโหลดข้อมูลเอกสารสรุปผลงานอันเป็นที่ประจักษ์ ที่สอดคล้องกับประเภทกลุ่มผู้ทรงคุณวุฒิที่เลือกสมัคร (ไม่เกิน 2 หน้ากระดาษ A4) พิมพ์โดยใช้ตัวอักษรขนาดไม่ต่ำกว่า 16)';
-               }
-
-               if(!empty($rule))
-               {
-                    return redirect('form-professional/5')->withErrors($rule);
-               }
 
                if(empty(Auth::user()->detail->pastWork1) || empty(Auth::user()->detail->pastOrganization1) || empty(Auth::user()->detail->time1)) {
                     return redirect('form-professional/4#target1')->withErrors(['pastWork1' => "โปรดระบุข้อมูลนี้", 'pastOrganization1' => "โปรดระบุข้อมูลนี้", 'time1' => "โปรดระบุข้อมูลนี้"]);

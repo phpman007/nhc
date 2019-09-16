@@ -38,12 +38,13 @@
         @php
             $idprovince=request()->idprovince;
             $idgroup=request()->idgroup;
+            $idsection=request()->idsection;
         @endphp
-        <form id="frmsearchngoapproveall" method="GET" action="{{url('backend/approveAll/ngoApproveAll/'.$idprovince.'/'.$idgroup)}}">
+        <form id="frmsearchngoapproveall" method="GET" action="{{url('backend/approveAll/ngoApproveAll/'.$idprovince.'/'.$idgroup.'/'.$idsection)}}">
             {{ csrf_field() }}
             <input type="hidden" value="{{request()->idprovince}}" name="idprovince">
             <input type="hidden" value="{{request()->idgroup}}" name="idgroup">
-
+            <input type="hidden" value="{{request()->idsection}}" name="idsection">
             <div class="col-md-12">
                     <div class="form-group">
                         <div class="form-row">
@@ -53,7 +54,7 @@
                             </div>
                         <div class="form-group col-md-12 d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> ค้นหา</button>&nbsp
-                            <a href="{{url('backend/approveAll/ngoApproveAll/'.$idprovince.'/'.$idgroup)}}"><button type="button" class="btn btn-warning">ล้างข้อมูล</button></a>
+                            <a href="{{url('backend/approveAll/ngoApproveAll/'.$idprovince.'/'.$idgroup.'/'.$idsection)}}"><button type="button" class="btn btn-warning">ล้างข้อมูล</button></a>
 
                         </div>
                     </div>

@@ -10,6 +10,7 @@ use App\Model\Backend\organizationGroup;
 use App\Model\Backend\Statuses;
 use App\Model\Backend\Member;
 use App\Model\Backend\MemberDetail;
+use App\Model\Backend\ngoSection;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -21,57 +22,56 @@ class ViewNGOController extends Controller
 
             $input = \Request::all();
 
-            $listprovince=Province::orderBy('province')->get();
-            $listgroupngo=ngoGroup::get();
-            // $liststatus=Statuses::get();
-
             $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-            // if(!empty ($a)) {
+            if(!empty ($a)) {
 
-            if (true) {
+                $listsection=ngoSection::whereIn('section',$a)
+                ->groupBy('section')
+                ->orderBy('section')
+                ->get();
+                if(!empty($input['txtsection'])){
+                    $listprovince=Province::join('ngo_sections','province.provinceId','=','ngo_sections.provinceId');
+                    $listprovince->whereIn('ngo_sections.section',$input['txtsection']);
+                    $listprovince->select('province.provinceId','province.province');
+                    $listprovince=$listprovince->orderBy('province')->get();
+                }else{
+                    $listprovince="";
+                }
+                $listgroupngo=ngoGroup::get();
 
-            $list=Member::leftjoin('member_details','member_details.memberId','=','members.id');
-            $list->leftjoin('statuses','member_details.statusId','=','statuses.id');
-            $list->leftjoin('province','members.provinceId','=','province.provinceId');
-            $list->leftjoin('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
-            $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
-            $list->leftJoin('ngo_sections','members.provinceId','=','ngo_sections.provinceId');
-            $list->select('ngo_sections.section','members.ngoGroupId','members.status_accept','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','province.provinceId','province.province','ngo_groups.groupName','users.username','members.created_at','members.confirmed_at');
-            // $list->whereNull('members.confirmed_at');
-
-            $list->where('members.groupId','=',3);
-            $list->whereNull('members.confirmed_at');
-
-            // ->where(function ($query) {
-            //     $query->where('members.status_accept','=',null)
-            //         ->orWhere('members.status_accept','=',2)
-            //         ->orWhere('members.confirmed_at','=',null);
-            // });
-
-            // $list->whereIn('ngo_sections.section',$a);
-
-            if(!empty($input['txtname'])){
-                $list->where('members.groupId','=',3)
-                ->where(function ($query) {
-                    $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
-                        ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%')
-                        ->orWhere('member_details.docId','like','%'.\Request::get('txtname').'%');
-                });
-            } else {
+                $list=Member::leftjoin('member_details','member_details.memberId','=','members.id');
+                $list->leftjoin('statuses','member_details.statusId','=','statuses.id');
+                $list->leftjoin('province','members.provinceId','=','province.provinceId');
+                $list->leftjoin('ngo_groups', 'members.ngoGroupId', '=', 'ngo_groups.id');
+                $list->leftJoin('users', 'member_details.adminId', '=', 'users.id');
+                $list->leftJoin('ngo_sections','members.provinceId','=','ngo_sections.provinceId');
+                $list->select('ngo_sections.section','members.ngoGroupId','members.status_accept','member_details.fixStatus','members.personalId','members.id','member_details.docId','member_details.zipFile','members.nameTitle','members.firstname','members.lastname','member_details.statusId','statuses.status','province.provinceId','province.province','ngo_groups.groupName','users.username','members.created_at','members.confirmed_at');
                 $list->where('members.groupId','=',3);
-            }
+                $list->whereNull('members.confirmed_at');
+                $list->whereIn('ngo_sections.section',$a);
 
-            if(!empty($input['txtgroup'])){
-                $countgroup=count($input['txtgroup']);
-                $list->where('members.groupId','=',3)
-                ->where(function ($query){
-                    $query->whereIn('members.ngoGroupId',\Request::get('txtgroup'));
-                });
-            } else {
-                $list->where('members.groupId','=',3);
-                $countgroup=0;
-            }
+                if(!empty($input['txtname'])){
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query) {
+                        $query->where('members.firstname','like','%'.\Request::get('txtname').'%')
+                            ->orWhere('members.lastname','like','%'.\Request::get('txtname').'%')
+                            ->orWhere('member_details.docId','like','%'.\Request::get('txtname').'%');
+                    });
+                } else {
+                    $list->where('members.groupId','=',3);
+                }
+
+                if(!empty($input['txtgroup'])){
+                    $countgroup=count($input['txtgroup']);
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query){
+                        $query->whereIn('members.ngoGroupId',\Request::get('txtgroup'));
+                    });
+                } else {
+                    $list->where('members.groupId','=',3);
+                    $countgroup=0;
+                }
 
             // if(!empty($input['txtstatus'])){
             //     $countstatus=count($input['txtstatus']);
@@ -108,48 +108,47 @@ class ViewNGOController extends Controller
             //     $countstatus=0;
             // }
 
-            if (!empty($input['txtprovince'])){
-                $countprovince=count($input['txtprovince']);
-                $txtprovince = request()->input('txtprovince');
+                if (!empty($input['txtprovince'])){
+                    $countprovince=count($input['txtprovince']);
+                    $txtprovince = request()->input('txtprovince');
 
-                $list->where('members.groupId','=',3)
-                ->where(function ($query1){
-                    $query1->whereIn('members.provinceId',request()->input('txtprovince'));
-                });
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query1){
+                        $query1->whereIn('members.provinceId',request()->input('txtprovince'));
+                    });
+
+                } else {
+                    $list->where('members.groupId','=',3);
+                    $countprovince=0;
+                }
+
+                if (!empty($input['txtsection'])){
+                    $countsection=count($input['txtsection']);
+                    $txtsection = request()->input('txtsection');
+
+                    $list->where('members.groupId','=',3)
+                    ->where(function ($query1){
+                        $query1->whereIn('ngo_sections.section',request()->input('txtsection'));
+                    });
+
+                } else {
+                    $list->where('members.groupId','=',3);
+                    $countsection=0;
+                }
+
+                $listmember= $list->orderBy('member_details.updated_at','ASC')->paginate(10)->appends($input);
 
             } else {
-                $list->where('members.groupId','=',3);
-                $countprovince=0;
-            }
-
-            if (!empty($input['txtsection'])){
-                $countsection=count($input['txtsection']);
-                $txtsection = request()->input('txtsection');
-
-                $list->where('members.groupId','=',3)
-                ->where(function ($query1){
-                    $query1->whereIn('ngo_sections.section',request()->input('txtsection'));
-                });
-
-            } else {
-                $list->where('members.groupId','=',3);
                 $countsection=0;
+                $countgroup=0;
+                $countprovince=0;
+                $listsection="";
+                $listmember="";
+                $listprovince="";
+                $listgroupngo="";
             }
 
-
-
-            $listmember= $list->orderBy('member_details.updated_at','ASC')->paginate(10)->appends($input);
-
-            // $listmember= $list->orderBy('member_details.updated_at','ASC')->get();
-
-        } else {
-            $countsection=0;
-            $countgroup=0;
-            $countprovince=0;
-            // $countstatus=0;
-        }
-
-            return view('backend.view.ngoView',compact('listprovince','listgroupngo','listmember','countprovince','countgroup','countsection'));
+            return view('backend.view.ngoView',compact('listsection','countsection','listprovince','listgroupngo','listmember','countprovince','countgroup'));
 
         } else {
             return redirect('/backend/home');
@@ -166,11 +165,11 @@ class ViewNGOController extends Controller
             $listgroupngo=ngoGroup::get();
             // $liststatus=Statuses::get();
 
-            // $a=json_decode(Auth::guard('admin')->user()->sectionControl);
+            $a=json_decode(Auth::guard('admin')->user()->sectionControl);
 
-            // if(!empty ($a)) {
+            if(!empty ($a)) {
 
-            if (true) {
+            // if (true) {
 
             $list=Member::leftjoin('member_details','member_details.memberId','=','members.id');
             $list->leftjoin('statuses','member_details.statusId','=','statuses.id');
@@ -192,8 +191,7 @@ class ViewNGOController extends Controller
                 $query->where('members.status_accept','=',null)
                     ->orWhere('members.status_accept','!=',1);
             });
-
-            // $list->whereIn('ngo_sections.section',$a);
+            $list->whereIn('ngo_sections.section',$a);
 
             if(!empty($input['Hname'])){
                 $list->where('members.groupId','=',3)

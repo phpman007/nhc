@@ -6,9 +6,9 @@
   <div class="navication2f">
       <div class="container">
         <ol class="breadcrumb">
-            <li><a href="">หน้าหลัก</a></li>
+            <li><a href="/">หน้าหลัก</a></li>
             <!-- <li><a href="">ข่าวงานสรรหาคณะกรรมการ</a></li> -->
-            <li class="active">ประกาศคณะกรรมการสรรหา</li>
+            <li class="active">สื่อแนะนำการสรรหา</li>
         </ol>
       </div>
   </div><!--end navication2f-->
@@ -16,7 +16,7 @@
       <div class="control-bannertext2f">
           <div class="container">
             <div class="headline2f line-brown">
-             <h1>ข่าวจากสื่อ</h1>
+             <h1>สื่อแนะนำการสรรหา</h1>
             </div>
           </div><!--end container-->
       </div><!--end control-bannertext2f-->
@@ -28,7 +28,106 @@
   </div><!--end insite-banner2f-->
   <div class="control-insitepage2f">
       <div class="container">
-        <div class="list-announce2f listcontent">
+
+            <div class="row">
+                <div class="col-md-4">
+                        <div class="home-vdo2f">
+                        <div class="content-vdo2f">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/6lt6h5mKwdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </video>
+                        </div><!--end content-vdo2f-->
+                        <div class="t-vdo2f">Motion graphic ที่มาและความสำคัญ รวมถึงกระบวนการสรรหาคณะกรรมการสุขภาพแห่งชาติ(คสช.)ปี 2562</div>
+                        </div><!--end home-vdo2f-->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="home-vdo2f">
+                        <div class="content-vdo2f">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/5aZUsLQz1HI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </video>
+                        </div><!--end content-vdo2f-->
+                        <div class="t-vdo2f">ไวรัลคลิป คสช.กำลังจะกลับมา</div>
+                    </div><!--end home-vdo2f-->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="home-vdo2f">
+                        <div class="content-vdo2f">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/MjIrSwF_aQQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </video>
+                        </div><!--end content-vdo2f-->
+                        <div class="t-vdo2f">ไวรัลคลิป คสช.กำลังจะกลับมา</div>
+                    </div><!--end home-vdo2f-->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                        <div class="home-vdo2f">
+                        <div class="content-vdo2f">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/PcnhNr1mCtA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </video>
+                        </div><!--end content-vdo2f-->
+                        <div class="t-vdo2f">Spot Radio กลุ่มผู้ทรงคุณวุฒิ</div>
+                        </div><!--end home-vdo2f-->
+                </div>
+
+                <div class="col-md-4">
+                        <div class="home-vdo2f">
+                        <div class="content-vdo2f">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/salXvtC1b5Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </video>
+                        </div><!--end content-vdo2f-->
+                        <div class="t-vdo2f">Spot Radio กลุ่มองค์กรภาคเอกชน</div>
+                        </div><!--end home-vdo2f-->
+                </div>
+
+                <div class="col-md-4">
+                        <div class="home-vdo2f">
+                        <div class="content-vdo2f">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/fmLyc8S9rGw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </video>
+                        </div><!--end content-vdo2f-->
+                        <div class="t-vdo2f">จับกระแสนโยบายสุขภาวะ ss2 ตอน ที่มาและความสำคัญของคณะกรรมการสุขภาพแห่งชาติ (ฉบับย่อ)</div>
+                        </div><!--end home-vdo2f-->
+                </div>
+
+            </div>
+
+            <div class="row">
+                    <div class="col-md-4">
+                            <div class="home-vdo2f">
+                            <div class="content-vdo2f">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/lpyMEZUBBZw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </video>
+                            </div><!--end content-vdo2f-->
+                            <div class="t-vdo2f">จับกระแสนโยบายสุขภาวะ ss2 ตอน กระบวนการสรรหาคณะกรรมการสุขภาพแห่งชาติ (ฉบับย่อ)</div>
+                            </div><!--end home-vdo2f-->
+                    </div>
+
+                    <div class="col-md-4">
+                            <div class="home-vdo2f">
+                            <div class="content-vdo2f">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ua4J5UHoT6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </video>
+                            </div><!--end content-vdo2f-->
+                            <div class="t-vdo2f">การสรรหาคณะกรรมการสุขภาพแห่งชาติ ปี 2562 : ข่าวเช้าไทยรัฐ เสาร์-อาทิตย์ 17.ส.ค.62</div>
+                            </div><!--end home-vdo2f-->
+                    </div>
+
+                    <div class="col-md-4">
+                            <div class="home-vdo2f">
+                            <div class="content-vdo2f">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/mN1v3TrWY2Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </video>
+                            </div><!--end content-vdo2f-->
+                            <div class="t-vdo2f">เจาะลึก!! รับสมัครคณะกรรมการสุขภาพแห่งชาติ 2562 รายการกาแฟดำ ช่อง 9 MCOT HD 12 ส.ค.62</div>
+                            </div><!--end home-vdo2f-->
+                    </div>
+
+                </div>
+
+        {{-- <div class="list-announce2f listcontent">
           <div class="row">
                 <div class="col-sm-6">
                     <div class="box-announce2f">
@@ -113,7 +212,8 @@
 
 
           </div><!--end row-->
-      </div><!--end list-announce2f-->
+      </div><!--end list-announce2f--> --}}
+
       <!-- <div class="box-pagination2f">
         <div class="box-pagin2f">
            <nav aria-label="Page navigation">

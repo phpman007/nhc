@@ -13,6 +13,7 @@ class electionPoint extends Model
         'electionId',
         'memberId',
         'memberPoint',
+        'round',
     ];
 
     // public function detail() {
